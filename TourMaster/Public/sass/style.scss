@@ -1,0 +1,1869 @@
+$primary-color: #f15a23;
+$secondary-color: #63cac5;
+$success-color: #8bc34a;
+$error-color: #f44336;
+$viewport-height: 100vh;
+$viewport-width: 100vw;
+$boxShadow: 0 0 10px 2px $primary-color;
+body {
+    font-family: 'Montserrat';
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
+}
+
+// Tooltips
+.tooltip {
+    .arrow::before {
+        border-bottom-color: $primary-color;
+    }
+    &.bs-tooltip-top {
+        .arrow::before {
+            border-top-color: $primary-color;
+        }
+    }
+    .tooltip-inner {
+        background-color: $primary-color;
+        border-radius: 0;
+    }
+}
+
+// Range Slider
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid white;
+        height: 18px;
+        width: 10px;
+        margin-top: -5px;
+        background: $primary-color;
+        cursor: pointer;
+    }
+    &::-moz-range-thumb {
+        -webkit-appearance: none;
+        border: 1px solid white;
+        height: 18px;
+        width: 10px;
+        background: $primary-color;
+        cursor: pointer;
+    }
+    &::-ms-thumb {
+        -webkit-appearance: none;
+        border: 1px solid white;
+        height: 18px;
+        width: 10px;
+        background: $primary-color;
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 10px;
+        cursor: pointer;
+        overflow: hidden;
+        background: white;
+        &:hover {
+            overflow: visible;
+        }
+    }
+    &::-moz-range-track {
+        width: 100%;
+        height: 10px;
+        cursor: pointer;
+        overflow: hidden;
+        background: white;
+        &:hover {
+            overflow: visible;
+        }
+    }
+}
+
+.modal-backdrop.show {
+    opacity: 0 !important;
+}
+
+// Responsive Container
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
+// Selection
+::selection {
+    background: $primary-color;
+    color: $secondary-color;
+}
+
+// Scroll Top Button
+#scroll-top {
+    position: fixed;
+    bottom: -10%;
+    right: 2%;
+    height: 60px;
+    width: 60px;
+    background: $primary-color;
+    border-radius: 50%;
+    opacity: 0;
+    text-align: center;
+    transition: all .3s ease-out;
+    z-index: 998;
+    i {
+        font-size: 45px;
+        color: white;
+        line-height: 60px;
+    }
+    &:hover {
+        background: $secondary-color;
+    }
+}
+
+// Primary Button
+.btn-primary {
+    background: $primary-color;
+    border: none;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 20px 40px;
+    letter-spacing: 2px;
+    transition: all .3s ease;
+    &:hover {
+        background: $secondary-color;
+    }
+    &:not(:disabled):not(.disabled):active,
+    &:focus {
+        background: $secondary-color;
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+// Secondary Button
+.btn-secondary {
+    background: $primary-color;
+    border: 3px solid $primary-color;
+    border-radius: 0;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 20px 40px;
+    letter-spacing: 1px;
+    transition: all .3s ease;
+    color: white !important;
+    &:hover {
+        background: white;
+        border-color: $primary-color;
+        color: $primary-color !important;
+    }
+    &:not(:disabled):not(.disabled):active,
+    &:focus {
+        background: white;
+        border-color: $primary-color;
+        color: $primary-color;
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+// Outlined Success Button
+.btn-outline-success {
+    background: transparent;
+    border: 3px solid $primary-color;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    font-size: 30px;
+    font-weight: 600;
+    padding: 20px 40px;
+    letter-spacing: 1px;
+    transition: all .3s ease;
+    color: white !important;
+    &:hover {
+        background: transparent;
+        border-color: $primary-color;
+        color: $primary-color !important;
+    }
+    &:not(:disabled):not(.disabled):active,
+    &:focus {
+        background: transparent;
+        border-color: $primary-color;
+        color: $primary-color;
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+// Sections
+section {
+    padding: 70px 0 0;
+    .section-heading-wrapper {
+        padding-bottom: 70px;
+        h1.section-title {
+            font-weight: 300;
+            font-size: 50px;
+        }
+        h4.section-subtitle {
+            font-weight: 600;
+            color: $secondary-color;
+            span {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+// Sweet Alerts
+.swal2-popup {
+    border-radius: 0 !important;
+    .swal2-styled.swal2-confirm {
+        border-radius: 0 !important;
+        background-color: $secondary-color !important;
+    }
+    .swal2-styled.swal2-cancel{
+        border-radius: 0 !important;
+        background-color: $error-color !important;
+    }
+}
+
+// Navbar
+nav.navbar {
+    padding: 30px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    transition: all .3s ease-in-out;
+
+    @media screen and (max-width: 768px) {
+        background: $secondary-color;
+
+        & .container {
+            padding: 0 20px;
+        }
+
+        ul {
+            li {
+                margin-left: 0 !important;
+                margin-top: 10px !important;
+            }
+
+            .sign-in {
+                border: 2px solid white;
+                overflow: hidden;
+                position: relative;
+                text-align: center;
+
+                a {
+                    border: none;
+                    width: 100%;
+                }
+
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: 1200px) and (orientation: landscape) {
+        ul {
+            li {
+                a {
+                    font-size: 12px !important;
+                }
+            }
+        }
+    }
+
+    &.fixed {
+        position: fixed;
+        transition: all .3s ease-in-out;
+        padding: 15px 0;
+        background: $secondary-color;
+    }
+
+    .navbar-brand {
+        color: white;
+        font-weight: 700;
+        font-size: 30px;
+    }
+
+    ul {
+        li {
+            margin-left: 10px;
+
+            a {
+                display: inline-block;
+                color: white;
+                padding: 7px 10px !important;
+                font-weight: 600;
+                font-size: 14px;
+                transition: all .5s ease;
+                text-transform: uppercase;
+                border: 2px solid transparent;
+                transition: all .2s ease;
+
+                &.active {
+                    border-color: white;
+                }
+            }
+        }
+
+        :hover {
+            border-color: white;
+            transition: all .5s ease;
+        }
+
+        .sign-in {
+            border: 2px solid white;
+            overflow: hidden;
+            position: relative;
+
+            a {
+                border: none;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: white;
+                top: -225%;
+                left: 90%;
+                transition: all .5s ease;
+            }
+
+            &:hover {
+                &::after {
+                    left: -15%;
+                    top: -100%;
+                    transition: all .5s ease;
+                    z-index: -2;
+                }
+
+                & a {
+                    color: $secondary-color;
+                    transition: all .5s ease;
+                }
+            }
+        }
+    }
+}
+
+// Main Slider Wrapper
+.main-slider-wrapper {
+    height: 100vh;
+    position: relative;
+    .main-slider {
+        height: 100vh;
+        .owl-item {
+            height: 100vh;
+            .slider-image {
+                height: 100vh;
+                background-size: cover;
+            }
+        }
+    }
+    .tour-search-background {
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        transform: translate(-50%, -50%);
+        height: 85vh;
+        width: 85vh;
+        background: black;
+        opacity: 0.45;
+        z-index: 1;
+        border-radius: 50%;
+        border: abs($number: 85vh*0.08) solid rgb(94, 94, 94);
+        @media screen and (max-width: 768px) {
+            border-radius: 0;
+            border: none;
+            border-left: abs($number: 85vh*0.08) solid rgb(94, 94, 94);
+            border-right: abs($number: 85vh*0.08) solid rgb(94, 94, 94);
+            height: 70vh;
+            width: 100%;
+        }
+    }
+    .tour-search-wrapper {
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        width: 55vh;
+        @media screen and (orientation: portrait) {
+            width: 55vw;
+        }
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        text-transform: uppercase;
+        color: white;
+        h1 {
+            font-weight: 300;
+        }
+    }
+}
+
+// Select Form Control
+select.form-control {
+    background: transparent;
+    border: 3px solid white;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 600;
+    height: 50px !important;
+    color: white;
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus {
+        color: white;
+        background: transparent;
+        border-color: white;
+        box-shadow: none;
+    }
+    option {
+        color: black;
+        font-weight: 600;
+    }
+}
+
+// Datepicker Form Control
+.picker__input {
+    background: transparent;
+    border: 3px solid white;
+    width: 100%;
+    height: 50px !important;
+    position: relative;
+    padding: .375rem .75rem;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    &.picker__input--active {
+        border-color: $secondary-color;
+    }
+    &::placeholder {
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        padding: .375rem .75rem;
+    }
+}
+
+// Date Picker Container
+.picker--focused .picker__day--highlighted,
+.picker__day--highlighted:hover,
+.picker__day--infocus:hover,
+.picker__day--outfocus:hover {
+    background: $secondary-color;
+}
+
+.picker--focused .picker__day--highlighted {
+    background: $primary-color;
+    color: white;
+}
+
+.picker__day--today:before,
+.picker__button--today:before {
+    border-top-color: $secondary-color;
+}
+
+.picker__button--clear,
+.picker__button--close,
+.picker__button--today {
+    transition: all .3s ease;
+}
+
+.picker__button--clear:hover,
+.picker__button--close:hover,
+.picker__button--today:hover {
+    background: none;
+    color: $secondary-color;
+    border-bottom-color: $secondary-color;
+    transition: all .3s ease;
+}
+
+.picker__button--clear:focus,
+.picker__button--close:focus,
+.picker__button--today:focus {
+    background: none;
+    border: none;
+}
+
+.picker__nav--next:before,
+.picker__nav--prev:before {
+    transition: all .3s ease;
+}
+
+.picker__nav--next:hover,
+.picker__nav--prev:hover {
+    background: none;
+}
+
+.picker__year {
+    color: $secondary-color;
+    font-style: normal;
+}
+
+.picker__select--month,
+.picker__select--year {
+    font-size: 14px;
+    height: 40px;
+}
+
+.picker__holder {
+    overflow-y: visible;
+}
+
+.picker--opened .picker__holder {
+    background: none;
+}
+
+.picker__box {
+    border-radius: 0 !important;
+}
+
+// Date Picker Inputs
+.d-picker {
+    width: 48%;
+    position: relative;
+    @media screen and (orientation: portrait) {
+        width: 100%;
+    }
+    i {
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translate(0, -50%);
+        font-size: 20px;
+        z-index: -1;
+        transition: all .3s;
+    }
+    &:hover {
+        i {
+            color: $secondary-color;
+        }
+    }
+}
+
+// Login, SignUp, Password Recovery Form, PM, Tour Request Modal
+.login-form-modal-wrapper,
+.signup-form-modal-wrapper,
+.pass-recovery-form-modal-wrapper,
+.pm-modal-wrapper,
+.tour-request-modal-wrapper {
+    height: 0;
+    width: 0;
+    #login-form-modal,
+    #signup-form-modal,
+    #pass-recovery-form-modal,
+    #pm-form-modal,
+    #tour-request-modal {
+        background: rgba($secondary-color, .95);
+        width: 100%;
+        animation-duration: .5s;
+        .modal-content {
+            border-radius: 0;
+            box-shadow: $boxShadow;
+            .modal-body {
+                padding: 0;
+                @media screen and (max-width: 768px) {
+                    .nav-tabs {
+                        width: 85% !important;
+                        border-right: 1px solid #dee2e6;
+                        li>a {
+                            height: 100%;
+                        }
+                    }
+                }
+                .nav-link {
+                    border-radius: 0;
+                    color: $primary-color;
+                    &.active {
+                        color: $secondary-color;
+                    }
+                }
+                &#signup-form-body,
+                &#pass-recovery-form-body,
+                &#pm-form-modal-body,
+                &#tour-request-modal-body {
+                    padding: 10px 20px;
+                    i.fa-angle-right {
+                        font-size: 40px;
+                        line-height: 45px;
+                        color: $primary-color;
+                    }
+                }
+            }
+            .form-group {
+                .form-check-label>span {
+                    color: $primary-color;
+                }
+                textarea.form-control {
+                    resize: none;
+                    transition: none;
+                    border: 1px solid $primary-color;
+                    margin-top: 20px;
+                    transition: all .3s;
+                }
+                .form-control-plaintext {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+                .form-control {
+                    border-radius: 0;
+                    border: none;
+                    border-bottom: 1px solid $primary-color;
+                    transition: all .3s;
+                    &:read-only {
+                        background: transparent !important;
+                        height: 37px !important;
+                        color: black;
+                        font-weight: inherit;
+                        font-size: inherit;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0px 2px 0px 0px $secondary-color;
+                        border-color: $secondary-color;
+                    }
+                    &.error {
+                        box-shadow: 0px 2px 0px 0px $error-color;
+                        border-color: $error-color !important;
+                        margin-bottom: 5px;
+                    }
+                    &.valid {
+                        box-shadow: none;
+                        border-color: $success-color !important;
+                        margin-bottom: 0;
+                    }
+                }
+                &.has-error>span {
+                    color: $error-color;
+                    font-size: 14px;
+                }
+            }
+            #form-modal-close {
+                position: absolute;
+                top: 0;
+                right: -45px;
+                font-size: 25px;
+                cursor: pointer;
+                transition: all .3s ease;
+                @media screen and (max-width: 768px) {
+                    right: 5%;
+                    top: 2%;
+                }
+                &:hover {
+                    transform: scale(1.2);
+                    color: $primary-color;
+                }
+            }
+            .login-form-heading,
+            .signup-form-heading {
+                h1 {
+                    color: $secondary-color;
+                    font-weight: 300;
+                }
+                p {
+                    font-weight: 600;
+                    span {
+                        color: $primary-color;
+                    }
+                    t {
+                        color: black;
+                        text-decoration: underline;
+                        text-decoration-color: $secondary-color;
+                    }
+                }
+            }
+            .pm-form-heading,
+            .tour-request-form-heading {
+                h3 {
+                    font-weight: 300;
+                }
+            }
+            .btn-success {
+                background-color: $secondary-color;
+                border: none;
+                border-radius: 0;
+                height: 50px;
+                font-weight: 600;
+                &:hover {
+                    background-color: $primary-color;
+                }
+            }
+            .btn-outline-secondary {
+                border-radius: 0;
+            }
+            .tab-pane {
+                padding: 10px 20px;
+                &.fade {
+                    transition: opacity .5s linear;
+                }
+            }
+            .pass-recovery {
+                color: $secondary-color;
+                text-decoration: none;
+                transition: all .3s;
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+// Tours Modal Section
+.tours-modal-wrapper {
+    height: 0;
+    width: 0;
+    #tours-modal {
+        background: rgba($secondary-color, .95);
+        overflow-y: auto;
+        z-index: 999;
+        #tours-close {
+            position: fixed;
+            right: 5%;
+            top: 5%;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all .3s ease;
+            &:hover {
+                color: $primary-color;
+                transform: scale(1.2);
+                transition: all .3s ease;
+            }
+        }
+        section#tours {
+            .section-heading-wrapper {
+                padding-bottom: 35px;
+            }
+            h4.section-subtitle {
+                color: $primary-color !important;
+            }
+            .tours-filters-wrapper {
+                padding-bottom: 35px;
+                .btn-info {
+                    border-radius: 0;
+                    background-color: $primary-color;
+                    border: none;
+                    &:hover {
+                        border: none;
+                        background: darken($primary-color, 20%);
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                    &.active {
+                        background: darken($primary-color, 20%);
+                        color: $secondary-color;
+                        font-weight: 500;
+                    }
+                }
+            }
+            .tours-grid-wrapper {
+                .gutter-sizer {
+                    width: 2%;
+                    @media screen and (max-width: 768px) {
+                        width: 0;
+                    }
+                }
+                .grid-item {
+                    overflow: hidden;
+                    position: relative;
+                    background-size: cover;
+                    height: 500px;
+                    width: 32%;
+                    margin-bottom: 40px;
+                    box-shadow: $boxShadow;
+                    @media screen and (max-width: 768px) {
+                        width: 100%;
+                    }
+                    .info-overlay {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        background: rgba(black, .7);
+                        transform: translateY(-100%);
+                        opacity: 0;
+                        transition: all .5s;
+                        .tour-heading {
+                            text-align: center;
+                            width: 100%;
+                            padding: 10px 20px;
+                            position: absolute;
+                            top: 40%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            h3 {
+                                color: white;
+                            }
+                            .duration,
+                            .price {
+                                font-size: 25px;
+                                margin-bottom: 0;
+                                color: white;
+                                cursor: default;
+                                i {
+                                    display: inline-block;
+                                    width: 60px;
+                                    font-size: 30px;
+                                    vertical-align: middle;
+                                    line-height: 50px;
+                                    text-align: left;
+                                }
+                            }
+                        }
+                        .tour-guide {
+                            border-top: 1px solid $secondary-color;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            img {
+                                margin: 10px 20px;
+                                display: inline-block;
+                                max-width: 20%;
+                                border-radius: 50%;
+                            }
+                            ul {
+                                display: inline-block;
+                                margin: 10px 0 30px;
+                                vertical-align: top;
+                                max-width: 60%;
+                                li {
+                                    text-transform: uppercase;
+                                    color: $secondary-color;
+                                    &:first-child {
+                                        font-size: 24px;
+                                        font-weight: 600;
+                                    }
+                                    .br-theme-css-stars .br-widget a {
+                                        float: none;
+                                        font-size: 30px;
+                                        display: inline;
+                                        &.br-selected:after {
+                                            color: $secondary-color;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .info-overlay-bottom {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        background: rgba(black, .7);
+                        color: white;
+                        transition: all .5s;
+                        p {
+                            margin-bottom: 0;
+                            padding: 5px 20px;
+                            font-size: 24px;
+                            @media screen and (max-width: 1500px) {
+                                font-size: 18px;
+                                text-align: center;
+                                span {
+                                    float: none !important;
+                                    display: block;
+                                }
+                            }
+                            span {
+                                float: right;
+                            }
+                        }
+                    }
+                    &:hover {
+                        .info-overlay {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                        .info-overlay-bottom {
+                            transform: translateY(100%);
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+            .tours-search-wrapper {
+                .accordion {
+                    .card {
+                        background-color: transparent;
+                        border: none;
+                        .card-header {
+                            border: none;
+                            background-color: transparent;
+                            button.btn-info {
+                                background: transparent;
+                                border: none;
+                                color: $primary-color;
+                                font-weight: 600;
+                                transition: all .3s;
+                                &:focus {
+                                    outline: none;
+                                    border: none;
+                                    box-shadow: none;
+                                }
+                                &:hover {
+                                    color: white;
+                                }
+                            }
+                        }
+                        .card-body {
+                            padding: 0;
+                            .form-group {
+                                &.has-error {
+                                    span {
+                                        color: $error-color;
+                                        font-size: 12px;
+                                    }
+                                }
+                                label {
+                                    display: block;
+                                    span {
+                                        float: right;
+                                    }
+                                }
+                                .form-control.search-input {
+                                    border-radius: 0;
+                                    border: 2px solid $primary-color;
+                                    &:focus {
+                                        outline: none;
+                                        box-shadow: none;
+                                    }
+                                    &.error {
+                                        border-color: $error-color;
+                                    }
+                                }
+                            }
+                            button {
+                                padding: 5px;
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Tour View Modal
+.tour-view-modal-wrapper,
+.profile-view-modal-wrapper {
+    height: 0;
+    width: 0;
+    #tour-view-modal,
+    #profile-view-modal {
+        background: rgba($secondary-color, .95);
+        overflow-y: auto;
+        z-index: 999;
+        #modal-close {
+            position: fixed;
+            right: 5%;
+            top: 5%;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all .3s ease;
+            &:hover {
+                color: $primary-color;
+                transform: scale(1.2);
+                transition: all .3s ease;
+            }
+        }
+        #tour-view-back {
+            position: fixed;
+            left: 5%;
+            top: 5%;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all .3s ease;
+            &:hover {
+                color: $primary-color;
+                transform: scale(1.2);
+                transition: all .3s ease;
+            }
+        }
+        #tour-view-car {
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(black, .5);
+                transition: all .5s;
+            }
+            .owl-item.center div.overlay {
+                opacity: 0 !important;
+            }
+            .owl-prev,
+            .owl-next {
+                position: absolute;
+                top: 50%;
+                height: 100%;
+                width: 5%;
+                transform: translateY(-50%);
+                color: $secondary-color;
+                font-size: 80px;
+                transition: all .3s;
+                &:hover {
+                    color: $primary-color;
+                    background: rgba(black, .5);
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+            .owl-prev {
+                left: 0;
+            }
+            .owl-next {
+                right: 0;
+            }
+        }
+        .tour-view-info {
+            padding: 50px 0 20px;
+            .media {
+                @media screen and (max-width: 768px) {
+                    &.main-info {
+                        display: block;
+                        text-align: center;
+                        img {
+                            max-width: 50%;
+                            margin: 0 !important;
+                            margin-bottom: 15px !important;
+                        }
+                    }
+                    &.comment {
+                        display: block;
+                        img {
+                            max-width: 25% !important;
+                            margin: 0 !important;
+                            margin-bottom: 10px !important;
+                        }
+                        span.feedback-date {
+                            float: none !important;
+                        }
+                    }
+                }
+                @media only screen and (max-width: 1200px) and (orientation: landscape){
+                    &.main-info {
+                        display: block;
+                        text-align: center;
+                        img {
+                            max-width: 50%;
+                            margin: 0 !important;
+                            margin-bottom: 15px !important;
+                        }
+                    }
+                    &.comment {
+                        display: block;
+                        img {
+                            max-width: 25% !important;
+                            margin: 0 !important;
+                            margin-bottom: 10px !important;
+                        }
+                        span.feedback-date {
+                            float: none !important;
+                        }
+                    }
+                }
+                img {
+                    max-width: 20%;
+                    box-shadow: $boxShadow;
+                    cursor: pointer;
+                }
+                h2.guide-profile {
+                    transition: all .3s;
+                    display: inline-block;
+                    &:hover {
+                        cursor: pointer;
+                        color: $primary-color;
+                    }
+                }
+                .guide-contacts {
+                    p {
+                        i {
+                            display: inline-block;
+                            width: 25px;
+                            height: 25px;
+                            font-size: 20px;
+                            margin-right: 10px;
+                            color: $primary-color;
+                        }
+                    }
+                    button.btn-outline-info {
+                        color: $primary-color;
+                        font-weight: 500;
+                        border-radius: 0;
+                        border-color: $primary-color;
+                        &:hover {
+                            color: white;
+                            background: $primary-color;
+                        }
+                        &:focus {
+                            outline: none;
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+            .br-theme-css-stars .br-widget a {
+                float: none;
+                font-size: 30px;
+                &.br-selected:after {
+                    color: $primary-color;
+                }
+            }
+            .tour-description-wrapper {
+                margin: 30px 0;
+                padding: 20px;
+                box-shadow: $boxShadow;
+            }
+            .tour-details-wrapper {
+                padding: 20px;
+                box-shadow: $boxShadow;
+                p {
+                    font-size: 18px;
+                    i {
+                        display: inline-block;
+                        width: 25px;
+                        height: 25px;
+                        font-size: 20px;
+                        color: $primary-color;
+                        margin-right: 10px;
+                    }
+                    &.tour-type {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                }
+                .jalendar {
+                    width: 100% !important;
+                    .jalendar-container {
+                        .jalendar-pages {
+                            border-radius: 0;
+                            h1,
+                            h2 {
+                                font-family: 'Montserrat' !important;
+                            }
+                            .prv-m,
+                            .nxt-m {
+                                transition: all .3s;
+                            }
+                            .prv-m:hover,
+                            .nxt-m:hover {
+                                color: $secondary-color;
+                                transform: scale(1.5);
+                            }
+                            .days {
+                                .day {
+                                    font-family: 'Montserrat' !important;
+                                    span {
+                                        line-height: 18px;
+                                        border-radius: 0;
+                                        &:hover {
+                                            background: $secondary-color;
+                                        }
+                                    }
+                                    &.today {
+                                        span {
+                                            background: darken($secondary-color, 10%);
+                                            color: white !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                button#send-tour-request {
+                    transition: all .3s;
+                }
+                button.btn-outline-info {
+                    color: $primary-color;
+                    font-weight: 500;
+                    border-radius: 0;
+                    border-color: $primary-color;
+                    &:hover {
+                        color: white;
+                        background: $primary-color;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+            .tour-feedbacks-wrapper {
+                margin: 30px 0;
+                padding: 20px;
+                box-shadow: $boxShadow;
+                .br-wrapper {
+                    .br-widget {
+                        display: inline-block;
+                        .br-current-rating {
+                            display: inline-block;
+                            font-size: 24px;
+                            margin-left: 10px;
+                        }
+                        .br-active:after {
+                            color: $primary-color;
+                        }
+                    }
+                }
+                textarea {
+                    resize: none;
+                    overflow-y: scroll;
+                    border-radius: 0;
+                    border: none;
+                    transition: all .3s;
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                        border: none;
+                    }
+                    &.error {
+                        outline: 2px solid $primary-color;
+                    }
+                }
+                .has-error {
+                    span {
+                        color: $error-color;
+                        font-size: 12px;
+                    }
+                }
+                button.btn-outline-info {
+                    color: $primary-color;
+                    font-weight: 500;
+                    border-radius: 0;
+                    border-color: $primary-color;
+                    &:hover {
+                        color: white;
+                        background: $primary-color;
+                    }
+                    &:focus {
+                        outline: none;
+                        box-shadow: none;
+                    }
+                }
+                .feedbacks-list-wrapper {
+                    .media {
+                        border-bottom: 1px dashed $primary-color;
+                        margin-bottom: 20px;
+                        img {
+                            max-width: 10%;
+                        }
+                        p.feedback-text {
+                            font-size: 14px;
+                        }
+                        span.feedback-date {
+                            font-size: 14px;
+                        }
+                        .br-wrapper {
+                            display: inline-block;
+                            .br-widget a {
+                                font-size: 20px;
+                            }
+                            .br-current-rating {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        img.profile-photo {
+            max-width: 100%;
+            box-shadow: $boxShadow;
+        }
+        .profile-details-wrapper {
+            height: 100%;
+            box-shadow: $boxShadow;
+            @media screen and (max-width: 768px) {
+                margin-top: 25px;
+            }
+            @media only screen and (max-width: 1200px) and (orientation: landscape){
+                margin-top: 25px;
+            }
+            h3,
+            h5 {
+                margin: 0;
+            }
+            .profile-country {
+                padding: 20px 0;
+                border-bottom: 1px dashed $primary-color;
+                span {
+                    width: 1em;
+                }
+            }
+            .profile-card {
+                padding: 20px 0;
+                border-right: 1px dashed $primary-color;
+                @media screen and (max-width: 768px) {
+                    border-right: none !important;
+                    border-bottom: 1px dashed $primary-color;
+                }
+                @media only screen and (max-width: 1200px) and (orientation: landscape){
+                    border-right: none !important;
+                    border-bottom: 1px dashed $primary-color;
+                }
+                &.no-border {
+                    border: none !important;
+                }
+                span {
+                    margin-top: 15px;
+                    display: block;
+                    font-size: 42px;
+                }
+            }
+            .guide-rating-wrapper {
+                padding: 20px 0;
+                border-top: 1px dashed $primary-color;
+                border-bottom: 1px dashed $primary-color;
+                .br-theme-css-stars .br-widget {
+                    line-height: 30px;
+                    a {
+                        float: none;
+                        font-size: 45px;
+                        &.br-selected:after {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+            .guide-contacts-wrapper {
+                padding: 20px 0;
+                h5 {
+                    i {
+                        margin-right: 15px;
+                        color: $primary-color;
+                    }
+                }
+                ul {
+                    margin-bottom: 0;
+                    li {
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        a {
+                            color: $primary-color;
+                            font-size: 20px;
+                            transition: all .3s;
+                        }
+                        &:hover {
+                            a {
+                                color: black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .guide-offered-tours-wrapper {
+            .guide-offered-tours-heading {
+                font-weight: 300;
+            }
+            .tour-item {
+                overflow: hidden;
+                position: relative;
+                background-size: cover;
+                height: 500px;
+                width: 100%;
+                margin-bottom: 40px;
+                box-shadow: $boxShadow;
+                .info-overlay {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: rgba(black, .7);
+                    transform: translateY(-100%);
+                    opacity: 0;
+                    transition: all .5s;
+                    .tour-heading {
+                        text-align: center;
+                        width: 100%;
+                        padding: 10px 20px;
+                        position: absolute;
+                        top: 40%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        h3 {
+                            color: white;
+                        }
+                        .duration,
+                        .price {
+                            font-size: 25px;
+                            margin-bottom: 0;
+                            color: white;
+                            cursor: default;
+                            i {
+                                display: inline-block;
+                                width: 60px;
+                                font-size: 30px;
+                                vertical-align: middle;
+                                line-height: 50px;
+                                text-align: left;
+                            }
+                        }
+                    }
+                    .tour-guide {
+                        border-top: 1px solid $secondary-color;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        img {
+                            margin: 10px 20px;
+                            display: inline-block;
+                            max-width: 20%;
+                            border-radius: 50%;
+                        }
+                        ul {
+                            display: inline-block;
+                            margin: 10px 0 30px;
+                            vertical-align: top;
+                            max-width: 60%;
+                            li {
+                                text-transform: uppercase;
+                                color: $secondary-color;
+                                &:first-child {
+                                    font-size: 24px;
+                                    font-weight: 600;
+                                }
+                                .br-theme-css-stars .br-widget a {
+                                    float: none;
+                                    font-size: 30px;
+                                    display: inline;
+                                    &.br-selected:after {
+                                        color: $secondary-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .info-overlay-bottom {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: rgba(black, .7);
+                    color: white;
+                    transition: all .5s;
+                    p {
+                        margin-bottom: 0;
+                        padding: 5px 20px;
+                        font-size: 24px;
+                        @media screen and (max-width: 1500px) {
+                            font-size: 18px;
+                            text-align: center;
+                            span {
+                                float: none !important;
+                                display: block;
+                            }
+                        }
+                        span {
+                            float: right;
+                        }
+                    }
+                }
+                &:hover {
+                    .info-overlay {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                    .info-overlay-bottom {
+                        transform: translateY(100%);
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Most Popular Section
+section#most-popular {
+    .section-body-wrapper {
+        .best-tour {
+            position: relative;
+            @media screen and (max-width: 768px) {
+                border-bottom: 1px dashed $primary-color;
+            }
+            .tour-background {
+                background-size: cover;
+                background-position: center;
+                height: 500px;
+                position: relative;
+                @media screen and (max-width: 768px) {
+                    .tour-info-left, .tour-info-right {
+                        width: 100% !important;
+                        background: rgba(black, .7) !important;
+                    }
+                    .tour-info-left:after,
+                    .tour-info-right:after {
+                        display: none !important;
+                    }
+                }
+                .tour-info-left {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 50vw;
+                    background: white;
+                    &:after {
+                        content: "";
+                        display: inline-block;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 500px 280px 0 0;
+                        border-color: white transparent transparent transparent;
+                        position: absolute;
+                        right: -280px;
+                        top: 0;
+                    }
+                }
+                .tour-info-right {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    width: 48vw;
+                    background: white;
+                    &:after {
+                        content: "";
+                        display: inline-block;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 0 0 500px 280px;
+                        border-color: transparent transparent white transparent;
+                        position: absolute;
+                        left: -280px;
+                        top: 0;
+                    }
+                }
+            }
+            .tour-info {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                transform: translate(0, -50%);
+                @media screen and (max-width: 768px) {
+                    text-align: center !important;
+                    h3.tour-subtitle {
+                        color: white !important;
+                    }
+                    p {
+                        color: white !important;
+                        i {
+                            color: white !important;
+                        }
+                    }
+                }
+                h1.tour-title {
+                    font-weight: 300;
+                    color: $secondary-color;
+                    font-size: 50px;
+                    width: 45vw;
+                    display: inline-block;
+                    @media screen and (max-width: 768px){
+                        width: 100%;
+                    }
+                }
+                h3.tour-subtitle {
+                    font-weight: 600;
+                    width: 45vw;
+                    display: inline-block;
+                    @media screen and (max-width: 768px){
+                        width: 100%;
+                    }
+                }
+                p {
+                    margin-bottom: .5rem;
+                    font-size: 25px;
+                    cursor: default;
+                    i {
+                        display: inline-block;
+                        width: 30px;
+                        font-size: 30px;
+                        vertical-align: middle;
+                        line-height: 50px;
+                    }
+                }
+                &.left {
+                    text-align: left;
+                    p {
+                        i {
+                            margin-right: 25px;
+                        }
+                    }
+                }
+                &.right {
+                    text-align: right;
+                    p {
+                        i {
+                            margin-right: 25px;
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Best Guides Section
+section#best-guides {
+    padding-bottom: 70px;
+    .section-body-wrapper {
+        .card {
+            border-radius: 0;
+            border: none;
+            border-top: 3px solid $primary-color;
+            border-bottom: 3px solid $primary-color;
+            @media screen and (max-width: 768px) {
+                margin-bottom: 15px;
+            }
+            .card-heading {
+                position: relative;
+                .overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba($secondary-color, .8);
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: all .4s ease-in-out;
+                    a.best-guide-profile {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+                &:hover {
+                    .overlay {
+                        visibility: visible;
+                        opacity: 1;
+                        transition: all .4s ease-in-out;
+                    }
+                }
+            }
+            .card-body {
+                h4.card-title {
+                    color: $secondary-color;
+                    font-weight: 700;
+                    letter-spacing: 2px;
+                    margin-bottom: 0;
+                }
+            }
+            .br-theme-css-stars .br-widget a {
+                float: none;
+                font-size: 30px;
+                &.br-selected:after {
+                    color: $secondary-color;
+                }
+            }
+            ul li span {
+                color: $secondary-color;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// About Us Section
+section#about {
+    padding-bottom: 70px;
+    border-top: 1px dashed $primary-color;
+    p.about-text {
+        line-height: 1.5;
+        span {
+            color: $primary-color;
+            font-weight: 600;
+        }
+    }
+    .guide-item-wrapper {
+        width: 90%;
+        .img-wrapper {
+            border: 3px solid $primary-color;
+            border-top: none;
+            border-bottom: none;
+            overflow: hidden;
+        }
+        .guide-info-wrapper {
+            h4.guide-name {
+                color: $secondary-color;
+            }
+        }
+    }
+}
+
+// Guide Join Section
+section#guide-join {
+    background-size: cover;
+    background-position: center;
+    padding: 150px 0;
+    position: relative;
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        background: rgba(black, .5);
+    }
+    h1.guide-join-text {
+        color: white;
+        font-weight: 600;
+        span {
+            color: $primary-color;
+        }
+    }
+    button {
+        width: 70%;
+        font-size: 25px;
+        margin: 20px 0;
+    }
+}
+
+// Contact Section
+section#contact {
+    padding-bottom: 70px;
+    .contact-form-wrapper {
+        label {
+            font-size: 20px;
+            font-weight: 300;
+        }
+        .form-group.has-error>span {
+            color: $error-color;
+            font-size: 14px;
+        }
+        .form-control {
+            border: 3px solid $primary-color;
+            border-radius: 0;
+            height: 50px;
+            transition: all .3s;
+            &.error {
+                border-color: $error-color !important;
+                box-shadow: 0 0 10px 0.2rem rgba($error-color, .5);
+                margin-bottom: 5px;
+            }
+            &.valid {
+                border-color: $success-color;
+                box-shadow: none;
+                margin-bottom: 0;
+            }
+            &:focus {
+                outline: none;
+                border-color: $secondary-color;
+                box-shadow: 0 0 10px 0.2rem rgba($secondary-color, .5);
+                transition: all .3s;
+            }
+        }
+        textarea {
+            min-height: 200px;
+        }
+        button {
+            width: 30%;
+            min-width: 150px;
+        }
+    }
+}
+
+// Footer
+footer {
+    border-top: 1px dashed $primary-color;
+    padding: 40px 0 0;
+    #insta-feed-slider {
+        margin-bottom: 30px;
+        .insta-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            a {
+                img {
+                    max-width: 100%;
+                }
+            }
+            .post-stats {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -50%;
+                text-align: center;
+                transition: all .3s;
+                background: rgba(black, .5);
+                padding: 5px 0;
+                span {
+                    font-size: 16px;
+                    color: $secondary-color;
+                    padding: 0 10px;
+                }
+            }
+            &:hover {
+                .post-stats {
+                    bottom: 0;
+                }
+            }
+        }
+    }
+    .social-links-wrapper {
+        .social-links {
+            list-style-type: none;
+            margin-bottom: 0 !important;
+            li {
+                display: inline-block;
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                a {
+                    color: $secondary-color;
+                    background: transparent;
+                    border: none;
+                    border-radius: 0;
+                    transition: all .3s;
+                    font-size: 24px;
+                    &:hover {
+                        color: $primary-color;
+                        transition: all .3s;
+                    }
+                }
+            }
+        }
+    }
+    .copyright {
+        background: black;
+        margin-bottom: 0;
+        height: 45px;
+        line-height: 45px;
+        color: $secondary-color;
+        font-size: 12px;
+        font-weight: 600;
+    }
+}

@@ -1,0 +1,1436 @@
+﻿@using TourMaster.Models;
+@model TourMaster.Models.ViewModel
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Origin.Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900;subset=latin-ext">
+    <link rel="stylesheet" href="~/public/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="~/public/css/default.css">
+    <link rel="stylesheet" href="~/public/css/default.date.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/css-stars.min.css">
+    <link rel="stylesheet" href="~/public/css/jalendar.css">
+    <link rel="stylesheet" href="~/public/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/public/css/style.css">
+</head>
+
+
+
+<body data-spy="scroll" data-target="#navigation" data-offset="100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg" id="navigation">
+        <div class="container">
+            <!-- NavBar Logo Start -->
+            <a href="#" class="navbar-brand">@ViewBag.Origin.Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsable">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            <!-- NavBar Logo End -->
+            <!-- NavBar Menu Start -->
+            <div class="collapse navbar-collapse" id="navbar-collapsable">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#main-car">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tours-modal-trigger" href="">Tours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#most-popular">Most Popular</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#best-guides">Top Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item sign-in">
+                        <a class="nav-link text-center" id="signup-form-modal-trigger" href="">
+                            <i class="fas fa-user-plus"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item sign-in">
+                        <a class="nav-link" id="login-form-modal-trigger" href="">Log In</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- NavBar Menu End -->
+        </div>
+    </nav>
+
+    <!-- SignUp Form Modal -->
+    <div class="signup-form-modal-wrapper">
+        <div class="modal" id="signup-form-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="signup-form-body">
+                        <div class="signup-form-heading">
+                            <h2 class="text-capitalize text-center">tour master</h2>
+                            <h1 class="text-uppercase text-center">welcome</h1>
+                            <p class="text-uppercase text-center">
+                                Fill the form and start
+                                <span>touring</span>
+                            </p>
+                        </div>
+                        <form action="@Url.Action("signup", "home")" method="post" id="signup-form" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input class="form-control" type="text" name="name" id="name" data-validation="required length" data-validation-length="min3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">E-mail</label>
+                                        <input class="form-control" type="email" name="email" id="email" data-validation="required email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input class="form-control" type="password" name="password" id="password" data-validation="required strength length" data-validation-length="min8"
+                                               data-validation-strength="2">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password-confirmation">Password Confirmation</label>
+                                        <input class="form-control" type="password" name="passwordconfirmation" id="password-confirmation" data-validation="required confirmation"
+                                               data-validation-confirm="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input class="form-control" type="text" name="phone" id="phone" data-validation="required number" data-validation-allowing="integer, positive">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-group">
+                                        <label for="surname">Surname</label>
+                                        <input class="form-control" type="text" name="surname" id="surnname" data-validation="required length" data-validation-length="min3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="b-day-date">Birthday</label>
+                                        <input class="datepicker form-control" name="birthday" id="b-day-date" data-validation="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <select class="form-control" name="countryid" id="country" data-validation="required">
+                                            <option value="" disabled selected></option>
+                                            @foreach (Country cntr in ViewBag.Countries)
+                                            {
+                                                <option value="@cntr.Id">@cntr.CountryName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <select class="form-control" name="cityid" id="city" data-validation="required">
+                                            <option value="" disabled selected></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-0 mt-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="accounttypeid" id="account-type-traveler" value="0" checked>
+                                            <label class="form-check-label" for="account-type-traveler">
+                                                I want to
+                                                <span>book</span> a tour.
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="accounttypeid" id="account-type-guide" value="1">
+                                            <label class="form-check-label" for="account-type-guide">
+                                                I am a
+                                                <span>guide</span>.
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-buttons my-4">
+                                <button type="submit" class="btn btn-success btn-block text-uppercase">Sign Up</button>
+                                <button type="button" class="btn btn-outline-secondary btn-block" id="go-to-login">Already have an account? Log In</button>
+                            </div>
+                        </form>
+                    </div>
+                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                </div>
+            </div>
+        </div>
+        @if (Session["SignedUpSuccess"] != null)
+        {
+            <span id="signup-alert-success" hidden></span>
+        }
+        else if (Session["SignedUpError"] != null)
+        {
+            <span id="signup-alert-error" data-msg="@Session["SignUpMsg"]" hidden></span>
+        }
+    </div>
+
+    <!-- Login Form Modal -->
+    <div class="login-form-modal-wrapper">
+        <div class="modal" id="login-form-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs nav-justified" id="login-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active text-uppercase" href="#traveler-login" data-toggle="tab">Traveler Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" href="#guide-login" data-toggle="tab">Guide Login</a>
+                            </li>
+                        </ul>
+                        <!-- Tab Contents -->
+                        <div class="tab-content">
+                            <!-- Traveler Login Tab Start -->
+                            <div class="tab-pane fade show active" id="traveler-login" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="login-form-heading">
+                                    <h2 class="text-capitalize text-center">tour master</h2>
+                                    <h1 class="text-uppercase text-center">welcome</h1>
+                                    <p class="text-uppercase text-center">
+                                        if you are a
+                                        <span>guide</span> use
+                                        <t>guide login</t>
+                                    </p>
+                                </div>
+                                <form action="" method="post" id="traveler-login-form" novalidate>
+                                    <div class="form-group">
+                                        <label for="traveler-email">E-mail</label>
+                                        <input class="form-control" type="email" name="email" id="traveler-email" data-validation="required email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="traveler-password">Password</label>
+                                        <input class="form-control" type="password" name="password" id="traveler-password" data-validation="length" data-validation-length="min8">
+                                    </div>
+                                    <div class="form-buttons my-4 text-center">
+                                        <button type="submit" class="btn btn-success btn-block text-uppercase">Log in</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
+                                        <a href="#" class="btn btn-link pass-recovery">Forgot Password?</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Traveler Login Tab End -->
+                            <!-- Guide Login Tab Start -->
+                            <div class="tab-pane fade" id="guide-login" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="login-form-heading">
+                                    <h2 class="text-capitalize text-center">tour master</h2>
+                                    <h1 class="text-uppercase text-center">welcome</h1>
+                                    <p class="text-uppercase text-center">
+                                        if you want to
+                                        <span>book</span> a tour use
+                                        <t>traveler login</t>
+                                    </p>
+                                </div>
+                                <form action="" method="post" id="guide-login-form" novalidate>
+                                    <div class="form-group">
+                                        <label for="guide-email">E-mail</label>
+                                        <input class="form-control" type="email" name="email" id="guide-email" data-validation="required email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="guide-password">Password</label>
+                                        <input class="form-control" type="password" name="password" id="guide-password" data-validation="length" data-validation-length="min8">
+                                    </div>
+                                    <div class="form-buttons my-4 text-center">
+                                        <button type="submit" class="btn btn-success btn-block text-uppercase">Log in</button>
+                                        <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
+                                        <a href="#" class="btn btn-link pass-recovery">Forgot Password?</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Guide Login Tab End -->
+                        </div>
+                    </div>
+                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Recovery Form Modal -->
+    <div class="pass-recovery-form-modal-wrapper">
+        <div class="modal" id="pass-recovery-form-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="pass-recovery-form-body">
+                        <div class="login-form-heading">
+                            <h2 class="text-capitalize text-center">tour master</h2>
+                            <h1 class="text-uppercase text-center">welcome</h1>
+                            <p class="text-uppercase text-center">
+                                enter your
+                                <span>email</span> to recover your password
+                            </p>
+                        </div>
+                        <form action="" method="post" id="pass-recovery-form" novalidate>
+                            <div class="form-group">
+                                <label for="recover-email">E-mail</label>
+                                <input class="form-control" type="email" name="email" id="recover-email" data-validation="required email">
+                            </div>
+                            <div class="form-buttons my-4 text-center">
+                                <button type="submit" class="btn btn-success btn-block text-uppercase">Send recovery email</button>
+                                <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tours Modal Section -->
+    <div class="tours-modal-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <div class="modal" id="tours-modal" tabindex="-1" role="dialog" data-backdrop="false">
+                    <section id="tours">
+                        <!-- Section Heading -->
+                        <div class="section-heading-wrapper text-center">
+                            <h1 class="section-title text-uppercase">Tours Available</h1>
+                            <h4 class="section-subtitle text-uppercase">Here is our tours</h4>
+                        </div>
+                        <!-- Section Body -->
+                        <div class="container">
+                            <!-- Filter Buttons -->
+                            <div class="tours-filters-wrapper text-center">
+                                <div class="btn-group btn-group-lg flex-wrap filter-button-group justify-content-center">
+                                    <button class="btn btn-info active" data-filter="*" type="button">All</button>
+                                    @foreach (Category cat in Model.Categories)
+                                    {
+                                        <button class="btn btn-info" data-filter=".@cat.CategoryName.ToLower()" type="button">@cat.CategoryName</button>
+
+                                    }
+                                </div>
+                            </div>
+                            <!-- Tours Search -->
+                            <div class="tours-search-wrapper">
+                                <div class="accordion" id="search-accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="search-trigger">
+                                            <h5 class="mb-0 text-center">
+                                                <button class="btn btn-info text-uppercase" type="button" data-toggle="collapse" data-target="#search-wrapper">
+                                                    Search for specific tour
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="search-wrapper" class="collapse" data-parent="search-accordion">
+                                            <div class="card-body">
+                                                <form action="" method="get" id="tours-modal-search-form">
+                                                    <div class="form-group">
+                                                        <label for="search">Search</label>
+                                                        <input class="form-control search-input" type="text" id="search" name="search">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="min-rating">
+                                                                    Min. Rating
+                                                                    <span>0</span>
+                                                                </label>
+                                                                <input class="form-control-range" type="range" name="min-rating" id="min-rating" min="0" max="5" step="1" value="0">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="min-price">
+                                                                    Min. Price
+                                                                    <span>@Model.Tours.OrderBy(t => t.Price).FirstOrDefault().Price.ToString("#.##")</span>
+                                                                </label>
+                                                                <input class="form-control-range" type="range" name="min-price" id="min-price" min="@Model.Tours.OrderBy(t=>t.Price).FirstOrDefault().Price.ToString("#.##")" max="@Model.Tours.OrderByDescending(t=>t.Price).FirstOrDefault().Price.ToString("#.##")" step="1" value="@Model.Tours.OrderBy(t=>t.Price).FirstOrDefault().Price.ToString("#.##")">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="max-price">
+                                                                    Max. Price
+                                                                    <span>@Model.Tours.OrderByDescending(t => t.Price).FirstOrDefault().Price.ToString("#.##")</span>
+                                                                </label>
+                                                                <input class="form-control-range" type="range" name="max-price" id="max-price" min="100" max="@Model.Tours.OrderByDescending(t=>t.Price).FirstOrDefault().Price.ToString("#.##")" step="1" value="@Model.Tours.OrderByDescending(t=>t.Price).FirstOrDefault().Price.ToString("#.##")">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="duration-days">
+                                                                    Days
+                                                                    <span>1</span>
+                                                                </label>
+                                                                <input class="form-control-range" type="range" name="duration-days" id="duration-type" min="1" max="@Model.Tours.OrderByDescending(t=>t.DurationTypeId).OrderByDescending(t=>t.Duration).FirstOrDefault().Duration" step="1" value="1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-button text-center">
+                                                        <button class="btn btn-secondary text-uppercase" type="submit">Search</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Filter Items -->
+                            <div class="tours-grid-wrapper mt-4">
+                                <div class="tours-grid">
+                                    <!-- Gutter Sizer -->
+                                    <div class="gutter-sizer"></div>
+                                    @foreach (Tour tour in Model.Tours.Where(t=>t.Status == 1).OrderByDescending(t=>t.PostedDate).Take(6))
+                                    {
+                                        string[] tourCats = tour.Category.Split(',');
+                                        string tourCatsAll = "";
+                                        foreach (string category in tourCats)
+                                        {
+                                            tourCatsAll += " " + category;
+                                        }
+                                        <!-- Grid Item Start -->
+                                        <div class="grid-item @tourCatsAll" style="background-image: url('@tour.TourImage.ImageURL')">
+                                            <div class="info-overlay">
+                                                <div class="tour-heading">
+                                                    @{
+                                                        string tourTitle = "";
+                                                        if (tour.FromId == tour.DestinationId)
+                                                        {
+                                                            tourTitle = tour.City.CityName;
+                                                        }
+                                                        else
+                                                        {
+                                                            tourTitle = tour.City.CityName + " - " + tour.City1.CityName;
+                                                        }
+                                                    }
+                                                    <h3 class="tour-title">@tourTitle Tour</h3>
+                                                    <p class="duration" title="Duration">
+                                                        <i class="fal fa-clock"></i>@tour.Duration @tour.DurationType.Type
+                                                    </p>
+                                                    <p class="price" title="Price">
+                                                        <i class="fal fa-money-bill"></i>@tour.Price.ToString("#.##") @tour.Currency.CurrencyName
+                                                    </p>
+                                                    <button class="btn btn-primary text-uppercase my-3 tour-details" data-tour-id="@tour.Id">Details</button>
+                                                </div>
+                                                <div class="tour-guide">
+                                                    @{
+                                                        User guide = tour.User;
+                                                    }
+                                                    <img src="@guide.ProfileImage">
+                                                    <ul class="list-unstyled">
+                                                        <li>@guide.Fullname</li>
+                                                        <li>
+                                                            <select class="tour-guide-rating">
+                                                                <option value="1" @(tour.Feedbacks.Count == 0 || Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==1?"selected":"")>1</option>
+                                                                <option value="2" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==2?"selected":"")>2</option>
+                                                                <option value="3" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==3?"selected":"")>3</option>
+                                                                <option value="4" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==4?"selected":"")>4</option>
+                                                                <option value="5" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==5?"selected":"")>5</option>
+                                                            </select>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="info-overlay-bottom">
+                                                <p>
+                                                    @tourTitle Tour
+                                                    <span>@tour.Price.ToString("#.##") @tour.Currency.CurrencyName</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Grid Item End -->
+                                    }
+                                </div>
+                                <div class="tours-load-button text-center mb-5">
+                                    <button class="btn btn-secondary text-capitalize" id="load-more-tours">Load More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <i class="fas fa-times" id="tours-close"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour View Modal -->
+    <div class="tour-view-modal-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <div class="modal" id="tour-view-modal" tabindex="-1" role="dialog" data-backdrop="false">
+                    <section id="tour-view">
+                        <!-- Tour Heading -->
+                        <div class="section-heading-wrapper text-center">
+                            <h1 class="section-title text-uppercase">Tour</h1>
+                        </div>
+                        <!-- Tour Body Start -->
+                        <!-- Tour View Slider Start -->
+                        <div class="owl-carousel" id="tour-view-car">
+                            @*<div>
+                                <img src="~/public/images/insta_1.jpg">
+                                <div class="overlay"></div>
+                            </div>
+                            <div>
+                                <img src="~/public/images/insta_2.jpg">
+                                <div class="overlay"></div>
+                            </div>
+                            <div>
+                                <img src="~/public/images/insta_3.jpg">
+                                <div class="overlay"></div>
+                            </div>
+                            <div>
+                                <img src="~/public/images/insta_2.jpg">
+                                <div class="overlay"></div>
+                            </div>
+                            <div>
+                                <img src="~/public/images/insta_1.jpg">
+                                <div class="overlay"></div>
+                            </div>
+                            <div>
+                                <img src="~/public/images/insta_3.jpg">
+                                <div class="overlay"></div>
+                            </div>
+                            <div>
+                                <img src="~/public/images/insta_2.jpg">
+                                <div class="overlay"></div>
+                            </div>*@
+                        </div>
+                        <!-- Tour View Slider End -->
+                        <!-- Tour View Info -->
+                        <div class="tour-view-info">
+                            <div class="container">
+                                <div class="row">
+                                    <!-- Main Info -->
+                                    <div class="col-xl-8">
+                                        <!-- Tour Guide Info -->
+                                        <div class="media main-info">
+                                            <img class="align-self-start mr-3" src="~/public/images/guide_1.jpg">
+                                            <div class="media-body">
+                                                <h2 class="mt-0 mb-0 guide-profile">Ayan Rafiyeva</h2>
+                                                <select class="guide-rating">
+                                                    @*<option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4" selected>4</option>
+                                                    <option value="5">5</option>*@
+                                                </select>
+                                                <div class="guide-contacts mt-4">
+                                                    <p class="guide-phone mb-2">
+                                                        <i class="fal fa-mobile-android"></i>+99450 123 45 67
+                                                    </p>
+                                                    <p class="guide-email mb-2">
+                                                        <i class="fal fa-at"></i>ayan.rafiyeva@gmail.com
+                                                    </p>
+                                                    <button class="btn btn-outline-info" id="pm-guide">Write a Private Message</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Tour Description -->
+                                        <div class="tour-description-wrapper">
+                                            <h3 class="tour-title text-capitalize">Baku - Gabala Tour</h3>
+                                            <p class="tour-desc text-justify">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum natus doloremque
+                                                in. Cumque nemo error rerum quidem, recusandae dolor unde expedita, adipisci
+                                                laudantium perspiciatis quod cupiditate. Architecto est cupiditate id, laudantium
+                                                quasi incidunt aliquam molestias aut sapiente velit, perferendis eius, eum
+                                                expedita rem fugit aliquid dolore numquam perspiciatis porro harum blanditiis
+                                                sint illo voluptate. Dignissimos temporibus sit labore molestiae quod illum
+                                                exercitationem nam? Officia hic in vel architecto eveniet optio ad est aspernatur
+                                                minus consequatur. Animi expedita, id tenetur quis qui esse nemo error enim
+                                                nostrum suscipit saepe quia totam nesciunt placeat quibusdam eligendi sit
+                                                optio voluptate, laudantium ad harum dolorum? Dolores accusantium assumenda
+                                                dolore eos esse animi exercitationem fuga deleniti odio architecto! Excepturi
+                                                explicabo earum accusantium sequi culpa fugiat corrupti qui error. Illo,
+                                                tempore ea. Mollitia nisi vitae excepturi eligendi sequi. Dolorum optio reprehenderit
+                                                non at possimus officia quaerat perferendis veniam inventore! Reiciendis
+                                                facilis, perspiciatis corrupti fugit quibusdam alias.
+                                            </p>
+                                        </div>
+                                        <!-- Tour Feedbacks -->
+                                        <div class="tour-feedbacks-wrapper">
+                                            <form action="" method="get" id="submit-feedback">
+                                                <h4 class="feedback-heading text-capitalize">Leave your feedback</h4>
+                                                <select id="tour-rating">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                                <div class="form-group">
+                                                    <textarea class="form-control mt-3" name="feedback-text" id="feedback-text" cols="30" rows="4" placeholder="Your feedback here..."
+                                                              data-validation="required length" data-validation-length="min10"></textarea>
+                                                </div>
+                                                <div class="form-button text-right">
+                                                    <button class="btn btn-outline-info text-capitalize" type="submit">Submit</button>
+                                                </div>
+                                            </form>
+                                            <div class="feedbacks-list-wrapper mt-3">
+                                                <h5 class="text-capitalize mb-2">last feedbacks</h5>
+                                                <!-- Feedback Media Start -->
+                                                <div class="media comment">
+                                                    <img class="align-self-center mr-3" src="~/public/images/guide_1.jpg">
+                                                    <div class="media-body">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">Ayan Rafiyeva</h5>
+                                                        <select class="feedback-rated">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3" selected>3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <p class="feedback-text text-justify">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam odio qui modi eligendi excepturi nulla praesentium cum,
+                                                            quasi possimus maxime vitae at quaerat cupiditate amet rem repudiandae
+                                                            soluta, repellat cumque!
+                                                        </p>
+                                                        <span class="feedback-date float-right mt-1">16:45 25.06.2018</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Feedback Media End -->
+                                                <!-- Feedback Media Start -->
+                                                <div class="media comment">
+                                                    <img class="align-self-center mr-3" src="~/public/images/guide_2.jpg">
+                                                    <div class="media-body">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">Murad Jafarov</h5>
+                                                        <select class="feedback-rated">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5" selected>5</option>
+                                                        </select>
+                                                        <p class="feedback-text text-justify">
+                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam odio qui modi eligendi excepturi nulla praesentium cum,
+                                                            quasi possimus maxime vitae at quaerat cupiditate amet rem repudiandae
+                                                            soluta, repellat cumque!
+                                                        </p>
+                                                        <span class="feedback-date float-right mt-1">16:45 25.06.2018</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Feedback Media End -->
+                                                <div class="feedback-load-button text-center">
+                                                    <button class="btn btn-outline-info text-capitalize">Load More</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Widgets -->
+                                    <div class="col-xl-4">
+                                        <div class="tour-details-wrapper">
+                                            <p class="tour-type text-center" title="Type">Adventure - Hiking</p>
+                                            <p class="tour-duration" title="Duration">
+                                                <i class="fal fa-clock"></i>10 hours
+                                            </p>
+                                            <p class="tour-price" title="Price">
+                                                <i class="fal fa-money-bill"></i>250 USD
+                                            </p>
+                                            <p class="tour-transport" title="Transport">
+                                                <i class="fal fa-bus"></i>Minivan
+                                            </p>
+                                            <p class="tour-accomodation" title="Accomodation">
+                                                <i class="fal fa-home"></i>4-star Hotel
+                                            </p>
+                                            <h5 class="text-center">Available Dates</h5>
+                                            <div class="tour-available-dates jalendar"></div>
+                                            <span class="d-block" id="send-request-button-wrapper" tab-index="0">
+                                                <button class="btn btn-outline-info btn-block" id="send-tour-request" style="pointer-events: none;" disabled>Send a Request</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tour Body End -->
+                        <i class="fas fa-angle-left" id="tour-view-back"></i>
+                        <i class="fas fa-times" id="modal-close" data-dismiss="modal"></i>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Private Message Modal -->
+    <div class="pm-modal-wrapper">
+        <div class="modal" id="pm-form-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="pm-form-modal-body">
+                        <div class="pm-form-heading">
+                            <h3 class="text-uppercase text-center">Drop a Private Message to guide</h3>
+                        </div>
+                        <form action="" method="post" id="pm-to-guide">
+                            <div class="form-group">
+                                <input class="form-control-plaintext" type="text" readonly id="guide-fullname" value="Ayan Rafiyeva">
+                                <input class="form-control" type="text" id="pm-subject" placeholder="Subject" data-validation="required">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="pm-text" id="pm-text" cols="30" rows="5" placeholder="Message" data-validation="required length"
+                                          data-validation-length="min5"></textarea>
+                            </div>
+                            <div class="form-button mt-3 text-center">
+                                <button class="btn btn-success text-uppercase" type="submit">send</button>
+                            </div>
+                        </form>
+                    </div>
+                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send a Request Modal -->
+    <div class="tour-request-modal-wrapper">
+        <div class="modal" id="tour-request-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="tour-request-modal-body">
+                        <div class="tour-request-form-heading">
+                            <h3 class="text-uppercase text-center">Send a request for booking</h3>
+                        </div>
+                        <form action="" method="post" id="tour-request-guide">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input class="form-control" type="date" name="start-date" id="start-date" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <i class="far fa-angle-right"></i>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input class="form-control" type="date" name="end-date" id="end-date" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="request-text" id="request-text" cols="30" rows="10" placeholder="Request message..."></textarea>
+                            </div>
+                            <div class="form-button mt-3 text-center">
+                                <button class="btn btn-success text-uppercase" type="submit">send</button>
+                            </div>
+                        </form>
+                    </div>
+                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile View Modal -->
+    <div class="profile-view-modal-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <div class="modal" id="profile-view-modal" tabindex="-1" role="dialog" data-backdrop="false">
+                    <section id="profile-view">
+                        <!-- Profile Heading -->
+                        <div class="section-heading-wrapper text-center">
+                            <h1 class="section-title text-uppercase">Ayan Rafiyeva</h1>
+                        </div>
+                        <!-- Tour Body Start -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="profile-photo" src="~/public/images/guide_1.jpg">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="profile-details-wrapper text-uppercase text-center">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3 class="profile-country">
+                                                    <span class="flag-icon flag-icon-az"></span> Azerbaijan
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h5 class="profile-total-tours profile-card">
+                                                    Total tours
+                                                    <span>42</span>
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5 class="profile-completed-tours profile-card">
+                                                    Completed tours
+                                                    <span>31</span>
+                                                </h5>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5 class="profile-tour-feedbacks profile-card no-border">
+                                                    Feedbacks
+                                                    <span>13</span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="guide-rating-wrapper">
+                                                    <select class="guide-rating">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4" selected>4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="guide-contacts-wrapper">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h5 class="profile-number">
+                                                        <i class="fal fa-mobile-android"></i> +99450 123 45 67
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h5 class="profile-email">
+                                                        <i class="fal fa-at"></i> ayan.rafiyeva@gmail.com
+                                                    </h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <ul class="list-unstyled">
+                                                        <li>
+                                                            <a href="#">
+                                                                <i class="fab fa-facebook-f"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <i class="fab fa-instagram"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="guide-offered-tours-wrapper mt-5">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h1 class="guide-offered-tours-heading text-uppercase text-center mb-5">Offered tours</h1>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- Tour Item Start -->
+                                            <div class="col-md-4">
+                                                <div class="tour-item" style="background-image: url('/public/images/insta_1.jpg')">
+                                                    <div class="info-overlay">
+                                                        <div class="tour-heading">
+                                                            <h3 class="tour-title">Baku - Gabala Tour</h3>
+                                                            <p class="duration" title="Duration">
+                                                                <i class="fal fa-clock"></i>10 hours
+                                                            </p>
+                                                            <p class="price" title="Price">
+                                                                <i class="fal fa-money-bill"></i>250 USD
+                                                            </p>
+                                                            <button class="btn btn-primary text-uppercase my-3 tour-details">Details</button>
+                                                        </div>
+                                                        <div class="tour-guide">
+                                                            <img src="~/public/images/guide_1.jpg">
+                                                            <ul class="list-unstyled">
+                                                                <li>Ayan Rafiyeva</li>
+                                                                <li>
+                                                                    <select class="guide-rating">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4" selected>4</option>
+                                                                        <option value="5">5</option>
+                                                                    </select>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-overlay-bottom">
+                                                        <p>
+                                                            Baku - Gabala Tour
+                                                            <span>250 USD</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Tour Item End -->
+                                            <!-- Tour Item Start -->
+                                            <div class="col-md-4">
+                                                <div class="tour-item" style="background-image: url('/public/images/insta_2.jpg')">
+                                                    <div class="info-overlay">
+                                                        <div class="tour-heading">
+                                                            <h3 class="tour-title">Baku - Gabala Tour</h3>
+                                                            <p class="duration" title="Duration">
+                                                                <i class="fal fa-clock"></i>10 hours
+                                                            </p>
+                                                            <p class="price" title="Price">
+                                                                <i class="fal fa-money-bill"></i>250 USD
+                                                            </p>
+                                                            <button class="btn btn-primary text-uppercase my-3 tour-details">Details</button>
+                                                        </div>
+                                                        <div class="tour-guide">
+                                                            <img src="~/public/images/guide_1.jpg">
+                                                            <ul class="list-unstyled">
+                                                                <li>Ayan Rafiyeva</li>
+                                                                <li>
+                                                                    <select class="guide-rating">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4" selected>4</option>
+                                                                        <option value="5">5</option>
+                                                                    </select>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-overlay-bottom">
+                                                        <p>
+                                                            Baku - Gabala Tour
+                                                            <span>250 USD</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Tour Item End -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Tour Body End -->
+                        <i class="fas fa-times" id="modal-close" data-dismiss="modal"></i>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Slider -->
+    <div class="main-slider-wrapper" id="main-car">
+        <!-- Slider Start -->
+        <div class="owl-carousel main-slider">
+            @{
+                foreach (string image in ViewBag.Origin.MainSliderPhotos.Split(','))
+                {
+                    <div class="slider-image" style="background-image: url('/public/images/@image')"></div>
+                }
+            }
+        </div>
+        <!-- Slider End -->
+        <!-- Search Form Start -->
+        <div class="tour-search-background"></div>
+        <div class="tour-search-wrapper">
+            <form class="text-center" action="" method="get" id="tour-search-form">
+                <h1 class="tour-search-title text-center mb-4">
+                    Find a Perfect
+                    <br> Tour
+                </h1>
+                <div class="form-group">
+                    <select class="form-control" name="dest" id="destination">
+                        <option value="" disabled selected>PREDEFINED DESTINATIONS</option>
+                        <option value="">Baku</option>
+                        <option value="">Ganja</option>
+                        <option value="">London</option>
+                        <option value="">Kiev</option>
+                        <option value="">Tokyo</option>
+                    </select>
+                </div>
+                <div class="row no-gutters justify-content-between">
+                    <div class="form-group d-picker start">
+                        <input type="text" class="datepicker" id="date-start" placeholder="DATE START">
+                        <i class="fal fa-calendar-alt"></i>
+                    </div>
+                    <div class="form-group d-picker end">
+                        <input type="text" class="datepicker" id="date-end" placeholder="DATE END">
+                        <i class="fal fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <button class="btn btn-primary text-uppercase" type="submit">Search</button>
+            </form>
+        </div>
+        <!-- Search Form End -->
+    </div>
+
+    <!-- Most Popular Section -->
+    <section id="most-popular">
+        <!-- Section Heading -->
+        <div class="section-heading-wrapper text-center">
+            <h1 class="section-title text-uppercase">Most Popular Tours</h1>
+            <h4 class="section-subtitle text-uppercase">
+                Here is the
+                <span>best selling</span> tours
+            </h4>
+        </div>
+        <!-- Section Body -->
+        <div class="section-body-wrapper">
+            <!-- Section Item Left-Angle Start -->
+            <div class="best-tour clearfix">
+                <div class="tour-background" style="background-image: url('/public/images/home_1.jpg')">
+                    <div class="tour-info-left"></div>
+                </div>
+                <div class="tour-info left">
+                    <div class="container">
+                        <h1 class="tour-title text-uppercase">Baku - Gabala Tour</h1>
+                        <h3 class="tour-subtitle text-capitalize">Full day roundtrip from Baku</h3>
+                        <p class="tour-duration" title="Duration">
+                            <i class="fal fa-clock"></i>10 hours
+                        </p>
+                        <p class="tour-price" title="Price">
+                            <i class="fal fa-money-bill"></i>250 USD
+                        </p>
+                        <button class="btn btn-secondary text-uppercase goto-tour-details">Details</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Item Left-Angle End -->
+            <!-- Section Item Right-Angle Start -->
+            <div class="best-tour clearfix">
+                <div class="tour-background" style="background-image: url('/public/images/home_2.jpg')">
+                    <div class="tour-info-right"></div>
+                </div>
+                <div class="tour-info right">
+                    <div class="container">
+                        <h1 class="tour-title text-uppercase">Baku - Gabala Tour</h1>
+                        <h3 class="tour-subtitle text-capitalize">Full day roundtrip from Baku</h3>
+                        <p class="tour-duration" title="Duration">
+                            <i class="fal fa-clock"></i>10 hours
+                        </p>
+                        <p class="tour-price" title="Price">
+                            <i class="fal fa-money-bill"></i>250 USD
+                        </p>
+                        <button class="btn btn-secondary text-uppercase goto-tour-details">Details</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Item Right-Angle End -->
+            <!-- Section Item Left-Angle Start -->
+            <div class="best-tour clearfix">
+                <div class="tour-background" style="background-image: url('/public/images/home_3.jpg')">
+                    <div class="tour-info-left"></div>
+                </div>
+                <div class="tour-info left">
+                    <div class="container">
+                        <h1 class="tour-title text-uppercase">Baku - Gabala Tour</h1>
+                        <h3 class="tour-subtitle text-capitalize">Full day roundtrip from Baku</h3>
+                        <p class="tour-duration" title="Duration">
+                            <i class="fal fa-clock"></i>10 hours
+                        </p>
+                        <p class="tour-price" title="Price">
+                            <i class="fal fa-money-bill"></i>250 USD
+                        </p>
+                        <button class="btn btn-secondary text-uppercase goto-tour-details">Details</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Item Left-Angle End -->
+        </div>
+    </section>
+
+    <!-- Best Guides Section -->
+    <section id="best-guides">
+        <!-- Section Heading -->
+        <div class="section-heading-wrapper text-center">
+            <h1 class="section-title text-uppercase">Best Guides</h1>
+            <h4 class="section-subtitle text-uppercase">
+                Here is the
+                <span>top rated</span> guides
+            </h4>
+        </div>
+        <!-- Section Body -->
+        <div class="section-body-wrapper">
+            <div class="container">
+                <div class="row">
+                    <!-- Best Guide Item Start -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-heading">
+                                <img class="card-img-top" src="~/public/images/guide_1.jpg" alt="Card image cap">
+                                <div class="overlay text-center">
+                                    <a href="#" class="best-guide-profile text-uppercase btn btn-outline-success">Go to profile</a>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title text-uppercase">Ayan Rafiyeva</h4>
+                                <select class="best-guide-rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" selected>4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-capitalize">
+                                    Completed tours:
+                                    <span class="float-right">45</span>
+                                </li>
+                                <li class="list-group-item text-capitalize">
+                                    Feedbacks:
+                                    <span class="float-right">125</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Best Guide Item End -->
+                    <!-- Best Guide Item Start -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-heading">
+                                <img class="card-img-top" src="~/public/images/guide_2.jpg" alt="Card image cap">
+                                <div class="overlay text-center">
+                                    <a href="#" class="best-guide-profile text-uppercase btn btn-outline-success">Go to profile</a>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title text-uppercase">Murad Jafarov</h4>
+                                <select class="best-guide-rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                </select>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-capitalize">
+                                    Completed tours:
+                                    <span class="float-right">31</span>
+                                </li>
+                                <li class="list-group-item text-capitalize">
+                                    Feedbacks:
+                                    <span class="float-right">48</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Best Guide Item End -->
+                    <!-- Best Guide Item Start -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-heading">
+                                <img class="card-img-top" src="~/public/images/guide_3.jpg" alt="Card image cap">
+                                <div class="overlay text-center">
+                                    <a href="#" class="best-guide-profile text-uppercase btn btn-outline-success">Go to profile</a>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title text-uppercase">Fariz Hasanov</h4>
+                                <select class="best-guide-rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-capitalize">
+                                    Completed tours:
+                                    <span class="float-right">15</span>
+                                </li>
+                                <li class="list-group-item text-capitalize">
+                                    Feedbacks:
+                                    <span class="float-right">47</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Best Guide Item End -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <!-- Section Heading -->
+        <div class="section-heading-wrapper text-center">
+            <h1 class="section-title text-uppercase">About Us</h1>
+            <h4 class="section-subtitle text-uppercase">
+                Who
+                <span>we</span> are? What
+                <span>we</span> do?
+            </h4>
+        </div>
+        <!-- Section Body -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="about-slider-wrapper">
+                        <h4 class="about-guides-slider-title text-uppercase text-center mb-5">Guides from all over the world</h4>
+                        <!-- Guides Slider Start -->
+                        <div class="owl-carousel about-guides-slider">
+                            <!-- Guide Item Start -->
+                            <div class="guide-item-wrapper">
+                                <div class="img-wrapper rounded-circle mb-3">
+                                    <img style="max-width: 100%" src="~/public/images/guide_1.jpg">
+                                </div>
+                                <div class="guide-info-wrapper">
+                                    <h4 class="text-center text-uppercase guide-name">Ayan Rafiyeva</h4>
+                                    <p class="location text-center text-uppercase">Azerbaijan</p>
+                                </div>
+                            </div>
+                            <!-- Guide Item End -->
+                            <!-- Guide Item Start -->
+                            <div class="guide-item-wrapper">
+                                <div class="img-wrapper rounded-circle mb-3">
+                                    <img style="max-width: 100%" src="~/public/images/guide_2.jpg">
+                                </div>
+                                <div class="guide-info-wrapper">
+                                    <h4 class="text-center text-uppercase guide-name">Murad Jafarov</h4>
+                                    <p class="location text-center text-uppercase">Azerbaijan</p>
+                                </div>
+                            </div>
+                            <!-- Guide Item End -->
+                            <!-- Guide Item Start -->
+                            <div class="guide-item-wrapper">
+                                <div class="img-wrapper rounded-circle mb-3">
+                                    <img style="max-width: 100%" src="~/public/images/guide_3.jpg">
+                                </div>
+                                <div class="guide-info-wrapper">
+                                    <h4 class="text-center text-uppercase guide-name">Fariz Hasanov</h4>
+                                    <p class="location text-center text-uppercase">Azerbaijan</p>
+                                </div>
+                            </div>
+                            <!-- Guide Item End -->
+                        </div>
+                        <!-- Guides Slider End -->
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <p class="about-text text-justify mb-0">
+                        @(new HtmlString(ViewBag.Origin.About));
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Join Section -->
+    <section id="guide-join" style="background-image: url('/public/images/join.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row text-center align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="guide-join-text text-uppercase">
+                        @(new HtmlString(ViewBag.Origin.JoinUs));
+                    </h1>
+                </div>
+                <div class="col-lg-4 offset-lg-2">
+                    <button class="btn btn-primary text-uppercase" id="guide-join-signup">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <!-- Section Heading -->
+        <div class="section-heading-wrapper text-center">
+            <h1 class="section-title text-uppercase">Contact</h1>
+            <h4 class="section-subtitle text-uppercase">Fill the form and drop us a message</h4>
+        </div>
+        <!-- Section Body -->
+        <div class="contact-form-wrapper">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-9">
+                        <form action="" method="post" id="contact-form">
+                            <div class="row text-left">
+                                <div class="col-xl-4">
+                                    <div class="form-group d-inline-block w-100">
+                                        <label for="fullname">Full Name</label>
+                                        <input class="form-control" type="text" name="fullname" id="fullname" data-validation="required length" data-validation-length="min8">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <div class="form-group d-inline-block w-100">
+                                        <label for="email">E-mail</label>
+                                        <input class="form-control" type="email" name="email" id="contact-form-email" data-validation="email required">
+                                    </div>
+                                </div>
+                                <div class="col-xl-4">
+                                    <div class="form-group d-inline-block w-100">
+                                        <label for="phone">Phone</label>
+                                        <input class="form-control" type="text" name="phone" id="contact-form-phone" data-validation="number" data-validation-optional="true"
+                                               data-validation-allowing="integer, positive">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="subject">Subject</label>
+                                <input class="form-control" type="text" name="subject" id="subject" data-validation="required">
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="msg">Message</label>
+                                <textarea class="form-control" id="msg" name="msg" cols="30" rows="10" data-validation="required length" data-validation-length="min20"></textarea>
+                            </div>
+                            <button class="btn btn-primary text-uppercase mt-3 mb-2" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h2 class="footer-title text-uppercase text-center mb-4">Our instagram feed</h2>
+            <div class="insta-feed-wrapper">
+                <div class="owl-carousel" id="insta-feed-slider">
+                    <!-- Instagram Post Start -->
+                    <div class="insta-img-wrapper">
+                        <a href="#">
+                            <img src="~/public/images/insta_1.jpg">
+                        </a>
+                        <div class="post-stats">
+                            <span>
+                                <i class="fas fa-heart"></i> 32
+                            </span>
+                            <span>
+                                <i class="fas fa-comment"></i> 45
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Instagram Post End -->
+                    <!-- Instagram Post Start -->
+                    <div class="insta-img-wrapper">
+                        <a href="#">
+                            <img src="~/public/images/insta_2.jpg">
+                        </a>
+                        <div class="post-stats">
+                            <span>
+                                <i class="fas fa-heart"></i> 32
+                            </span>
+                            <span>
+                                <i class="fas fa-comment"></i> 45
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Instagram Post End -->
+                    <!-- Instagram Post Start -->
+                    <div class="insta-img-wrapper">
+                        <a href="#">
+                            <img src="~/public/images/insta_3.jpg">
+                        </a>
+                        <div class="post-stats">
+                            <span>
+                                <i class="fas fa-heart"></i> 32
+                            </span>
+                            <span>
+                                <i class="fas fa-comment"></i> 45
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Instagram Post End -->
+                    <!-- Instagram Post Start -->
+                    <div class="insta-img-wrapper">
+                        <a href="#">
+                            <img src="~/public/images/insta_4.jpg">
+                        </a>
+                        <div class="post-stats">
+                            <span>
+                                <i class="fas fa-heart"></i> 32
+                            </span>
+                            <span>
+                                <i class="fas fa-comment"></i> 45
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Instagram Post End -->
+                    <!-- Instagram Post Start -->
+                    <div class="insta-img-wrapper">
+                        <a href="#">
+                            <img src="~/public/images/insta_5.jpg">
+                        </a>
+                        <div class="post-stats">
+                            <span>
+                                <i class="fas fa-heart"></i> 32
+                            </span>
+                            <span>
+                                <i class="fas fa-comment"></i> 45
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Instagram Post End -->
+                </div>
+            </div>
+        </div>
+        <div class="social-links-wrapper">
+            <h4 class="social-links-title text-center text-uppercase">We are social</h4>
+            <ul class="list-unstyled social-links text-center">
+                @if (ViewBag.Origin.Facebook != null)
+                {
+                    <li>
+                        <a class="list-item" href="@ViewBag.Origin.Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                }
+                @if (ViewBag.Origin.Instagram != null)
+                {
+                    <li>
+                        <a class="list-item" href="@ViewBag.Origin.Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                }
+                @if (ViewBag.Origin.Twitter != null)
+                {
+                    <li>
+                        <a class="list-item" href="@ViewBag.Origin.Twitter" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                }
+                @if (ViewBag.Origin.GooglePlus != null)
+                {
+                    <li>
+                        <a class="list-item" href="@ViewBag.Origin.GooglePlus" target="_blank">
+                            <i class="fab fa-google-plus-g"></i>
+                        </a>
+                    </li>
+                }
+                @if (ViewBag.Origin.Youtube != null)
+                {
+                    <li>
+                        <a class="list-item" href="@ViewBag.Origin.Youtube" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <p class="copyright text-capitalize text-center">@ViewBag.Origin.Copyright</p>
+    </footer>
+
+    <!-- Scroll To Top Icon -->
+    <a href="#" id="scroll-top">
+        <i class="fal fa-angle-up"></i>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="~/public/js/plugins/datepicker/picker.js"></script>
+    <script src="~/public/js/plugins/datepicker/picker.date.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.21.1/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+    <script src="~/public/js/plugins/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/public/js/plugins/form-validator/jquery.form-validator.min.js"></script>
+    <script src="~/public/js/plugins/jalendar/jalendar.min.js"></script>
+    <script src="~/public/js/plugins/waypoint/waypoint.js"></script>
+    <script src="~/public/js/plugins/counterup/counterup.min.js"></script>
+    <script src="~/public/js/main.js"></script>
+</body>
+
+</html>
