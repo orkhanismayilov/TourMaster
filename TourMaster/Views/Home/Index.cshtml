@@ -384,7 +384,7 @@
                                 <div class="tours-grid">
                                     <!-- Gutter Sizer -->
                                     <div class="gutter-sizer"></div>
-                                    @foreach (Tour tour in Model.Tours.Where(t=>t.Status == 1).OrderByDescending(t=>t.PostedDate).Take(6))
+                                    @foreach (Tour tour in Model.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.PostedDate).Take(6))
                                     {
                                         string[] tourCats = tour.Category.Split(',');
                                         string tourCatsAll = "";
@@ -425,11 +425,11 @@
                                                         <li>@guide.Fullname</li>
                                                         <li>
                                                             <select class="tour-guide-rating">
-                                                                <option value="1" @(tour.Feedbacks.Count == 0 || Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==1?"selected":"")>1</option>
-                                                                <option value="2" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==2?"selected":"")>2</option>
-                                                                <option value="3" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==3?"selected":"")>3</option>
-                                                                <option value="4" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==4?"selected":"")>4</option>
-                                                                <option value="5" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f=>f.Rating)/tour.Feedbacks.Count))==5?"selected":"")>5</option>
+                                                                <option value="1" @(tour.Feedbacks.Count == 0 || Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 1 ? "selected" : "")>1</option>
+                                                                <option value="2" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 2 ? "selected" : "")>2</option>
+                                                                <option value="3" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 3 ? "selected" : "")>3</option>
+                                                                <option value="4" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 4 ? "selected" : "")>4</option>
+                                                                <option value="5" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 5 ? "selected" : "")>5</option>
                                                             </select>
                                                         </li>
                                                     </ul>
@@ -465,39 +465,12 @@
                     <section id="tour-view">
                         <!-- Tour Heading -->
                         <div class="section-heading-wrapper text-center">
-                            <h1 class="section-title text-uppercase">Tour</h1>
+                            <h1 class="section-title text-uppercase"></h1>
                         </div>
                         <!-- Tour Body Start -->
                         <!-- Tour View Slider Start -->
                         <div class="owl-carousel" id="tour-view-car">
-                            @*<div>
-                                <img src="~/public/images/insta_1.jpg">
-                                <div class="overlay"></div>
-                            </div>
-                            <div>
-                                <img src="~/public/images/insta_2.jpg">
-                                <div class="overlay"></div>
-                            </div>
-                            <div>
-                                <img src="~/public/images/insta_3.jpg">
-                                <div class="overlay"></div>
-                            </div>
-                            <div>
-                                <img src="~/public/images/insta_2.jpg">
-                                <div class="overlay"></div>
-                            </div>
-                            <div>
-                                <img src="~/public/images/insta_1.jpg">
-                                <div class="overlay"></div>
-                            </div>
-                            <div>
-                                <img src="~/public/images/insta_3.jpg">
-                                <div class="overlay"></div>
-                            </div>
-                            <div>
-                                <img src="~/public/images/insta_2.jpg">
-                                <div class="overlay"></div>
-                            </div>*@
+
                         </div>
                         <!-- Tour View Slider End -->
                         <!-- Tour View Info -->
@@ -508,22 +481,22 @@
                                     <div class="col-xl-8">
                                         <!-- Tour Guide Info -->
                                         <div class="media main-info">
-                                            <img class="align-self-start mr-3" src="~/public/images/guide_1.jpg">
+                                            <img class="align-self-start mr-3" src="">
                                             <div class="media-body">
-                                                <h2 class="mt-0 mb-0 guide-profile">Ayan Rafiyeva</h2>
+                                                <h2 class="mt-0 mb-0 guide-profile"></h2>
                                                 <select class="guide-rating">
-                                                    @*<option value="1">1</option>
+                                                    <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
-                                                    <option value="4" selected>4</option>
-                                                    <option value="5">5</option>*@
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
                                                 </select>
                                                 <div class="guide-contacts mt-4">
                                                     <p class="guide-phone mb-2">
-                                                        <i class="fal fa-mobile-android"></i>+99450 123 45 67
+                                                        <i class="fal fa-mobile-android"></i>+
                                                     </p>
                                                     <p class="guide-email mb-2">
-                                                        <i class="fal fa-at"></i>ayan.rafiyeva@gmail.com
+                                                        <i class="fal fa-at"></i>
                                                     </p>
                                                     <button class="btn btn-outline-info" id="pm-guide">Write a Private Message</button>
                                                 </div>
@@ -531,24 +504,8 @@
                                         </div>
                                         <!-- Tour Description -->
                                         <div class="tour-description-wrapper">
-                                            <h3 class="tour-title text-capitalize">Baku - Gabala Tour</h3>
-                                            <p class="tour-desc text-justify">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum natus doloremque
-                                                in. Cumque nemo error rerum quidem, recusandae dolor unde expedita, adipisci
-                                                laudantium perspiciatis quod cupiditate. Architecto est cupiditate id, laudantium
-                                                quasi incidunt aliquam molestias aut sapiente velit, perferendis eius, eum
-                                                expedita rem fugit aliquid dolore numquam perspiciatis porro harum blanditiis
-                                                sint illo voluptate. Dignissimos temporibus sit labore molestiae quod illum
-                                                exercitationem nam? Officia hic in vel architecto eveniet optio ad est aspernatur
-                                                minus consequatur. Animi expedita, id tenetur quis qui esse nemo error enim
-                                                nostrum suscipit saepe quia totam nesciunt placeat quibusdam eligendi sit
-                                                optio voluptate, laudantium ad harum dolorum? Dolores accusantium assumenda
-                                                dolore eos esse animi exercitationem fuga deleniti odio architecto! Excepturi
-                                                explicabo earum accusantium sequi culpa fugiat corrupti qui error. Illo,
-                                                tempore ea. Mollitia nisi vitae excepturi eligendi sequi. Dolorum optio reprehenderit
-                                                non at possimus officia quaerat perferendis veniam inventore! Reiciendis
-                                                facilis, perspiciatis corrupti fugit quibusdam alias.
-                                            </p>
+                                            <h3 class="tour-title text-capitalize"></h3>
+                                            <p class="tour-desc text-justify"></p>
                                         </div>
                                         <!-- Tour Feedbacks -->
                                         <div class="tour-feedbacks-wrapper">
@@ -569,8 +526,8 @@
                                                     <button class="btn btn-outline-info text-capitalize" type="submit">Submit</button>
                                                 </div>
                                             </form>
+                                            <h5 class="text-capitalize mb-2">last feedbacks</h5>
                                             <div class="feedbacks-list-wrapper mt-3">
-                                                <h5 class="text-capitalize mb-2">last feedbacks</h5>
                                                 <!-- Feedback Media Start -->
                                                 <div class="media comment">
                                                     <img class="align-self-center mr-3" src="~/public/images/guide_1.jpg">
@@ -622,18 +579,18 @@
                                     <!-- Widgets -->
                                     <div class="col-xl-4">
                                         <div class="tour-details-wrapper">
-                                            <p class="tour-type text-center" title="Type">Adventure - Hiking</p>
-                                            <p class="tour-duration" title="Duration">
-                                                <i class="fal fa-clock"></i>10 hours
+                                            <p class="tour-type text-center text-capitalize" title="Type"></p>
+                                            <p class="tour-duration text-lowercase" title="Duration">
+                                                <i class="fal fa-clock"></i>
                                             </p>
                                             <p class="tour-price" title="Price">
-                                                <i class="fal fa-money-bill"></i>250 USD
+                                                <i class="fal fa-money-bill"></i>
                                             </p>
                                             <p class="tour-transport" title="Transport">
-                                                <i class="fal fa-bus"></i>Minivan
+                                                <i class="fal fa-bus"></i>
                                             </p>
                                             <p class="tour-accomodation" title="Accomodation">
-                                                <i class="fal fa-home"></i>4-star Hotel
+                                                <i class="fal fa-home"></i>
                                             </p>
                                             <h5 class="text-center">Available Dates</h5>
                                             <div class="tour-available-dates jalendar"></div>

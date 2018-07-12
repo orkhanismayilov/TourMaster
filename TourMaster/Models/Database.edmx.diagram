@@ -21,19 +21,21 @@
         <AssociationConnector Association="TourMaster.FK_Users_Cities" ManuallyRouted="false" />
         <AssociationConnector Association="TourMaster.FK_PrivateMessages_Users" ManuallyRouted="false" />
         <AssociationConnector Association="TourMaster.FK_PrivateMessages_Users1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TourMaster.Feedback" Width="1.5" PointX="14.25" PointY="11.5" />
+        <AssociationConnector Association="TourMaster.FK_Feedbacks_Users" />
+        <EntityTypeShape EntityType="TourMaster.AccomodationLevel" Width="1.5" PointX="9.75" PointY="10.625" />
         <EntityTypeShape EntityType="TourMaster.Tour" Width="1.5" PointX="12" PointY="9.375" />
+        <AssociationConnector Association="TourMaster.FK_Tours_AccomodationLevels" />
         <AssociationConnector Association="TourMaster.FK_Tours_Accomodations" />
         <AssociationConnector Association="TourMaster.FK_Bookings_Tours" />
         <AssociationConnector Association="TourMaster.FK_Tours_Cities" />
         <AssociationConnector Association="TourMaster.FK_Tours_Cities1" />
         <AssociationConnector Association="TourMaster.FK_Tours_Currencies" />
         <AssociationConnector Association="TourMaster.FK_Tours_DurationTypes" />
+        <AssociationConnector Association="TourMaster.FK_Feedbacks_Tours" />
         <AssociationConnector Association="TourMaster.FK_TourImages_Tours" />
         <AssociationConnector Association="TourMaster.FK_Tours_TourImages" />
         <AssociationConnector Association="TourMaster.FK_Tours_Users" />
-        <EntityTypeShape EntityType="TourMaster.Feedback" Width="1.5" PointX="14.25" PointY="11.5" />
-        <AssociationConnector Association="TourMaster.FK_Feedbacks_Tours" />
-        <AssociationConnector Association="TourMaster.FK_Feedbacks_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TourMaster.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccomodationLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Level" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Accomodations">
           <Key>
             <PropertyRef Name="Id" />
@@ -122,7 +129,7 @@
           <Property Name="Duration" Type="int" Nullable="false" />
           <Property Name="DurationTypeId" Type="int" Nullable="false" />
           <Property Name="AccomodationId" Type="int" />
-          <Property Name="AccomodationLevel" Type="int" />
+          <Property Name="AccomodationLevelId" Type="int" />
           <Property Name="Vehicle" Type="nvarchar" MaxLength="50" />
           <Property Name="MainImageId" Type="int" Nullable="false" />
           <Property Name="Description" Type="ntext" />
@@ -239,6 +246,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tours_AccomodationLevels">
+          <End Role="AccomodationLevels" Type="Self.AccomodationLevels" Multiplicity="0..1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccomodationLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="AccomodationLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tours_Accomodations">
           <End Role="Accomodations" Type="Self.Accomodations" Multiplicity="0..1" />
           <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
@@ -336,6 +355,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TourMasterStoreContainer">
+          <EntitySet Name="AccomodationLevels" EntityType="Self.AccomodationLevels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accomodations" EntityType="Self.Accomodations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -380,6 +400,10 @@
           <AssociationSet Name="FK_TourImages_Tours" Association="Self.FK_TourImages_Tours">
             <End Role="Tours" EntitySet="Tours" />
             <End Role="TourImages" EntitySet="TourImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tours_AccomodationLevels" Association="Self.FK_Tours_AccomodationLevels">
+            <End Role="AccomodationLevels" EntitySet="AccomodationLevels" />
+            <End Role="Tours" EntitySet="Tours" />
           </AssociationSet>
           <AssociationSet Name="FK_Tours_Accomodations" Association="Self.FK_Tours_Accomodations">
             <End Role="Accomodations" EntitySet="Accomodations" />
@@ -459,7 +483,7 @@
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Cities" FromRole="Cities" ToRole="Users" />
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Cities" FromRole="City" ToRole="Tour" />
           <NavigationProperty Name="Tours1" Relationship="TourMaster.FK_Tours_Cities1" FromRole="City" ToRole="Tour" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="Id" />
@@ -523,7 +547,7 @@
           <Property Name="TourId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tour" Relationship="TourMaster.FK_TourImages_Tours" FromRole="TourImage" ToRole="Tour" />
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_TourImages" FromRole="TourImage" ToRole="Tour" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -541,8 +565,8 @@
           <NavigationProperty Name="City" Relationship="Self.FK_Users_Cities" FromRole="Users" ToRole="Cities" />
           <NavigationProperty Name="PrivateMessages" Relationship="Self.FK_PrivateMessages_Users" FromRole="Users" ToRole="PrivateMessages" />
           <NavigationProperty Name="PrivateMessages1" Relationship="Self.FK_PrivateMessages_Users1" FromRole="Users" ToRole="PrivateMessages" />
-          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
           <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="User" ToRole="Feedback" />
+          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
         </EntityType>
         <Association Name="FK_Bookings_Users">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
@@ -636,7 +660,17 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="PrivateMessages" EntitySet="PrivateMessages" />
           </AssociationSet>
+          <EntitySet Name="Feedbacks" EntityType="TourMaster.Feedback" />
+          <AssociationSet Name="FK_Feedbacks_Users" Association="TourMaster.FK_Feedbacks_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <EntitySet Name="AccomodationLevels" EntityType="TourMaster.AccomodationLevel" />
           <EntitySet Name="Tours" EntityType="TourMaster.Tour" />
+          <AssociationSet Name="FK_Tours_AccomodationLevels" Association="TourMaster.FK_Tours_AccomodationLevels">
+            <End Role="AccomodationLevel" EntitySet="AccomodationLevels" />
+            <End Role="Tour" EntitySet="Tours" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tours_Accomodations" Association="TourMaster.FK_Tours_Accomodations">
             <End Role="Accomodation" EntitySet="Accomodations" />
             <End Role="Tour" EntitySet="Tours" />
@@ -661,6 +695,10 @@
             <End Role="DurationType" EntitySet="DurationTypes" />
             <End Role="Tour" EntitySet="Tours" />
           </AssociationSet>
+          <AssociationSet Name="FK_Feedbacks_Tours" Association="TourMaster.FK_Feedbacks_Tours">
+            <End Role="Tour" EntitySet="Tours" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
           <AssociationSet Name="FK_TourImages_Tours" Association="TourMaster.FK_TourImages_Tours">
             <End Role="Tour" EntitySet="Tours" />
             <End Role="TourImage" EntitySet="TourImages" />
@@ -673,16 +711,40 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Tour" EntitySet="Tours" />
           </AssociationSet>
-          <EntitySet Name="Feedbacks" EntityType="TourMaster.Feedback" />
-          <AssociationSet Name="FK_Feedbacks_Tours" Association="TourMaster.FK_Feedbacks_Tours">
-            <End Role="Tour" EntitySet="Tours" />
-            <End Role="Feedback" EntitySet="Feedbacks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Feedbacks_Users" Association="TourMaster.FK_Feedbacks_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Feedback" EntitySet="Feedbacks" />
-          </AssociationSet>
           </EntityContainer>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="Feedback" ToRole="User" />
+          <NavigationProperty Name="Tour" Relationship="TourMaster.FK_Feedbacks_Tours" FromRole="Feedback" ToRole="Tour" />
+        </EntityType>
+        <Association Name="FK_Feedbacks_Users">
+          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
+          <End Type="TourMaster.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AccomodationLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Level" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_AccomodationLevels" FromRole="AccomodationLevel" ToRole="Tour" />
+        </EntityType>
         <EntityType Name="Tour">
           <Key>
             <PropertyRef Name="Id" />
@@ -697,23 +759,36 @@
           <Property Name="Duration" Type="Int32" Nullable="false" />
           <Property Name="DurationTypeId" Type="Int32" Nullable="false" />
           <Property Name="AccomodationId" Type="Int32" />
-          <Property Name="AccomodationLevel" Type="Int32" />
+          <Property Name="AccomodationLevelId" Type="Int32" />
           <Property Name="Vehicle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MainImageId" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccomodationLevel" Relationship="TourMaster.FK_Tours_AccomodationLevels" FromRole="Tour" ToRole="AccomodationLevel" />
           <NavigationProperty Name="Accomodation" Relationship="TourMaster.FK_Tours_Accomodations" FromRole="Tour" ToRole="Accomodation" />
           <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Tours" FromRole="Tour" ToRole="Booking" />
           <NavigationProperty Name="City" Relationship="TourMaster.FK_Tours_Cities" FromRole="Tour" ToRole="City" />
           <NavigationProperty Name="City1" Relationship="TourMaster.FK_Tours_Cities1" FromRole="Tour" ToRole="City" />
           <NavigationProperty Name="Currency" Relationship="TourMaster.FK_Tours_Currencies" FromRole="Tour" ToRole="Currency" />
           <NavigationProperty Name="DurationType" Relationship="TourMaster.FK_Tours_DurationTypes" FromRole="Tour" ToRole="DurationType" />
+          <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Tours" FromRole="Tour" ToRole="Feedback" />
           <NavigationProperty Name="TourImages" Relationship="TourMaster.FK_TourImages_Tours" FromRole="Tour" ToRole="TourImage" />
           <NavigationProperty Name="TourImage" Relationship="TourMaster.FK_Tours_TourImages" FromRole="Tour" ToRole="TourImage" />
           <NavigationProperty Name="User" Relationship="TourMaster.FK_Tours_Users" FromRole="Tour" ToRole="User" />
-          <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Tours" FromRole="Tour" ToRole="Feedback" />
         </EntityType>
+        <Association Name="FK_Tours_AccomodationLevels">
+          <End Type="TourMaster.AccomodationLevel" Role="AccomodationLevel" Multiplicity="0..1" />
+          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccomodationLevel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="AccomodationLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tours_Accomodations">
           <End Type="TourMaster.Accomodation" Role="Accomodation" Multiplicity="0..1" />
           <End Type="TourMaster.Tour" Role="Tour" Multiplicity="*" />
@@ -786,6 +861,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Feedbacks_Tours">
+          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
+          <End Type="TourMaster.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TourImages_Tours">
           <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
           <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="*" />
@@ -819,43 +906,6 @@
             </Principal>
             <Dependent Role="Tour">
               <PropertyRef Name="GuideId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Feedback">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TourId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Rating" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Tour" Relationship="TourMaster.FK_Feedbacks_Tours" FromRole="Feedback" ToRole="Tour" />
-          <NavigationProperty Name="User" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="Feedback" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Feedbacks_Tours">
-          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
-          <End Type="TourMaster.Feedback" Role="Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tour">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="TourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Feedbacks_Users">
-          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
-          <End Type="TourMaster.Feedback" Role="Feedback" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -982,6 +1032,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="TourMaster.Feedback">
+              <MappingFragment StoreEntitySet="Feedbacks">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccomodationLevels">
+            <EntityTypeMapping TypeName="TourMaster.AccomodationLevel">
+              <MappingFragment StoreEntitySet="AccomodationLevels">
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tours">
             <EntityTypeMapping TypeName="TourMaster.Tour">
               <MappingFragment StoreEntitySet="Tours">
@@ -990,7 +1060,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MainImageId" ColumnName="MainImageId" />
                 <ScalarProperty Name="Vehicle" ColumnName="Vehicle" />
-                <ScalarProperty Name="AccomodationLevel" ColumnName="AccomodationLevel" />
+                <ScalarProperty Name="AccomodationLevelId" ColumnName="AccomodationLevelId" />
                 <ScalarProperty Name="AccomodationId" ColumnName="AccomodationId" />
                 <ScalarProperty Name="DurationTypeId" ColumnName="DurationTypeId" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
@@ -1000,18 +1070,6 @@
                 <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
                 <ScalarProperty Name="FromId" ColumnName="FromId" />
                 <ScalarProperty Name="GuideId" ColumnName="GuideId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Feedbacks">
-            <EntityTypeMapping TypeName="TourMaster.Feedback">
-              <MappingFragment StoreEntitySet="Feedbacks">
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="TourId" ColumnName="TourId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

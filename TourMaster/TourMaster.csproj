@@ -157,6 +157,9 @@
     <Compile Include="Models\Accomodation.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccomodationLevel.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Booking.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

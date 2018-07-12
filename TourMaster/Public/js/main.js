@@ -364,30 +364,105 @@ $(document).ready(function () {
                 type: "get",
                 dataType: "json",
                 success: function (data) {
+                    // Tour Title
                     $(tvm + " h1.section-title").text(data[0].TourTitle);
+
+                    // Slider
                     $(tvm + " #tour-view-car").empty();
                     for (var a = 0; a < data[0].TourImages.length; a++) {
                         var carItem = '<div><img src = "' + data[0].TourImages[a] + '"><div class="overlay"></div></div>';
                         $("#tour-view-car").append(carItem);
                     }
                     TourViewSlider();
+
+                    // Guide Photo & Fullname
                     $(tvm + " .main-info img").attr("src", data[0].Guide.ProfileImage);
-                    $(tvm + " .main-info h2.guide-profile").text(data[0].Guide.FullName).data("guide-id", data[0].Guide.Id);
+                    $(tvm + " .main-info h2.guide-profile").text(data[0].Guide.Fullname).attr("data-guide-id", data[0].Guide.Id);
+
+                    // Guide Rating
                     var totalRating = 0;
                     for (var b = 0; b < data[0].FeedbacksList.length; b++) {
                         totalRating += parseInt(data[0].FeedbacksList[b].split(", ")[2].split("=")[1]);
                     }
                     var overallRating = Math.ceil(totalRating / data[0].FeedbacksList.length);
                     $(tvm + " .main-info select.guide-rating").empty();
-                    for (var c = 1; c < 6; c++) {
-                        var ratingOpt = '<option value="' + c + '" ' + (overallRating === c ? "selected" : "") + '>' + c + '</option>';
-                        $(tvm + " .main-info select.guide-rating").append(ratingOpt);
-                    }
                     $(tvm + " .main-info .guide-rating").barrating({
                         theme: "css-stars",
                         readonly: true,
                         showSelectedRating: true
                     });
+                    if (isNaN(overallRating)) {
+                        $(tvm + " .main-info .guide-rating").barrating('set', 1);
+                    } else {
+                        $(tvm + " .main-info .guide-rating").barrating('set', overallRating);
+                    }
+
+                    // Guide Phone & Email
+                    $(tvm + " .main-info p.guide-phone").empty().append('<i class="fal fa-mobile-android"></i>+' + data[0].Guide.Phone);
+                    $(tvm + " .main-info p.guide-email").empty().append('<i class="fal fa-at"></i>' + data[0].Guide.Email);
+
+                    // Tour Title & Description
+                    $(tvm + " h3.tour-title").text(data[0].TourTitle);
+                    $(tvm + " p.tour-desc").text(data[0].Desc);
+
+                    // Tour Categories
+                    var tourCat = data[0].Categories.split(',');
+                    $(tvm + " p.tour-type").text(tourCat.join(" - "));
+
+                    // Tour Duration
+                    var duration = [data[0].Duration, data[0].DurationType];
+                    $(tvm + " p.tour-duration").empty().append('<i class="fal fa-clock"></i>' + duration.join(" "));
+
+                    // Tour Price
+                    var price = [data[0].Price, data[0].Currency];
+                    $(tvm + " p.tour-price").empty().append('<i class="fal fa-money-bill"></i>' + price.join(" "));
+
+                    // Tour Transport
+                    if (data[0].Vehicle != "") {
+                        $(tvm + " p.tour-transport").empty().append('<i class="fal fa-bus"></i>' + data[0].Vehicle);
+                    } else {
+                        $(tvm + " p.tour-transport").empty().append('<i class="fal fa-bus"></i>Non Specified');
+                    }
+
+                    // Tour Accomodation
+                    var acc = data[0].Accomodation;
+                    var accLvl = data[0].AccomodationLevel;
+                    $(tvm + " p.tour-accomodation").empty();
+                    if (acc == "Hotel") {
+                        $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>' + accLvl + " " + acc);
+                    } else if (acc == null) {
+                        $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>Non Specified');
+                    } else {
+                        $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>' + acc);
+                    }
+
+                    // Feedbacks
+                    $(tvm + " div.feedbacks-list-wrapper").empty();
+                    for (var d = 0; d < data[0].FeedbacksList.length; d++) {
+                        var feedbackInfo = data[0].FeedbacksList[d].replace('{', '').replace('}', '').split(",");
+                        var feedbackTime = feedbackInfo[3].split(" = ")[1].split(":");
+                        var feedbackDate = feedbackInfo[3].split(" = ")[0];
+                        var feedback = `<!-- Feedback Media Start -->
+                                                <div class="media comment">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] + `">
+                                                    <div class="media-body">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ feedbackInfo[5].split(" = ")[1] + `</h5>
+                                                        <select class="feedback-rated" data-feedback-id="`+feedbackInfo[0].split(" = ")[1]+`">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <p class="feedback-text text-justify">`+ feedbackInfo[1].split(" = ")[1] + `</p>
+                                                        <span class="feedback-date float-right mt-1">`+ feedbackTime[0] + `:` + feedbackTime[1] + ` ` + feedbackDate + `</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Feedback Media End -->`
+                        $(tvm + " div.feedbacks-list-wrapper").append(feedback);
+
+                    }
+
                 }
             });
             $("#tours-modal").addClass("animated fadeOutLeft parent");
@@ -418,6 +493,7 @@ $(document).ready(function () {
         // Tour View Modal Hidden
         $("#tour-view-modal").on("hidden.bs.modal", function () {
             $("#tour-view-modal").removeClass("animated fadeOutRight");
+            $("#tour-view-car").owlCarousel('destroy');
         });
 
         // Tour View Back
@@ -459,7 +535,7 @@ $(document).ready(function () {
                 autoplayHoverPause: true
             });
         }
-       
+
         // Tour View Calendar
         var clndr = $(".tour-available-dates");
         clndr.jalendar({

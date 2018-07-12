@@ -12,16 +12,18 @@ namespace TourMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class AccomodationLevel
     {
-        public int Id { get; set; }
-        public int TourId { get; set; }
-        public int UserId { get; set; }
-        public string Text { get; set; }
-        public int Rating { get; set; }
-        public System.DateTime Date { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AccomodationLevel()
+        {
+            this.Tours = new HashSet<Tour>();
+        }
     
-        public virtual User User { get; set; }
-        public virtual Tour Tour { get; set; }
+        public int Id { get; set; }
+        public string Level { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tour> Tours { get; set; }
     }
 }

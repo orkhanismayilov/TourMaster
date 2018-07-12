@@ -110,7 +110,7 @@ namespace TourMaster.Controllers
                 TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
             }
 
-            List<Feedback> feedbacks = tour.Feedbacks.ToList();
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f=>f.Date).ToList();
             List<string> feedbacksList = new List<string>();
             foreach (Feedback fdbck in feedbacks)
             {
@@ -121,7 +121,8 @@ namespace TourMaster.Controllers
                     fdbck.Rating,
                     fdbck.Date,
                     fdbck.UserId,
-                    fdbck.User.Fullname
+                    fdbck.User.Fullname,
+                    fdbck.User.ProfileImage
                 });
                 feedbacksList.Add(feedbackInfo);
             };
@@ -138,6 +139,12 @@ namespace TourMaster.Controllers
                 bookingsList.Add(bookingInfo);
             }
 
+            string Price = tour.Price.ToString("#,##");
+            string AccomodationLevel = "";
+            if (tour.AccomodationLevelId != null)
+            {
+                AccomodationLevel = tour.AccomodationLevel.Level;
+            }
 
             var TourInfo = db.Tours.Where(t => t.Id == Id).Select(t => new
             {
@@ -159,11 +166,11 @@ namespace TourMaster.Controllers
                 Categories = t.Category,
                 t.Duration,
                 DurationType = t.DurationType.Type,
-                t.Price,
+                Price,
                 Currency = t.Currency.CurrencyName,
                 t.Vehicle,
                 Accomodation = t.Accomodation.AccomodationName,
-                t.AccomodationLevel,
+                AccomodationLevel,
                 BookingsList = bookingsList
             });
 

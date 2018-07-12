@@ -18,8 +18,8 @@ namespace TourMaster.Models
         public Tour()
         {
             this.Bookings = new HashSet<Booking>();
-            this.TourImages = new HashSet<TourImage>();
             this.Feedbacks = new HashSet<Feedback>();
+            this.TourImages = new HashSet<TourImage>();
         }
     
         public int Id { get; set; }
@@ -32,13 +32,14 @@ namespace TourMaster.Models
         public int Duration { get; set; }
         public int DurationTypeId { get; set; }
         public Nullable<int> AccomodationId { get; set; }
-        public Nullable<int> AccomodationLevel { get; set; }
+        public Nullable<int> AccomodationLevelId { get; set; }
         public string Vehicle { get; set; }
         public int MainImageId { get; set; }
         public string Description { get; set; }
         public System.DateTime PostedDate { get; set; }
         public int Status { get; set; }
     
+        public virtual AccomodationLevel AccomodationLevel { get; set; }
         public virtual Accomodation Accomodation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
@@ -47,10 +48,10 @@ namespace TourMaster.Models
         public virtual Currency Currency { get; set; }
         public virtual DurationType DurationType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TourImage> TourImages { get; set; }
         public virtual TourImage TourImage { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }

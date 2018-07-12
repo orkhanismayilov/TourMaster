@@ -36,7 +36,8 @@ namespace TourMaster.Models
         public virtual DbSet<PrivateMessage> PrivateMessages { get; set; }
         public virtual DbSet<TourImage> TourImages { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Tour> Tours { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<AccomodationLevel> AccomodationLevels { get; set; }
+        public virtual DbSet<Tour> Tours { get; set; }
     }
 }
