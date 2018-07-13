@@ -77,6 +77,71 @@ namespace TourMaster.Controllers
             return RedirectToAction("index");
         }
 
+        [HttpPost]
+        public ActionResult LogIn(LogInForm logInForm)
+        {
+            if (!String.IsNullOrWhiteSpace(logInForm.Email) && !String.IsNullOrWhiteSpace(logInForm.Password) && !String.IsNullOrWhiteSpace(logInForm.AccountTypeId.ToString()))
+            {
+                if (logInForm.AccountTypeId == 0)
+                {
+                    User traveler = db.Users.Where(u => u.AccountType == 0).FirstOrDefault(u => u.Email == logInForm.Email);
+                    if (traveler != null)
+                    {
+                        if (Crypto.VerifyHashedPassword(traveler.Password, logInForm.Password))
+                        {
+                            Session["LogInSuccess"] = true;
+                            Session["User"] = traveler;
+                        }
+                        else
+                        {
+                            Session["LogInError"] = true;
+                            return RedirectToAction("index");
+                        }
+                    }
+                    else
+                    {
+                        Session["LogInError"] = true;
+                        return RedirectToAction("index");
+                    }
+                }
+                else
+                {
+                    Session["LogInError-AccountType"] = true;
+                    return RedirectToAction("index");
+                }
+
+                if (logInForm.AccountTypeId == 1)
+                {
+                    User guide = db.Users.Where(u => u.AccountType == 1).FirstOrDefault(u => u.Email == logInForm.Email);
+                    if (guide != null)
+                    {
+                        if (Crypto.VerifyHashedPassword(guide.Password, logInForm.Password))
+                        {
+                            Session["LogInSuccess"] = true;
+                            Session["User"] = guide;
+                        }
+                        else
+                        {
+                            Session["LogInError"] = true;
+                            return RedirectToAction("index");
+                        }
+                    }
+                    else
+                    {
+                        Session["LogInError"] = true;
+                        return RedirectToAction("index");
+                    }
+                }
+                else
+                {
+                    Session["LogInError"] = true;
+                    return RedirectToAction("index");
+                }
+            }
+
+            return RedirectToAction("index");
+        }
+
         [HttpGet]
         public JsonResult GetCities(int Id)
         {
@@ -177,6 +242,13 @@ namespace TourMaster.Controllers
             return Json(TourInfo, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult SubmitFeedback()
+        {
+
+
+            return Json("ok", JsonRequestBehavior.AllowGet);
+        }
 
 
 

@@ -171,10 +171,13 @@
         @if (Session["SignedUpSuccess"] != null)
         {
             <span id="signup-alert-success" hidden></span>
+            Session["SignedUpSuccess"] = null;
         }
         else if (Session["SignedUpError"] != null)
         {
             <span id="signup-alert-error" data-msg="@Session["SignUpMsg"]" hidden></span>
+            Session["SignedUpError"] = null;
+            Session["SignUpMsg"] = null;
         }
     </div>
 
@@ -206,7 +209,8 @@
                                         <t>guide login</t>
                                     </p>
                                 </div>
-                                <form action="" method="post" id="traveler-login-form" novalidate>
+                                <form action="@Url.Action("login", "home")" method="post" id="traveler-login-form" novalidate>
+                                    <input type="number" name="accounttypeid" value="0" hidden />
                                     <div class="form-group">
                                         <label for="traveler-email">E-mail</label>
                                         <input class="form-control" type="email" name="email" id="traveler-email" data-validation="required email">
@@ -234,7 +238,8 @@
                                         <t>traveler login</t>
                                     </p>
                                 </div>
-                                <form action="" method="post" id="guide-login-form" novalidate>
+                                <form action="@Url.Action("login", "home")" method="post" id="guide-login-form" novalidate>
+                                    <input type="number" name="accounttypeid" value="1" hidden />
                                     <div class="form-group">
                                         <label for="guide-email">E-mail</label>
                                         <input class="form-control" type="email" name="email" id="guide-email" data-validation="required email">
@@ -257,6 +262,17 @@
                 </div>
             </div>
         </div>
+        @if (Session["LogInSuccess"] != null)
+        {
+            <span id="login-alert-success" hidden></span>
+            Session["LogInSuccess"] = null;
+        }
+        else if (Session["LogInError"] != null)
+        {
+            <span id="login-alert-error" hidden></span>
+            Session["LogInError"] = null;
+        }
+
     </div>
 
     <!-- Password Recovery Form Modal -->
@@ -509,8 +525,9 @@
                                         </div>
                                         <!-- Tour Feedbacks -->
                                         <div class="tour-feedbacks-wrapper">
-                                            <form action="" method="get" id="submit-feedback">
+                                            <form action="@Url.Action("submitfeedback", "home")" method="post" id="submit-feedback">
                                                 <h4 class="feedback-heading text-capitalize">Leave your feedback</h4>
+                                                <input type="number" name="TourId" value="" hidden />
                                                 <select id="tour-rating">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -528,51 +545,10 @@
                                             </form>
                                             <h5 class="text-capitalize mb-2">last feedbacks</h5>
                                             <div class="feedbacks-list-wrapper mt-3">
-                                                <!-- Feedback Media Start -->
-                                                <div class="media comment">
-                                                    <img class="align-self-center mr-3" src="~/public/images/guide_1.jpg">
-                                                    <div class="media-body">
-                                                        <h5 class="feedback-author text-capitalize d-inline-block">Ayan Rafiyeva</h5>
-                                                        <select class="feedback-rated">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3" selected>3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                        </select>
-                                                        <p class="feedback-text text-justify">
-                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam odio qui modi eligendi excepturi nulla praesentium cum,
-                                                            quasi possimus maxime vitae at quaerat cupiditate amet rem repudiandae
-                                                            soluta, repellat cumque!
-                                                        </p>
-                                                        <span class="feedback-date float-right mt-1">16:45 25.06.2018</span>
-                                                    </div>
-                                                </div>
-                                                <!-- Feedback Media End -->
-                                                <!-- Feedback Media Start -->
-                                                <div class="media comment">
-                                                    <img class="align-self-center mr-3" src="~/public/images/guide_2.jpg">
-                                                    <div class="media-body">
-                                                        <h5 class="feedback-author text-capitalize d-inline-block">Murad Jafarov</h5>
-                                                        <select class="feedback-rated">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5" selected>5</option>
-                                                        </select>
-                                                        <p class="feedback-text text-justify">
-                                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam odio qui modi eligendi excepturi nulla praesentium cum,
-                                                            quasi possimus maxime vitae at quaerat cupiditate amet rem repudiandae
-                                                            soluta, repellat cumque!
-                                                        </p>
-                                                        <span class="feedback-date float-right mt-1">16:45 25.06.2018</span>
-                                                    </div>
-                                                </div>
-                                                <!-- Feedback Media End -->
-                                                <div class="feedback-load-button text-center">
-                                                    <button class="btn btn-outline-info text-capitalize">Load More</button>
-                                                </div>
+
+                                            </div>
+                                            <div class="feedback-load-button text-center">
+                                                <button class="btn btn-outline-info text-capitalize">Load More</button>
                                             </div>
                                         </div>
                                     </div>

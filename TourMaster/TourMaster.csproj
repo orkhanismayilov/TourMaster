@@ -196,6 +196,7 @@
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogInForm.cs" />
     <Compile Include="Models\Origin.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

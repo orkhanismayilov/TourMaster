@@ -290,7 +290,7 @@ $(document).ready(function () {
     }
 
     // Password Recovery Form Validation
-    if (".pass-recovery-form-modal-wrapper") {
+    if ($(".pass-recovery-form-modal-wrapper")) {
         $.validate({
             form: '#pass-recovery-form'
         });
@@ -367,6 +367,9 @@ $(document).ready(function () {
                     // Tour Title
                     $(tvm + " h1.section-title").text(data[0].TourTitle);
 
+                    // TourId
+                    $(tvm + " input[name='TourId']").val(data[0].Id);
+
                     // Slider
                     $(tvm + " #tour-view-car").empty();
                     for (var a = 0; a < data[0].TourImages.length; a++) {
@@ -385,7 +388,6 @@ $(document).ready(function () {
                         totalRating += parseInt(data[0].FeedbacksList[b].split(", ")[2].split("=")[1]);
                     }
                     var overallRating = Math.ceil(totalRating / data[0].FeedbacksList.length);
-                    $(tvm + " .main-info select.guide-rating").empty();
                     $(tvm + " .main-info .guide-rating").barrating({
                         theme: "css-stars",
                         readonly: true,
@@ -418,7 +420,7 @@ $(document).ready(function () {
                     $(tvm + " p.tour-price").empty().append('<i class="fal fa-money-bill"></i>' + price.join(" "));
 
                     // Tour Transport
-                    if (data[0].Vehicle != "") {
+                    if (data[0].Vehicle !== "") {
                         $(tvm + " p.tour-transport").empty().append('<i class="fal fa-bus"></i>' + data[0].Vehicle);
                     } else {
                         $(tvm + " p.tour-transport").empty().append('<i class="fal fa-bus"></i>Non Specified');
@@ -428,9 +430,9 @@ $(document).ready(function () {
                     var acc = data[0].Accomodation;
                     var accLvl = data[0].AccomodationLevel;
                     $(tvm + " p.tour-accomodation").empty();
-                    if (acc == "Hotel") {
+                    if (acc === "Hotel") {
                         $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>' + accLvl + " " + acc);
-                    } else if (acc == null) {
+                    } else if (acc === null) {
                         $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>Non Specified');
                     } else {
                         $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>' + acc);
@@ -440,14 +442,16 @@ $(document).ready(function () {
                     $(tvm + " div.feedbacks-list-wrapper").empty();
                     for (var d = 0; d < data[0].FeedbacksList.length; d++) {
                         var feedbackInfo = data[0].FeedbacksList[d].replace('{', '').replace('}', '').split(",");
-                        var feedbackTime = feedbackInfo[3].split(" = ")[1].split(":");
-                        var feedbackDate = feedbackInfo[3].split(" = ")[0];
+                        var feedbackTime = feedbackInfo[3].split(" = ")[1].split(" ")[1].split(":");
+                        var feedbackDate = feedbackInfo[3].split(" = ")[1].split(" ")[0].split("-").join(" ");
+                        feedbackTime.pop();
+                        feedbackTime = feedbackTime.join(":");
                         var feedback = `<!-- Feedback Media Start -->
                                                 <div class="media comment">
                                                     <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] + `">
                                                     <div class="media-body">
                                                         <h5 class="feedback-author text-capitalize d-inline-block">`+ feedbackInfo[5].split(" = ")[1] + `</h5>
-                                                        <select class="feedback-rated" data-feedback-id="`+feedbackInfo[0].split(" = ")[1]+`">
+                                                        <select class="feedback-rated" data-feedback-id="`+ feedbackInfo[0].split(" = ")[1] + `">
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -455,14 +459,17 @@ $(document).ready(function () {
                                                             <option value="5">5</option>
                                                         </select>
                                                         <p class="feedback-text text-justify">`+ feedbackInfo[1].split(" = ")[1] + `</p>
-                                                        <span class="feedback-date float-right mt-1">`+ feedbackTime[0] + `:` + feedbackTime[1] + ` ` + feedbackDate + `</span>
+                                                        <span class="feedback-date float-right mt-1">`+ feedbackTime + ` ` + feedbackDate + `</span>
                                                     </div>
                                                 </div>
-                                                <!-- Feedback Media End -->`
+                                                <!-- Feedback Media End -->`;
                         $(tvm + " div.feedbacks-list-wrapper").append(feedback);
-
+                        $(".feedback-rated").barrating({
+                            theme: "css-stars",
+                            readonly: true
+                        });
+                        $(tvm + " select.feedback-rated[data-feedback-id=" + parseInt(feedbackInfo[0].split(" = ")[1]) + "]").barrating('set', parseInt(feedbackInfo[2].split(" = ")[1]));
                     }
-
                 }
             });
             $("#tours-modal").addClass("animated fadeOutLeft parent");
@@ -471,6 +478,21 @@ $(document).ready(function () {
             $("#tour-view-modal").animateCss("fadeInRight", function () {
                 $("#tour-view-modal").removeClass("animated fadeInRight");
             });
+        });
+
+        // Tour View Modal Feedback Post
+        $("#tour-view-modal #submit-feedback").on("submit", function () {
+            var that = $(this);
+            url = that.attr("action");
+            method = that.attr("method");
+            data = {};
+
+            data["TourId"] = that.find("input[name='TourId']").val();
+            data["Text"] = that.find("textarea").val();
+            data["Rating"] = that.find(".br-current-rating").text();
+            data["UserId"] = 3;
+            console.log(data);
+            return false;
         });
 
         // Tour Details in Most Popular
