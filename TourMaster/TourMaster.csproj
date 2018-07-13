@@ -761,6 +761,7 @@
     <Content Include="Public\images\insta_4.jpg" />
     <Content Include="Public\images\insta_5.jpg" />
     <Content Include="Public\images\join.jpg" />
+    <Content Include="Public\images\profile_placeholder.jpg" />
     <Content Include="Public\images\slider_1.jpg" />
     <Content Include="Public\images\slider_2.jpg" />
     <Content Include="Public\images\slider_3.jpg" />

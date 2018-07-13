@@ -272,7 +272,6 @@
             <span id="login-alert-error" hidden></span>
             Session["LogInError"] = null;
         }
-
     </div>
 
     <!-- Password Recovery Form Modal -->
@@ -606,6 +605,7 @@
                         <form action="" method="post" id="pm-to-guide">
                             <div class="form-group">
                                 <input class="form-control-plaintext" type="text" readonly id="guide-fullname" value="Ayan Rafiyeva">
+                                <input type="number" name="GuideId" value="" hidden/>
                                 <input class="form-control" type="text" id="pm-subject" placeholder="Subject" data-validation="required">
                             </div>
                             <div class="form-group">

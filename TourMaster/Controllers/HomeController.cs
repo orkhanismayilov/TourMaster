@@ -103,11 +103,6 @@ namespace TourMaster.Controllers
                         return RedirectToAction("index");
                     }
                 }
-                else
-                {
-                    Session["LogInError-AccountType"] = true;
-                    return RedirectToAction("index");
-                }
 
                 if (logInForm.AccountTypeId == 1)
                 {
@@ -130,11 +125,6 @@ namespace TourMaster.Controllers
                         Session["LogInError"] = true;
                         return RedirectToAction("index");
                     }
-                }
-                else
-                {
-                    Session["LogInError"] = true;
-                    return RedirectToAction("index");
                 }
             }
             return RedirectToAction("index");
@@ -173,7 +163,7 @@ namespace TourMaster.Controllers
                 TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
             }
 
-            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f=>f.Date).ToList();
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f=>f.Date).Take(5).ToList();
             List<string> feedbacksList = new List<string>();
             foreach (Feedback fdbck in feedbacks)
             {
@@ -241,11 +231,39 @@ namespace TourMaster.Controllers
         }
 
         [HttpPost]
-        public JsonResult SubmitFeedback()
+        public JsonResult SubmitFeedback(int TourId, int UserId, string Text, int Rating)
         {
+            Feedback feedback = new Feedback
+            {
+                TourId = TourId,
+                UserId = UserId,
+                Text = Text,
+                Rating = Rating,
+                Date = DateTime.Now
+            };
+            db.Feedbacks.Add(feedback);
+            db.SaveChanges();
 
+            string Date = feedback.Date.ToString("hh:mm dd MMM yyyy");
+            string UserFullname = db.Users.Find(feedback.UserId).Fullname;
+            string UserProfileImage = db.Users.Find(feedback.UserId).ProfileImage;
 
-            return Json("ok", JsonRequestBehavior.AllowGet);
+            var feedbackInfo = db.Feedbacks.Where(f => f.Id == feedback.Id).Select(f => new
+            {
+                feedback.Id,
+                feedback.TourId,
+                User = new
+                {
+                    feedback.UserId,
+                    UserFullname,
+                    UserProfileImage
+                },
+                feedback.Text,
+                feedback.Rating,
+                Date
+            });
+
+            return Json(feedbackInfo, JsonRequestBehavior.AllowGet);
         }
 
 

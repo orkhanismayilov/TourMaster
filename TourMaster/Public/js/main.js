@@ -281,6 +281,21 @@ $(document).ready(function () {
         });
     }
 
+    // LogIn Sweet Alert
+    if ($("#login-alert-success").length > 0) {
+        swal({
+            type: 'success',
+            title: 'Success',
+            text: 'You are logged in!'
+        });
+    } else if ($("#login-alert-error").length > 0) {
+        swal({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Invalid Email or Password!'
+        });
+    }
+
     // Login Form Validation
     if ($(".login-form-modal-wrapper")) {
         $.validate({
@@ -403,6 +418,10 @@ $(document).ready(function () {
                     $(tvm + " .main-info p.guide-phone").empty().append('<i class="fal fa-mobile-android"></i>+' + data[0].Guide.Phone);
                     $(tvm + " .main-info p.guide-email").empty().append('<i class="fal fa-at"></i>' + data[0].Guide.Email);
 
+                    // Guide Private Message Modal
+                    $("form#pm-to-guide input#guide-fullname").val(data[0].Guide.Fullname);
+                    $("form#pm-to-guide input[name='GuideId']").val(data[0].Guide.Id);
+
                     // Tour Title & Description
                     $(tvm + " h3.tour-title").text(data[0].TourTitle);
                     $(tvm + " p.tour-desc").text(data[0].Desc);
@@ -485,13 +504,42 @@ $(document).ready(function () {
             var that = $(this);
             url = that.attr("action");
             method = that.attr("method");
-            data = {};
+            request = {};
 
-            data["TourId"] = that.find("input[name='TourId']").val();
-            data["UserId"] = that.find("input[name='UserId']").val();
-            data["Text"] = that.find("textarea").val();
-            data["Rating"] = that.find(".br-current-rating").text();
-            console.log(data);
+            request["TourId"] = that.find("input[name='TourId']").val();
+            request["UserId"] = that.find("input[name='UserId']").val();
+            request["Text"] = that.find("textarea").val();
+            request["Rating"] = that.find(".br-current-rating").text();
+            console.log(request);
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: request,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    var feedback = `<!-- Feedback Media Start -->
+                                                <div class="media comment">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ data[0].User.UserProfileImage + `">
+                                                    <div class="media-body">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ data[0].User.UserFullname + `</h5>
+                                                        <select class="feedback-rated" data-feedback-id="`+ data[0].Id + `">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <p class="feedback-text text-justify">`+ data[0].Text + `</p>
+                                                        <span class="feedback-date float-right mt-1">`+ data[0].Date + `</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Feedback Media End -->`;
+                    $("#tour-view-modal div.feedbacks-list-wrapper").prepend(feedback);
+                    $("#tour-view-modal select.feedback-rated[data-feedback-id=" + data[0].Id + "]").barrating('set', data[0].Rating);
+                }
+            });
             return false;
         });
 
