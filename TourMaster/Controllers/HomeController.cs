@@ -73,7 +73,6 @@ namespace TourMaster.Controllers
                 Session["SignedUpError"] = true;
                 Session["SignUpMsg"] = "Please, fill all the inputs.";
             }
-
             return RedirectToAction("index");
         }
 
@@ -138,7 +137,6 @@ namespace TourMaster.Controllers
                     return RedirectToAction("index");
                 }
             }
-
             return RedirectToAction("index");
         }
 

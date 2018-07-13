@@ -525,24 +525,31 @@
                                         </div>
                                         <!-- Tour Feedbacks -->
                                         <div class="tour-feedbacks-wrapper">
-                                            <form action="@Url.Action("submitfeedback", "home")" method="post" id="submit-feedback">
-                                                <h4 class="feedback-heading text-capitalize">Leave your feedback</h4>
-                                                <input type="number" name="TourId" value="" hidden />
-                                                <select id="tour-rating">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                                <div class="form-group">
-                                                    <textarea class="form-control mt-3" name="feedback-text" id="feedback-text" cols="30" rows="4" placeholder="Your feedback here..."
-                                                              data-validation="required length" data-validation-length="min10"></textarea>
-                                                </div>
-                                                <div class="form-button text-right">
-                                                    <button class="btn btn-outline-info text-capitalize" type="submit">Submit</button>
-                                                </div>
-                                            </form>
+                                            @if (Session["User"] != null)
+                                            {
+                                                <form action="@Url.Action("submitfeedback", "home")" method="post" id="submit-feedback">
+                                                    <h4 class="feedback-heading text-capitalize">Leave your feedback</h4>
+                                                    <input type="number" name="TourId" value="" hidden />
+                                                    @{
+                                                        User user = Session["User"] as User;
+                                                    }
+                                                    <input type="number" name="UserId" value="@user.Id" hidden />
+                                                    <select id="tour-rating">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control mt-3" name="feedback-text" id="feedback-text" cols="30" rows="4" placeholder="Your feedback here..."
+                                                                  data-validation="required length" data-validation-length="min10"></textarea>
+                                                    </div>
+                                                    <div class="form-button text-right">
+                                                        <button class="btn btn-outline-info text-capitalize" type="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                            }
                                             <h5 class="text-capitalize mb-2">last feedbacks</h5>
                                             <div class="feedbacks-list-wrapper mt-3">
 

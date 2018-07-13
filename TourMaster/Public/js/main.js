@@ -488,9 +488,9 @@ $(document).ready(function () {
             data = {};
 
             data["TourId"] = that.find("input[name='TourId']").val();
+            data["UserId"] = that.find("input[name='UserId']").val();
             data["Text"] = that.find("textarea").val();
             data["Rating"] = that.find(".br-current-rating").text();
-            data["UserId"] = 3;
             console.log(data);
             return false;
         });
