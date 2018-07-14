@@ -22,6 +22,7 @@ namespace TourMaster.Controllers
                 Tours = db.Tours.ToList(),
                 Categories = db.Categories.ToList()
             };
+
             return View(model);
         }
 
@@ -163,7 +164,7 @@ namespace TourMaster.Controllers
                 TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
             }
 
-            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f=>f.Date).Take(5).ToList();
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Take(5).ToList();
             List<string> feedbacksList = new List<string>();
             foreach (Feedback fdbck in feedbacks)
             {
@@ -180,7 +181,7 @@ namespace TourMaster.Controllers
                 feedbacksList.Add(feedbackInfo);
             };
 
-            List<Booking> bookings = tour.Bookings.Where(b=>b.BookedStart > DateTime.Now).ToList();
+            List<Booking> bookings = tour.Bookings.Where(b => b.BookedStart > DateTime.Now).ToList();
             List<string> bookingsList = new List<string>();
             foreach (Booking bkng in bookings)
             {
@@ -244,28 +245,147 @@ namespace TourMaster.Controllers
             db.Feedbacks.Add(feedback);
             db.SaveChanges();
 
-            string Date = feedback.Date.ToString("hh:mm dd MMM yyyy");
-            string UserFullname = db.Users.Find(feedback.UserId).Fullname;
-            string UserProfileImage = db.Users.Find(feedback.UserId).ProfileImage;
+            User user = db.Users.Find(UserId);
 
-            var feedbackInfo = db.Feedbacks.Where(f => f.Id == feedback.Id).Select(f => new
+            FeedbackModel feedbackModel = new FeedbackModel
             {
-                feedback.Id,
-                feedback.TourId,
-                User = new
-                {
-                    feedback.UserId,
-                    UserFullname,
-                    UserProfileImage
-                },
-                feedback.Text,
-                feedback.Rating,
-                Date
-            });
+                Id = feedback.Id,
+                Text = feedback.Text,
+                Rating = feedback.Rating,
+                Date = feedback.Date.ToString("HH:mm dd MMM yyyy"),
+                UserId = feedback.UserId,
+                UserFullname = user.Fullname,
+                UserProfileImage = user.ProfileImage
+            };
 
-            return Json(feedbackInfo, JsonRequestBehavior.AllowGet);
+            return Json(feedbackModel, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult LoadMoreFeedbacks(int FeedbackId, int FeedbacksCount)
+        {
+            Tour tour = db.Feedbacks.Find(FeedbackId).Tour;
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Skip(FeedbacksCount).Take(5).ToList();
+            List<FeedbackModel> feedbacksList = new List<FeedbackModel>();
+            foreach (Feedback item in feedbacks)
+            {
+                FeedbackModel feedbackModel = new FeedbackModel
+                {
+                    Id = item.Id,
+                    Text = item.Text,
+                    Rating = item.Rating,
+                    Date = item.Date.ToString("HH:mm dd MMM yyyy"),
+                    UserId = item.UserId,
+                    UserFullname = item.User.Fullname,
+                    UserProfileImage = item.User.ProfileImage
+                };
+                feedbacksList.Add(feedbackModel);
+            }
+
+            return Json(feedbacksList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SendPrivateMessage(int SenderId, int GuideId, string Subject, string Msg)
+        {
+            if (!String.IsNullOrWhiteSpace(SenderId.ToString()) && !String.IsNullOrWhiteSpace(GuideId.ToString()) && !String.IsNullOrWhiteSpace(Subject) && !String.IsNullOrWhiteSpace(Msg))
+            {
+                PrivateMessage pm = new PrivateMessage
+                {
+                    SenderId = SenderId,
+                    RecieverId = GuideId,
+                    Subject = Subject,
+                    Message = Msg,
+                    ReadStatus = 0
+                };
+                db.PrivateMessages.Add(pm);
+                db.SaveChanges();
+
+                bool sent = true;
+                return Json(sent, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                bool sent = false;
+                return Json(sent, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetUserInfo(int Id)
+        {
+            User user = db.Users.Find(Id);
+
+            int rating = 0;
+            int totalUserRating = 0;
+            if (user.Tours.Count != 0)
+            {
+                foreach (Tour tour in user.Tours)
+                {
+                    if (tour.Feedbacks.Count != 0)
+                    {
+                        int totalTourRating = 0;
+                        int overallTourRating = 0;
+                        foreach (Feedback feedback in tour.Feedbacks)
+                        {
+                            totalTourRating += feedback.Rating;
+                        }
+                        double a = totalTourRating / tour.Feedbacks.Count;
+                        overallTourRating = (int)Math.Ceiling(a);
+                        totalUserRating += overallTourRating;
+                    }
+                }
+                double b = totalUserRating / user.Tours.Count;
+                rating = (int)Math.Ceiling(b);
+            }
+
+            List<TourModel> toursList = new List<TourModel>();
+            foreach (Tour tour in user.Tours)
+            {
+                string title = "";
+                if (tour.FromId == tour.DestinationId)
+                {
+                    title = tour.City.CityName;
+                }
+                else
+                {
+                    title = tour.City.CityName + " - " + tour.City1.CityName;
+                }
+
+                TourModel tourModel = new TourModel
+                {
+                    Id = tour.Id,
+                    TourTitle = title,
+                    TourImage = tour.TourImage.ImageURL,
+                    Duration = tour.Duration,
+                    DurationType = tour.DurationType.Type,
+                    Price = tour.Price.ToString("#.##"),
+                    Currency = tour.Currency.CurrencyName
+                };
+                toursList.Add(tourModel);
+            }
+
+            UserModel userModel = new UserModel
+            {
+                Id = user.Id,
+                Fullname = user.Fullname,
+                ProfileImage = user.ProfileImage,
+                Country = user.City.Country.CountryName,
+                CountryCode = user.City.Country.CountryCode,
+                ToursList = toursList,
+                FeedbackCount = user.Tours.Sum(t => t.Feedbacks.Count),
+                Rating = rating,
+                Phone = user.Phone,
+                Email = user.Email,
+                Facebook = user.Facebook,
+                Instagram = user.Instagram,
+                GooglePlus = user.GooglePlus,
+                Twitter = user.Twitter
+            };
+
+
+            return Json(userModel, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

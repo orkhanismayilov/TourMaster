@@ -395,6 +395,7 @@ $(document).ready(function () {
 
                     // Guide Photo & Fullname
                     $(tvm + " .main-info img").attr("src", data[0].Guide.ProfileImage);
+                    $(tvm + " .main-info img").attr("data-guide-id", data[0].Guide.Id);
                     $(tvm + " .main-info h2.guide-profile").text(data[0].Guide.Fullname).attr("data-guide-id", data[0].Guide.Id);
 
                     // Guide Rating
@@ -459,6 +460,9 @@ $(document).ready(function () {
 
                     // Feedbacks
                     $(tvm + " div.feedbacks-list-wrapper").empty();
+                    if (data[0].FeedbacksList.length < 5) {
+                        $("button#load-more-feedbacks").hide();
+                    }
                     for (var d = 0; d < data[0].FeedbacksList.length; d++) {
                         var feedbackInfo = data[0].FeedbacksList[d].replace('{', '').replace('}', '').split(",");
                         var feedbackTime = feedbackInfo[3].split(" = ")[1].split(" ")[1].split(":");
@@ -467,7 +471,7 @@ $(document).ready(function () {
                         feedbackTime = feedbackTime.join(":");
                         var feedback = `<!-- Feedback Media Start -->
                                                 <div class="media comment">
-                                                    <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] + `">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] +`" data-guide-id="` + feedbackInfo[4].split(" = ")[1] +`">
                                                     <div class="media-body">
                                                         <h5 class="feedback-author text-capitalize d-inline-block">`+ feedbackInfo[5].split(" = ")[1] + `</h5>
                                                         <select class="feedback-rated" data-feedback-id="`+ feedbackInfo[0].split(" = ")[1] + `">
@@ -499,8 +503,59 @@ $(document).ready(function () {
             });
         });
 
+        // Tour View Modal Load More Feedbacks
+        $("button#load-more-feedbacks").on("click", function () {
+            var that = $(this);
+            url = "/home/loadmorefeedbacks/";
+            data = {};
+
+            data["FeedbacksCount"] = $(".feedbacks-list-wrapper .media.comment").length;
+            data["FeedbackId"] = $(".feedbacks-list-wrapper .media.comment").last().find(".feedback-rated").data("feedback-id");
+
+            $.ajax({
+                url: url,
+                method: "get",
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data.length != 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            var feedback = `<!-- Feedback Media Start -->
+                                                <div class="media comment animated fadeIn">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ data[i].UserProfileImage + `">
+                                                    <div class="media-body">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ data[i].UserFullname + `</h5>
+                                                        <select class="feedback-rated" data-feedback-id="`+ data[i].Id + `">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <p class="feedback-text text-justify">`+ data[i].Text + `</p>
+                                                        <span class="feedback-date float-right mt-1">`+ data[i].Date + `</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Feedback Media End -->`;
+                            $("#tour-view-modal div.feedbacks-list-wrapper").append(feedback);
+                            $(".feedback-rated").barrating({
+                                theme: "css-stars",
+                                readonly: true
+                            });
+                            $("#tour-view-modal select.feedback-rated[data-feedback-id=" + data[i].Id + "]").barrating('set', data[i].Rating);
+                        }
+                    }
+
+                    if (data.length < 5) {
+                        that.hide();
+                    }
+                }
+            });
+        });
+
         // Tour View Modal Feedback Post
-        $("#tour-view-modal #submit-feedback").on("submit", function () {
+        $("form#submit-feedback").on("submit", function () {
             var that = $(this);
             url = that.attr("action");
             method = that.attr("method");
@@ -509,7 +564,60 @@ $(document).ready(function () {
             request["TourId"] = that.find("input[name='TourId']").val();
             request["UserId"] = that.find("input[name='UserId']").val();
             request["Text"] = that.find("textarea").val();
+            that.find("textarea").val("");
+            that.find("textarea").removeClass("error");
             request["Rating"] = that.find(".br-current-rating").text();
+            that.find("#tour-rating").barrating('set', 1);
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: request,
+                dataType: "json",
+                success: function (data) {
+                    var feedback = `<!-- Feedback Media Start -->
+                                                <div class="media comment animated fadeIn">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ data.UserProfileImage + `">
+                                                    <div class="media-body">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ data.UserFullname + `</h5>
+                                                        <select class="feedback-rated" data-feedback-id="`+ data.Id + `">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <p class="feedback-text text-justify">`+ data.Text + `</p>
+                                                        <span class="feedback-date float-right mt-1">`+ data.Date + `</span>
+                                                    </div>
+                                                </div>
+                                                <!-- Feedback Media End -->`;
+                    $("#tour-view-modal div.feedbacks-list-wrapper").prepend(feedback);
+                    $(".feedback-rated").barrating({
+                        theme: "css-stars",
+                        readonly: true
+                    });
+                    $("#tour-view-modal select.feedback-rated[data-feedback-id=" + data.Id + "]").barrating('set', data.Rating);
+                }
+            });
+            return false;
+        });
+
+        // Tour View Modal Send Private Message
+        $("form#pm-to-guide").on("submit", function () {
+            var that = $(this);
+            url = that.attr("action");
+            method = that.attr("method");
+            request = {};
+
+            that.find("[name]").each(function (index, value) {
+                var that = $(this);
+                name = that.attr("name")
+                value = that.val();
+
+                request[name] = value;
+            });
+            request["SenderId"] = $("button#pm-guide").data("user-id");
             console.log(request);
 
             $.ajax({
@@ -518,26 +626,22 @@ $(document).ready(function () {
                 data: request,
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
-                    var feedback = `<!-- Feedback Media Start -->
-                                                <div class="media comment">
-                                                    <img class="align-self-center mr-3 mb-3" src="`+ data[0].User.UserProfileImage + `">
-                                                    <div class="media-body">
-                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ data[0].User.UserFullname + `</h5>
-                                                        <select class="feedback-rated" data-feedback-id="`+ data[0].Id + `">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                        </select>
-                                                        <p class="feedback-text text-justify">`+ data[0].Text + `</p>
-                                                        <span class="feedback-date float-right mt-1">`+ data[0].Date + `</span>
-                                                    </div>
-                                                </div>
-                                                <!-- Feedback Media End -->`;
-                    $("#tour-view-modal div.feedbacks-list-wrapper").prepend(feedback);
-                    $("#tour-view-modal select.feedback-rated[data-feedback-id=" + data[0].Id + "]").barrating('set', data[0].Rating);
+                    if (data == true) {
+                        swal({
+                            type: 'success',
+                            title: 'Success',
+                            text: 'Your message has been sent!'
+                        });
+                        $("#pm-form-modal").modal("hide");
+                        that.find("[name='subject']").text("");
+                        that.find("[name='msg']").text("");
+                    } else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong! Please, try later!'
+                        });
+                    }
                 }
             });
             return false;
@@ -558,6 +662,7 @@ $(document).ready(function () {
                 $("#tour-view-modal").addClass("animated fadeOutRight");
                 setTimeout("$('#tour-view-modal').modal('hide')", 550);
             }
+            $("button#load-more-feedbacks").show();
         });
 
         // Tour View Modal Hidden
@@ -618,12 +723,12 @@ $(document).ready(function () {
             done: btnShow
         });
 
+        // Send Request Button Tooltip
         $('#send-request-button-wrapper').tooltip({
             trigger: 'hover',
             title: "Please, choose dates first!",
             placement: 'bottom'
         });
-
         function btnShow() {
             $('#send-request-button-wrapper').tooltip("disable");
             $("#send-tour-request").removeAttr("disabled style");
@@ -739,6 +844,18 @@ $(document).ready(function () {
 
         // Profile View Modal in Tour View Modal
         $("#tour-view-modal .guide-profile, .media img").on("click", function () {
+            var that = $(this);
+            url = "/home/getuserinfo/" + that.data("guide-id");
+
+            $.ajax({
+                url: url,
+                method: "get",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+
             $("#profile-view-modal").addClass("animated fadeInUp").modal('show');
             $("#profile-view-modal").animateCss("fadeInUp", function () {
                 $("#profile-view-modal").removeClass("animated fadeInUp");

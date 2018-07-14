@@ -21,7 +21,7 @@ namespace TourMaster.Models
         public int Rating { get; set; }
         public System.DateTime Date { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Tour Tour { get; set; }
+        public virtual User User { get; set; }
     }
 }

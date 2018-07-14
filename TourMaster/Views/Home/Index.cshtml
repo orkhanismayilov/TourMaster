@@ -513,7 +513,13 @@
                                                     <p class="guide-email mb-2">
                                                         <i class="fal fa-at"></i>
                                                     </p>
-                                                    <button class="btn btn-outline-info" id="pm-guide">Write a Private Message</button>
+                                                    @{
+                                                        User user = Session["User"] as User;
+                                                        if (user != null)
+                                                        {
+                                                            <button class="btn btn-outline-info" id="pm-guide" data-user-id="@user.Id">Write a Private Message</button>
+                                                        }
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -530,9 +536,9 @@
                                                     <h4 class="feedback-heading text-capitalize">Leave your feedback</h4>
                                                     <input type="number" name="TourId" value="" hidden />
                                                     @{
-                                                        User user = Session["User"] as User;
+                                                        User usr = Session["User"] as User;
                                                     }
-                                                    <input type="number" name="UserId" value="@user.Id" hidden />
+                                                    <input type="number" name="UserId" value="@usr.Id" hidden />
                                                     <select id="tour-rating">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -554,7 +560,7 @@
 
                                             </div>
                                             <div class="feedback-load-button text-center">
-                                                <button class="btn btn-outline-info text-capitalize">Load More</button>
+                                                <button class="btn btn-outline-info text-capitalize" id="load-more-feedbacks">Load More</button>
                                             </div>
                                         </div>
                                     </div>
@@ -602,14 +608,14 @@
                         <div class="pm-form-heading">
                             <h3 class="text-uppercase text-center">Drop a Private Message to guide</h3>
                         </div>
-                        <form action="" method="post" id="pm-to-guide">
+                        <form action="@Url.Action("sendprivatemessage", "home")" method="post" id="pm-to-guide">
                             <div class="form-group">
-                                <input class="form-control-plaintext" type="text" readonly id="guide-fullname" value="Ayan Rafiyeva">
-                                <input type="number" name="GuideId" value="" hidden/>
-                                <input class="form-control" type="text" id="pm-subject" placeholder="Subject" data-validation="required">
+                                <input class="form-control-plaintext" type="text" readonly id="guide-fullname" value="">
+                                <input type="number" name="GuideId" value="" hidden />
+                                <input class="form-control" type="text" id="pm-subject" name="subject" placeholder="Subject" data-validation="required">
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="pm-text" id="pm-text" cols="30" rows="5" placeholder="Message" data-validation="required length"
+                                <textarea class="form-control" name="msg" id="pm-text" cols="30" rows="5" placeholder="Message" data-validation="required length"
                                           data-validation-length="min5"></textarea>
                             </div>
                             <div class="form-button mt-3 text-center">

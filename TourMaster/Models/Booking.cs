@@ -23,7 +23,7 @@ namespace TourMaster.Models
         public decimal BookedPrice { get; set; }
         public int Status { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Tour Tour { get; set; }
+        public virtual User User { get; set; }
     }
 }

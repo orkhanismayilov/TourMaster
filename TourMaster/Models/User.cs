@@ -18,9 +18,9 @@ namespace TourMaster.Models
         public User()
         {
             this.Bookings = new HashSet<Booking>();
+            this.Feedbacks = new HashSet<Feedback>();
             this.PrivateMessages = new HashSet<PrivateMessage>();
             this.PrivateMessages1 = new HashSet<PrivateMessage>();
-            this.Feedbacks = new HashSet<Feedback>();
             this.Tours = new HashSet<Tour>();
         }
     
@@ -33,16 +33,20 @@ namespace TourMaster.Models
         public string Phone { get; set; }
         public string ProfileImage { get; set; }
         public int AccountType { get; set; }
+        public string Facebook { get; set; }
+        public string Instagram { get; set; }
+        public string GooglePlus { get; set; }
+        public string Twitter { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual City City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PrivateMessage> PrivateMessages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PrivateMessage> PrivateMessages1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Feedback> Feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tour> Tours { get; set; }
     }

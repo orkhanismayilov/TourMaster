@@ -193,6 +193,7 @@
     <Compile Include="Models\DurationType.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -210,9 +211,11 @@
     <Compile Include="Models\TourImage.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TourModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -761,7 +764,7 @@
     <Content Include="Public\images\insta_4.jpg" />
     <Content Include="Public\images\insta_5.jpg" />
     <Content Include="Public\images\join.jpg" />
-    <Content Include="Public\images\profile_placeholder.jpg" />
+    <Content Include="Public\images\profile_placeholder.png" />
     <Content Include="Public\images\slider_1.jpg" />
     <Content Include="Public\images\slider_2.jpg" />
     <Content Include="Public\images\slider_3.jpg" />
