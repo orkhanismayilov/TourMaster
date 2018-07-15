@@ -22,7 +22,7 @@ namespace TourMaster.Controllers
                 Tours = db.Tours.Where(t => t.Status == 1).ToList(),
                 Categories = db.Categories.ToList(),
                 MostPopular = db.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.Bookings.Count).Take(3).ToList(),
-                BestGuides = db.Users.Where(u=>u.AccountType == 1).OrderByDescending(u=>u.OverallRating).Take(3).ToList()
+                BestGuides = db.Users.Where(u => u.AccountType == 1).OrderByDescending(u => u.OverallRating).Take(3).ToList()
             };
 
             return View(model);
@@ -172,7 +172,8 @@ namespace TourMaster.Controllers
                 Fullname = tour.User.Fullname,
                 Email = tour.User.Email,
                 Phone = tour.User.Phone,
-                ProfileImage = tour.TourImage.ImageURL
+                ProfileImage = tour.User.ProfileImage,
+                Rating = tour.User.OverallRating
             };
 
             List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Take(5).ToList();
@@ -195,7 +196,6 @@ namespace TourMaster.Controllers
 
             string Price = tour.Price.ToString("#,##");
 
-
             TourInfoModel TourInfo = new TourInfoModel
             {
                 Id = tour.Id,
@@ -212,8 +212,8 @@ namespace TourMaster.Controllers
                 Price = Price,
                 Currency = tour.Currency.CurrencyName,
                 Vehicle = tour.Vehicle,
-                Accomodation = tour.Accomodation.AccomodationName,
-                AccomodationLvl = tour.AccomodationLevel.Level
+                Accomodation = tour.Accomodation?.AccomodationName,
+                AccomodationLvl = tour.AccomodationLevel?.Level
             };
 
             return Json(TourInfo, JsonRequestBehavior.AllowGet);
@@ -366,7 +366,7 @@ namespace TourMaster.Controllers
                 CountryCode = user.City.Country.CountryCode,
                 ToursList = toursList,
                 FeedbacksCount = user.Tours.Sum(t => t.Feedbacks.Count),
-                BookingsCount = user.Bookings.Where(b =>b.Status ==1 && b.BookedEnd < DateTime.Now).Count(),
+                BookingsCount = user.Bookings.Where(b => b.Status == 1 && b.BookedEnd < DateTime.Now).Count(),
                 Rating = user.OverallRating,
                 Phone = user.Phone,
                 Email = user.Email,
@@ -380,5 +380,26 @@ namespace TourMaster.Controllers
             return Json(userModel, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult ContactFormSubmit(string Fullname, string Email, string Phone, string Subject, string Msg)
+        {
+            if (!String.IsNullOrWhiteSpace(Fullname) && !String.IsNullOrWhiteSpace(Email) && !String.IsNullOrWhiteSpace(Subject) && !String.IsNullOrWhiteSpace(Msg))
+            {
+                ContactRequest contact = new ContactRequest
+                {
+                    Fullname = Fullname,
+                    Email = Email,
+                    Phone = Phone,
+                    Subject = Subject,
+                    Message = Msg
+                };
+                db.ContactRequests.Add(contact);
+                db.SaveChanges();
+
+                return Json(contact.Id, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("error", JsonRequestBehavior.AllowGet);
+        }
     }
 }

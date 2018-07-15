@@ -380,78 +380,71 @@ $(document).ready(function () {
                 type: "get",
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
                     tvm.find("form#submit-feedback").show();
                     // Tour Title
-                    tvm.find("h1.section-title").text(data[0].TourTitle);
+                    tvm.find("h1.section-title").text(data.TourTitle);
 
                     // TourId
-                    tvm.find("input[name='TourId']").val(data[0].Id);
+                    tvm.find("input[name='TourId']").val(data.Id);
 
                     // Slider
                     tvm.find("#tour-view-car").empty();
-                    for (var a = 0; a < data[0].TourImages.length; a++) {
-                        var carItem = '<div><img src = "' + data[0].TourImages[a] + '"><div class="overlay"></div></div>';
+                    for (var a = 0; a < data.TourImagesUrl.length; a++) {
+                        var carItem = '<div><img src = "' + data.TourImagesUrl[a] + '"><div class="overlay"></div></div>';
                         $("#tour-view-car").append(carItem);
                     }
                     TourViewSlider();
 
                     // Guide Photo & Fullname
-                    tvm.find(".main-info img").attr("src", data[0].Guide.ProfileImage);
-                    tvm.find(".main-info img").attr("data-guide-id", data[0].Guide.Id);
-                    tvm.find(".main-info h2.guide-profile").text(data[0].Guide.Fullname).attr("data-guide-id", data[0].Guide.Id);
+                    tvm.find(".main-info img").attr("src", data.Guide.ProfileImage);
+                    tvm.find(".main-info img").attr("data-guide-id", data.Guide.Id);
+                    tvm.find(".main-info h2.guide-profile").text(data.Guide.Fullname).attr("data-guide-id", data.Guide.Id);
 
                     // Guide Rating
-                    var totalRating = 0;
-                    for (var b = 0; b < data[0].FeedbacksList.length; b++) {
-                        totalRating += parseInt(data[0].FeedbacksList[b].split(", ")[2].split("=")[1]);
-                    }
-                    var overallRating = Math.ceil(totalRating / data[0].FeedbacksList.length);
                     tvm.find(".main-info .guide-rating").barrating({
                         theme: "css-stars",
                         readonly: true,
                         showSelectedRating: true
                     });
-                    if (isNaN(overallRating)) {
+                    if (data.Guide.Rating <= 1) {
                         tvm.find(".main-info .guide-rating").barrating('set', 1);
                     } else {
-                        tvm.find(".main-info .guide-rating").barrating('set', overallRating);
+                        tvm.find(".main-info .guide-rating").barrating('set', data.Guide.Rating);
                     }
 
                     // Guide Phone & Email
-                    tvm.find(".main-info p.guide-phone").empty().append('<i class="fal fa-mobile-android"></i>+' + data[0].Guide.Phone);
-                    tvm.find(".main-info p.guide-email").empty().append('<i class="fal fa-at"></i>' + data[0].Guide.Email);
+                    tvm.find(".main-info p.guide-phone").empty().append('<i class="fal fa-mobile-android"></i>+' + data.Guide.Phone);
+                    tvm.find(".main-info p.guide-email").empty().append('<i class="fal fa-at"></i>' + data.Guide.Email);
 
                     // Guide Private Message Modal
-                    $("form#pm-to-guide input#guide-fullname").val(data[0].Guide.Fullname);
-                    $("form#pm-to-guide input[name='GuideId']").val(data[0].Guide.Id);
+                    $("form#pm-to-guide input#guide-fullname").val(data.Guide.Fullname);
+                    $("form#pm-to-guide input[name='GuideId']").val(data.Guide.Id);
 
                     // Tour Title & Description
-                    tvm.find("h3.tour-title").text(data[0].TourTitle);
-                    tvm.find("p.tour-desc").text(data[0].Desc);
+                    tvm.find("h3.tour-title").text(data.TourTitle);
+                    tvm.find("p.tour-desc").text(data.Desc);
 
                     // Tour Categories
-                    var tourCat = data[0].Categories.split(',');
-                    tvm.find("p.tour-type").text(tourCat.join(" - "));
+                    tvm.find("p.tour-type").text(data.Categories.split(',').join(" - "));
 
                     // Tour Duration
-                    var duration = [data[0].Duration, data[0].DurationType];
+                    var duration = [data.Duration, data.DurationType];
                     tvm.find("p.tour-duration").empty().append('<i class="fal fa-clock"></i>' + duration.join(" "));
 
                     // Tour Price
-                    var price = [data[0].Price, data[0].Currency];
+                    var price = [data.Price, data.Currency];
                     tvm.find("p.tour-price").empty().append('<i class="fal fa-money-bill"></i>' + price.join(" "));
 
                     // Tour Transport
-                    if (data[0].Vehicle !== "") {
-                        tvm.find("p.tour-transport").empty().append('<i class="fal fa-bus"></i>' + data[0].Vehicle);
+                    if (data.Vehicle != null) {
+                        tvm.find("p.tour-transport").empty().append('<i class="fal fa-bus"></i>' + data.Vehicle);
                     } else {
                         tvm.find("p.tour-transport").empty().append('<i class="fal fa-bus"></i>Non Specified');
                     }
 
                     // Tour Accomodation
-                    var acc = data[0].Accomodation;
-                    var accLvl = data[0].AccomodationLevel;
+                    var acc = data.Accomodation;
+                    var accLvl = data.AccomodationLvl;
                     tvm.find("p.tour-accomodation").empty();
                     if (acc === "Hotel") {
                         tvm.find("p.tour-accomodation").append('<i class="fal fa-home"></i>' + accLvl + " " + acc);
@@ -463,26 +456,24 @@ $(document).ready(function () {
 
                     // Feedbacks
                     tvm.find("div.feedbacks-list-wrapper").empty();
-                    if (data[0].FeedbacksList.length < 5) {
+                    if (data.FeedbacksList.length < 5) {
                         $("button#load-more-feedbacks").hide();
                     }
-                    for (var d = 0; d < data[0].FeedbacksList.length; d++) {
-                        var feedbackInfo = data[0].FeedbacksList[d].replace('{', '').replace('}', '').split(",");
-                        var feedbackDate = feedbackInfo[3].split(" = ")[1];
+                    for (var d = 0; d < data.FeedbacksList.length; d++) {
                         var feedback = `<!-- Feedback Media Start -->
                                                 <div class="media comment">
-                                                    <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] + `" data-guide-id="` + feedbackInfo[4].split(" = ")[1] + `">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ data.FeedbacksList[d].UserProfileImage + `" data-guide-id="` + data.FeedbacksList[d].UserId + `">
                                                     <div class="media-body">
-                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ feedbackInfo[5].split(" = ")[1] + `</h5>
-                                                        <select class="feedback-rated" data-feedback-id="`+ feedbackInfo[0].split(" = ")[1] + `">
+                                                        <h5 class="feedback-author text-capitalize d-inline-block">`+ data.FeedbacksList[d].UserFullname + `</h5>
+                                                        <select class="feedback-rated" data-feedback-id="`+ data.FeedbacksList[d].Id + `">
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
                                                             <option value="4">4</option>
                                                             <option value="5">5</option>
                                                         </select>
-                                                        <p class="feedback-text text-justify">`+ feedbackInfo[1].split(" = ")[1] + `</p>
-                                                        <span class="feedback-date float-right mt-1">`+ feedbackDate + `</span>
+                                                        <p class="feedback-text text-justify">`+ data.FeedbacksList[d].Text + `</p>
+                                                        <span class="feedback-date float-right mt-1">`+ data.FeedbacksList[d].Date + `</span>
                                                     </div>
                                                 </div>
                                                 <!-- Feedback Media End -->`;
@@ -491,11 +482,11 @@ $(document).ready(function () {
                             theme: "css-stars",
                             readonly: true
                         });
-                        tvm.find("select.feedback-rated[data-feedback-id=" + parseInt(feedbackInfo[0].split(" = ")[1]) + "]").barrating('set', parseInt(feedbackInfo[2].split(" = ")[1]));
+                        tvm.find("select.feedback-rated[data-feedback-id=" + data.FeedbacksList[d].Id + "]").barrating('set', data.FeedbacksList[d].Rating);
                     }
 
                     // Hide Feedback Form if Tours User and Logged User is the Same
-                    if (data[0].Guide.Id == tvm.find("input[name='UserId']").val()) {
+                    if (data.Guide.Id == tvm.find("input[name='UserId']").val()) {
                         tvm.find("form#submit-feedback").hide();
                     }
                 }
@@ -513,8 +504,6 @@ $(document).ready(function () {
                 $("#tour-view-modal").removeClass("animated fadeInRight");
             });
         });
-
-
 
         // Tour View Modal Load More Feedbacks
         $("button#load-more-feedbacks").on("click", function () {
@@ -662,6 +651,7 @@ $(document).ready(function () {
 
         // Tour Details in Most Popular
         $(".goto-tour-details").on("click", function () {
+            GetTourInfo($(this).data("tour-id"));
             $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
             $("#tour-view-modal").animateCss("fadeInRight", function () {
                 $("#tour-view-modal").removeClass("animated fadeInRight");
@@ -827,6 +817,7 @@ $(document).ready(function () {
     if ($(".best-guide-profile")) {
         $(".best-guide-profile").on("click", function (e) {
             e.preventDefault();
+            GetUserInfo($(this).data("guide-id"));
             $("#profile-view-modal").addClass("animated fadeInUp").modal('show');
             $("#profile-view-modal").animateCss("fadeInUp", function () {
                 $("#profile-view-modal").removeClass("animated fadeInUp");
@@ -847,22 +838,19 @@ $(document).ready(function () {
             $("#profile-view-modal").removeClass("animated fadeOutDown");
         });
 
-        // Profile View Modal in Tour View Modal
-        $("#tour-view-modal .guide-profile, .media img").on("click", function () {
-            var that = $(this);
-            url = "/home/getuserinfo/" + that.data("guide-id");
-            
+        function GetUserInfo(UserId) {
+            url = "/home/getuserinfo/" + UserId;
+
             $.ajax({
                 url: url,
                 method: "get",
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
                     var pvm = $("#profile-view-modal");
                     pvm.find("guide-offered-tours-wrapper row").empty();
                     pvm.find("h1.section-title").text(data.Fullname);
                     pvm.find("img.profile-photo").attr("src", data.ProfileImage);
-                    pvm.find("h3.profile-country").append('<span class="flag-icon flag-icon-' + data.CountryCode + '"></span> ' + data.Country + '');
+                    pvm.find("h3.profile-country").empty().append('<span class="flag-icon flag-icon-' + data.CountryCode + '"></span> ' + data.Country + '');
                     pvm.find("h5.profile-total-tours span").text(data.ToursList.length);
                     pvm.find("h5.profile-completed-tours span").text(data.BookingsCount);
                     pvm.find("h5.profile-tour-feedbacks span").text(data.FeedbacksCount);
@@ -944,7 +932,11 @@ $(document).ready(function () {
                     });
                 }
             });
+        }
 
+        // Profile View Modal in Tour View Modal
+        $("#tour-view-modal .guide-profile, .media img").on("click", function () {
+            GetUserInfo($(this).data("guide-id"));
             $("#profile-view-modal").addClass("animated fadeInUp").modal('show');
             $("#profile-view-modal").animateCss("fadeInUp", function () {
                 $("#profile-view-modal").removeClass("animated fadeInUp");
@@ -986,6 +978,49 @@ $(document).ready(function () {
             form: "#contact-form"
         });
     }
+
+    // Contact Form Submit
+    $("form#contact-form").on("submit", function () {
+        var that = $(this);
+        url = that.attr("action");
+        method = that.attr("method");
+        request = {};
+
+        that.find("[name]").each(function (index, value) {
+            var that = $(this);
+            name = that.attr("name");
+            value = that.val();
+
+            request[name] = value;
+        });
+
+        console.log(request);
+
+        $.ajax({
+            url: url,
+            method: method,
+            data: request,
+            dataType: "json",
+            success: function (data) {
+                if (data === "error") {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong! Please, try later!'
+                    });
+                } else {
+                    swal({
+                        type: 'success',
+                        title: 'Success',
+                        text: 'Thank you for request! We will get back to you soon.'
+                    });
+                }
+            }
+        });
+        that[0].reset();
+
+        return false;
+    });
 
     // Instagram Feed Slider
     if ($("#insta-feed-slider")) {

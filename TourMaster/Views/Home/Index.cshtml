@@ -911,21 +911,21 @@
                                     <div class="card-body text-center">
                                         <h4 class="card-title text-uppercase">@bestguide.Fullname</h4>
                                         <select class="best-guide-rating">
-                                            <option value="1" @(bestguide.OverallRating <= 1?"selected":"")>1</option>
-                                            <option value="2" @(bestguide.OverallRating == 2?"selected":"")>2</option>
-                                            <option value="3" @(bestguide.OverallRating == 3?"selected":"")>3</option>
-                                            <option value="4" @(bestguide.OverallRating == 4?"selected":"")>4</option>
-                                            <option value="5" @(bestguide.OverallRating == 5?"selected":"")>5</option>
+                                            <option value="1" @(bestguide.OverallRating <= 1 ? "selected" : "")>1</option>
+                                            <option value="2" @(bestguide.OverallRating == 2 ? "selected" : "")>2</option>
+                                            <option value="3" @(bestguide.OverallRating == 3 ? "selected" : "")>3</option>
+                                            <option value="4" @(bestguide.OverallRating == 4 ? "selected" : "")>4</option>
+                                            <option value="5" @(bestguide.OverallRating == 5 ? "selected" : "")>5</option>
                                         </select>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item text-capitalize">
                                             Completed tours:
-                                            <span class="float-right">@bestguide.Bookings.Where(b=>b.Status == 1 && b.BookedEnd < DateTime.Now).Count()</span>
+                                            <span class="float-right">@bestguide.Bookings.Where(b => b.Status == 1 && b.BookedEnd < DateTime.Now).Count()</span>
                                         </li>
                                         <li class="list-group-item text-capitalize">
                                             Feedbacks:
-                                            <span class="float-right">@bestguide.Tours.Sum(t=>t.Feedbacks.Count)</span>
+                                            <span class="float-right">@bestguide.Tours.Sum(t => t.Feedbacks.Count)</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -933,71 +933,6 @@
                             <!-- Best Guide Item End -->
                         }
                     }
-
-                    @*<!-- Best Guide Item Start -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-heading">
-                                <img class="card-img-top" src="~/public/images/guide_2.jpg" alt="Card image cap">
-                                <div class="overlay text-center">
-                                    <a href="#" class="best-guide-profile text-uppercase btn btn-outline-success">Go to profile</a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title text-uppercase">Murad Jafarov</h4>
-                                <select class="best-guide-rating">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5" selected>5</option>
-                                </select>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-capitalize">
-                                    Completed tours:
-                                    <span class="float-right">31</span>
-                                </li>
-                                <li class="list-group-item text-capitalize">
-                                    Feedbacks:
-                                    <span class="float-right">48</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Best Guide Item End -->
-                    <!-- Best Guide Item Start -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-heading">
-                                <img class="card-img-top" src="~/public/images/guide_3.jpg" alt="Card image cap">
-                                <div class="overlay text-center">
-                                    <a href="#" class="best-guide-profile text-uppercase btn btn-outline-success">Go to profile</a>
-                                </div>
-                            </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title text-uppercase">Fariz Hasanov</h4>
-                                <select class="best-guide-rating">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3" selected>3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-capitalize">
-                                    Completed tours:
-                                    <span class="float-right">15</span>
-                                </li>
-                                <li class="list-group-item text-capitalize">
-                                    Feedbacks:
-                                    <span class="float-right">47</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Best Guide Item End -->*@
                 </div>
             </div>
         </div>
@@ -1022,39 +957,20 @@
                         <h4 class="about-guides-slider-title text-uppercase text-center mb-5">Guides from all over the world</h4>
                         <!-- Guides Slider Start -->
                         <div class="owl-carousel about-guides-slider">
-                            <!-- Guide Item Start -->
-                            <div class="guide-item-wrapper">
-                                <div class="img-wrapper rounded-circle mb-3">
-                                    <img style="max-width: 100%" src="~/public/images/guide_1.jpg">
+                            @foreach (User guide in Model.Users)
+                            {
+                                <!-- Guide Item Start -->
+                                <div class="guide-item-wrapper">
+                                    <div class="img-wrapper rounded-circle mb-3">
+                                        <img style="max-width: 100%" src="@guide.ProfileImage">
+                                    </div>
+                                    <div class="guide-info-wrapper">
+                                        <h4 class="text-center text-uppercase guide-name">@guide.Fullname</h4>
+                                        <p class="location text-center text-uppercase">@guide.City.Country.CountryName</p>
+                                    </div>
                                 </div>
-                                <div class="guide-info-wrapper">
-                                    <h4 class="text-center text-uppercase guide-name">Ayan Rafiyeva</h4>
-                                    <p class="location text-center text-uppercase">Azerbaijan</p>
-                                </div>
-                            </div>
-                            <!-- Guide Item End -->
-                            <!-- Guide Item Start -->
-                            <div class="guide-item-wrapper">
-                                <div class="img-wrapper rounded-circle mb-3">
-                                    <img style="max-width: 100%" src="~/public/images/guide_2.jpg">
-                                </div>
-                                <div class="guide-info-wrapper">
-                                    <h4 class="text-center text-uppercase guide-name">Murad Jafarov</h4>
-                                    <p class="location text-center text-uppercase">Azerbaijan</p>
-                                </div>
-                            </div>
-                            <!-- Guide Item End -->
-                            <!-- Guide Item Start -->
-                            <div class="guide-item-wrapper">
-                                <div class="img-wrapper rounded-circle mb-3">
-                                    <img style="max-width: 100%" src="~/public/images/guide_3.jpg">
-                                </div>
-                                <div class="guide-info-wrapper">
-                                    <h4 class="text-center text-uppercase guide-name">Fariz Hasanov</h4>
-                                    <p class="location text-center text-uppercase">Azerbaijan</p>
-                                </div>
-                            </div>
-                            <!-- Guide Item End -->
+                                <!-- Guide Item End -->
+                            }
                         </div>
                         <!-- Guides Slider End -->
                     </div>
@@ -1097,31 +1013,31 @@
             <div class="container">
                 <div class="row justify-content-center text-center">
                     <div class="col-md-9">
-                        <form action="" method="post" id="contact-form">
+                        <form action="@Url.Action("contactformsubmit", "home")" method="post" id="contact-form">
                             <div class="row text-left">
                                 <div class="col-xl-4">
                                     <div class="form-group d-inline-block w-100">
                                         <label for="fullname">Full Name</label>
-                                        <input class="form-control" type="text" name="fullname" id="fullname" data-validation="required length" data-validation-length="min8">
+                                        <input class="form-control" type="text" name="fullname" id="fullname" data-validation="required length" data-validation-length="8-150">
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group d-inline-block w-100">
                                         <label for="email">E-mail</label>
-                                        <input class="form-control" type="email" name="email" id="contact-form-email" data-validation="email required">
+                                        <input class="form-control" type="email" name="email" id="contact-form-email" data-validation="email required length" data-validation-length="5-50">
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group d-inline-block w-100">
                                         <label for="phone">Phone</label>
-                                        <input class="form-control" type="text" name="phone" id="contact-form-phone" data-validation="number" data-validation-optional="true"
-                                               data-validation-allowing="integer, positive">
+                                        <input class="form-control" type="text" name="phone" id="contact-form-phone" data-validation="number length" data-validation-optional="true"
+                                               data-validation-allowing="integer, positive" data-validation-length="max50">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group text-left">
                                 <label for="subject">Subject</label>
-                                <input class="form-control" type="text" name="subject" id="subject" data-validation="required">
+                                <input class="form-control" type="text" name="subject" id="subject" data-validation="required length" data-validation-length="max150">
                             </div>
                             <div class="form-group text-left">
                                 <label for="msg">Message</label>

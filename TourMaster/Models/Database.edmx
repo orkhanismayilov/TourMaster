@@ -48,6 +48,18 @@
           <Property Name="CityName" Type="nvarchar" MaxLength="100" />
           <Property Name="CountryId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ContactRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Message" Type="ntext" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="Id" />
@@ -379,6 +391,7 @@
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactRequests" EntityType="Self.ContactRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DurationTypes" EntityType="Self.DurationTypes" Schema="dbo" store:Type="Tables" />
@@ -471,6 +484,7 @@
           <EntitySet Name="Bookings" EntityType="TourMaster.Booking" />
           <EntitySet Name="Categories" EntityType="TourMaster.Category" />
           <EntitySet Name="Cities" EntityType="TourMaster.City" />
+          <EntitySet Name="ContactRequests" EntityType="TourMaster.ContactRequest" />
           <EntitySet Name="Countries" EntityType="TourMaster.Country" />
           <EntitySet Name="Currencies" EntityType="TourMaster.Currency" />
           <EntitySet Name="DurationTypes" EntityType="TourMaster.DurationType" />
@@ -604,6 +618,18 @@
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Cities" FromRole="City" ToRole="Tour" />
           <NavigationProperty Name="Tours1" Relationship="TourMaster.FK_Tours_Cities1" FromRole="City" ToRole="Tour" />
           <NavigationProperty Name="Users" Relationship="TourMaster.FK_Users_Cities" FromRole="City" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ContactRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -1007,6 +1033,19 @@
               <MappingFragment StoreEntitySet="Cities">
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactRequests">
+            <EntityTypeMapping TypeName="TourMaster.ContactRequest">
+              <MappingFragment StoreEntitySet="ContactRequests">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

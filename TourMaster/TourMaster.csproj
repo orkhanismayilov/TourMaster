@@ -169,6 +169,9 @@
     <Compile Include="Models\City.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactRequest.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Country.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

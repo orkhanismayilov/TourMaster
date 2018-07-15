@@ -30,6 +30,7 @@ namespace TourMaster.Models
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<ContactRequest> ContactRequests { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<DurationType> DurationTypes { get; set; }

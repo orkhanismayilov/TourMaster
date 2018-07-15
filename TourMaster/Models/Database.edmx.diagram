@@ -5,20 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="76072e35669f4eb1ad97bc856ac19846" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="TourMaster.AccomodationLevel" Width="1.5" PointX="0.75" PointY="15.75" />
-        <EntityTypeShape EntityType="TourMaster.Accomodation" Width="1.5" PointX="0.75" PointY="26" />
+        <EntityTypeShape EntityType="TourMaster.AccomodationLevel" Width="1.5" PointX="0.75" PointY="17.25" />
+        <EntityTypeShape EntityType="TourMaster.Accomodation" Width="1.5" PointX="0.75" PointY="25.25" />
         <EntityTypeShape EntityType="TourMaster.Booking" Width="1.5" PointX="5.25" PointY="4.875" />
         <EntityTypeShape EntityType="TourMaster.Category" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TourMaster.City" Width="1.5" PointX="0.75" PointY="9.625" />
-        <EntityTypeShape EntityType="TourMaster.Country" Width="1.5" PointX="1.5" PointY="12.875" />
+        <EntityTypeShape EntityType="TourMaster.City" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="TourMaster.ContactRequest" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TourMaster.Country" Width="1.5" PointX="1.5" PointY="14.5" />
         <EntityTypeShape EntityType="TourMaster.Currency" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="TourMaster.DurationType" Width="1.5" PointX="0.75" PointY="18" />
+        <EntityTypeShape EntityType="TourMaster.DurationType" Width="1.5" PointX="0.75" PointY="8.875" />
         <EntityTypeShape EntityType="TourMaster.Feedback" Width="1.5" PointX="8.25" PointY="5.25" />
         <EntityTypeShape EntityType="TourMaster.Origin" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TourMaster.PrivateMessage" Width="1.5" PointX="3" PointY="21.5" />
+        <EntityTypeShape EntityType="TourMaster.PrivateMessage" Width="1.5" PointX="3" PointY="20.75" />
         <EntityTypeShape EntityType="TourMaster.TourImage" Width="1.5" PointX="5.25" PointY="9.75" />
         <EntityTypeShape EntityType="TourMaster.Tour" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="TourMaster.User" Width="1.5" PointX="0.75" PointY="20.375" />
+        <EntityTypeShape EntityType="TourMaster.User" Width="1.5" PointX="0.75" PointY="19.625" />
         <AssociationConnector Association="TourMaster.FK_Tours_AccomodationLevels" />
         <AssociationConnector Association="TourMaster.FK_Tours_Accomodations" />
         <AssociationConnector Association="TourMaster.FK_Bookings_Currencies" />
