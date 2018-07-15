@@ -13,7 +13,8 @@ namespace TourMaster.Models
         public string Country { get; set; }
         public string CountryCode { get; set; }
         public List<TourModel> ToursList { get; set; }
-        public int FeedbackCount { get; set; }
+        public int FeedbacksCount { get; set; }
+        public int BookingsCount { get; set; }
         public int Rating { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

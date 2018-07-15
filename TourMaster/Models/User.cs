@@ -32,6 +32,7 @@ namespace TourMaster.Models
         public int CityId { get; set; }
         public string Phone { get; set; }
         public string ProfileImage { get; set; }
+        public int OverallRating { get; set; }
         public int AccountType { get; set; }
         public string Facebook { get; set; }
         public string Instagram { get; set; }

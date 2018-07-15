@@ -19,8 +19,10 @@ namespace TourMaster.Controllers
             ViewModel model = new ViewModel
             {
                 Users = db.Users.ToList(),
-                Tours = db.Tours.ToList(),
-                Categories = db.Categories.ToList()
+                Tours = db.Tours.Where(t => t.Status == 1).ToList(),
+                Categories = db.Categories.ToList(),
+                MostPopular = db.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.Bookings.Count).Take(3).ToList(),
+                BestGuides = db.Users.Where(u=>u.AccountType == 1).OrderByDescending(u=>u.OverallRating).Take(3).ToList()
             };
 
             return View(model);
@@ -147,13 +149,6 @@ namespace TourMaster.Controllers
         {
             Tour tour = db.Tours.Find(Id);
 
-            List<TourImage> timg = tour.TourImages.ToList();
-            List<string> timgurls = new List<string>();
-            foreach (TourImage img in timg)
-            {
-                timgurls.Add(img.ImageURL);
-            }
-
             string TourTitle = "";
             if (tour.FromId == tour.DestinationId)
             {
@@ -164,69 +159,62 @@ namespace TourMaster.Controllers
                 TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
             }
 
-            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Take(5).ToList();
-            List<string> feedbacksList = new List<string>();
-            foreach (Feedback fdbck in feedbacks)
+            List<TourImage> timg = tour.TourImages.ToList();
+            List<string> TourImagesUrl = new List<string>();
+            foreach (TourImage img in timg)
             {
-                string feedbackInfo = String.Join("/", new
-                {
-                    fdbck.Id,
-                    fdbck.Text,
-                    fdbck.Rating,
-                    fdbck.Date,
-                    fdbck.UserId,
-                    fdbck.User.Fullname,
-                    fdbck.User.ProfileImage
-                });
-                feedbacksList.Add(feedbackInfo);
+                TourImagesUrl.Add(img.ImageURL);
+            }
+
+            UserModel Guide = new UserModel
+            {
+                Id = tour.User.Id,
+                Fullname = tour.User.Fullname,
+                Email = tour.User.Email,
+                Phone = tour.User.Phone,
+                ProfileImage = tour.TourImage.ImageURL
             };
 
-            List<Booking> bookings = tour.Bookings.Where(b => b.BookedStart > DateTime.Now).ToList();
-            List<string> bookingsList = new List<string>();
-            foreach (Booking bkng in bookings)
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Take(5).ToList();
+            List<FeedbackModel> feedbacksList = new List<FeedbackModel>();
+            foreach (Feedback fdbck in feedbacks)
             {
-                string bookingInfo = String.Join("/", new
+                string date = fdbck.Date.ToString("HH:mm dd MMM yyyy");
+                FeedbackModel feedback = new FeedbackModel
                 {
-                    bkng.BookedStart,
-                    bkng.BookedEnd,
-                });
-                bookingsList.Add(bookingInfo);
+                    Id = fdbck.Id,
+                    Text = fdbck.Text,
+                    Rating = fdbck.Rating,
+                    Date = date,
+                    UserId = fdbck.UserId,
+                    UserFullname = fdbck.User.Fullname,
+                    UserProfileImage = fdbck.User.ProfileImage
+                };
+                feedbacksList.Add(feedback);
             }
 
             string Price = tour.Price.ToString("#,##");
-            string AccomodationLevel = "";
-            if (tour.AccomodationLevelId != null)
-            {
-                AccomodationLevel = tour.AccomodationLevel.Level;
-            }
 
-            var TourInfo = db.Tours.Where(t => t.Id == Id).Select(t => new
+
+            TourInfoModel TourInfo = new TourInfoModel
             {
-                t.Id,
-                FromCity = t.City.CityName,
-                DestCity = t.City1.CityName,
-                TourTitle,
-                TourImages = timgurls,
-                Guide = new
-                {
-                    t.User.Id,
-                    t.User.Fullname,
-                    t.User.Email,
-                    t.User.Phone,
-                    t.User.ProfileImage
-                },
+                Id = tour.Id,
+                FromCity = tour.City.CityName,
+                DestCity = tour.City1.CityName,
+                TourTitle = TourTitle,
+                TourImagesUrl = TourImagesUrl,
+                Guide = Guide,
                 FeedbacksList = feedbacksList,
-                Desc = t.Description,
-                Categories = t.Category,
-                t.Duration,
-                DurationType = t.DurationType.Type,
-                Price,
-                Currency = t.Currency.CurrencyName,
-                t.Vehicle,
-                Accomodation = t.Accomodation.AccomodationName,
-                AccomodationLevel,
-                BookingsList = bookingsList
-            });
+                Desc = tour.Description,
+                Categories = tour.Category,
+                Duration = tour.Duration,
+                DurationType = tour.DurationType.Type,
+                Price = Price,
+                Currency = tour.Currency.CurrencyName,
+                Vehicle = tour.Vehicle,
+                Accomodation = tour.Accomodation.AccomodationName,
+                AccomodationLvl = tour.AccomodationLevel.Level
+            };
 
             return Json(TourInfo, JsonRequestBehavior.AllowGet);
         }
@@ -246,6 +234,33 @@ namespace TourMaster.Controllers
             db.SaveChanges();
 
             User user = db.Users.Find(UserId);
+            User userRated = db.Tours.Find(TourId).User;
+
+            int rating = 0;
+            int totalUserRating = 0;
+            if (userRated.Tours.Count != 0)
+            {
+                foreach (Tour tour in userRated.Tours)
+                {
+                    if (tour.Feedbacks.Count != 0)
+                    {
+                        int totalTourRating = 0;
+                        int overallTourRating = 0;
+                        foreach (Feedback fdbck in tour.Feedbacks)
+                        {
+                            totalTourRating += fdbck.Rating;
+                        }
+                        double a = totalTourRating / tour.Feedbacks.Count;
+                        overallTourRating = (int)Math.Ceiling(a);
+                        totalUserRating += overallTourRating;
+                    }
+                }
+                double b = totalUserRating / userRated.Tours.Count;
+                rating = (int)Math.Ceiling(b);
+            }
+
+            userRated.OverallRating = rating;
+            db.SaveChanges();
 
             FeedbackModel feedbackModel = new FeedbackModel
             {
@@ -316,31 +331,8 @@ namespace TourMaster.Controllers
         {
             User user = db.Users.Find(Id);
 
-            int rating = 0;
-            int totalUserRating = 0;
-            if (user.Tours.Count != 0)
-            {
-                foreach (Tour tour in user.Tours)
-                {
-                    if (tour.Feedbacks.Count != 0)
-                    {
-                        int totalTourRating = 0;
-                        int overallTourRating = 0;
-                        foreach (Feedback feedback in tour.Feedbacks)
-                        {
-                            totalTourRating += feedback.Rating;
-                        }
-                        double a = totalTourRating / tour.Feedbacks.Count;
-                        overallTourRating = (int)Math.Ceiling(a);
-                        totalUserRating += overallTourRating;
-                    }
-                }
-                double b = totalUserRating / user.Tours.Count;
-                rating = (int)Math.Ceiling(b);
-            }
-
             List<TourModel> toursList = new List<TourModel>();
-            foreach (Tour tour in user.Tours)
+            foreach (Tour tour in user.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.PostedDate))
             {
                 string title = "";
                 if (tour.FromId == tour.DestinationId)
@@ -373,8 +365,9 @@ namespace TourMaster.Controllers
                 Country = user.City.Country.CountryName,
                 CountryCode = user.City.Country.CountryCode,
                 ToursList = toursList,
-                FeedbackCount = user.Tours.Sum(t => t.Feedbacks.Count),
-                Rating = rating,
+                FeedbacksCount = user.Tours.Sum(t => t.Feedbacks.Count),
+                BookingsCount = user.Bookings.Where(b =>b.Status ==1 && b.BookedEnd < DateTime.Now).Count(),
+                Rating = user.OverallRating,
                 Phone = user.Phone,
                 Email = user.Email,
                 Facebook = user.Facebook,
@@ -386,7 +379,6 @@ namespace TourMaster.Controllers
 
             return Json(userModel, JsonRequestBehavior.AllowGet);
         }
-
 
     }
 }

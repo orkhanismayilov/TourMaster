@@ -10,5 +10,7 @@ namespace TourMaster.Models
         public List<User> Users { get; set; }
         public List<Tour> Tours { get; set; }
         public List<Category> Categories { get; set; }
+        public List<Tour> MostPopular { get; set; }
+        public List<User> BestGuides { get; set; }
     }
 }

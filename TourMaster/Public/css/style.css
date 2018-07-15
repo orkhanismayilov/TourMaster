@@ -1,22 +1,29 @@
+/* line 8, ../sass/style.scss */
 body {
   font-family: 'Montserrat';
   position: relative; }
 
+/* line 13, ../sass/style.scss */
 ::-webkit-scrollbar {
   display: none !important; }
 
+/* line 19, ../sass/style.scss */
 .tooltip .arrow::before {
   border-bottom-color: #f15a23; }
+/* line 23, ../sass/style.scss */
 .tooltip.bs-tooltip-top .arrow::before {
   border-top-color: #f15a23; }
+/* line 27, ../sass/style.scss */
 .tooltip .tooltip-inner {
   background-color: #f15a23;
   border-radius: 0; }
 
+/* line 34, ../sass/style.scss */
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
   background: transparent; }
+  /* line 38, ../sass/style.scss */
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: 1px solid white;
@@ -25,6 +32,7 @@ input[type=range] {
     margin-top: -5px;
     background: #f15a23;
     cursor: pointer; }
+  /* line 47, ../sass/style.scss */
   input[type=range]::-moz-range-thumb {
     -webkit-appearance: none;
     border: 1px solid white;
@@ -32,6 +40,7 @@ input[type=range] {
     width: 10px;
     background: #f15a23;
     cursor: pointer; }
+  /* line 55, ../sass/style.scss */
   input[type=range]::-ms-thumb {
     -webkit-appearance: none;
     border: 1px solid white;
@@ -39,35 +48,44 @@ input[type=range] {
     width: 10px;
     background: #f15a23;
     cursor: pointer; }
+  /* line 63, ../sass/style.scss */
   input[type=range]:focus {
     outline: none; }
+  /* line 66, ../sass/style.scss */
   input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
     overflow: hidden;
     background: white; }
+    /* line 72, ../sass/style.scss */
     input[type=range]::-webkit-slider-runnable-track:hover {
       overflow: visible; }
+  /* line 76, ../sass/style.scss */
   input[type=range]::-moz-range-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
     overflow: hidden;
     background: white; }
+    /* line 82, ../sass/style.scss */
     input[type=range]::-moz-range-track:hover {
       overflow: visible; }
 
+/* line 88, ../sass/style.scss */
 .modal-backdrop.show {
   opacity: 0 !important; }
 
 @media screen and (min-width: 1200px) {
+  /* line 94, ../sass/style.scss */
   .container {
     max-width: 80%; } }
+/* line 100, ../sass/style.scss */
 ::selection {
   background: #f15a23;
   color: #63cac5; }
 
+/* line 106, ../sass/style.scss */
 #scroll-top {
   position: fixed;
   bottom: -10%;
@@ -80,13 +98,16 @@ input[type=range] {
   text-align: center;
   transition: all .3s ease-out;
   z-index: 998; }
+  /* line 118, ../sass/style.scss */
   #scroll-top i {
     font-size: 45px;
     color: white;
     line-height: 60px; }
+  /* line 123, ../sass/style.scss */
   #scroll-top:hover {
     background: #63cac5; }
 
+/* line 129, ../sass/style.scss */
 .btn-primary {
   background: #f15a23;
   border: none;
@@ -96,14 +117,17 @@ input[type=range] {
   padding: 20px 40px;
   letter-spacing: 2px;
   transition: all .3s ease; }
+  /* line 138, ../sass/style.scss */
   .btn-primary:hover {
     background: #63cac5; }
+  /* line 141, ../sass/style.scss */
   .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:focus {
     background: #63cac5;
     border: none;
     outline: none;
     box-shadow: none; }
 
+/* line 151, ../sass/style.scss */
 .btn-secondary {
   background: #f15a23;
   border: 3px solid #f15a23;
@@ -114,10 +138,12 @@ input[type=range] {
   letter-spacing: 1px;
   transition: all .3s ease;
   color: white !important; }
+  /* line 161, ../sass/style.scss */
   .btn-secondary:hover {
     background: white;
     border-color: #f15a23;
     color: #f15a23 !important; }
+  /* line 166, ../sass/style.scss */
   .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:focus {
     background: white;
     border-color: #f15a23;
@@ -125,6 +151,7 @@ input[type=range] {
     outline: none;
     box-shadow: none; }
 
+/* line 177, ../sass/style.scss */
 .btn-outline-success {
   background: transparent;
   border: 3px solid #f15a23;
@@ -137,10 +164,12 @@ input[type=range] {
   letter-spacing: 1px;
   transition: all .3s ease;
   color: white !important; }
+  /* line 189, ../sass/style.scss */
   .btn-outline-success:hover {
     background: transparent;
     border-color: #f15a23;
     color: #f15a23 !important; }
+  /* line 194, ../sass/style.scss */
   .btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:focus {
     background: transparent;
     border-color: #f15a23;
@@ -148,28 +177,37 @@ input[type=range] {
     outline: none;
     box-shadow: none; }
 
+/* line 205, ../sass/style.scss */
 section {
   padding: 70px 0 0; }
+  /* line 207, ../sass/style.scss */
   section .section-heading-wrapper {
     padding-bottom: 70px; }
+    /* line 209, ../sass/style.scss */
     section .section-heading-wrapper h1.section-title {
       font-weight: 300;
       font-size: 50px; }
+    /* line 213, ../sass/style.scss */
     section .section-heading-wrapper h4.section-subtitle {
       font-weight: 600;
       color: #63cac5; }
+      /* line 216, ../sass/style.scss */
       section .section-heading-wrapper h4.section-subtitle span {
         color: #f15a23; }
 
+/* line 224, ../sass/style.scss */
 .swal2-popup {
   border-radius: 0 !important; }
+  /* line 226, ../sass/style.scss */
   .swal2-popup .swal2-styled.swal2-confirm {
     border-radius: 0 !important;
     background-color: #63cac5 !important; }
+  /* line 230, ../sass/style.scss */
   .swal2-popup .swal2-styled.swal2-cancel {
     border-radius: 0 !important;
     background-color: #f44336 !important; }
 
+/* line 237, ../sass/style.scss */
 nav.navbar {
   padding: 30px 0;
   position: absolute;
@@ -179,37 +217,48 @@ nav.navbar {
   z-index: 99;
   transition: all .3s ease-in-out; }
   @media screen and (max-width: 768px) {
+    /* line 237, ../sass/style.scss */
     nav.navbar {
       background: #63cac5; }
+      /* line 249, ../sass/style.scss */
       nav.navbar .container {
         padding: 0 20px; }
+      /* line 254, ../sass/style.scss */
       nav.navbar ul li {
         margin-left: 0 !important;
         margin-top: 10px !important; }
+      /* line 259, ../sass/style.scss */
       nav.navbar ul .sign-in {
         border: 2px solid white;
         overflow: hidden;
         position: relative;
         text-align: center; }
+        /* line 265, ../sass/style.scss */
         nav.navbar ul .sign-in a {
           border: none;
           width: 100%; }
+        /* line 270, ../sass/style.scss */
         nav.navbar ul .sign-in::after {
           display: none; } }
   @media only screen and (max-width: 1200px) and (orientation: landscape) {
+    /* line 280, ../sass/style.scss */
     nav.navbar ul li a {
       font-size: 12px !important; } }
+  /* line 287, ../sass/style.scss */
   nav.navbar.fixed {
     position: fixed;
     transition: all .3s ease-in-out;
     padding: 15px 0;
     background: #63cac5; }
+  /* line 294, ../sass/style.scss */
   nav.navbar .navbar-brand {
     color: white;
     font-weight: 700;
     font-size: 30px; }
+  /* line 301, ../sass/style.scss */
   nav.navbar ul li {
     margin-left: 10px; }
+    /* line 304, ../sass/style.scss */
     nav.navbar ul li a {
       display: inline-block;
       color: white;
@@ -220,17 +269,22 @@ nav.navbar {
       text-transform: uppercase;
       border: 2px solid transparent;
       transition: all .2s ease; }
+      /* line 315, ../sass/style.scss */
       nav.navbar ul li a.active {
         border-color: white; }
+  /* line 321, ../sass/style.scss */
   nav.navbar ul :hover {
     border-color: white;
     transition: all .5s ease; }
+  /* line 326, ../sass/style.scss */
   nav.navbar ul .sign-in {
     border: 2px solid white;
     overflow: hidden;
     position: relative; }
+    /* line 331, ../sass/style.scss */
     nav.navbar ul .sign-in a {
       border: none; }
+    /* line 335, ../sass/style.scss */
     nav.navbar ul .sign-in::after {
       content: "";
       position: absolute;
@@ -241,25 +295,32 @@ nav.navbar {
       top: -225%;
       left: 90%;
       transition: all .5s ease; }
+    /* line 348, ../sass/style.scss */
     nav.navbar ul .sign-in:hover::after {
       left: -15%;
       top: -100%;
       transition: all .5s ease;
       z-index: -2; }
+    /* line 355, ../sass/style.scss */
     nav.navbar ul .sign-in:hover a {
       color: #63cac5;
       transition: all .5s ease; }
 
+/* line 365, ../sass/style.scss */
 .main-slider-wrapper {
   height: 100vh;
   position: relative; }
+  /* line 368, ../sass/style.scss */
   .main-slider-wrapper .main-slider {
     height: 100vh; }
+    /* line 370, ../sass/style.scss */
     .main-slider-wrapper .main-slider .owl-item {
       height: 100vh; }
+      /* line 372, ../sass/style.scss */
       .main-slider-wrapper .main-slider .owl-item .slider-image {
         height: 100vh;
         background-size: cover; }
+  /* line 378, ../sass/style.scss */
   .main-slider-wrapper .tour-search-background {
     position: absolute;
     left: 50%;
@@ -273,6 +334,7 @@ nav.navbar {
     border-radius: 50%;
     border: 6.8vh solid #5e5e5e; }
     @media screen and (max-width: 768px) {
+      /* line 378, ../sass/style.scss */
       .main-slider-wrapper .tour-search-background {
         border-radius: 0;
         border: none;
@@ -280,6 +342,7 @@ nav.navbar {
         border-right: 6.8vh solid #5e5e5e;
         height: 70vh;
         width: 100%; } }
+  /* line 399, ../sass/style.scss */
   .main-slider-wrapper .tour-search-wrapper {
     position: absolute;
     left: 50%;
@@ -290,11 +353,14 @@ nav.navbar {
     text-transform: uppercase;
     color: white; }
     @media screen and (orientation: portrait) {
+      /* line 399, ../sass/style.scss */
       .main-slider-wrapper .tour-search-wrapper {
         width: 55vw; } }
+    /* line 411, ../sass/style.scss */
     .main-slider-wrapper .tour-search-wrapper h1 {
       font-weight: 300; }
 
+/* line 418, ../sass/style.scss */
 select.form-control {
   background: transparent;
   border: 3px solid white;
@@ -303,17 +369,21 @@ select.form-control {
   font-weight: 600;
   height: 50px !important;
   color: white; }
+  /* line 426, ../sass/style.scss */
   select.form-control:hover {
     cursor: pointer; }
+  /* line 429, ../sass/style.scss */
   select.form-control:focus {
     color: white;
     background: transparent;
     border-color: white;
     box-shadow: none; }
+  /* line 435, ../sass/style.scss */
   select.form-control option {
     color: black;
     font-weight: 600; }
 
+/* line 442, ../sass/style.scss */
 .picker__input {
   background: transparent;
   border: 3px solid white;
@@ -325,33 +395,40 @@ select.form-control {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer; }
+  /* line 453, ../sass/style.scss */
   .picker__input.picker__input--active {
     border-color: #63cac5; }
+  /* line 456, ../sass/style.scss */
   .picker__input::placeholder {
     color: white;
     font-size: 14px;
     font-weight: 600;
     padding: .375rem .75rem; }
 
+/* line 465, ../sass/style.scss */
 .picker--focused .picker__day--highlighted,
 .picker__day--highlighted:hover,
 .picker__day--infocus:hover,
 .picker__day--outfocus:hover {
   background: #63cac5; }
 
+/* line 472, ../sass/style.scss */
 .picker--focused .picker__day--highlighted {
   background: #f15a23;
   color: white; }
 
+/* line 477, ../sass/style.scss */
 .picker__day--today:before,
 .picker__button--today:before {
   border-top-color: #63cac5; }
 
+/* line 482, ../sass/style.scss */
 .picker__button--clear,
 .picker__button--close,
 .picker__button--today {
   transition: all .3s ease; }
 
+/* line 488, ../sass/style.scss */
 .picker__button--clear:hover,
 .picker__button--close:hover,
 .picker__button--today:hover {
@@ -360,44 +437,55 @@ select.form-control {
   border-bottom-color: #63cac5;
   transition: all .3s ease; }
 
+/* line 497, ../sass/style.scss */
 .picker__button--clear:focus,
 .picker__button--close:focus,
 .picker__button--today:focus {
   background: none;
   border: none; }
 
+/* line 504, ../sass/style.scss */
 .picker__nav--next:before,
 .picker__nav--prev:before {
   transition: all .3s ease; }
 
+/* line 509, ../sass/style.scss */
 .picker__nav--next:hover,
 .picker__nav--prev:hover {
   background: none; }
 
+/* line 514, ../sass/style.scss */
 .picker__year {
   color: #63cac5;
   font-style: normal; }
 
+/* line 519, ../sass/style.scss */
 .picker__select--month,
 .picker__select--year {
   font-size: 14px;
   height: 40px; }
 
+/* line 525, ../sass/style.scss */
 .picker__holder {
   overflow-y: visible; }
 
+/* line 529, ../sass/style.scss */
 .picker--opened .picker__holder {
   background: none; }
 
+/* line 533, ../sass/style.scss */
 .picker__box {
   border-radius: 0 !important; }
 
+/* line 538, ../sass/style.scss */
 .d-picker {
   width: 48%;
   position: relative; }
   @media screen and (orientation: portrait) {
+    /* line 538, ../sass/style.scss */
     .d-picker {
       width: 100%; } }
+  /* line 544, ../sass/style.scss */
   .d-picker i {
     position: absolute;
     right: 5%;
@@ -406,9 +494,11 @@ select.form-control {
     font-size: 20px;
     z-index: -1;
     transition: all .3s; }
+  /* line 554, ../sass/style.scss */
   .d-picker:hover i {
     color: #63cac5; }
 
+/* line 561, ../sass/style.scss */
 .login-form-modal-wrapper,
 .signup-form-modal-wrapper,
 .pass-recovery-form-modal-wrapper,
@@ -416,6 +506,7 @@ select.form-control {
 .tour-request-modal-wrapper {
   height: 0;
   width: 0; }
+  /* line 568, ../sass/style.scss */
   .login-form-modal-wrapper #login-form-modal,
   .login-form-modal-wrapper #signup-form-modal,
   .login-form-modal-wrapper #pass-recovery-form-modal,
@@ -444,6 +535,7 @@ select.form-control {
     background: rgba(99, 202, 197, 0.95);
     width: 100%;
     animation-duration: .5s; }
+    /* line 576, ../sass/style.scss */
     .login-form-modal-wrapper #login-form-modal .modal-content,
     .login-form-modal-wrapper #signup-form-modal .modal-content,
     .login-form-modal-wrapper #pass-recovery-form-modal .modal-content,
@@ -471,6 +563,7 @@ select.form-control {
     .tour-request-modal-wrapper #tour-request-modal .modal-content {
       border-radius: 0;
       box-shadow: 0 0 10px 2px #f15a23; }
+      /* line 579, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .modal-body,
       .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
@@ -498,6 +591,7 @@ select.form-control {
       .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body {
         padding: 0; }
         @media screen and (max-width: 768px) {
+          /* line 582, ../sass/style.scss */
           .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
           .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs,
           .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
@@ -525,6 +619,7 @@ select.form-control {
           .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs {
             width: 85% !important;
             border-right: 1px solid #dee2e6; }
+            /* line 585, ../sass/style.scss */
             .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
             .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs li > a,
             .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
@@ -551,6 +646,7 @@ select.form-control {
             .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
             .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a {
               height: 100%; } }
+        /* line 590, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
         .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
@@ -578,6 +674,7 @@ select.form-control {
         .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link {
           border-radius: 0;
           color: #f15a23; }
+          /* line 593, ../sass/style.scss */
           .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
           .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link.active,
           .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
@@ -604,6 +701,7 @@ select.form-control {
           .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
           .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active {
             color: #63cac5; }
+        /* line 597, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#tour-request-modal-body,
         .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body#signup-form-body,
         .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body#pass-recovery-form-body,
@@ -702,6 +800,7 @@ select.form-control {
         .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body {
           padding: 10px 20px; }
+          /* line 602, ../sass/style.scss */
           .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
           .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
           .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
@@ -802,6 +901,7 @@ select.form-control {
             font-size: 40px;
             line-height: 45px;
             color: #f15a23; }
+      /* line 610, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-check-label > span,
       .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-check-label > span,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
@@ -828,6 +928,7 @@ select.form-control {
       .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span {
         color: #f15a23; }
+      /* line 613, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
       .login-form-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
@@ -858,6 +959,7 @@ select.form-control {
         border: 1px solid #f15a23;
         margin-top: 20px;
         transition: all .3s; }
+      /* line 620, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control-plaintext,
       .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control-plaintext,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
@@ -885,6 +987,7 @@ select.form-control {
       .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext {
         font-size: 20px;
         font-weight: 500; }
+      /* line 624, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
       .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
@@ -914,6 +1017,7 @@ select.form-control {
         border: none;
         border-bottom: 1px solid #f15a23;
         transition: all .3s; }
+        /* line 629, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control:read-only,
         .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:read-only,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
@@ -944,6 +1048,7 @@ select.form-control {
           color: black;
           font-weight: inherit;
           font-size: inherit; }
+        /* line 636, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control:focus,
         .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:focus,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
@@ -972,6 +1077,7 @@ select.form-control {
           outline: none;
           box-shadow: 0px 2px 0px 0px #63cac5;
           border-color: #63cac5; }
+        /* line 641, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control.error,
         .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.error,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
@@ -1000,6 +1106,7 @@ select.form-control {
           box-shadow: 0px 2px 0px 0px #f44336;
           border-color: #f44336 !important;
           margin-bottom: 5px; }
+        /* line 646, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control.valid,
         .login-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.valid,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
@@ -1028,6 +1135,7 @@ select.form-control {
           box-shadow: none;
           border-color: #8bc34a !important;
           margin-bottom: 0; }
+      /* line 652, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group.has-error > span,
       .login-form-modal-wrapper #signup-form-modal .modal-content .form-group.has-error > span,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
@@ -1055,6 +1163,7 @@ select.form-control {
       .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span {
         color: #f44336;
         font-size: 14px; }
+      /* line 657, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
       .login-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
@@ -1087,6 +1196,7 @@ select.form-control {
         cursor: pointer;
         transition: all .3s ease; }
         @media screen and (max-width: 768px) {
+          /* line 657, ../sass/style.scss */
           .login-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
           .login-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
           .login-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
@@ -1114,6 +1224,7 @@ select.form-control {
           .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close {
             right: 5%;
             top: 2%; } }
+        /* line 668, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
         .login-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close:hover,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
@@ -1141,6 +1252,7 @@ select.form-control {
         .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover {
           transform: scale(1.2);
           color: #f15a23; }
+      /* line 675, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
       .login-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading h1,
       .login-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading h1,
@@ -1193,6 +1305,7 @@ select.form-control {
       .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1 {
         color: #63cac5;
         font-weight: 300; }
+      /* line 679, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
       .login-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p,
       .login-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p,
@@ -1244,6 +1357,7 @@ select.form-control {
       .tour-request-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p {
         font-weight: 600; }
+        /* line 681, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
         .login-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
         .login-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p span,
@@ -1295,6 +1409,7 @@ select.form-control {
         .tour-request-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span {
           color: #f15a23; }
+        /* line 684, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
         .login-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
         .login-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p t,
@@ -1348,6 +1463,7 @@ select.form-control {
           color: black;
           text-decoration: underline;
           text-decoration-color: #63cac5; }
+      /* line 693, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .pm-form-heading h3,
       .login-form-modal-wrapper #login-form-modal .modal-content .tour-request-form-heading h3,
       .login-form-modal-wrapper #signup-form-modal .modal-content .pm-form-heading h3,
@@ -1399,6 +1515,7 @@ select.form-control {
       .tour-request-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3 {
         font-weight: 300; }
+      /* line 697, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .btn-success,
       .login-form-modal-wrapper #signup-form-modal .modal-content .btn-success,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
@@ -1429,6 +1546,7 @@ select.form-control {
         border-radius: 0;
         height: 50px;
         font-weight: 600; }
+        /* line 703, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .btn-success:hover,
         .login-form-modal-wrapper #signup-form-modal .modal-content .btn-success:hover,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
@@ -1455,6 +1573,7 @@ select.form-control {
         .tour-request-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-success:hover {
           background-color: #f15a23; }
+      /* line 707, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
       .login-form-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
@@ -1481,6 +1600,7 @@ select.form-control {
       .tour-request-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary {
         border-radius: 0; }
+      /* line 710, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .tab-pane,
       .login-form-modal-wrapper #signup-form-modal .modal-content .tab-pane,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
@@ -1507,6 +1627,7 @@ select.form-control {
       .tour-request-modal-wrapper #pm-form-modal .modal-content .tab-pane,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .tab-pane {
         padding: 10px 20px; }
+        /* line 712, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
         .login-form-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
@@ -1533,6 +1654,7 @@ select.form-control {
         .tour-request-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade {
           transition: opacity .5s linear; }
+      /* line 716, ../sass/style.scss */
       .login-form-modal-wrapper #login-form-modal .modal-content .pass-recovery,
       .login-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
@@ -1561,6 +1683,7 @@ select.form-control {
         color: #63cac5;
         text-decoration: none;
         transition: all .3s; }
+        /* line 720, ../sass/style.scss */
         .login-form-modal-wrapper #login-form-modal .modal-content .pass-recovery:hover,
         .login-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery:hover,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
@@ -1588,13 +1711,16 @@ select.form-control {
         .tour-request-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover {
           color: #f15a23; }
 
+/* line 729, ../sass/style.scss */
 .tours-modal-wrapper {
   height: 0;
   width: 0; }
+  /* line 732, ../sass/style.scss */
   .tours-modal-wrapper #tours-modal {
     background: rgba(99, 202, 197, 0.95);
     overflow-y: auto;
     z-index: 999; }
+    /* line 736, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal #tours-close {
       position: fixed;
       right: 5%;
@@ -1602,35 +1728,46 @@ select.form-control {
       font-size: 30px;
       cursor: pointer;
       transition: all .3s ease; }
+      /* line 743, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal #tours-close:hover {
         color: #f15a23;
         transform: scale(1.2);
         transition: all .3s ease; }
+    /* line 750, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal section#tours .section-heading-wrapper {
       padding-bottom: 35px; }
+    /* line 753, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal section#tours h4.section-subtitle {
       color: #f15a23 !important; }
+    /* line 756, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal section#tours .tours-filters-wrapper {
       padding-bottom: 35px; }
+      /* line 758, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-filters-wrapper .btn-info {
         border-radius: 0;
         background-color: #f15a23;
         border: none; }
+        /* line 762, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-filters-wrapper .btn-info:hover {
           border: none;
           background: #a4330a; }
+        /* line 766, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-filters-wrapper .btn-info:focus {
           outline: none;
           box-shadow: none; }
+        /* line 770, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-filters-wrapper .btn-info.active {
           background: #a4330a;
           color: #63cac5;
           font-weight: 500; }
+    /* line 778, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .gutter-sizer {
       width: 2%; }
       @media screen and (max-width: 768px) {
+        /* line 778, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .gutter-sizer {
           width: 0; } }
+    /* line 784, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item {
       overflow: hidden;
       position: relative;
@@ -1640,8 +1777,10 @@ select.form-control {
       margin-bottom: 40px;
       box-shadow: 0 0 10px 2px #f15a23; }
       @media screen and (max-width: 768px) {
+        /* line 784, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item {
           width: 100%; } }
+      /* line 795, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay {
         position: absolute;
         top: 0;
@@ -1652,6 +1791,7 @@ select.form-control {
         transform: translateY(-100%);
         opacity: 0;
         transition: all .5s; }
+        /* line 805, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading {
           text-align: center;
           width: 100%;
@@ -1660,14 +1800,17 @@ select.form-control {
           top: 40%;
           left: 50%;
           transform: translate(-50%, -50%); }
+          /* line 813, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading h3 {
             color: white; }
+          /* line 816, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .duration,
           .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .price {
             font-size: 25px;
             margin-bottom: 0;
             color: white;
             cursor: default; }
+            /* line 822, ../sass/style.scss */
             .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .duration i,
             .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .price i {
               display: inline-block;
@@ -1676,34 +1819,42 @@ select.form-control {
               vertical-align: middle;
               line-height: 50px;
               text-align: left; }
+        /* line 832, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide {
           border-top: 1px solid #63cac5;
           position: absolute;
           bottom: 0;
           left: 0;
           right: 0; }
+          /* line 838, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide img {
             margin: 10px 20px;
             display: inline-block;
             max-width: 20%;
             border-radius: 50%; }
+          /* line 844, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul {
             display: inline-block;
             margin: 10px 0 30px;
             vertical-align: top;
             max-width: 60%; }
+            /* line 849, ../sass/style.scss */
             .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li {
               text-transform: uppercase;
               color: #63cac5; }
+              /* line 852, ../sass/style.scss */
               .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li:first-child {
                 font-size: 24px;
                 font-weight: 600; }
+              /* line 856, ../sass/style.scss */
               .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a {
                 float: none;
                 font-size: 30px;
                 display: inline; }
+                /* line 860, ../sass/style.scss */
                 .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after {
                   color: #63cac5; }
+      /* line 868, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom {
         position: absolute;
         bottom: 0;
@@ -1712,68 +1863,89 @@ select.form-control {
         background: rgba(0, 0, 0, 0.7);
         color: white;
         transition: all .5s; }
+        /* line 876, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p {
           margin-bottom: 0;
           padding: 5px 20px;
           font-size: 24px; }
           @media screen and (max-width: 1500px) {
+            /* line 876, ../sass/style.scss */
             .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p {
               font-size: 18px;
               text-align: center; }
+              /* line 883, ../sass/style.scss */
               .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p span {
                 float: none !important;
                 display: block; } }
+          /* line 888, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p span {
             float: right; }
+      /* line 894, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item:hover .info-overlay {
         transform: translateY(0);
         opacity: 1; }
+      /* line 898, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item:hover .info-overlay-bottom {
         transform: translateY(100%);
         opacity: 0; }
+    /* line 907, ../sass/style.scss */
     .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card {
       background-color: transparent;
       border: none; }
+      /* line 910, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-header {
         border: none;
         background-color: transparent; }
+        /* line 913, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-header button.btn-info {
           background: transparent;
           border: none;
           color: #f15a23;
           font-weight: 600;
           transition: all .3s; }
+          /* line 919, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-header button.btn-info:focus {
             outline: none;
             border: none;
             box-shadow: none; }
+          /* line 924, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-header button.btn-info:hover {
             color: white; }
+      /* line 929, ../sass/style.scss */
       .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body {
         padding: 0; }
+        /* line 933, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body .form-group.has-error span {
           color: #f44336;
           font-size: 12px; }
+        /* line 938, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body .form-group label {
           display: block; }
+          /* line 940, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body .form-group label span {
             float: right; }
+        /* line 944, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body .form-group .form-control.search-input {
           border-radius: 0;
           border: 2px solid #f15a23; }
+          /* line 947, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body .form-group .form-control.search-input:focus {
             outline: none;
             box-shadow: none; }
+          /* line 951, ../sass/style.scss */
           .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body .form-group .form-control.search-input.error {
             border-color: #f44336; }
+        /* line 956, ../sass/style.scss */
         .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card .card-body button {
           padding: 5px;
           font-size: 16px; }
 
+/* line 969, ../sass/style.scss */
 .tour-view-modal-wrapper,
 .profile-view-modal-wrapper {
   height: 0;
   width: 0; }
+  /* line 973, ../sass/style.scss */
   .tour-view-modal-wrapper #tour-view-modal,
   .tour-view-modal-wrapper #profile-view-modal,
   .profile-view-modal-wrapper #tour-view-modal,
@@ -1781,6 +1953,7 @@ select.form-control {
     background: rgba(99, 202, 197, 0.95);
     overflow-y: auto;
     z-index: 999; }
+    /* line 978, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #modal-close,
     .tour-view-modal-wrapper #profile-view-modal #modal-close,
     .profile-view-modal-wrapper #tour-view-modal #modal-close,
@@ -1791,6 +1964,7 @@ select.form-control {
       font-size: 30px;
       cursor: pointer;
       transition: all .3s ease; }
+      /* line 985, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal #modal-close:hover,
       .tour-view-modal-wrapper #profile-view-modal #modal-close:hover,
       .profile-view-modal-wrapper #tour-view-modal #modal-close:hover,
@@ -1798,6 +1972,7 @@ select.form-control {
         color: #f15a23;
         transform: scale(1.2);
         transition: all .3s ease; }
+    /* line 991, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #tour-view-back,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-back,
     .profile-view-modal-wrapper #tour-view-modal #tour-view-back,
@@ -1808,6 +1983,7 @@ select.form-control {
       font-size: 36px;
       cursor: pointer;
       transition: all .3s ease; }
+      /* line 998, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal #tour-view-back:hover,
       .tour-view-modal-wrapper #profile-view-modal #tour-view-back:hover,
       .profile-view-modal-wrapper #tour-view-modal #tour-view-back:hover,
@@ -1815,6 +1991,7 @@ select.form-control {
         color: #f15a23;
         transform: scale(1.2);
         transition: all .3s ease; }
+    /* line 1005, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .overlay,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-car .overlay,
     .profile-view-modal-wrapper #tour-view-modal #tour-view-car .overlay,
@@ -1826,11 +2003,13 @@ select.form-control {
       bottom: 0;
       background: rgba(0, 0, 0, 0.5);
       transition: all .5s; }
+    /* line 1014, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item.center div.overlay,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item.center div.overlay,
     .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item.center div.overlay,
     .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item.center div.overlay {
       opacity: 0 !important; }
+    /* line 1017, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-prev,
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-next,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-prev,
@@ -1847,6 +2026,7 @@ select.form-control {
       color: #63cac5;
       font-size: 80px;
       transition: all .3s; }
+      /* line 1027, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-prev:hover,
       .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-next:hover,
       .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-prev:hover,
@@ -1857,6 +2037,7 @@ select.form-control {
       .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-next:hover {
         color: #f15a23;
         background: rgba(0, 0, 0, 0.5); }
+      /* line 1031, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-prev:focus,
       .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-next:focus,
       .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-prev:focus,
@@ -1866,28 +2047,33 @@ select.form-control {
       .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-prev:focus,
       .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-next:focus {
         outline: none; }
+    /* line 1035, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-prev,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-prev,
     .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-prev,
     .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-prev {
       left: 0; }
+    /* line 1038, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-next,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-next,
     .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-next,
     .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-next {
       right: 0; }
+    /* line 1042, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal .tour-view-info,
     .tour-view-modal-wrapper #profile-view-modal .tour-view-info,
     .profile-view-modal-wrapper #tour-view-modal .tour-view-info,
     .profile-view-modal-wrapper #profile-view-modal .tour-view-info {
       padding: 50px 0 20px; }
       @media screen and (max-width: 768px) {
+        /* line 1046, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.main-info,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media.main-info {
           display: block;
           text-align: center; }
+          /* line 1049, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info img,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.main-info img,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info img,
@@ -1895,11 +2081,13 @@ select.form-control {
             max-width: 50%;
             margin: 0 !important;
             margin-bottom: 15px !important; }
+        /* line 1055, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment {
           display: block; }
+          /* line 1057, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment img,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment img,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment img,
@@ -1907,18 +2095,21 @@ select.form-control {
             max-width: 25% !important;
             margin: 0 !important;
             margin-bottom: 10px !important; }
+          /* line 1062, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment span.feedback-date,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment span.feedback-date,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment span.feedback-date,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment span.feedback-date {
             float: none !important; } }
       @media only screen and (max-width: 1200px) and (orientation: landscape) {
+        /* line 1068, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.main-info,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media.main-info {
           display: block;
           text-align: center; }
+          /* line 1071, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info img,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.main-info img,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.main-info img,
@@ -1926,11 +2117,13 @@ select.form-control {
             max-width: 50%;
             margin: 0 !important;
             margin-bottom: 15px !important; }
+        /* line 1077, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment {
           display: block; }
+          /* line 1079, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment img,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment img,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment img,
@@ -1938,11 +2131,13 @@ select.form-control {
             max-width: 25% !important;
             margin: 0 !important;
             margin-bottom: 10px !important; }
+          /* line 1084, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment span.feedback-date,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment span.feedback-date,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media.comment span.feedback-date,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media.comment span.feedback-date {
             float: none !important; } }
+      /* line 1089, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media img,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media img,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media img,
@@ -1950,18 +2145,21 @@ select.form-control {
         max-width: 20%;
         box-shadow: 0 0 10px 2px #f15a23;
         cursor: pointer; }
+      /* line 1094, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media h2.guide-profile,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media h2.guide-profile,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media h2.guide-profile,
       .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media h2.guide-profile {
         transition: all .3s;
         display: inline-block; }
+        /* line 1097, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media h2.guide-profile:hover,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media h2.guide-profile:hover,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media h2.guide-profile:hover,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media h2.guide-profile:hover {
           cursor: pointer;
           color: #f15a23; }
+      /* line 1104, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts p i,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media .guide-contacts p i,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts p i,
@@ -1972,6 +2170,7 @@ select.form-control {
         font-size: 20px;
         margin-right: 10px;
         color: #f15a23; }
+      /* line 1113, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info,
@@ -1980,29 +2179,34 @@ select.form-control {
         font-weight: 500;
         border-radius: 0;
         border-color: #f15a23; }
+        /* line 1118, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:hover,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:hover,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:hover,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:hover {
           color: white;
           background: #f15a23; }
+        /* line 1122, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:focus,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:focus,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:focus,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .media .guide-contacts button.btn-outline-info:focus {
           outline: none;
           box-shadow: none; }
+      /* line 1129, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .br-theme-css-stars .br-widget a,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .br-theme-css-stars .br-widget a,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .br-theme-css-stars .br-widget a,
       .profile-view-modal-wrapper #profile-view-modal .tour-view-info .br-theme-css-stars .br-widget a {
         float: none;
         font-size: 30px; }
+        /* line 1132, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .br-theme-css-stars .br-widget a.br-selected:after,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .br-theme-css-stars .br-widget a.br-selected:after,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .br-theme-css-stars .br-widget a.br-selected:after,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .br-theme-css-stars .br-widget a.br-selected:after {
           color: #f15a23; }
+      /* line 1136, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-description-wrapper,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-description-wrapper,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-description-wrapper,
@@ -2010,17 +2214,20 @@ select.form-control {
         margin: 30px 0;
         padding: 20px;
         box-shadow: 0 0 10px 2px #f15a23; }
+      /* line 1141, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper,
       .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper {
         padding: 20px;
         box-shadow: 0 0 10px 2px #f15a23; }
+        /* line 1144, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper p,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper p,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper p,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper p {
           font-size: 18px; }
+          /* line 1146, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper p i,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper p i,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper p i,
@@ -2031,22 +2238,26 @@ select.form-control {
             font-size: 20px;
             color: #f15a23;
             margin-right: 10px; }
+          /* line 1154, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper p.tour-type,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper p.tour-type,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper p.tour-type,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper p.tour-type {
             font-size: 20px;
             font-weight: 600; }
+        /* line 1159, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar {
           width: 100% !important; }
+          /* line 1162, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages {
             border-radius: 0; }
+            /* line 1164, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages h1,
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages h2,
             .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages h1,
@@ -2056,6 +2267,7 @@ select.form-control {
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages h1,
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages h2 {
               font-family: 'Montserrat' !important; }
+            /* line 1168, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .prv-m,
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .nxt-m,
             .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .prv-m,
@@ -2065,6 +2277,7 @@ select.form-control {
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .prv-m,
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .nxt-m {
               transition: all .3s; }
+            /* line 1172, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .prv-m:hover,
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .nxt-m:hover,
             .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .prv-m:hover,
@@ -2075,33 +2288,39 @@ select.form-control {
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .nxt-m:hover {
               color: #63cac5;
               transform: scale(1.5); }
+            /* line 1178, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day,
             .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day,
             .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day,
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day {
               font-family: 'Montserrat' !important; }
+              /* line 1180, ../sass/style.scss */
               .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span,
               .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span,
               .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span,
               .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span {
                 line-height: 18px;
                 border-radius: 0; }
+                /* line 1183, ../sass/style.scss */
                 .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span:hover,
                 .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span:hover,
                 .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span:hover,
                 .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day span:hover {
                   background: #63cac5; }
+              /* line 1188, ../sass/style.scss */
               .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day.today span,
               .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day.today span,
               .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day.today span,
               .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper .jalendar .jalendar-container .jalendar-pages .days .day.today span {
                 background: #3fbbb5;
                 color: white !important; }
+        /* line 1198, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button#send-tour-request,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button#send-tour-request,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button#send-tour-request,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button#send-tour-request {
           transition: all .3s; }
+        /* line 1201, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info,
@@ -2110,18 +2329,21 @@ select.form-control {
           font-weight: 500;
           border-radius: 0;
           border-color: #f15a23; }
+          /* line 1206, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:hover,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:hover,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:hover,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:hover {
             color: white;
             background: #f15a23; }
+          /* line 1210, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:focus,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:focus,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:focus,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-details-wrapper button.btn-outline-info:focus {
             outline: none;
             box-shadow: none; }
+      /* line 1216, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper,
       .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper,
       .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper,
@@ -2129,11 +2351,13 @@ select.form-control {
         margin: 30px 0;
         padding: 20px;
         box-shadow: 0 0 10px 2px #f15a23; }
+        /* line 1221, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget {
           display: inline-block; }
+          /* line 1223, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-current-rating,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-current-rating,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-current-rating,
@@ -2141,11 +2365,13 @@ select.form-control {
             display: inline-block;
             font-size: 24px;
             margin-left: 10px; }
+          /* line 1228, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-active:after,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-active:after,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-active:after,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .br-wrapper .br-widget .br-active:after {
             color: #f15a23; }
+        /* line 1233, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper textarea,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper textarea,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper textarea,
@@ -2155,6 +2381,7 @@ select.form-control {
           border-radius: 0;
           border: none;
           transition: all .3s; }
+          /* line 1239, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper textarea:focus,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper textarea:focus,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper textarea:focus,
@@ -2162,17 +2389,20 @@ select.form-control {
             outline: none;
             box-shadow: none;
             border: none; }
+          /* line 1244, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper textarea.error,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper textarea.error,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper textarea.error,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper textarea.error {
             outline: 2px solid #f15a23; }
+        /* line 1249, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .has-error span,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .has-error span,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .has-error span,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .has-error span {
           color: #f44336;
           font-size: 12px; }
+        /* line 1254, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info,
@@ -2181,60 +2411,71 @@ select.form-control {
           font-weight: 500;
           border-radius: 0;
           border-color: #f15a23; }
+          /* line 1259, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:hover,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:hover,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:hover,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:hover {
             color: white;
             background: #f15a23; }
+          /* line 1263, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:focus,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:focus,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:focus,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper button.btn-outline-info:focus {
             outline: none;
             box-shadow: none; }
+        /* line 1269, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media,
         .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media,
         .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media,
         .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media {
           border-bottom: 1px dashed #f15a23;
           margin-bottom: 20px; }
+          /* line 1272, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media img,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media img,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media img,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media img {
             max-width: 10%; }
+          /* line 1275, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media p.feedback-text,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media p.feedback-text,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media p.feedback-text,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media p.feedback-text {
             font-size: 14px; }
+          /* line 1278, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media span.feedback-date,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media span.feedback-date,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media span.feedback-date,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media span.feedback-date {
             font-size: 14px; }
+          /* line 1281, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper,
           .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper,
           .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper,
           .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper {
             display: inline-block; }
+            /* line 1283, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-widget a,
             .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-widget a,
             .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-widget a,
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-widget a {
               font-size: 20px; }
+            /* line 1286, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-current-rating,
             .tour-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-current-rating,
             .profile-view-modal-wrapper #tour-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-current-rating,
             .profile-view-modal-wrapper #profile-view-modal .tour-view-info .tour-feedbacks-wrapper .feedbacks-list-wrapper .media .br-wrapper .br-current-rating {
               display: none; }
+    /* line 1294, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal img.profile-photo,
     .tour-view-modal-wrapper #profile-view-modal img.profile-photo,
     .profile-view-modal-wrapper #tour-view-modal img.profile-photo,
     .profile-view-modal-wrapper #profile-view-modal img.profile-photo {
       max-width: 100%;
       box-shadow: 0 0 10px 2px #f15a23; }
+    /* line 1298, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper,
     .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper,
     .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper,
@@ -2242,17 +2483,20 @@ select.form-control {
       height: 100%;
       box-shadow: 0 0 10px 2px #f15a23; }
       @media screen and (max-width: 768px) {
+        /* line 1298, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper {
           margin-top: 25px; } }
       @media only screen and (max-width: 1200px) and (orientation: landscape) {
+        /* line 1298, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper {
           margin-top: 25px; } }
+      /* line 1307, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper h3,
       .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper h5,
       .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper h3,
@@ -2262,17 +2506,20 @@ select.form-control {
       .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper h3,
       .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper h5 {
         margin: 0; }
+      /* line 1311, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-country,
       .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-country,
       .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-country,
       .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-country {
         padding: 20px 0;
         border-bottom: 1px dashed #f15a23; }
+        /* line 1314, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-country span,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-country span,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-country span,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-country span {
           width: 1em; }
+      /* line 1318, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card,
       .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card,
       .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card,
@@ -2280,6 +2527,7 @@ select.form-control {
         padding: 20px 0;
         border-right: 1px dashed #f15a23; }
         @media screen and (max-width: 768px) {
+          /* line 1318, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card,
           .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card,
           .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card,
@@ -2287,17 +2535,20 @@ select.form-control {
             border-right: none !important;
             border-bottom: 1px dashed #f15a23; } }
         @media only screen and (max-width: 1200px) and (orientation: landscape) {
+          /* line 1318, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card,
           .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card,
           .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card,
           .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card {
             border-right: none !important;
             border-bottom: 1px dashed #f15a23; } }
+        /* line 1329, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card.no-border,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card.no-border,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card.no-border,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card.no-border {
           border: none !important; }
+        /* line 1332, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card span,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .profile-card span,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .profile-card span,
@@ -2305,6 +2556,7 @@ select.form-control {
           margin-top: 15px;
           display: block;
           font-size: 42px; }
+      /* line 1338, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper,
       .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper,
       .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper,
@@ -2312,38 +2564,45 @@ select.form-control {
         padding: 20px 0;
         border-top: 1px dashed #f15a23;
         border-bottom: 1px dashed #f15a23; }
+        /* line 1342, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget {
           line-height: 30px; }
+          /* line 1344, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a,
           .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a,
           .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a,
           .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a {
             float: none;
             font-size: 45px; }
+            /* line 1347, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a.br-selected:after,
             .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a.br-selected:after,
             .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a.br-selected:after,
             .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-rating-wrapper .br-theme-css-stars .br-widget a.br-selected:after {
               color: #f15a23; }
+      /* line 1353, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper,
       .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper,
       .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper,
       .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper {
         padding: 20px 0; }
+        /* line 1356, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper h5 i,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper h5 i,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper h5 i,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper h5 i {
           margin-right: 15px;
           color: #f15a23; }
+        /* line 1361, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul,
         .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper ul,
         .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul,
         .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper ul {
           margin-bottom: 0; }
+          /* line 1363, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li,
           .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li,
           .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li,
@@ -2351,6 +2610,7 @@ select.form-control {
             display: inline-block;
             width: 30px;
             height: 30px; }
+            /* line 1367, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li a,
             .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li a,
             .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li a,
@@ -2358,16 +2618,19 @@ select.form-control {
               color: #f15a23;
               font-size: 20px;
               transition: all .3s; }
+            /* line 1373, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li:hover a,
             .tour-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li:hover a,
             .profile-view-modal-wrapper #tour-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li:hover a,
             .profile-view-modal-wrapper #profile-view-modal .profile-details-wrapper .guide-contacts-wrapper ul li:hover a {
               color: black; }
+    /* line 1382, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .guide-offered-tours-heading,
     .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .guide-offered-tours-heading,
     .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .guide-offered-tours-heading,
     .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .guide-offered-tours-heading {
       font-weight: 300; }
+    /* line 1385, ../sass/style.scss */
     .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item,
     .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item,
     .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item,
@@ -2379,6 +2642,7 @@ select.form-control {
       width: 100%;
       margin-bottom: 40px;
       box-shadow: 0 0 10px 2px #f15a23; }
+      /* line 1393, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay,
       .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay,
       .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay,
@@ -2392,6 +2656,7 @@ select.form-control {
         transform: translateY(-100%);
         opacity: 0;
         transition: all .5s; }
+        /* line 1403, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading,
         .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading,
         .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading,
@@ -2403,11 +2668,13 @@ select.form-control {
           top: 40%;
           left: 50%;
           transform: translate(-50%, -50%); }
+          /* line 1411, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading h3,
           .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading h3,
           .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading h3,
           .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading h3 {
             color: white; }
+          /* line 1414, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading .duration,
           .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading .price,
           .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading .duration,
@@ -2420,6 +2687,7 @@ select.form-control {
             margin-bottom: 0;
             color: white;
             cursor: default; }
+            /* line 1420, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading .duration i,
             .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading .price i,
             .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-heading .duration i,
@@ -2434,6 +2702,7 @@ select.form-control {
               vertical-align: middle;
               line-height: 50px;
               text-align: left; }
+        /* line 1430, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide,
         .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide,
         .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide,
@@ -2443,6 +2712,7 @@ select.form-control {
           bottom: 0;
           left: 0;
           right: 0; }
+          /* line 1436, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide img,
           .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide img,
           .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide img,
@@ -2451,6 +2721,7 @@ select.form-control {
             display: inline-block;
             max-width: 20%;
             border-radius: 50%; }
+          /* line 1442, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul,
           .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul,
           .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul,
@@ -2459,18 +2730,21 @@ select.form-control {
             margin: 10px 0 30px;
             vertical-align: top;
             max-width: 60%; }
+            /* line 1447, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li,
             .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li,
             .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li,
             .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li {
               text-transform: uppercase;
               color: #63cac5; }
+              /* line 1450, ../sass/style.scss */
               .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li:first-child,
               .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li:first-child,
               .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li:first-child,
               .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li:first-child {
                 font-size: 24px;
                 font-weight: 600; }
+              /* line 1454, ../sass/style.scss */
               .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a,
               .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a,
               .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a,
@@ -2478,11 +2752,13 @@ select.form-control {
                 float: none;
                 font-size: 30px;
                 display: inline; }
+                /* line 1458, ../sass/style.scss */
                 .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after,
                 .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after,
                 .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after,
                 .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after {
                   color: #63cac5; }
+      /* line 1466, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom,
       .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom,
       .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom,
@@ -2494,6 +2770,7 @@ select.form-control {
         background: rgba(0, 0, 0, 0.7);
         color: white;
         transition: all .5s; }
+        /* line 1474, ../sass/style.scss */
         .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p,
         .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p,
         .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p,
@@ -2502,29 +2779,34 @@ select.form-control {
           padding: 5px 20px;
           font-size: 24px; }
           @media screen and (max-width: 1500px) {
+            /* line 1474, ../sass/style.scss */
             .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p,
             .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p,
             .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p,
             .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p {
               font-size: 18px;
               text-align: center; }
+              /* line 1481, ../sass/style.scss */
               .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span,
               .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span,
               .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span,
               .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span {
                 float: none !important;
                 display: block; } }
+          /* line 1486, ../sass/style.scss */
           .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span,
           .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span,
           .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span,
           .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item .info-overlay-bottom p span {
             float: right; }
+      /* line 1492, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay,
       .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay,
       .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay,
       .profile-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay {
         transform: translateY(0);
         opacity: 1; }
+      /* line 1496, ../sass/style.scss */
       .tour-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay-bottom,
       .tour-view-modal-wrapper #profile-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay-bottom,
       .profile-view-modal-wrapper #tour-view-modal .guide-offered-tours-wrapper .tour-item:hover .info-overlay-bottom,
@@ -2532,23 +2814,29 @@ select.form-control {
         transform: translateY(100%);
         opacity: 0; }
 
+/* line 1509, ../sass/style.scss */
 section#most-popular .section-body-wrapper .best-tour {
   position: relative; }
   @media screen and (max-width: 768px) {
+    /* line 1509, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour {
       border-bottom: 1px dashed #f15a23; } }
+  /* line 1514, ../sass/style.scss */
   section#most-popular .section-body-wrapper .best-tour .tour-background {
     background-size: cover;
     background-position: center;
     height: 500px;
     position: relative; }
     @media screen and (max-width: 768px) {
+      /* line 1520, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-left, section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-right {
         width: 100% !important;
         background: rgba(0, 0, 0, 0.7) !important; }
+      /* line 1524, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-left:after,
       section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-right:after {
         display: none !important; } }
+    /* line 1529, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-left {
       position: absolute;
       top: 0;
@@ -2556,6 +2844,7 @@ section#most-popular .section-body-wrapper .best-tour {
       left: 0;
       width: 50vw;
       background: white; }
+      /* line 1536, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-left:after {
         content: "";
         display: inline-block;
@@ -2567,6 +2856,7 @@ section#most-popular .section-body-wrapper .best-tour {
         position: absolute;
         right: -280px;
         top: 0; }
+    /* line 1549, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-right {
       position: absolute;
       top: 0;
@@ -2574,6 +2864,7 @@ section#most-popular .section-body-wrapper .best-tour {
       right: 0;
       width: 48vw;
       background: white; }
+      /* line 1556, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-background .tour-info-right:after {
         content: "";
         display: inline-block;
@@ -2585,6 +2876,7 @@ section#most-popular .section-body-wrapper .best-tour {
         position: absolute;
         left: -280px;
         top: 0; }
+  /* line 1570, ../sass/style.scss */
   section#most-popular .section-body-wrapper .best-tour .tour-info {
     position: absolute;
     top: 50%;
@@ -2592,14 +2884,19 @@ section#most-popular .section-body-wrapper .best-tour {
     right: 0;
     transform: translate(0, -50%); }
     @media screen and (max-width: 768px) {
+      /* line 1570, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-info {
         text-align: center !important; }
+        /* line 1578, ../sass/style.scss */
         section#most-popular .section-body-wrapper .best-tour .tour-info h3.tour-subtitle {
           color: white !important; }
+        /* line 1581, ../sass/style.scss */
         section#most-popular .section-body-wrapper .best-tour .tour-info p {
           color: white !important; }
+          /* line 1583, ../sass/style.scss */
           section#most-popular .section-body-wrapper .best-tour .tour-info p i {
             color: white !important; } }
+    /* line 1588, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-info h1.tour-title {
       font-weight: 300;
       color: #63cac5;
@@ -2607,47 +2904,61 @@ section#most-popular .section-body-wrapper .best-tour {
       width: 45vw;
       display: inline-block; }
       @media screen and (max-width: 768px) {
+        /* line 1588, ../sass/style.scss */
         section#most-popular .section-body-wrapper .best-tour .tour-info h1.tour-title {
           width: 100%; } }
+    /* line 1598, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-info h3.tour-subtitle {
       font-weight: 600;
       width: 45vw;
       display: inline-block; }
       @media screen and (max-width: 768px) {
+        /* line 1598, ../sass/style.scss */
         section#most-popular .section-body-wrapper .best-tour .tour-info h3.tour-subtitle {
           width: 100%; } }
+    /* line 1606, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-info p {
       margin-bottom: .5rem;
       font-size: 25px;
       cursor: default; }
+      /* line 1610, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-info p i {
         display: inline-block;
         width: 30px;
         font-size: 30px;
         vertical-align: middle;
         line-height: 50px; }
+    /* line 1618, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-info.left {
       text-align: left; }
+      /* line 1621, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-info.left p i {
         margin-right: 25px; }
+    /* line 1626, ../sass/style.scss */
     section#most-popular .section-body-wrapper .best-tour .tour-info.right {
       text-align: right; }
+      /* line 1629, ../sass/style.scss */
       section#most-popular .section-body-wrapper .best-tour .tour-info.right p i {
         margin-right: 25px;
         text-align: left; }
 
+/* line 1641, ../sass/style.scss */
 section#best-guides {
   padding-bottom: 70px; }
+  /* line 1644, ../sass/style.scss */
   section#best-guides .section-body-wrapper .card {
     border-radius: 0;
     border: none;
     border-top: 3px solid #f15a23;
     border-bottom: 3px solid #f15a23; }
     @media screen and (max-width: 768px) {
+      /* line 1644, ../sass/style.scss */
       section#best-guides .section-body-wrapper .card {
         margin-bottom: 15px; } }
+    /* line 1652, ../sass/style.scss */
     section#best-guides .section-body-wrapper .card .card-heading {
       position: relative; }
+      /* line 1654, ../sass/style.scss */
       section#best-guides .section-body-wrapper .card .card-heading .overlay {
         position: absolute;
         top: 0;
@@ -2658,110 +2969,141 @@ section#best-guides {
         visibility: hidden;
         opacity: 0;
         transition: all .4s ease-in-out; }
+        /* line 1664, ../sass/style.scss */
         section#best-guides .section-body-wrapper .card .card-heading .overlay a.best-guide-profile {
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%); }
+      /* line 1672, ../sass/style.scss */
       section#best-guides .section-body-wrapper .card .card-heading:hover .overlay {
         visibility: visible;
         opacity: 1;
         transition: all .4s ease-in-out; }
+    /* line 1680, ../sass/style.scss */
     section#best-guides .section-body-wrapper .card .card-body h4.card-title {
       color: #63cac5;
       font-weight: 700;
       letter-spacing: 2px;
       margin-bottom: 0; }
+    /* line 1687, ../sass/style.scss */
     section#best-guides .section-body-wrapper .card .br-theme-css-stars .br-widget a {
       float: none;
       font-size: 30px; }
+      /* line 1690, ../sass/style.scss */
       section#best-guides .section-body-wrapper .card .br-theme-css-stars .br-widget a.br-selected:after {
         color: #63cac5; }
+    /* line 1694, ../sass/style.scss */
     section#best-guides .section-body-wrapper .card ul li span {
       color: #63cac5;
       font-weight: 600; }
 
+/* line 1703, ../sass/style.scss */
 section#about {
   padding-bottom: 70px;
   border-top: 1px dashed #f15a23; }
+  /* line 1706, ../sass/style.scss */
   section#about p.about-text {
     line-height: 1.5; }
+    /* line 1708, ../sass/style.scss */
     section#about p.about-text span {
       color: #f15a23;
       font-weight: 600; }
+  /* line 1713, ../sass/style.scss */
   section#about .guide-item-wrapper {
     width: 90%; }
+    /* line 1715, ../sass/style.scss */
     section#about .guide-item-wrapper .img-wrapper {
       border: 3px solid #f15a23;
       border-top: none;
       border-bottom: none;
       overflow: hidden; }
+    /* line 1722, ../sass/style.scss */
     section#about .guide-item-wrapper .guide-info-wrapper h4.guide-name {
       color: #63cac5; }
 
+/* line 1730, ../sass/style.scss */
 section#guide-join {
   background-size: cover;
   background-position: center;
   padding: 150px 0;
   position: relative; }
+  /* line 1735, ../sass/style.scss */
   section#guide-join .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     background: rgba(0, 0, 0, 0.5); }
+  /* line 1742, ../sass/style.scss */
   section#guide-join h1.guide-join-text {
     color: white;
     font-weight: 600; }
+    /* line 1745, ../sass/style.scss */
     section#guide-join h1.guide-join-text span {
       color: #f15a23; }
+  /* line 1749, ../sass/style.scss */
   section#guide-join button {
     width: 70%;
     font-size: 25px;
     margin: 20px 0; }
 
+/* line 1757, ../sass/style.scss */
 section#contact {
   padding-bottom: 70px; }
+  /* line 1760, ../sass/style.scss */
   section#contact .contact-form-wrapper label {
     font-size: 20px;
     font-weight: 300; }
+  /* line 1764, ../sass/style.scss */
   section#contact .contact-form-wrapper .form-group.has-error > span {
     color: #f44336;
     font-size: 14px; }
+  /* line 1768, ../sass/style.scss */
   section#contact .contact-form-wrapper .form-control {
     border: 3px solid #f15a23;
     border-radius: 0;
     height: 50px;
     transition: all .3s; }
+    /* line 1773, ../sass/style.scss */
     section#contact .contact-form-wrapper .form-control.error {
       border-color: #f44336 !important;
       box-shadow: 0 0 10px 0.2rem rgba(244, 67, 54, 0.5);
       margin-bottom: 5px; }
+    /* line 1778, ../sass/style.scss */
     section#contact .contact-form-wrapper .form-control.valid {
       border-color: #8bc34a;
       box-shadow: none;
       margin-bottom: 0; }
+    /* line 1783, ../sass/style.scss */
     section#contact .contact-form-wrapper .form-control:focus {
       outline: none;
       border-color: #63cac5;
       box-shadow: 0 0 10px 0.2rem rgba(99, 202, 197, 0.5);
       transition: all .3s; }
+  /* line 1790, ../sass/style.scss */
   section#contact .contact-form-wrapper textarea {
     min-height: 200px; }
+  /* line 1793, ../sass/style.scss */
   section#contact .contact-form-wrapper button {
     width: 30%;
     min-width: 150px; }
 
+/* line 1801, ../sass/style.scss */
 footer {
   border-top: 1px dashed #f15a23;
   padding: 40px 0 0; }
+  /* line 1804, ../sass/style.scss */
   footer #insta-feed-slider {
     margin-bottom: 30px; }
+    /* line 1806, ../sass/style.scss */
     footer #insta-feed-slider .insta-img-wrapper {
       position: relative;
       overflow: hidden; }
+      /* line 1810, ../sass/style.scss */
       footer #insta-feed-slider .insta-img-wrapper a img {
         max-width: 100%; }
+      /* line 1814, ../sass/style.scss */
       footer #insta-feed-slider .insta-img-wrapper .post-stats {
         position: absolute;
         left: 0;
@@ -2771,20 +3113,25 @@ footer {
         transition: all .3s;
         background: rgba(0, 0, 0, 0.5);
         padding: 5px 0; }
+        /* line 1823, ../sass/style.scss */
         footer #insta-feed-slider .insta-img-wrapper .post-stats span {
           font-size: 16px;
           color: #63cac5;
           padding: 0 10px; }
+      /* line 1830, ../sass/style.scss */
       footer #insta-feed-slider .insta-img-wrapper:hover .post-stats {
         bottom: 0; }
+  /* line 1837, ../sass/style.scss */
   footer .social-links-wrapper .social-links {
     list-style-type: none;
     margin-bottom: 0 !important; }
+    /* line 1840, ../sass/style.scss */
     footer .social-links-wrapper .social-links li {
       display: inline-block;
       width: 60px;
       height: 60px;
       line-height: 60px; }
+      /* line 1845, ../sass/style.scss */
       footer .social-links-wrapper .social-links li a {
         color: #63cac5;
         background: transparent;
@@ -2792,9 +3139,11 @@ footer {
         border-radius: 0;
         transition: all .3s;
         font-size: 24px; }
+        /* line 1852, ../sass/style.scss */
         footer .social-links-wrapper .social-links li a:hover {
           color: #f15a23;
           transition: all .3s; }
+  /* line 1860, ../sass/style.scss */
   footer .copyright {
     background: black;
     margin-bottom: 0;

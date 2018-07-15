@@ -21,8 +21,10 @@ namespace TourMaster.Models
         public System.DateTime BookedStart { get; set; }
         public System.DateTime BookedEnd { get; set; }
         public decimal BookedPrice { get; set; }
+        public int CurrencyId { get; set; }
         public int Status { get; set; }
     
+        public virtual Currency Currency { get; set; }
         public virtual Tour Tour { get; set; }
         public virtual User User { get; set; }
     }

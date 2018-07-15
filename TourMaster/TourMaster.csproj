@@ -211,6 +211,7 @@
     <Compile Include="Models\TourImage.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TourInfoModel.cs" />
     <Compile Include="Models\TourModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>Database.tt</DependentUpon>

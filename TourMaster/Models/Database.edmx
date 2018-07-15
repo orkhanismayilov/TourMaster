@@ -30,6 +30,7 @@
           <Property Name="BookedStart" Type="datetime" Nullable="false" />
           <Property Name="BookedEnd" Type="datetime" Nullable="false" />
           <Property Name="BookedPrice" Type="money" Nullable="false" />
+          <Property Name="CurrencyId" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Categories">
@@ -149,12 +150,25 @@
           <Property Name="CityId" Type="int" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProfileImage" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OverallRating" Type="int" Nullable="false" />
           <Property Name="AccountType" Type="int" Nullable="false" />
           <Property Name="Facebook" Type="nvarchar" MaxLength="150" />
           <Property Name="Instagram" Type="nvarchar" MaxLength="150" />
           <Property Name="GooglePlus" Type="nvarchar" MaxLength="150" />
           <Property Name="Twitter" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <Association Name="FK_Bookings_Currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Tours">
           <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
@@ -374,6 +388,10 @@
           <EntitySet Name="TourImages" EntityType="Self.TourImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tours" EntityType="Self.Tours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bookings_Currencies" Association="Self.FK_Bookings_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Tours" Association="Self.FK_Bookings_Tours">
             <End Role="Tours" EntitySet="Tours" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -461,6 +479,7 @@
           <EntitySet Name="PrivateMessages" EntityType="TourMaster.PrivateMessage" />
           <EntitySet Name="TourImages" EntityType="TourMaster.TourImage" />
           <EntitySet Name="Tours" EntityType="TourMaster.Tour" />
+          <EntitySet Name="Users" EntityType="TourMaster.User" />
           <AssociationSet Name="FK_Tours_AccomodationLevels" Association="TourMaster.FK_Tours_AccomodationLevels">
             <End Role="AccomodationLevel" EntitySet="AccomodationLevels" />
             <End Role="Tour" EntitySet="Tours" />
@@ -469,8 +488,16 @@
             <End Role="Accomodation" EntitySet="Accomodations" />
             <End Role="Tour" EntitySet="Tours" />
           </AssociationSet>
+          <AssociationSet Name="FK_Bookings_Currencies" Association="TourMaster.FK_Bookings_Currencies">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Tours" Association="TourMaster.FK_Bookings_Tours">
             <End Role="Tour" EntitySet="Tours" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_Users" Association="TourMaster.FK_Bookings_Users">
+            <End Role="User" EntitySet="Users" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Cities_Countries" Association="TourMaster.FK_Cities_Countries">
@@ -485,6 +512,10 @@
             <End Role="City" EntitySet="Cities" />
             <End Role="Tour" EntitySet="Tours" />
           </AssociationSet>
+          <AssociationSet Name="FK_Users_Cities" Association="TourMaster.FK_Users_Cities">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tours_Currencies" Association="TourMaster.FK_Tours_Currencies">
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Tour" EntitySet="Tours" />
@@ -497,23 +528,6 @@
             <End Role="Tour" EntitySet="Tours" />
             <End Role="Feedback" EntitySet="Feedbacks" />
           </AssociationSet>
-          <AssociationSet Name="FK_TourImages_Tours" Association="TourMaster.FK_TourImages_Tours">
-            <End Role="Tour" EntitySet="Tours" />
-            <End Role="TourImage" EntitySet="TourImages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tours_TourImages" Association="TourMaster.FK_Tours_TourImages">
-            <End Role="TourImage" EntitySet="TourImages" />
-            <End Role="Tour" EntitySet="Tours" />
-          </AssociationSet>
-          <EntitySet Name="Users" EntityType="TourMaster.User" />
-          <AssociationSet Name="FK_Bookings_Users" Association="TourMaster.FK_Bookings_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Booking" EntitySet="Bookings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Cities" Association="TourMaster.FK_Users_Cities">
-            <End Role="City" EntitySet="Cities" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <AssociationSet Name="FK_Feedbacks_Users" Association="TourMaster.FK_Feedbacks_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Feedback" EntitySet="Feedbacks" />
@@ -525,6 +539,14 @@
           <AssociationSet Name="FK_PrivateMessages_Users1" Association="TourMaster.FK_PrivateMessages_Users1">
             <End Role="User" EntitySet="Users" />
             <End Role="PrivateMessage" EntitySet="PrivateMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TourImages_Tours" Association="TourMaster.FK_TourImages_Tours">
+            <End Role="Tour" EntitySet="Tours" />
+            <End Role="TourImage" EntitySet="TourImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tours_TourImages" Association="TourMaster.FK_Tours_TourImages">
+            <End Role="TourImage" EntitySet="TourImages" />
+            <End Role="Tour" EntitySet="Tours" />
           </AssociationSet>
           <AssociationSet Name="FK_Tours_Users" Association="TourMaster.FK_Tours_Users">
             <End Role="User" EntitySet="Users" />
@@ -558,7 +580,9 @@
           <Property Name="BookedStart" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="BookedEnd" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="BookedPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Currency" Relationship="TourMaster.FK_Bookings_Currencies" FromRole="Booking" ToRole="Currency" />
           <NavigationProperty Name="Tour" Relationship="TourMaster.FK_Bookings_Tours" FromRole="Booking" ToRole="Tour" />
           <NavigationProperty Name="User" Relationship="TourMaster.FK_Bookings_Users" FromRole="Booking" ToRole="User" />
         </EntityType>
@@ -596,6 +620,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CurrencyName" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Currencies" FromRole="Currency" ToRole="Booking" />
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Currencies" FromRole="Currency" ToRole="Tour" />
         </EntityType>
         <EntityType Name="DurationType">
@@ -691,6 +716,31 @@
           <NavigationProperty Name="TourImage" Relationship="TourMaster.FK_Tours_TourImages" FromRole="Tour" ToRole="TourImage" />
           <NavigationProperty Name="User" Relationship="TourMaster.FK_Tours_Users" FromRole="Tour" ToRole="User" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OverallRating" Type="Int32" Nullable="false" />
+          <Property Name="AccountType" Type="Int32" Nullable="false" />
+          <Property Name="Facebook" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Instagram" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="GooglePlus" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Users" FromRole="User" ToRole="Booking" />
+          <NavigationProperty Name="City" Relationship="TourMaster.FK_Users_Cities" FromRole="User" ToRole="City" />
+          <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="User" ToRole="Feedback" />
+          <NavigationProperty Name="PrivateMessages" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="User" ToRole="PrivateMessage" />
+          <NavigationProperty Name="PrivateMessages1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="User" ToRole="PrivateMessage" />
+          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
+        </EntityType>
         <Association Name="FK_Tours_AccomodationLevels">
           <End Type="TourMaster.AccomodationLevel" Role="AccomodationLevel" Multiplicity="0..1" />
           <End Type="TourMaster.Tour" Role="Tour" Multiplicity="*" />
@@ -715,6 +765,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Bookings_Currencies">
+          <End Type="TourMaster.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="TourMaster.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Tours">
           <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
           <End Type="TourMaster.Booking" Role="Booking" Multiplicity="*" />
@@ -724,6 +786,18 @@
             </Principal>
             <Dependent Role="Booking">
               <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_Users">
+          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
+          <End Type="TourMaster.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="TravelerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -763,6 +837,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Users_Cities">
+          <End Type="TourMaster.City" Role="City" Multiplicity="1" />
+          <End Type="TourMaster.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tours_Currencies">
           <End Type="TourMaster.Currency" Role="Currency" Multiplicity="1" />
           <End Type="TourMaster.Tour" Role="Tour" Multiplicity="*" />
@@ -799,78 +885,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TourImages_Tours">
-          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
-          <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tour">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TourImage">
-              <PropertyRef Name="TourId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tours_TourImages">
-          <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="1" />
-          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TourImage">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tour">
-              <PropertyRef Name="MainImageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CityId" Type="Int32" Nullable="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProfileImage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AccountType" Type="Int32" Nullable="false" />
-          <Property Name="Facebook" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Instagram" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="GooglePlus" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Twitter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Users" FromRole="User" ToRole="Booking" />
-          <NavigationProperty Name="City" Relationship="TourMaster.FK_Users_Cities" FromRole="User" ToRole="City" />
-          <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="User" ToRole="Feedback" />
-          <NavigationProperty Name="PrivateMessages" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="User" ToRole="PrivateMessage" />
-          <NavigationProperty Name="PrivateMessages1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="User" ToRole="PrivateMessage" />
-          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
-        </EntityType>
-        <Association Name="FK_Bookings_Users">
-          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
-          <End Type="TourMaster.Booking" Role="Booking" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Booking">
-              <PropertyRef Name="TravelerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_Cities">
-          <End Type="TourMaster.City" Role="City" Multiplicity="1" />
-          <End Type="TourMaster.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="City">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="CityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Feedbacks_Users">
           <End Type="TourMaster.User" Role="User" Multiplicity="1" />
           <End Type="TourMaster.Feedback" Role="Feedback" Multiplicity="*" />
@@ -904,6 +918,30 @@
             </Principal>
             <Dependent Role="PrivateMessage">
               <PropertyRef Name="RecieverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TourImages_Tours">
+          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
+          <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TourImage">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tours_TourImages">
+          <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="1" />
+          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TourImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="MainImageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -945,6 +983,7 @@
             <EntityTypeMapping TypeName="TourMaster.Booking">
               <MappingFragment StoreEntitySet="Bookings">
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
                 <ScalarProperty Name="BookedPrice" ColumnName="BookedPrice" />
                 <ScalarProperty Name="BookedEnd" ColumnName="BookedEnd" />
                 <ScalarProperty Name="BookedStart" ColumnName="BookedStart" />
@@ -1078,6 +1117,7 @@
                 <ScalarProperty Name="Instagram" ColumnName="Instagram" />
                 <ScalarProperty Name="Facebook" ColumnName="Facebook" />
                 <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="OverallRating" ColumnName="OverallRating" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="CityId" ColumnName="CityId" />

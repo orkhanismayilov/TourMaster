@@ -440,11 +440,11 @@
                                                         <li>@guide.Fullname</li>
                                                         <li>
                                                             <select class="tour-guide-rating">
-                                                                <option value="1" @(tour.Feedbacks.Count == 0 || Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 1 ? "selected" : "")>1</option>
-                                                                <option value="2" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 2 ? "selected" : "")>2</option>
-                                                                <option value="3" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 3 ? "selected" : "")>3</option>
-                                                                <option value="4" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 4 ? "selected" : "")>4</option>
-                                                                <option value="5" @(tour.Feedbacks.Count != 0 && Math.Abs((tour.Feedbacks.Sum(f => f.Rating) / tour.Feedbacks.Count)) == 5 ? "selected" : "")>5</option>
+                                                                <option value="1" @(guide.OverallRating <= 1 ? "selected" : "")>1</option>
+                                                                <option value="2" @(guide.OverallRating == 2 ? "selected" : "")>2</option>
+                                                                <option value="3" @(guide.OverallRating == 3 ? "selected" : "")>3</option>
+                                                                <option value="4" @(guide.OverallRating == 4 ? "selected" : "")>4</option>
+                                                                <option value="5" @(guide.OverallRating == 5 ? "selected" : "")>5</option>
                                                             </select>
                                                         </li>
                                                     </ul>
@@ -676,40 +676,38 @@
                     <section id="profile-view">
                         <!-- Profile Heading -->
                         <div class="section-heading-wrapper text-center">
-                            <h1 class="section-title text-uppercase">Ayan Rafiyeva</h1>
+                            <h1 class="section-title text-uppercase"></h1>
                         </div>
                         <!-- Tour Body Start -->
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img class="profile-photo" src="~/public/images/guide_1.jpg">
+                                    <img class="profile-photo" src="">
                                 </div>
                                 <div class="col-md-9">
                                     <div class="profile-details-wrapper text-uppercase text-center">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <h3 class="profile-country">
-                                                    <span class="flag-icon flag-icon-az"></span> Azerbaijan
-                                                </h3>
+                                                <h3 class="profile-country"></h3>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <h5 class="profile-total-tours profile-card">
                                                     Total tours
-                                                    <span>42</span>
+                                                    <span></span>
                                                 </h5>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5 class="profile-completed-tours profile-card">
                                                     Completed tours
-                                                    <span>31</span>
+                                                    <span></span>
                                                 </h5>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5 class="profile-tour-feedbacks profile-card no-border">
                                                     Feedbacks
-                                                    <span>13</span>
+                                                    <span></span>
                                                 </h5>
                                             </div>
                                         </div>
@@ -720,7 +718,7 @@
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
-                                                        <option value="4" selected>4</option>
+                                                        <option value="4">4</option>
                                                         <option value="5">5</option>
                                                     </select>
                                                 </div>
@@ -729,25 +727,31 @@
                                         <div class="guide-contacts-wrapper">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <h5 class="profile-number">
-                                                        <i class="fal fa-mobile-android"></i> +99450 123 45 67
-                                                    </h5>
+                                                    <h5 class="profile-number"></h5>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <h5 class="profile-email">
-                                                        <i class="fal fa-at"></i> ayan.rafiyeva@gmail.com
-                                                    </h5>
+                                                    <h5 class="profile-email"></h5>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <ul class="list-unstyled">
                                                         <li>
-                                                            <a href="#">
+                                                            <a class="text-muted">
                                                                 <i class="fab fa-facebook-f"></i>
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#">
+                                                            <a class="text-muted">
                                                                 <i class="fab fa-instagram"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="text-muted">
+                                                                <i class="fab fa-twitter"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="text-muted">
+                                                                <i class="fab fa-google-plus-g"></i>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -759,96 +763,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="guide-offered-tours-wrapper mt-5">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1 class="guide-offered-tours-heading text-uppercase text-center mb-5">Offered tours</h1>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h1 class="guide-offered-tours-heading text-uppercase text-center mt-5 mb-5">Offered tours</h1>
                                         </div>
+                                    </div>
+                                    <div class="guide-offered-tours-wrapper">
                                         <div class="row">
-                                            <!-- Tour Item Start -->
-                                            <div class="col-md-4">
-                                                <div class="tour-item" style="background-image: url('/public/images/insta_1.jpg')">
-                                                    <div class="info-overlay">
-                                                        <div class="tour-heading">
-                                                            <h3 class="tour-title">Baku - Gabala Tour</h3>
-                                                            <p class="duration" title="Duration">
-                                                                <i class="fal fa-clock"></i>10 hours
-                                                            </p>
-                                                            <p class="price" title="Price">
-                                                                <i class="fal fa-money-bill"></i>250 USD
-                                                            </p>
-                                                            <button class="btn btn-primary text-uppercase my-3 tour-details">Details</button>
-                                                        </div>
-                                                        <div class="tour-guide">
-                                                            <img src="~/public/images/guide_1.jpg">
-                                                            <ul class="list-unstyled">
-                                                                <li>Ayan Rafiyeva</li>
-                                                                <li>
-                                                                    <select class="guide-rating">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="3">3</option>
-                                                                        <option value="4" selected>4</option>
-                                                                        <option value="5">5</option>
-                                                                    </select>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-overlay-bottom">
-                                                        <p>
-                                                            Baku - Gabala Tour
-                                                            <span>250 USD</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Tour Item End -->
-                                            <!-- Tour Item Start -->
-                                            <div class="col-md-4">
-                                                <div class="tour-item" style="background-image: url('/public/images/insta_2.jpg')">
-                                                    <div class="info-overlay">
-                                                        <div class="tour-heading">
-                                                            <h3 class="tour-title">Baku - Gabala Tour</h3>
-                                                            <p class="duration" title="Duration">
-                                                                <i class="fal fa-clock"></i>10 hours
-                                                            </p>
-                                                            <p class="price" title="Price">
-                                                                <i class="fal fa-money-bill"></i>250 USD
-                                                            </p>
-                                                            <button class="btn btn-primary text-uppercase my-3 tour-details">Details</button>
-                                                        </div>
-                                                        <div class="tour-guide">
-                                                            <img src="~/public/images/guide_1.jpg">
-                                                            <ul class="list-unstyled">
-                                                                <li>Ayan Rafiyeva</li>
-                                                                <li>
-                                                                    <select class="guide-rating">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="3">3</option>
-                                                                        <option value="4" selected>4</option>
-                                                                        <option value="5">5</option>
-                                                                    </select>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="info-overlay-bottom">
-                                                        <p>
-                                                            Baku - Gabala Tour
-                                                            <span>250 USD</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Tour Item End -->
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <!-- Tour Body End -->
                         <i class="fas fa-times" id="modal-close" data-dismiss="modal"></i>
@@ -916,66 +842,43 @@
         </div>
         <!-- Section Body -->
         <div class="section-body-wrapper">
-            <!-- Section Item Left-Angle Start -->
-            <div class="best-tour clearfix">
-                <div class="tour-background" style="background-image: url('/public/images/home_1.jpg')">
-                    <div class="tour-info-left"></div>
-                </div>
-                <div class="tour-info left">
-                    <div class="container">
-                        <h1 class="tour-title text-uppercase">Baku - Gabala Tour</h1>
-                        <h3 class="tour-subtitle text-capitalize">Full day roundtrip from Baku</h3>
-                        <p class="tour-duration" title="Duration">
-                            <i class="fal fa-clock"></i>10 hours
-                        </p>
-                        <p class="tour-price" title="Price">
-                            <i class="fal fa-money-bill"></i>250 USD
-                        </p>
-                        <button class="btn btn-secondary text-uppercase goto-tour-details">Details</button>
+            @{
+                int Nr = 0;
+                foreach (Tour tour in Model.MostPopular)
+                {
+                    string TourTitle = "";
+                    if (tour.FromId == tour.DestinationId)
+                    {
+                        TourTitle = tour.City.CityName;
+                    }
+                    else
+                    {
+                        TourTitle = tour.City.CityName + " - " + tour.City1.CityName;
+                    }
+
+                    <!-- Section Item Left-Angle Start -->
+                    <div class="best-tour clearfix">
+                        <div class="tour-background" style="background-image: url('@tour.TourImage.ImageURL')">
+                            <div class="@(Nr==1?"tour-info-right":"tour-info-left")"></div>
+                        </div>
+                        <div class="tour-info @(Nr==1?"right":"left")">
+                            <div class="container">
+                                <h1 class="tour-title text-uppercase">@TourTitle Tour</h1>
+                                <h3 class="tour-subtitle text-capitalize">@tour.Duration @tour.DurationType.Type trip from @tour.City.CityName </h3>
+                                <p class="tour-duration" title="Duration">
+                                    <i class="fal fa-clock"></i>@tour.Duration @tour.DurationType.Type
+                                </p>
+                                <p class="tour-price" title="Price">
+                                    <i class="fal fa-money-bill"></i>@tour.Price.ToString("#.##") @tour.Currency.CurrencyName
+                                </p>
+                                <button class="btn btn-secondary text-uppercase goto-tour-details" data-tour-id="@tour.Id">Details</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!-- Section Item Left-Angle End -->
-            <!-- Section Item Right-Angle Start -->
-            <div class="best-tour clearfix">
-                <div class="tour-background" style="background-image: url('/public/images/home_2.jpg')">
-                    <div class="tour-info-right"></div>
-                </div>
-                <div class="tour-info right">
-                    <div class="container">
-                        <h1 class="tour-title text-uppercase">Baku - Gabala Tour</h1>
-                        <h3 class="tour-subtitle text-capitalize">Full day roundtrip from Baku</h3>
-                        <p class="tour-duration" title="Duration">
-                            <i class="fal fa-clock"></i>10 hours
-                        </p>
-                        <p class="tour-price" title="Price">
-                            <i class="fal fa-money-bill"></i>250 USD
-                        </p>
-                        <button class="btn btn-secondary text-uppercase goto-tour-details">Details</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Section Item Right-Angle End -->
-            <!-- Section Item Left-Angle Start -->
-            <div class="best-tour clearfix">
-                <div class="tour-background" style="background-image: url('/public/images/home_3.jpg')">
-                    <div class="tour-info-left"></div>
-                </div>
-                <div class="tour-info left">
-                    <div class="container">
-                        <h1 class="tour-title text-uppercase">Baku - Gabala Tour</h1>
-                        <h3 class="tour-subtitle text-capitalize">Full day roundtrip from Baku</h3>
-                        <p class="tour-duration" title="Duration">
-                            <i class="fal fa-clock"></i>10 hours
-                        </p>
-                        <p class="tour-price" title="Price">
-                            <i class="fal fa-money-bill"></i>250 USD
-                        </p>
-                        <button class="btn btn-secondary text-uppercase goto-tour-details">Details</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Section Item Left-Angle End -->
+                    <!-- Section Item Left-Angle End -->
+                    Nr++;
+                }
+            }
         </div>
     </section>
 
@@ -993,39 +896,45 @@
         <div class="section-body-wrapper">
             <div class="container">
                 <div class="row">
-                    <!-- Best Guide Item Start -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-heading">
-                                <img class="card-img-top" src="~/public/images/guide_1.jpg" alt="Card image cap">
-                                <div class="overlay text-center">
-                                    <a href="#" class="best-guide-profile text-uppercase btn btn-outline-success">Go to profile</a>
+                    @{
+                        foreach (User bestguide in Model.BestGuides)
+                        {
+                            <!-- Best Guide Item Start -->
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <img class="card-img-top" src="@bestguide.ProfileImage">
+                                        <div class="overlay text-center">
+                                            <a class="best-guide-profile text-uppercase btn btn-outline-success" data-guide-id="@bestguide.Id">Go to profile</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title text-uppercase">@bestguide.Fullname</h4>
+                                        <select class="best-guide-rating">
+                                            <option value="1" @(bestguide.OverallRating <= 1?"selected":"")>1</option>
+                                            <option value="2" @(bestguide.OverallRating == 2?"selected":"")>2</option>
+                                            <option value="3" @(bestguide.OverallRating == 3?"selected":"")>3</option>
+                                            <option value="4" @(bestguide.OverallRating == 4?"selected":"")>4</option>
+                                            <option value="5" @(bestguide.OverallRating == 5?"selected":"")>5</option>
+                                        </select>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item text-capitalize">
+                                            Completed tours:
+                                            <span class="float-right">@bestguide.Bookings.Where(b=>b.Status == 1 && b.BookedEnd < DateTime.Now).Count()</span>
+                                        </li>
+                                        <li class="list-group-item text-capitalize">
+                                            Feedbacks:
+                                            <span class="float-right">@bestguide.Tours.Sum(t=>t.Feedbacks.Count)</span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title text-uppercase">Ayan Rafiyeva</h4>
-                                <select class="best-guide-rating">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4" selected>4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item text-capitalize">
-                                    Completed tours:
-                                    <span class="float-right">45</span>
-                                </li>
-                                <li class="list-group-item text-capitalize">
-                                    Feedbacks:
-                                    <span class="float-right">125</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Best Guide Item End -->
-                    <!-- Best Guide Item Start -->
+                            <!-- Best Guide Item End -->
+                        }
+                    }
+
+                    @*<!-- Best Guide Item Start -->
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-heading">
@@ -1088,7 +997,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Best Guide Item End -->
+                    <!-- Best Guide Item End -->*@
                 </div>
             </div>
         </div>

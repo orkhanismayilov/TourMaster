@@ -370,23 +370,26 @@ $(document).ready(function () {
             $("#tours-modal").removeClass("animated fadeOutLeft");
         });
 
-        // Tour Details in Tours Modal
-        $("#tours-modal .tour-details").on("click", function () {
-            var GetTourInfoUrl = "/Home/GetTourInfo/" + $(this).data("tour-id");
-            var tvm = "#tour-view-modal";
+        // GetTourInfo Ajax Function
+        function GetTourInfo(TourId) {
+            var url = "/Home/GetTourInfo/" + TourId;
+            tvm = $("#tour-view-modal");
+
             $.ajax({
-                url: GetTourInfoUrl,
+                url: url,
                 type: "get",
                 dataType: "json",
                 success: function (data) {
+                    console.log(data);
+                    tvm.find("form#submit-feedback").show();
                     // Tour Title
-                    $(tvm + " h1.section-title").text(data[0].TourTitle);
+                    tvm.find("h1.section-title").text(data[0].TourTitle);
 
                     // TourId
-                    $(tvm + " input[name='TourId']").val(data[0].Id);
+                    tvm.find("input[name='TourId']").val(data[0].Id);
 
                     // Slider
-                    $(tvm + " #tour-view-car").empty();
+                    tvm.find("#tour-view-car").empty();
                     for (var a = 0; a < data[0].TourImages.length; a++) {
                         var carItem = '<div><img src = "' + data[0].TourImages[a] + '"><div class="overlay"></div></div>';
                         $("#tour-view-car").append(carItem);
@@ -394,9 +397,9 @@ $(document).ready(function () {
                     TourViewSlider();
 
                     // Guide Photo & Fullname
-                    $(tvm + " .main-info img").attr("src", data[0].Guide.ProfileImage);
-                    $(tvm + " .main-info img").attr("data-guide-id", data[0].Guide.Id);
-                    $(tvm + " .main-info h2.guide-profile").text(data[0].Guide.Fullname).attr("data-guide-id", data[0].Guide.Id);
+                    tvm.find(".main-info img").attr("src", data[0].Guide.ProfileImage);
+                    tvm.find(".main-info img").attr("data-guide-id", data[0].Guide.Id);
+                    tvm.find(".main-info h2.guide-profile").text(data[0].Guide.Fullname).attr("data-guide-id", data[0].Guide.Id);
 
                     // Guide Rating
                     var totalRating = 0;
@@ -404,74 +407,71 @@ $(document).ready(function () {
                         totalRating += parseInt(data[0].FeedbacksList[b].split(", ")[2].split("=")[1]);
                     }
                     var overallRating = Math.ceil(totalRating / data[0].FeedbacksList.length);
-                    $(tvm + " .main-info .guide-rating").barrating({
+                    tvm.find(".main-info .guide-rating").barrating({
                         theme: "css-stars",
                         readonly: true,
                         showSelectedRating: true
                     });
                     if (isNaN(overallRating)) {
-                        $(tvm + " .main-info .guide-rating").barrating('set', 1);
+                        tvm.find(".main-info .guide-rating").barrating('set', 1);
                     } else {
-                        $(tvm + " .main-info .guide-rating").barrating('set', overallRating);
+                        tvm.find(".main-info .guide-rating").barrating('set', overallRating);
                     }
 
                     // Guide Phone & Email
-                    $(tvm + " .main-info p.guide-phone").empty().append('<i class="fal fa-mobile-android"></i>+' + data[0].Guide.Phone);
-                    $(tvm + " .main-info p.guide-email").empty().append('<i class="fal fa-at"></i>' + data[0].Guide.Email);
+                    tvm.find(".main-info p.guide-phone").empty().append('<i class="fal fa-mobile-android"></i>+' + data[0].Guide.Phone);
+                    tvm.find(".main-info p.guide-email").empty().append('<i class="fal fa-at"></i>' + data[0].Guide.Email);
 
                     // Guide Private Message Modal
                     $("form#pm-to-guide input#guide-fullname").val(data[0].Guide.Fullname);
                     $("form#pm-to-guide input[name='GuideId']").val(data[0].Guide.Id);
 
                     // Tour Title & Description
-                    $(tvm + " h3.tour-title").text(data[0].TourTitle);
-                    $(tvm + " p.tour-desc").text(data[0].Desc);
+                    tvm.find("h3.tour-title").text(data[0].TourTitle);
+                    tvm.find("p.tour-desc").text(data[0].Desc);
 
                     // Tour Categories
                     var tourCat = data[0].Categories.split(',');
-                    $(tvm + " p.tour-type").text(tourCat.join(" - "));
+                    tvm.find("p.tour-type").text(tourCat.join(" - "));
 
                     // Tour Duration
                     var duration = [data[0].Duration, data[0].DurationType];
-                    $(tvm + " p.tour-duration").empty().append('<i class="fal fa-clock"></i>' + duration.join(" "));
+                    tvm.find("p.tour-duration").empty().append('<i class="fal fa-clock"></i>' + duration.join(" "));
 
                     // Tour Price
                     var price = [data[0].Price, data[0].Currency];
-                    $(tvm + " p.tour-price").empty().append('<i class="fal fa-money-bill"></i>' + price.join(" "));
+                    tvm.find("p.tour-price").empty().append('<i class="fal fa-money-bill"></i>' + price.join(" "));
 
                     // Tour Transport
                     if (data[0].Vehicle !== "") {
-                        $(tvm + " p.tour-transport").empty().append('<i class="fal fa-bus"></i>' + data[0].Vehicle);
+                        tvm.find("p.tour-transport").empty().append('<i class="fal fa-bus"></i>' + data[0].Vehicle);
                     } else {
-                        $(tvm + " p.tour-transport").empty().append('<i class="fal fa-bus"></i>Non Specified');
+                        tvm.find("p.tour-transport").empty().append('<i class="fal fa-bus"></i>Non Specified');
                     }
 
                     // Tour Accomodation
                     var acc = data[0].Accomodation;
                     var accLvl = data[0].AccomodationLevel;
-                    $(tvm + " p.tour-accomodation").empty();
+                    tvm.find("p.tour-accomodation").empty();
                     if (acc === "Hotel") {
-                        $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>' + accLvl + " " + acc);
+                        tvm.find("p.tour-accomodation").append('<i class="fal fa-home"></i>' + accLvl + " " + acc);
                     } else if (acc === null) {
-                        $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>Non Specified');
+                        tvm.find("p.tour-accomodation").append('<i class="fal fa-home"></i>Non Specified');
                     } else {
-                        $(tvm + " p.tour-accomodation").append('<i class="fal fa-home"></i>' + acc);
+                        tvm.find("p.tour-accomodation").append('<i class="fal fa-home"></i>' + acc);
                     }
 
                     // Feedbacks
-                    $(tvm + " div.feedbacks-list-wrapper").empty();
+                    tvm.find("div.feedbacks-list-wrapper").empty();
                     if (data[0].FeedbacksList.length < 5) {
                         $("button#load-more-feedbacks").hide();
                     }
                     for (var d = 0; d < data[0].FeedbacksList.length; d++) {
                         var feedbackInfo = data[0].FeedbacksList[d].replace('{', '').replace('}', '').split(",");
-                        var feedbackTime = feedbackInfo[3].split(" = ")[1].split(" ")[1].split(":");
-                        var feedbackDate = feedbackInfo[3].split(" = ")[1].split(" ")[0].split("-").join(" ");
-                        feedbackTime.pop();
-                        feedbackTime = feedbackTime.join(":");
+                        var feedbackDate = feedbackInfo[3].split(" = ")[1];
                         var feedback = `<!-- Feedback Media Start -->
                                                 <div class="media comment">
-                                                    <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] +`" data-guide-id="` + feedbackInfo[4].split(" = ")[1] +`">
+                                                    <img class="align-self-center mr-3 mb-3" src="`+ feedbackInfo[6].split(" = ")[1] + `" data-guide-id="` + feedbackInfo[4].split(" = ")[1] + `">
                                                     <div class="media-body">
                                                         <h5 class="feedback-author text-capitalize d-inline-block">`+ feedbackInfo[5].split(" = ")[1] + `</h5>
                                                         <select class="feedback-rated" data-feedback-id="`+ feedbackInfo[0].split(" = ")[1] + `">
@@ -482,26 +482,39 @@ $(document).ready(function () {
                                                             <option value="5">5</option>
                                                         </select>
                                                         <p class="feedback-text text-justify">`+ feedbackInfo[1].split(" = ")[1] + `</p>
-                                                        <span class="feedback-date float-right mt-1">`+ feedbackTime + ` ` + feedbackDate + `</span>
+                                                        <span class="feedback-date float-right mt-1">`+ feedbackDate + `</span>
                                                     </div>
                                                 </div>
                                                 <!-- Feedback Media End -->`;
-                        $(tvm + " div.feedbacks-list-wrapper").append(feedback);
+                        tvm.find("div.feedbacks-list-wrapper").append(feedback);
                         $(".feedback-rated").barrating({
                             theme: "css-stars",
                             readonly: true
                         });
-                        $(tvm + " select.feedback-rated[data-feedback-id=" + parseInt(feedbackInfo[0].split(" = ")[1]) + "]").barrating('set', parseInt(feedbackInfo[2].split(" = ")[1]));
+                        tvm.find("select.feedback-rated[data-feedback-id=" + parseInt(feedbackInfo[0].split(" = ")[1]) + "]").barrating('set', parseInt(feedbackInfo[2].split(" = ")[1]));
+                    }
+
+                    // Hide Feedback Form if Tours User and Logged User is the Same
+                    if (data[0].Guide.Id == tvm.find("input[name='UserId']").val()) {
+                        tvm.find("form#submit-feedback").hide();
                     }
                 }
             });
+        }
+
+        // Tour Details in Tours Modal
+        $("#tours-modal button.tour-details").on("click", function () {
+            GetTourInfo($(this).data("tour-id"));
             $("#tours-modal").addClass("animated fadeOutLeft parent");
             setTimeout("$('#tours-modal').modal('hide')", 550);
+            $("#profile-view-modal").removeClass("parent");
             $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
             $("#tour-view-modal").animateCss("fadeInRight", function () {
                 $("#tour-view-modal").removeClass("animated fadeInRight");
             });
         });
+
+
 
         // Tour View Modal Load More Feedbacks
         $("button#load-more-feedbacks").on("click", function () {
@@ -669,6 +682,7 @@ $(document).ready(function () {
         $("#tour-view-modal").on("hidden.bs.modal", function () {
             $("#tour-view-modal").removeClass("animated fadeOutRight");
             $("#tour-view-car").owlCarousel('destroy');
+            $(".parent").removeClass("parent");
         });
 
         // Tour View Back
@@ -833,26 +847,101 @@ $(document).ready(function () {
             $("#profile-view-modal").removeClass("animated fadeOutDown");
         });
 
-        // Tour Details in Profile View Modal
-        $("#profile-view-modal .tour-details").on("click", function () {
-            $("#profile-view-modal").addClass("parent").modal('hide');
-            $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
-            $("#tour-view-modal").animateCss("fadeInRight", function () {
-                $("#tour-view-modal").removeClass("animated fadeInRight");
-            });
-        });
-
         // Profile View Modal in Tour View Modal
         $("#tour-view-modal .guide-profile, .media img").on("click", function () {
             var that = $(this);
             url = "/home/getuserinfo/" + that.data("guide-id");
-
+            
             $.ajax({
                 url: url,
                 method: "get",
                 dataType: "json",
                 success: function (data) {
                     console.log(data);
+                    var pvm = $("#profile-view-modal");
+                    pvm.find("guide-offered-tours-wrapper row").empty();
+                    pvm.find("h1.section-title").text(data.Fullname);
+                    pvm.find("img.profile-photo").attr("src", data.ProfileImage);
+                    pvm.find("h3.profile-country").append('<span class="flag-icon flag-icon-' + data.CountryCode + '"></span> ' + data.Country + '');
+                    pvm.find("h5.profile-total-tours span").text(data.ToursList.length);
+                    pvm.find("h5.profile-completed-tours span").text(data.BookingsCount);
+                    pvm.find("h5.profile-tour-feedbacks span").text(data.FeedbacksCount);
+                    pvm.find("h5.profile-number").empty().append('<i class="fal fa-mobile-android"></i> +' + data.Phone + '');
+                    pvm.find("h5.profile-email").empty().append('<i class="fal fa-at"></i> ' + data.Email + '');
+
+                    if (data.Facebook != null) {
+                        pvm.find("i.fa-facebook-f").parent().attr("href", data.Facebook).removeClass("text-muted");
+                    }
+
+                    if (data.Instagram != null) {
+                        pvm.find("i.fa-instagram").parent().attr("href", data.Instagram).removeClass("text-muted");
+                    }
+
+                    if (data.Twitter != null) {
+                        pvm.find("i.fa-twitter").parent().attr("href", data.Twitter).removeClass("text-muted");
+                    }
+
+                    if (data.GooglePlus != null) {
+                        pvm.find("i.fa-google-plus-g").parent().attr("href", data.GooglePlus).removeClass("text-muted");
+                    }
+
+                    for (var i = 0; i < data.ToursList.length; i++) {
+                        var tourItem = `<!-- Tour Item Start -->
+                                            <div class="col-md-4">
+                                                <div class="tour-item" style="background-image: url('`+ data.ToursList[i].TourImage + `')">
+                                                    <div class="info-overlay">
+                                                        <div class="tour-heading">
+                                                            <h3 class="tour-title">`+ data.ToursList[i].TourTitle + ` Tour</h3>
+                                                            <p class="duration" title="Duration">
+                                                                <i class="fal fa-clock text-lowercase"></i>`+ data.ToursList[i].Duration + ` ` + data.ToursList[i].DurationType + `
+                                                            </p>
+                                                            <p class="price" title="Price">
+                                                                <i class="fal fa-money-bill"></i>`+ data.ToursList[i].Price + ` ` + data.ToursList[i].Currency + `
+                                                            </p>
+                                                            <button class="btn btn-primary text-uppercase my-3 tour-details" data-tour-id="`+ data.ToursList[i].Id + `">Details</button>
+                                                        </div>
+                                                        <div class="tour-guide">
+                                                            <img src="`+ data.ProfileImage + `">
+                                                            <ul class="list-unstyled">
+                                                                <li>`+ data.Fullname + `</li>
+                                                                <li>
+                                                                    <select class="guide-rating">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                    </select>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-overlay-bottom">
+                                                        <p>
+                                                            `+ data.ToursList[i].TourTitle + ` Tour
+                                                            <span>`+ data.ToursList[i].Price + ` ` + data.ToursList[i].Currency + `</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Tour Item End -->`;
+                        pvm.find(".guide-offered-tours-wrapper .row").append(tourItem);
+                    }
+
+                    pvm.find("select.guide-rating").barrating({
+                        theme: "css-stars",
+                        readonly: true
+                    }).barrating('set', data.Rating);
+
+                    pvm.find("button.tour-details").on("click", function () {
+                        GetTourInfo($(this).data("tour-id"));
+                        $("#profile-view-modal").addClass("parent").modal('hide');
+                        $("#tours-modal").removeClass("parent");
+                        $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
+                        $("#tour-view-modal").animateCss("fadeInRight", function () {
+                            $("#tour-view-modal").removeClass("animated fadeInRight");
+                        });
+                    });
                 }
             });
 
