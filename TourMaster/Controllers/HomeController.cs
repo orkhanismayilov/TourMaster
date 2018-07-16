@@ -133,6 +133,13 @@ namespace TourMaster.Controllers
             return RedirectToAction("index");
         }
 
+        public ActionResult LogOut()
+        {
+            Session["User"] = null;
+
+            return RedirectToAction("index");
+        }
+
         [HttpGet]
         public JsonResult GetCities(int Id)
         {
@@ -401,5 +408,7 @@ namespace TourMaster.Controllers
 
             return Json("error", JsonRequestBehavior.AllowGet);
         }
+
+
     }
 }

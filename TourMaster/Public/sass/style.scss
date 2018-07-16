@@ -5,6 +5,7 @@ $error-color: #f44336;
 $viewport-height: 100vh;
 $viewport-width: 100vw;
 $boxShadow: 0 0 10px 2px $primary-color;
+
 body {
     font-family: 'Montserrat';
     position: relative;
@@ -19,11 +20,13 @@ body {
     .arrow::before {
         border-bottom-color: $primary-color;
     }
+
     &.bs-tooltip-top {
         .arrow::before {
             border-top-color: $primary-color;
         }
     }
+
     .tooltip-inner {
         background-color: $primary-color;
         border-radius: 0;
@@ -35,6 +38,7 @@ input[type=range] {
     -webkit-appearance: none;
     width: 100%;
     background: transparent;
+
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         border: 1px solid white;
@@ -44,6 +48,7 @@ input[type=range] {
         background: $primary-color;
         cursor: pointer;
     }
+
     &::-moz-range-thumb {
         -webkit-appearance: none;
         border: 1px solid white;
@@ -52,6 +57,7 @@ input[type=range] {
         background: $primary-color;
         cursor: pointer;
     }
+
     &::-ms-thumb {
         -webkit-appearance: none;
         border: 1px solid white;
@@ -60,25 +66,30 @@ input[type=range] {
         background: $primary-color;
         cursor: pointer;
     }
+
     &:focus {
         outline: none;
     }
+
     &::-webkit-slider-runnable-track {
         width: 100%;
         height: 10px;
         cursor: pointer;
         overflow: hidden;
         background: white;
+
         &:hover {
             overflow: visible;
         }
     }
+
     &::-moz-range-track {
         width: 100%;
         height: 10px;
         cursor: pointer;
         overflow: hidden;
         background: white;
+
         &:hover {
             overflow: visible;
         }
@@ -115,11 +126,13 @@ input[type=range] {
     text-align: center;
     transition: all .3s ease-out;
     z-index: 998;
+
     i {
         font-size: 45px;
         color: white;
         line-height: 60px;
     }
+
     &:hover {
         background: $secondary-color;
     }
@@ -135,9 +148,11 @@ input[type=range] {
     padding: 20px 40px;
     letter-spacing: 2px;
     transition: all .3s ease;
+
     &:hover {
         background: $secondary-color;
     }
+
     &:not(:disabled):not(.disabled):active,
     &:focus {
         background: $secondary-color;
@@ -158,11 +173,13 @@ input[type=range] {
     letter-spacing: 1px;
     transition: all .3s ease;
     color: white !important;
+
     &:hover {
         background: white;
         border-color: $primary-color;
         color: $primary-color !important;
     }
+
     &:not(:disabled):not(.disabled):active,
     &:focus {
         background: white;
@@ -186,11 +203,13 @@ input[type=range] {
     letter-spacing: 1px;
     transition: all .3s ease;
     color: white !important;
+
     &:hover {
         background: transparent;
         border-color: $primary-color;
         color: $primary-color !important;
     }
+
     &:not(:disabled):not(.disabled):active,
     &:focus {
         background: transparent;
@@ -204,15 +223,19 @@ input[type=range] {
 // Sections
 section {
     padding: 70px 0 0;
+
     .section-heading-wrapper {
         padding-bottom: 70px;
+
         h1.section-title {
             font-weight: 300;
             font-size: 50px;
         }
+
         h4.section-subtitle {
             font-weight: 600;
             color: $secondary-color;
+
             span {
                 color: $primary-color;
             }
@@ -223,11 +246,13 @@ section {
 // Sweet Alerts
 .swal2-popup {
     border-radius: 0 !important;
+
     .swal2-styled.swal2-confirm {
         border-radius: 0 !important;
         background-color: $secondary-color !important;
     }
-    .swal2-styled.swal2-cancel{
+
+    .swal2-styled.swal2-cancel {
         border-radius: 0 !important;
         background-color: $error-color !important;
     }
@@ -304,7 +329,8 @@ nav.navbar {
             a {
                 display: inline-block;
                 color: white;
-                padding: 7px 10px !important;
+                padding: 5px 10px !important;
+                line-height: 30px;
                 font-weight: 600;
                 font-size: 14px;
                 transition: all .5s ease;
@@ -323,6 +349,33 @@ nav.navbar {
             transition: all .5s ease;
         }
 
+        #profile-dropdown {
+            border: 2px solid $secondary-color;
+            color: white;
+            cursor: pointer;
+
+            img {
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+            }
+
+            p.user-initials {
+                display: inline-block;
+                margin-bottom: 0;
+            }
+        }
+
+        .dropdown-menu {
+            background: transparent;
+            border-radius: 0;
+            border: 2px solid $secondary-color;
+
+            &:hover {
+                background: rgba(0, 0, 0, 0.3);
+            }
+        }
+
         .sign-in {
             border: 2px solid white;
             overflow: hidden;
@@ -335,12 +388,12 @@ nav.navbar {
             &::after {
                 content: "";
                 position: absolute;
-                width: 100px;
-                height: 100px;
+                width: 110px;
+                height: 110px;
                 border-radius: 50%;
                 background: white;
-                top: -225%;
-                left: 90%;
+                top: -255%;
+                left: 100%;
                 transition: all .5s ease;
             }
 
@@ -365,16 +418,20 @@ nav.navbar {
 .main-slider-wrapper {
     height: 100vh;
     position: relative;
+
     .main-slider {
         height: 100vh;
+
         .owl-item {
             height: 100vh;
+
             .slider-image {
                 height: 100vh;
                 background-size: cover;
             }
         }
     }
+
     .tour-search-background {
         position: absolute;
         left: 50%;
@@ -387,6 +444,7 @@ nav.navbar {
         z-index: 1;
         border-radius: 50%;
         border: abs($number: 85vh*0.08) solid rgb(94, 94, 94);
+
         @media screen and (max-width: 768px) {
             border-radius: 0;
             border: none;
@@ -396,18 +454,22 @@ nav.navbar {
             width: 100%;
         }
     }
+
     .tour-search-wrapper {
         position: absolute;
         left: 50%;
         top: 55%;
         width: 55vh;
+
         @media screen and (orientation: portrait) {
             width: 55vw;
         }
+
         transform: translate(-50%, -50%);
         z-index: 2;
         text-transform: uppercase;
         color: white;
+
         h1 {
             font-weight: 300;
         }
@@ -423,15 +485,18 @@ select.form-control {
     font-weight: 600;
     height: 50px !important;
     color: white;
+
     &:hover {
         cursor: pointer;
     }
+
     &:focus {
         color: white;
         background: transparent;
         border-color: white;
         box-shadow: none;
     }
+
     option {
         color: black;
         font-weight: 600;
@@ -450,9 +515,11 @@ select.form-control {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
+
     &.picker__input--active {
         border-color: $secondary-color;
     }
+
     &::placeholder {
         color: white;
         font-size: 14px;
@@ -538,9 +605,11 @@ select.form-control {
 .d-picker {
     width: 48%;
     position: relative;
+
     @media screen and (orientation: portrait) {
         width: 100%;
     }
+
     i {
         position: absolute;
         right: 5%;
@@ -550,6 +619,7 @@ select.form-control {
         z-index: -1;
         transition: all .3s;
     }
+
     &:hover {
         i {
             color: $secondary-color;
@@ -565,6 +635,7 @@ select.form-control {
 .tour-request-modal-wrapper {
     height: 0;
     width: 0;
+
     #login-form-modal,
     #signup-form-modal,
     #pass-recovery-form-modal,
@@ -573,32 +644,40 @@ select.form-control {
         background: rgba($secondary-color, .95);
         width: 100%;
         animation-duration: .5s;
+
         .modal-content {
             border-radius: 0;
             box-shadow: $boxShadow;
+
             .modal-body {
                 padding: 0;
+
                 @media screen and (max-width: 768px) {
                     .nav-tabs {
                         width: 85% !important;
                         border-right: 1px solid #dee2e6;
-                        li>a {
+
+                        li > a {
                             height: 100%;
                         }
                     }
                 }
+
                 .nav-link {
                     border-radius: 0;
                     color: $primary-color;
+
                     &.active {
                         color: $secondary-color;
                     }
                 }
+
                 &#signup-form-body,
                 &#pass-recovery-form-body,
                 &#pm-form-modal-body,
                 &#tour-request-modal-body {
                     padding: 10px 20px;
+
                     i.fa-angle-right {
                         font-size: 40px;
                         line-height: 45px;
@@ -606,10 +685,12 @@ select.form-control {
                     }
                 }
             }
+
             .form-group {
-                .form-check-label>span {
+                .form-check-label > span {
                     color: $primary-color;
                 }
+
                 textarea.form-control {
                     resize: none;
                     transition: none;
@@ -617,15 +698,18 @@ select.form-control {
                     margin-top: 20px;
                     transition: all .3s;
                 }
+
                 .form-control-plaintext {
                     font-size: 20px;
                     font-weight: 500;
                 }
+
                 .form-control {
                     border-radius: 0;
                     border: none;
                     border-bottom: 1px solid $primary-color;
                     transition: all .3s;
+
                     &:read-only {
                         background: transparent !important;
                         height: 37px !important;
@@ -633,27 +717,32 @@ select.form-control {
                         font-weight: inherit;
                         font-size: inherit;
                     }
+
                     &:focus {
                         outline: none;
                         box-shadow: 0px 2px 0px 0px $secondary-color;
                         border-color: $secondary-color;
                     }
+
                     &.error {
                         box-shadow: 0px 2px 0px 0px $error-color;
                         border-color: $error-color !important;
                         margin-bottom: 5px;
                     }
+
                     &.valid {
                         box-shadow: none;
                         border-color: $success-color !important;
                         margin-bottom: 0;
                     }
                 }
-                &.has-error>span {
+
+                &.has-error > span {
                     color: $error-color;
                     font-size: 14px;
                 }
             }
+
             #form-modal-close {
                 position: absolute;
                 top: 0;
@@ -661,26 +750,32 @@ select.form-control {
                 font-size: 25px;
                 cursor: pointer;
                 transition: all .3s ease;
+
                 @media screen and (max-width: 768px) {
                     right: 5%;
                     top: 2%;
                 }
+
                 &:hover {
                     transform: scale(1.2);
                     color: $primary-color;
                 }
             }
+
             .login-form-heading,
             .signup-form-heading {
                 h1 {
                     color: $secondary-color;
                     font-weight: 300;
                 }
+
                 p {
                     font-weight: 600;
+
                     span {
                         color: $primary-color;
                     }
+
                     t {
                         color: black;
                         text-decoration: underline;
@@ -688,35 +783,43 @@ select.form-control {
                     }
                 }
             }
+
             .pm-form-heading,
             .tour-request-form-heading {
                 h3 {
                     font-weight: 300;
                 }
             }
+
             .btn-success {
                 background-color: $secondary-color;
                 border: none;
                 border-radius: 0;
                 height: 50px;
                 font-weight: 600;
+
                 &:hover {
                     background-color: $primary-color;
                 }
             }
+
             .btn-outline-secondary {
                 border-radius: 0;
             }
+
             .tab-pane {
                 padding: 10px 20px;
+
                 &.fade {
                     transition: opacity .5s linear;
                 }
             }
+
             .pass-recovery {
                 color: $secondary-color;
                 text-decoration: none;
                 transition: all .3s;
+
                 &:hover {
                     color: $primary-color;
                 }
@@ -729,10 +832,12 @@ select.form-control {
 .tours-modal-wrapper {
     height: 0;
     width: 0;
+
     #tours-modal {
         background: rgba($secondary-color, .95);
         overflow-y: auto;
         z-index: 999;
+
         #tours-close {
             position: fixed;
             right: 5%;
@@ -740,33 +845,41 @@ select.form-control {
             font-size: 30px;
             cursor: pointer;
             transition: all .3s ease;
+
             &:hover {
                 color: $primary-color;
                 transform: scale(1.2);
                 transition: all .3s ease;
             }
         }
+
         section#tours {
             .section-heading-wrapper {
                 padding-bottom: 35px;
             }
+
             h4.section-subtitle {
                 color: $primary-color !important;
             }
+
             .tours-filters-wrapper {
                 padding-bottom: 35px;
+
                 .btn-info {
                     border-radius: 0;
                     background-color: $primary-color;
                     border: none;
+
                     &:hover {
                         border: none;
                         background: darken($primary-color, 20%);
                     }
+
                     &:focus {
                         outline: none;
                         box-shadow: none;
                     }
+
                     &.active {
                         background: darken($primary-color, 20%);
                         color: $secondary-color;
@@ -774,13 +887,16 @@ select.form-control {
                     }
                 }
             }
+
             .tours-grid-wrapper {
                 .gutter-sizer {
                     width: 2%;
+
                     @media screen and (max-width: 768px) {
                         width: 0;
                     }
                 }
+
                 .grid-item {
                     overflow: hidden;
                     position: relative;
@@ -789,9 +905,11 @@ select.form-control {
                     width: 32%;
                     margin-bottom: 40px;
                     box-shadow: $boxShadow;
+
                     @media screen and (max-width: 768px) {
                         width: 100%;
                     }
+
                     .info-overlay {
                         position: absolute;
                         top: 0;
@@ -802,6 +920,7 @@ select.form-control {
                         transform: translateY(-100%);
                         opacity: 0;
                         transition: all .5s;
+
                         .tour-heading {
                             text-align: center;
                             width: 100%;
@@ -810,15 +929,18 @@ select.form-control {
                             top: 40%;
                             left: 50%;
                             transform: translate(-50%, -50%);
+
                             h3 {
                                 color: white;
                             }
+
                             .duration,
                             .price {
                                 font-size: 25px;
                                 margin-bottom: 0;
                                 color: white;
                                 cursor: default;
+
                                 i {
                                     display: inline-block;
                                     width: 60px;
@@ -829,34 +951,41 @@ select.form-control {
                                 }
                             }
                         }
+
                         .tour-guide {
                             border-top: 1px solid $secondary-color;
                             position: absolute;
                             bottom: 0;
                             left: 0;
                             right: 0;
+
                             img {
                                 margin: 10px 20px;
                                 display: inline-block;
                                 max-width: 20%;
                                 border-radius: 50%;
                             }
+
                             ul {
                                 display: inline-block;
                                 margin: 10px 0 30px;
                                 vertical-align: top;
                                 max-width: 60%;
+
                                 li {
                                     text-transform: uppercase;
                                     color: $secondary-color;
+
                                     &:first-child {
                                         font-size: 24px;
                                         font-weight: 600;
                                     }
+
                                     .br-theme-css-stars .br-widget a {
                                         float: none;
                                         font-size: 30px;
                                         display: inline;
+
                                         &.br-selected:after {
                                             color: $secondary-color;
                                         }
@@ -865,6 +994,7 @@ select.form-control {
                             }
                         }
                     }
+
                     .info-overlay-bottom {
                         position: absolute;
                         bottom: 0;
@@ -873,28 +1003,34 @@ select.form-control {
                         background: rgba(black, .7);
                         color: white;
                         transition: all .5s;
+
                         p {
                             margin-bottom: 0;
                             padding: 5px 20px;
                             font-size: 24px;
+
                             @media screen and (max-width: 1500px) {
                                 font-size: 18px;
                                 text-align: center;
+
                                 span {
                                     float: none !important;
                                     display: block;
                                 }
                             }
+
                             span {
                                 float: right;
                             }
                         }
                     }
+
                     &:hover {
                         .info-overlay {
                             transform: translateY(0);
                             opacity: 1;
                         }
+
                         .info-overlay-bottom {
                             transform: translateY(100%);
                             opacity: 0;
@@ -902,32 +1038,39 @@ select.form-control {
                     }
                 }
             }
+
             .tours-search-wrapper {
                 .accordion {
                     .card {
                         background-color: transparent;
                         border: none;
+
                         .card-header {
                             border: none;
                             background-color: transparent;
+
                             button.btn-info {
                                 background: transparent;
                                 border: none;
                                 color: $primary-color;
                                 font-weight: 600;
                                 transition: all .3s;
+
                                 &:focus {
                                     outline: none;
                                     border: none;
                                     box-shadow: none;
                                 }
+
                                 &:hover {
                                     color: white;
                                 }
                             }
                         }
+
                         .card-body {
                             padding: 0;
+
                             .form-group {
                                 &.has-error {
                                     span {
@@ -935,24 +1078,30 @@ select.form-control {
                                         font-size: 12px;
                                     }
                                 }
+
                                 label {
                                     display: block;
+
                                     span {
                                         float: right;
                                     }
                                 }
+
                                 .form-control.search-input {
                                     border-radius: 0;
                                     border: 2px solid $primary-color;
+
                                     &:focus {
                                         outline: none;
                                         box-shadow: none;
                                     }
+
                                     &.error {
                                         border-color: $error-color;
                                     }
                                 }
                             }
+
                             button {
                                 padding: 5px;
                                 font-size: 16px;
@@ -970,11 +1119,13 @@ select.form-control {
 .profile-view-modal-wrapper {
     height: 0;
     width: 0;
+
     #tour-view-modal,
     #profile-view-modal {
         background: rgba($secondary-color, .95);
         overflow-y: auto;
         z-index: 999;
+
         #modal-close {
             position: fixed;
             right: 5%;
@@ -982,12 +1133,14 @@ select.form-control {
             font-size: 30px;
             cursor: pointer;
             transition: all .3s ease;
+
             &:hover {
                 color: $primary-color;
                 transform: scale(1.2);
                 transition: all .3s ease;
             }
         }
+
         #tour-view-back {
             position: fixed;
             left: 5%;
@@ -995,12 +1148,14 @@ select.form-control {
             font-size: 36px;
             cursor: pointer;
             transition: all .3s ease;
+
             &:hover {
                 color: $primary-color;
                 transform: scale(1.2);
                 transition: all .3s ease;
             }
         }
+
         #tour-view-car {
             .overlay {
                 position: absolute;
@@ -1011,9 +1166,11 @@ select.form-control {
                 background: rgba(black, .5);
                 transition: all .5s;
             }
+
             .owl-item.center div.overlay {
                 opacity: 0 !important;
             }
+
             .owl-prev,
             .owl-next {
                 position: absolute;
@@ -1024,81 +1181,100 @@ select.form-control {
                 color: $secondary-color;
                 font-size: 80px;
                 transition: all .3s;
+
                 &:hover {
                     color: $primary-color;
                     background: rgba(black, .5);
                 }
+
                 &:focus {
                     outline: none;
                 }
             }
+
             .owl-prev {
                 left: 0;
             }
+
             .owl-next {
                 right: 0;
             }
         }
+
         .tour-view-info {
             padding: 50px 0 20px;
+
             .media {
                 @media screen and (max-width: 768px) {
                     &.main-info {
                         display: block;
                         text-align: center;
+
                         img {
                             max-width: 50%;
                             margin: 0 !important;
                             margin-bottom: 15px !important;
                         }
                     }
+
                     &.comment {
                         display: block;
+
                         img {
                             max-width: 25% !important;
                             margin: 0 !important;
                             margin-bottom: 10px !important;
                         }
+
                         span.feedback-date {
                             float: none !important;
                         }
                     }
                 }
-                @media only screen and (max-width: 1200px) and (orientation: landscape){
+
+                @media only screen and (max-width: 1200px) and (orientation: landscape) {
                     &.main-info {
                         display: block;
                         text-align: center;
+
                         img {
                             max-width: 50%;
                             margin: 0 !important;
                             margin-bottom: 15px !important;
                         }
                     }
+
                     &.comment {
                         display: block;
+
                         img {
                             max-width: 25% !important;
                             margin: 0 !important;
                             margin-bottom: 10px !important;
                         }
+
                         span.feedback-date {
                             float: none !important;
                         }
                     }
                 }
+
                 img {
                     max-width: 20%;
                     box-shadow: $boxShadow;
                     cursor: pointer;
                 }
+
                 h2.guide-profile {
                     transition: all .3s;
                     display: inline-block;
+
                     &:hover {
                         cursor: pointer;
                         color: $primary-color;
                     }
                 }
+
                 .guide-contacts {
                     p {
                         i {
@@ -1110,15 +1286,18 @@ select.form-control {
                             color: $primary-color;
                         }
                     }
+
                     button.btn-outline-info {
                         color: $primary-color;
                         font-weight: 500;
                         border-radius: 0;
                         border-color: $primary-color;
+
                         &:hover {
                             color: white;
                             background: $primary-color;
                         }
+
                         &:focus {
                             outline: none;
                             box-shadow: none;
@@ -1126,23 +1305,29 @@ select.form-control {
                     }
                 }
             }
+
             .br-theme-css-stars .br-widget a {
                 float: none;
                 font-size: 30px;
+
                 &.br-selected:after {
                     color: $primary-color;
                 }
             }
+
             .tour-description-wrapper {
                 margin: 30px 0;
                 padding: 20px;
                 box-shadow: $boxShadow;
             }
+
             .tour-details-wrapper {
                 padding: 20px;
                 box-shadow: $boxShadow;
+
                 p {
                     font-size: 18px;
+
                     i {
                         display: inline-block;
                         width: 25px;
@@ -1151,39 +1336,49 @@ select.form-control {
                         color: $primary-color;
                         margin-right: 10px;
                     }
+
                     &.tour-type {
                         font-size: 20px;
                         font-weight: 600;
                     }
                 }
+
                 .jalendar {
                     width: 100% !important;
+
                     .jalendar-container {
                         .jalendar-pages {
                             border-radius: 0;
+
                             h1,
                             h2 {
                                 font-family: 'Montserrat' !important;
                             }
+
                             .prv-m,
                             .nxt-m {
                                 transition: all .3s;
                             }
+
                             .prv-m:hover,
                             .nxt-m:hover {
                                 color: $secondary-color;
                                 transform: scale(1.5);
                             }
+
                             .days {
                                 .day {
                                     font-family: 'Montserrat' !important;
+
                                     span {
                                         line-height: 18px;
                                         border-radius: 0;
+
                                         &:hover {
                                             background: $secondary-color;
                                         }
                                     }
+
                                     &.today {
                                         span {
                                             background: darken($secondary-color, 10%);
@@ -1195,94 +1390,116 @@ select.form-control {
                         }
                     }
                 }
+
                 button#send-tour-request {
                     transition: all .3s;
                 }
+
                 button.btn-outline-info {
                     color: $primary-color;
                     font-weight: 500;
                     border-radius: 0;
                     border-color: $primary-color;
+
                     &:hover {
                         color: white;
                         background: $primary-color;
                     }
+
                     &:focus {
                         outline: none;
                         box-shadow: none;
                     }
                 }
             }
+
             .tour-feedbacks-wrapper {
                 margin: 30px 0;
                 padding: 20px;
                 box-shadow: $boxShadow;
+
                 .br-wrapper {
                     .br-widget {
                         display: inline-block;
+
                         .br-current-rating {
                             display: inline-block;
                             font-size: 24px;
                             margin-left: 10px;
                         }
+
                         .br-active:after {
                             color: $primary-color;
                         }
                     }
                 }
+
                 textarea {
                     resize: none;
                     overflow-y: scroll;
                     border-radius: 0;
                     border: none;
                     transition: all .3s;
+
                     &:focus {
                         outline: none;
                         box-shadow: none;
                         border: none;
                     }
+
                     &.error {
                         outline: 2px solid $primary-color;
                     }
                 }
+
                 .has-error {
                     span {
                         color: $error-color;
                         font-size: 12px;
                     }
                 }
+
                 button.btn-outline-info {
                     color: $primary-color;
                     font-weight: 500;
                     border-radius: 0;
                     border-color: $primary-color;
+
                     &:hover {
                         color: white;
                         background: $primary-color;
                     }
+
                     &:focus {
                         outline: none;
                         box-shadow: none;
                     }
                 }
+
                 .feedbacks-list-wrapper {
                     .media {
                         border-bottom: 1px dashed $primary-color;
                         margin-bottom: 20px;
+
                         img {
                             max-width: 10%;
                         }
+
                         p.feedback-text {
                             font-size: 14px;
                         }
+
                         span.feedback-date {
                             font-size: 14px;
                         }
+
                         .br-wrapper {
                             display: inline-block;
+
                             .br-widget a {
                                 font-size: 20px;
                             }
+
                             .br-current-rating {
                                 display: none;
                             }
@@ -1291,84 +1508,106 @@ select.form-control {
                 }
             }
         }
+
         img.profile-photo {
             max-width: 100%;
             box-shadow: $boxShadow;
         }
+
         .profile-details-wrapper {
             height: 100%;
             box-shadow: $boxShadow;
+
             @media screen and (max-width: 768px) {
                 margin-top: 25px;
             }
-            @media only screen and (max-width: 1200px) and (orientation: landscape){
+
+            @media only screen and (max-width: 1200px) and (orientation: landscape) {
                 margin-top: 25px;
             }
+
             h3,
             h5 {
                 margin: 0;
             }
+
             .profile-country {
                 padding: 20px 0;
                 border-bottom: 1px dashed $primary-color;
+
                 span {
                     width: 1em;
                 }
             }
+
             .profile-card {
                 padding: 20px 0;
                 border-right: 1px dashed $primary-color;
+
                 @media screen and (max-width: 768px) {
                     border-right: none !important;
                     border-bottom: 1px dashed $primary-color;
                 }
-                @media only screen and (max-width: 1200px) and (orientation: landscape){
+
+                @media only screen and (max-width: 1200px) and (orientation: landscape) {
                     border-right: none !important;
                     border-bottom: 1px dashed $primary-color;
                 }
+
                 &.no-border {
                     border: none !important;
                 }
+
                 span {
                     margin-top: 15px;
                     display: block;
                     font-size: 42px;
                 }
             }
+
             .guide-rating-wrapper {
                 padding: 20px 0;
                 border-top: 1px dashed $primary-color;
                 border-bottom: 1px dashed $primary-color;
+
                 .br-theme-css-stars .br-widget {
                     line-height: 30px;
+
                     a {
                         float: none;
                         font-size: 45px;
+
                         &.br-selected:after {
                             color: $primary-color;
                         }
                     }
                 }
             }
+
             .guide-contacts-wrapper {
                 padding: 20px 0;
+
                 h5 {
                     i {
                         margin-right: 15px;
                         color: $primary-color;
                     }
                 }
+
                 ul {
                     margin-bottom: 0;
+
                     li {
                         display: inline-block;
                         width: 30px;
                         height: 30px;
+
                         a {
                             color: $primary-color;
                             font-size: 20px;
                             transition: all .3s;
                         }
+
                         &:hover {
                             a {
                                 color: black;
@@ -1378,10 +1617,12 @@ select.form-control {
                 }
             }
         }
+
         .guide-offered-tours-wrapper {
             .guide-offered-tours-heading {
                 font-weight: 300;
             }
+
             .tour-item {
                 overflow: hidden;
                 position: relative;
@@ -1390,6 +1631,7 @@ select.form-control {
                 width: 100%;
                 margin-bottom: 40px;
                 box-shadow: $boxShadow;
+
                 .info-overlay {
                     position: absolute;
                     top: 0;
@@ -1400,6 +1642,7 @@ select.form-control {
                     transform: translateY(-100%);
                     opacity: 0;
                     transition: all .5s;
+
                     .tour-heading {
                         text-align: center;
                         width: 100%;
@@ -1408,15 +1651,18 @@ select.form-control {
                         top: 40%;
                         left: 50%;
                         transform: translate(-50%, -50%);
+
                         h3 {
                             color: white;
                         }
+
                         .duration,
                         .price {
                             font-size: 25px;
                             margin-bottom: 0;
                             color: white;
                             cursor: default;
+
                             i {
                                 display: inline-block;
                                 width: 60px;
@@ -1427,34 +1673,41 @@ select.form-control {
                             }
                         }
                     }
+
                     .tour-guide {
                         border-top: 1px solid $secondary-color;
                         position: absolute;
                         bottom: 0;
                         left: 0;
                         right: 0;
+
                         img {
                             margin: 10px 20px;
                             display: inline-block;
                             max-width: 20%;
                             border-radius: 50%;
                         }
+
                         ul {
                             display: inline-block;
                             margin: 10px 0 30px;
                             vertical-align: top;
                             max-width: 60%;
+
                             li {
                                 text-transform: uppercase;
                                 color: $secondary-color;
+
                                 &:first-child {
                                     font-size: 24px;
                                     font-weight: 600;
                                 }
+
                                 .br-theme-css-stars .br-widget a {
                                     float: none;
                                     font-size: 30px;
                                     display: inline;
+
                                     &.br-selected:after {
                                         color: $secondary-color;
                                     }
@@ -1463,6 +1716,7 @@ select.form-control {
                         }
                     }
                 }
+
                 .info-overlay-bottom {
                     position: absolute;
                     bottom: 0;
@@ -1471,28 +1725,34 @@ select.form-control {
                     background: rgba(black, .7);
                     color: white;
                     transition: all .5s;
+
                     p {
                         margin-bottom: 0;
                         padding: 5px 20px;
                         font-size: 24px;
+
                         @media screen and (max-width: 1500px) {
                             font-size: 18px;
                             text-align: center;
+
                             span {
                                 float: none !important;
                                 display: block;
                             }
                         }
+
                         span {
                             float: right;
                         }
                     }
                 }
+
                 &:hover {
                     .info-overlay {
                         transform: translateY(0);
                         opacity: 1;
                     }
+
                     .info-overlay-bottom {
                         transform: translateY(100%);
                         opacity: 0;
@@ -1508,24 +1768,29 @@ section#most-popular {
     .section-body-wrapper {
         .best-tour {
             position: relative;
+
             @media screen and (max-width: 768px) {
                 border-bottom: 1px dashed $primary-color;
             }
+
             .tour-background {
                 background-size: cover;
                 background-position: center;
                 height: 500px;
                 position: relative;
+
                 @media screen and (max-width: 768px) {
                     .tour-info-left, .tour-info-right {
                         width: 100% !important;
                         background: rgba(black, .7) !important;
                     }
+
                     .tour-info-left:after,
                     .tour-info-right:after {
                         display: none !important;
                     }
                 }
+
                 .tour-info-left {
                     position: absolute;
                     top: 0;
@@ -1533,6 +1798,7 @@ section#most-popular {
                     left: 0;
                     width: 50vw;
                     background: white;
+
                     &:after {
                         content: "";
                         display: inline-block;
@@ -1546,6 +1812,7 @@ section#most-popular {
                         top: 0;
                     }
                 }
+
                 .tour-info-right {
                     position: absolute;
                     top: 0;
@@ -1553,6 +1820,7 @@ section#most-popular {
                     right: 0;
                     width: 48vw;
                     background: white;
+
                     &:after {
                         content: "";
                         display: inline-block;
@@ -1567,46 +1835,57 @@ section#most-popular {
                     }
                 }
             }
+
             .tour-info {
                 position: absolute;
                 top: 50%;
                 left: 0;
                 right: 0;
                 transform: translate(0, -50%);
+
                 @media screen and (max-width: 768px) {
                     text-align: center !important;
+
                     h3.tour-subtitle {
                         color: white !important;
                     }
+
                     p {
                         color: white !important;
+
                         i {
                             color: white !important;
                         }
                     }
                 }
+
                 h1.tour-title {
                     font-weight: 300;
                     color: $secondary-color;
                     font-size: 50px;
                     width: 45vw;
                     display: inline-block;
-                    @media screen and (max-width: 768px){
+
+                    @media screen and (max-width: 768px) {
                         width: 100%;
                     }
                 }
+
                 h3.tour-subtitle {
                     font-weight: 600;
                     width: 45vw;
                     display: inline-block;
-                    @media screen and (max-width: 768px){
+
+                    @media screen and (max-width: 768px) {
                         width: 100%;
                     }
                 }
+
                 p {
                     margin-bottom: .5rem;
                     font-size: 25px;
                     cursor: default;
+
                     i {
                         display: inline-block;
                         width: 30px;
@@ -1615,16 +1894,20 @@ section#most-popular {
                         line-height: 50px;
                     }
                 }
+
                 &.left {
                     text-align: left;
+
                     p {
                         i {
                             margin-right: 25px;
                         }
                     }
                 }
+
                 &.right {
                     text-align: right;
+
                     p {
                         i {
                             margin-right: 25px;
@@ -1640,17 +1923,21 @@ section#most-popular {
 // Best Guides Section
 section#best-guides {
     padding-bottom: 70px;
+
     .section-body-wrapper {
         .card {
             border-radius: 0;
             border: none;
             border-top: 3px solid $primary-color;
             border-bottom: 3px solid $primary-color;
+
             @media screen and (max-width: 768px) {
                 margin-bottom: 15px;
             }
+
             .card-heading {
                 position: relative;
+
                 .overlay {
                     position: absolute;
                     top: 0;
@@ -1661,6 +1948,7 @@ section#best-guides {
                     visibility: hidden;
                     opacity: 0;
                     transition: all .4s ease-in-out;
+
                     a.best-guide-profile {
                         position: absolute;
                         top: 50%;
@@ -1668,6 +1956,7 @@ section#best-guides {
                         transform: translate(-50%, -50%);
                     }
                 }
+
                 &:hover {
                     .overlay {
                         visibility: visible;
@@ -1676,6 +1965,7 @@ section#best-guides {
                     }
                 }
             }
+
             .card-body {
                 h4.card-title {
                     color: $secondary-color;
@@ -1684,13 +1974,16 @@ section#best-guides {
                     margin-bottom: 0;
                 }
             }
+
             .br-theme-css-stars .br-widget a {
                 float: none;
                 font-size: 30px;
+
                 &.br-selected:after {
                     color: $secondary-color;
                 }
             }
+
             ul li span {
                 color: $secondary-color;
                 font-weight: 600;
@@ -1703,21 +1996,26 @@ section#best-guides {
 section#about {
     padding-bottom: 70px;
     border-top: 1px dashed $primary-color;
+
     p.about-text {
         line-height: 1.5;
+
         span {
             color: $primary-color;
             font-weight: 600;
         }
     }
+
     .guide-item-wrapper {
         width: 90%;
+
         .img-wrapper {
             border: 3px solid $primary-color;
             border-top: none;
             border-bottom: none;
             overflow: hidden;
         }
+
         .guide-info-wrapper {
             h4.guide-name {
                 color: $secondary-color;
@@ -1732,6 +2030,7 @@ section#guide-join {
     background-position: center;
     padding: 150px 0;
     position: relative;
+
     .overlay {
         position: absolute;
         width: 100%;
@@ -1739,13 +2038,16 @@ section#guide-join {
         top: 0;
         background: rgba(black, .5);
     }
+
     h1.guide-join-text {
         color: white;
         font-weight: 600;
+
         span {
             color: $primary-color;
         }
     }
+
     button {
         width: 70%;
         font-size: 25px;
@@ -1756,30 +2058,36 @@ section#guide-join {
 // Contact Section
 section#contact {
     padding-bottom: 70px;
+
     .contact-form-wrapper {
         label {
             font-size: 20px;
             font-weight: 300;
         }
-        .form-group.has-error>span {
+
+        .form-group.has-error > span {
             color: $error-color;
             font-size: 14px;
         }
+
         .form-control {
             border: 3px solid $primary-color;
             border-radius: 0;
             height: 50px;
             transition: all .3s;
+
             &.error {
                 border-color: $error-color !important;
                 box-shadow: 0 0 10px 0.2rem rgba($error-color, .5);
                 margin-bottom: 5px;
             }
+
             &.valid {
                 border-color: $success-color;
                 box-shadow: none;
                 margin-bottom: 0;
             }
+
             &:focus {
                 outline: none;
                 border-color: $secondary-color;
@@ -1787,9 +2095,11 @@ section#contact {
                 transition: all .3s;
             }
         }
+
         textarea {
             min-height: 200px;
         }
+
         button {
             width: 30%;
             min-width: 150px;
@@ -1801,16 +2111,20 @@ section#contact {
 footer {
     border-top: 1px dashed $primary-color;
     padding: 40px 0 0;
+
     #insta-feed-slider {
         margin-bottom: 30px;
+
         .insta-img-wrapper {
             position: relative;
             overflow: hidden;
+
             a {
                 img {
                     max-width: 100%;
                 }
             }
+
             .post-stats {
                 position: absolute;
                 left: 0;
@@ -1820,12 +2134,14 @@ footer {
                 transition: all .3s;
                 background: rgba(black, .5);
                 padding: 5px 0;
+
                 span {
                     font-size: 16px;
                     color: $secondary-color;
                     padding: 0 10px;
                 }
             }
+
             &:hover {
                 .post-stats {
                     bottom: 0;
@@ -1833,15 +2149,18 @@ footer {
             }
         }
     }
+
     .social-links-wrapper {
         .social-links {
             list-style-type: none;
             margin-bottom: 0 !important;
+
             li {
                 display: inline-block;
                 width: 60px;
                 height: 60px;
                 line-height: 60px;
+
                 a {
                     color: $secondary-color;
                     background: transparent;
@@ -1849,6 +2168,7 @@ footer {
                     border-radius: 0;
                     transition: all .3s;
                     font-size: 24px;
+
                     &:hover {
                         color: $primary-color;
                         transition: all .3s;
@@ -1857,6 +2177,7 @@ footer {
             }
         }
     }
+
     .copyright {
         background: black;
         margin-bottom: 0;
