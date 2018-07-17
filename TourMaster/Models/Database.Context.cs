@@ -40,5 +40,7 @@ namespace TourMaster.Models
         public virtual DbSet<TourImage> TourImages { get; set; }
         public virtual DbSet<Tour> Tours { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<NotificationType> NotificationTypes { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
     }
 }

@@ -349,15 +349,44 @@ nav.navbar {
             transition: all .5s ease;
         }
 
-        #profile-dropdown {
+        .dropdown-toggle {
             border: 2px solid $secondary-color;
             color: white;
             cursor: pointer;
+            height: 45px;
+
+            &:not([href]):not([tabindex]):focus,
+            &:not([href]):not([tabindex]):hover {
+                color: $secondary-color;
+            }
+
+            &:hover {
+                i, p {
+                    color: $secondary-color !important;
+                    transition: all .3s;
+                }
+            }
+
+            &:after {
+                display: none !important;
+            }
 
             img {
                 width: 30px;
                 height: 30px;
                 display: inline-block;
+            }
+
+            i {
+                font-size: 16px;
+                width: 30px;
+                margin-top: 7px;
+            }
+
+            span.badge {
+                position: absolute;
+                top: 15px;
+                right: 10px;
             }
 
             p.user-initials {
@@ -370,9 +399,13 @@ nav.navbar {
             background: transparent;
             border-radius: 0;
             border: 2px solid $secondary-color;
+            min-width: 100%;
 
             &:hover {
                 background: rgba(0, 0, 0, 0.3);
+                a{
+                    color: $secondary-color;
+                }
             }
         }
 

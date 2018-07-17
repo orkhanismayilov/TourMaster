@@ -150,6 +150,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +205,12 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogInForm.cs" />
+    <Compile Include="Models\Notification.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotificationType.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Origin.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -224,6 +234,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -238,6 +249,16 @@
       <DependentUpon>Database.edmx</DependentUpon>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
+    <Content Include="Public\admin\css\icons\coreui-icons.min.css" />
+    <Content Include="Public\admin\css\icons\simple-line-icons.css" />
+    <Content Include="Public\admin\css\style.css" />
+    <Content Include="Public\admin\js\chart.min.js" />
+    <Content Include="Public\admin\js\coreui.min.js" />
+    <Content Include="Public\admin\js\custom-tooltips.min.js" />
+    <Content Include="Public\admin\js\main.js" />
+    <Content Include="Public\admin\js\perfect-scrollbar.min.js" />
+    <Content Include="Public\admin\vendors\pace-progress\css\pace.min.css" />
+    <Content Include="Public\admin\vendors\pace-progress\js\pace.min.js" />
     <Content Include="Public\css\default.css" />
     <Content Include="Public\css\default.date.css" />
     <Content Include="Public\css\flag-icon.min.css" />
@@ -804,6 +825,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Manage\Models\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Database.edmx">
@@ -813,6 +836,14 @@
     <Content Include="Models\Database.edmx.diagram">
       <DependentUpon>Database.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\web.config" />
+    <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Manage\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\css\style.css.map" />
     <Content Include="Public\sass\style.scss" />
@@ -832,6 +863,8 @@
     <Content Include="Public\webfonts\fa-solid-900.ttf" />
     <Content Include="Public\webfonts\fa-solid-900.woff" />
     <Content Include="Public\webfonts\fa-solid-900.woff2" />
+    <Content Include="Public\admin\css\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="Public\admin\vendors\pace-progress\css\pace.min.css.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -226,23 +226,42 @@ nav.navbar {
   nav.navbar ul :hover {
     border-color: white;
     transition: all .5s ease; }
-  nav.navbar ul #profile-dropdown {
+  nav.navbar ul .dropdown-toggle {
     border: 2px solid #63cac5;
     color: white;
-    cursor: pointer; }
-    nav.navbar ul #profile-dropdown img {
+    cursor: pointer;
+    height: 45px; }
+    nav.navbar ul .dropdown-toggle:not([href]):not([tabindex]):focus, nav.navbar ul .dropdown-toggle:not([href]):not([tabindex]):hover {
+      color: #63cac5; }
+    nav.navbar ul .dropdown-toggle:hover i, nav.navbar ul .dropdown-toggle:hover p {
+      color: #63cac5 !important;
+      transition: all .3s; }
+    nav.navbar ul .dropdown-toggle:after {
+      display: none !important; }
+    nav.navbar ul .dropdown-toggle img {
       width: 30px;
       height: 30px;
       display: inline-block; }
-    nav.navbar ul #profile-dropdown p.user-initials {
+    nav.navbar ul .dropdown-toggle i {
+      font-size: 16px;
+      width: 30px;
+      margin-top: 7px; }
+    nav.navbar ul .dropdown-toggle span.badge {
+      position: absolute;
+      top: 15px;
+      right: 10px; }
+    nav.navbar ul .dropdown-toggle p.user-initials {
       display: inline-block;
       margin-bottom: 0; }
   nav.navbar ul .dropdown-menu {
     background: transparent;
     border-radius: 0;
-    border: 2px solid #63cac5; }
+    border: 2px solid #63cac5;
+    min-width: 100%; }
     nav.navbar ul .dropdown-menu:hover {
       background: rgba(0, 0, 0, 0.3); }
+      nav.navbar ul .dropdown-menu:hover a {
+        color: #63cac5; }
   nav.navbar ul .sign-in {
     border: 2px solid white;
     overflow: hidden;

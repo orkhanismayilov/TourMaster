@@ -22,6 +22,7 @@ namespace TourMaster.Models
             this.PrivateMessages = new HashSet<PrivateMessage>();
             this.PrivateMessages1 = new HashSet<PrivateMessage>();
             this.Tours = new HashSet<Tour>();
+            this.Notifications = new HashSet<Notification>();
         }
     
         public int Id { get; set; }
@@ -50,5 +51,7 @@ namespace TourMaster.Models
         public virtual ICollection<PrivateMessage> PrivateMessages1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tour> Tours { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }
