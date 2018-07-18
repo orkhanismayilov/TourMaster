@@ -153,6 +153,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manage\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Manage\Controllers\ToursController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -844,6 +846,12 @@
     <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Manage\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Tours\Create.cshtml" />
+    <Content Include="Areas\Manage\Views\Tours\Delete.cshtml" />
+    <Content Include="Areas\Manage\Views\Tours\Details.cshtml" />
+    <Content Include="Areas\Manage\Views\Tours\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Tours\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\css\style.css.map" />
     <Content Include="Public\sass\style.scss" />
