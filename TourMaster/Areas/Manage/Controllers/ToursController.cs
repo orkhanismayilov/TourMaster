@@ -15,9 +15,9 @@ namespace TourMaster.Areas.Manage.Controllers
         private TourMasterEntities db = new TourMasterEntities();
 
         // GET: Manage/Tours
-        public ActionResult Index()
+        public ActionResult Index(int? Id)
         {
-            var tours = db.Tours.Include(t => t.AccomodationLevel).Include(t => t.Accomodation).Include(t => t.City).Include(t => t.City1).Include(t => t.Currency).Include(t => t.DurationType).Include(t => t.TourImage).Include(t => t.User);
+            var tours = db.Users.Find(Id).Tours;
             return View(tours.ToList());
         }
 

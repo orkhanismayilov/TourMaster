@@ -1,117 +1,110 @@
 ﻿@model IEnumerable<TourMaster.Models.Tour>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+<h2>My Tours</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table text-center">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            Destination
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Duration)
+            Country
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Vehicle)
+            Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PostedDate)
+            Duration
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            Accomodation
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccomodationLevel.Level)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Accomodation.AccomodationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City.CityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City1.CityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency.CurrencyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DurationType.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TourImage.ImageURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Fullname)
+            Transport
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vehicle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccomodationLevel.Level)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accomodation.AccomodationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City1.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency.CurrencyName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DurationType.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TourImage.ImageURL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Fullname)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    if (item.Status == 0)
+                    {
+                        <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Confirmed"></i>
+                    }
+                    else
+                    {
+                        <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Awaiting confirmation"></i>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    if (item.FromId == item.DestinationId)
+                    {
+                        @item.City.CityName
+                    }
+                    else
+                    {
+                        @(item.City.CityName + " - " + item.City1.CityName)
+                    }
+                }
+            </td>
+            <td>
+                <span class="flag-icon flag-icon-@item.City1.Country.CountryCode"></span> @item.City1.Country.CountryName
+            </td>
+            <td>
+                @(item.Price.ToString("#.##") + " " + item.Currency.CurrencyName)
+            </td>
+            <td>
+                @item.PostedDate.ToString("HH:mm dd.MM.yyyy")
+            </td>
+            <td>
+                @(item.Duration + " " + item.DurationType.Type)
+            </td>
+            <td>
+                @{
+                    if (item.AccomodationId != null)
+                    {
+                        if (item.AccomodationId == 3)
+                        {
+                                @(item.AccomodationLevel.Level + " " + item.Accomodation.AccomodationName)
+                            }
+                        else
+                        {
+                            @item.Accomodation.AccomodationName
+                        }
+                    }
+                    else
+                    {
+                        @:N/A
+                    }
+
+                }
+            </td>
+            <td>
+                <a class="mx-1" href="@Url.Action("details", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
+                    <i class="icon-info text-info"></i>
+                </a> |
+                <a class="mx-1" href="@Url.Action("edit", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                    <i class="icon-note text-warning"></i>
+                </a> |
+                <a class="mx-1" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
+                    <i class="icon-ban text-danger"></i>
+                </a>
+            </td>
+        </tr>
+    }
 
 </table>
