@@ -41,11 +41,11 @@
                 @{
                     if (item.Status == 0)
                     {
-                        <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Confirmed"></i>
+                        <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
                     }
                     else
                     {
-                        <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Awaiting confirmation"></i>
+                        <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
                     }
                 }
             </td>
@@ -79,8 +79,8 @@
                     {
                         if (item.AccomodationId == 3)
                         {
-                                @(item.AccomodationLevel.Level + " " + item.Accomodation.AccomodationName)
-                            }
+                            @(item.AccomodationLevel.Level + " " + item.Accomodation.AccomodationName)
+                        }
                         else
                         {
                             @item.Accomodation.AccomodationName
@@ -94,17 +94,95 @@
                 }
             </td>
             <td>
-                <a class="mx-1" href="@Url.Action("details", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
+                <a class="mx-1" href="@Url.Action("details", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
                     <i class="icon-info text-info"></i>
                 </a> |
-                <a class="mx-1" href="@Url.Action("edit", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                <a class="mx-1" href="@Url.Action("edit", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
                     <i class="icon-note text-warning"></i>
                 </a> |
-                <a class="mx-1" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
-                    <i class="icon-ban text-danger"></i>
-                </a>
+                @{
+                    if (item.Status == 1)
+                    {
+                        <a class="mx-1" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
+                            <i class="icon-ban text-danger"></i>
+                        </a>
+                        <a class="mx-1" style="display: none" href="@Url.Action("activate", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Activate">
+                            <i class="icon-key text-success"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="mx-1" style="display: none" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
+                            <i class="icon-ban text-danger"></i>
+                        </a>
+                        <a class="mx-1" href="@Url.Action("activate", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Activate">
+                            <i class="icon-key text-success"></i>
+                        </a>
+                    }
+                }
+
             </td>
         </tr>
     }
 
 </table>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Disable Tour</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Your tour successfully disabled. It will not be displayed on website until you activate it again!</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-warning" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Disable Tour</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Are you sure? Your tour will not be displayed on website until you activate it again!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="confirm" class="btn btn-warning" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="dangerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Disable Tour</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Oops... Error occured while disabling!<br>Please, try again later.</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

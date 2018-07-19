@@ -1,9 +1,5 @@
 ﻿@model TourMaster.Models.Tour
 
-@{
-    ViewBag.Title = "Details";
-}
-
 <h2>Details</h2>
 
 <div>
@@ -133,6 +129,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="mx-1" href="@Url.Action("edit", new { controller="tours", area="manage", id = Model.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
+        <i class="icon-note text-warning"></i>
+    </a>
 </p>

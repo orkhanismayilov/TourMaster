@@ -30,6 +30,7 @@ namespace TourMaster.Areas.Manage.Controllers
                     if (Crypto.VerifyHashedPassword(guide.Password, Password))
                     {
                         Session["LogInSuccess"] = true;
+                        Session["LogInError"] = null;
                         Session["User"] = guide;
 
                         return RedirectToAction("index", new { controller = "home", area = "manage" });
@@ -37,19 +38,19 @@ namespace TourMaster.Areas.Manage.Controllers
                     else
                     {
                         Session["LogInError"] = true;
-                        return RedirectToAction("index", new { controller = "login", area = "manage" });
+                        return RedirectToAction("index", new { controller = "login", area = "manage", error = 1 });
                     }
                 }
                 else
                 {
                     Session["LogInError"] = true;
-                    return RedirectToAction("index", new { controller = "login", area = "manage" });
+                    return RedirectToAction("index", new { controller = "login", area = "manage", error = 1 });
                 }
             }
             else
             {
                 Session["LogInError"] = true;
-                return RedirectToAction("index", new { controller = "login", area = "manage" });
+                return RedirectToAction("index", new { controller = "login", area = "manage", error = 1 });
             }
         }
     }

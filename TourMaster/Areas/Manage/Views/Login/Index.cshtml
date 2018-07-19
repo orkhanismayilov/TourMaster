@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -56,6 +55,31 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    @if (Session["LogInError"] != null)
+    {
+        <span id="login-error"></span>
+    }
+    <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Invalid Login or Password</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+
+        </div>
+
     </div>
     <!-- CoreUI and necessary plugins-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

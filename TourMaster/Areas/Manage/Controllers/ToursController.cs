@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TourMaster.Models;
+using TourMaster.Filters;
 
 namespace TourMaster.Areas.Manage.Controllers
 {
+    [GuideAuth]
     public class ToursController : Controller
     {
         private TourMasterEntities db = new TourMasterEntities();
@@ -122,39 +124,36 @@ namespace TourMaster.Areas.Manage.Controllers
             return View(tour);
         }
 
-        // GET: Manage/Tours/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpGet]
+        public JsonResult Disable(int? Id)
         {
-            if (id == null)
+            Tour tour = db.Tours.Find(Id);
+            if (tour != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                tour.Status = 0;
+                db.SaveChanges();
+                return Json(1, JsonRequestBehavior.AllowGet);
             }
-            Tour tour = db.Tours.Find(id);
-            if (tour == null)
+            else
             {
-                return HttpNotFound();
+                return Json(0, JsonRequestBehavior.AllowGet);
             }
-            return View(tour);
         }
 
-        // POST: Manage/Tours/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpGet]
+        public JsonResult Activate(int? Id)
         {
-            Tour tour = db.Tours.Find(id);
-            db.Tours.Remove(tour);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            Tour tour = db.Tours.Find(Id);
+            if (tour != null)
             {
-                db.Dispose();
+                tour.Status = 1;
+                db.SaveChanges();
+                return Json(1, JsonRequestBehavior.AllowGet);
             }
-            base.Dispose(disposing);
+            else
+            {
+                return Json(0, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

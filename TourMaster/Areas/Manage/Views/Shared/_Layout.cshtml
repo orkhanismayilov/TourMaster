@@ -30,8 +30,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="#">
-            @*<img class="navbar-brand-full" src="img/brand/logo.svg" width="89" height="25" alt="TourMaster Logo">*@
-            @*<img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">*@
+            <img class="navbar-brand-full" src="~/Public/images/logo/logo_tiffany.svg" width="80%" alt="TourMaster Logo">
+            <img class="navbar-brand-minimized" src="~/Public/images/logo/logo_tiffany_small.svg" width="80%" alt="TourMaster Logo">
         </a>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
@@ -122,7 +122,7 @@
                         <i class="fa fa-wrench"></i> Settings
                     </a>
                     <div class="divider"></div>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="@Url.Action("logout", new { controller="home", area="manage" })">
                         <i class="fa fa-lock"></i> Logout
                     </a>
                 </div>
