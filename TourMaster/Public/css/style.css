@@ -227,14 +227,14 @@ nav.navbar {
     border-color: white;
     transition: all .5s ease; }
   nav.navbar ul .dropdown-toggle {
-    border: 2px solid #63cac5;
+    border: 2px solid white;
     color: white;
     cursor: pointer;
     height: 45px; }
     nav.navbar ul .dropdown-toggle:not([href]):not([tabindex]):focus, nav.navbar ul .dropdown-toggle:not([href]):not([tabindex]):hover {
-      color: #63cac5; }
+      color: white; }
     nav.navbar ul .dropdown-toggle:hover i, nav.navbar ul .dropdown-toggle:hover p {
-      color: #63cac5 !important;
+      color: white !important;
       transition: all .3s; }
     nav.navbar ul .dropdown-toggle:after {
       display: none !important; }
@@ -256,7 +256,7 @@ nav.navbar {
   nav.navbar ul .dropdown-menu {
     background: transparent;
     border-radius: 0;
-    border: 2px solid #63cac5;
+    border: 2px solid white;
     min-width: 100%; }
     nav.navbar ul .dropdown-menu:hover {
       background: rgba(0, 0, 0, 0.3); }

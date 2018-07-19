@@ -800,6 +800,8 @@
     <Content Include="Public\images\logo\logo_tiffanylight.svg" />
     <Content Include="Public\images\logo\logo_tiffanylight_small.svg" />
     <Content Include="Public\images\logo\logo_tiffany_small.svg" />
+    <Content Include="Public\images\logo\logo_white.svg" />
+    <Content Include="Public\images\logo\logo_white_small.svg" />
     <Content Include="Public\images\profile_placeholder.png" />
     <Content Include="Public\images\slider_1.jpg" />
     <Content Include="Public\images\slider_2.jpg" />
