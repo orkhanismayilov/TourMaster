@@ -100,6 +100,9 @@ namespace TourMaster.Areas.Manage.Controllers
             ViewBag.Countries = db.Countries.ToList();
             ViewBag.DurationTypes = db.DurationTypes.ToList();
             ViewBag.Currency = db.Currencies.ToList();
+            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Accomodations = db.Accomodations.ToList();
+            ViewBag.AccomodationLvl = db.AccomodationLevels.ToList();
             return View(tour);
         }
 

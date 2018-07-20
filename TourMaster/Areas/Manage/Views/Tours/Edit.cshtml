@@ -22,7 +22,7 @@
                 <hr />
                 <form action="" method="post" id="tour-edit">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">From</label>
                                 <select class="form-control" name="fromCountry">
@@ -42,7 +42,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Destination</label>
                                 <select class="form-control" name="destCountry">
@@ -65,7 +65,7 @@
                     </div>
                     <hr />
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Price</label>
                                 <input class="form-control" name="price" type="number" value="@Model.Price.ToString("#.##")" />
@@ -78,7 +78,8 @@
                                     }
                                 </select>
                             </div>
-                        </div><div class="col-6">
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Duration</label>
                                 <input class="form-control" name="duration" type="number" value="@Model.Duration" />
@@ -94,7 +95,46 @@
                         </div>
                     </div>
                     <hr />
-
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Categories</label>
+                                <select class="form-control categories" name="categories[]" multiple>
+                                    @foreach (var category in ViewBag.Categories)
+                                    {
+                                        <option value="@category.Id" @(Model.Category.Contains(category.CategoryName.ToLower()) ? "selected" : "")>@category.CategoryName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Accomodation</label>
+                                        <select class="form-control" name="accomodation">
+                                            @foreach (var acc in ViewBag.Accomodations)
+                                            {
+                                                <option value="@acc.Id" @(Model.AccomodationId == acc.Id?"selected":"")>@acc.AccomodationName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label @(Model.AccomodationId != 3?"text-muted":"")">Accomodation Level</label>
+                                        <select class="form-control" @(Model.AccomodationId != 3?"disabled":"") name="accomodationLvl">
+                                            @foreach (var acclvl in ViewBag.AccomodationLvl)
+                                            {
+                                                <option value="@acclvl.Id" @(Model.AccomodationLevelId == acclvl.Id?"selected":"")>@acclvl.Level</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
 
 
 

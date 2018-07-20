@@ -72,4 +72,18 @@ $(document).ready(function () {
         });
     });
 
+    // Select 2 Plugin
+    $(".categories").select2({
+        theme: "classic"
+    });
+
+    // Accomodation Level Control
+    $("select[name='accomodation']").on("change", function () {
+        var that = $(this);
+        if (that.val() != 3) {
+            $("select[name='accomodationLvl']").attr("disabled", true);
+        } else {
+            $("select[name='accomodationLvl']").attr("disabled", false);
+        }
+    });
 });
