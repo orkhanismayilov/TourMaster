@@ -154,6 +154,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Manage\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Manage\Controllers\ToursController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -254,12 +255,14 @@
     </Content>
     <Content Include="Public\admin\css\icons\coreui-icons.min.css" />
     <Content Include="Public\admin\css\icons\simple-line-icons.css" />
+    <Content Include="Public\admin\css\select2.min.css" />
     <Content Include="Public\admin\css\style.css" />
     <Content Include="Public\admin\js\chart.min.js" />
     <Content Include="Public\admin\js\coreui.min.js" />
     <Content Include="Public\admin\js\custom-tooltips.min.js" />
     <Content Include="Public\admin\js\main.js" />
     <Content Include="Public\admin\js\perfect-scrollbar.min.js" />
+    <Content Include="Public\admin\js\select2.min.js" />
     <Content Include="Public\admin\vendors\pace-progress\css\pace.min.css" />
     <Content Include="Public\admin\vendors\pace-progress\js\pace.min.js" />
     <Content Include="Public\css\default.css" />
@@ -840,6 +843,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Areas\Manage\Views\Requests\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Database.edmx">

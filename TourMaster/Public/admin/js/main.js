@@ -55,4 +55,21 @@ $(document).ready(function () {
         $("#dangerModal").modal('show');
     }
 
+    // GetCities
+    $("select[name='fromCountry'], select[name='destCountry']").on("change", function () {
+        var that = $(this);
+        that.parent().next().children("select").empty().append("<option value='' disabled selected>City</option>");
+        $.ajax({
+            url: "/home/getcities/" + that.val(),
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var option = "<option value=" + data[i].Id + ">" + data[i].CityName + "</option>"
+                    that.parent().next().children("select").append(option);
+                }
+            }
+        });
+    });
+
 });

@@ -97,6 +97,9 @@ namespace TourMaster.Areas.Manage.Controllers
             ViewBag.DurationTypeId = new SelectList(db.DurationTypes, "Id", "Type", tour.DurationTypeId);
             ViewBag.MainImageId = new SelectList(db.TourImages, "Id", "ImageURL", tour.MainImageId);
             ViewBag.GuideId = new SelectList(db.Users, "Id", "Fullname", tour.GuideId);
+            ViewBag.Countries = db.Countries.ToList();
+            ViewBag.DurationTypes = db.DurationTypes.ToList();
+            ViewBag.Currency = db.Currencies.ToList();
             return View(tour);
         }
 

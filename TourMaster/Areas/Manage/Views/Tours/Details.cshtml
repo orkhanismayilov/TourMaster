@@ -1,135 +1,162 @@
 ﻿@model TourMaster.Models.Tour
 
-<h2>Details</h2>
+<div class="row">
+    <div class="col-12s">
+        <div class="card border-primary">
+            <div class="card-header">
+                <h2 class="d-inline-block">Details</h2>
+                <h3 class="d-inline-block ml-3">
+                    <a class="mx-1" href="@Url.Action("edit", new { controller="tours", area="manage", id = Model.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                        <i class="icon-note text-warning"></i>
+                    </a>
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div>
+                            @{
+                                string TourTitle = "";
+                                if (Model.FromId != Model.DestinationId)
+                                {
+                                    TourTitle = Model.City.CityName + " - " + Model.City1.CityName + " Tour";
+                                }
+                                else
+                                {
+                                    TourTitle = Model.City.CityName + " Tour";
+                                }
+                            }
+                            <h4>@TourTitle</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </dt>
 
-<div>
-    <h4>Tour</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+                                <dd>
+                                    @{
+                                        if (Model.Status == 0)
+                                        {
+                                            <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
+                                        }
+                                    }
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Price)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+                                <dd>
+                                    @Model.Price.ToString("#.##") @Model.Currency.CurrencyName
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Category)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Duration)
-        </dt>
+                                <dd class="text-capitalize">
+                                    @{
+                                        string[] cats = Model.Category.Split(',');
+                                        @String.Join(" - ", cats);
+                                    }
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Duration)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Duration)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Vehicle)
-        </dt>
+                                <dd>
+                                    @Model.Duration @Model.DurationType.Type
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Vehicle)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Vehicle)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Vehicle)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Accomodation)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostedDate)
-        </dt>
+                                <dd>
+                                    @{
+                                        if (Model.AccomodationId != null)
+                                        {
+                                            if (Model.AccomodationId == 3)
+                                            {
+                                                @(Model.AccomodationLevel.Level + " " + Model.Accomodation.AccomodationName)
+                                            }
+                                            else
+                                            {
+                                                @Model.Accomodation.AccomodationName
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @:N/A
+                                        }
+                                    }
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PostedDate)
-        </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+                                <dd class="text-justify">
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+                                <dt>
+                                    Posted Date
+                                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AccomodationLevel.Level)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccomodationLevel.Level)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Accomodation.AccomodationName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Accomodation.AccomodationName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City.CityName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City.CityName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City1.CityName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City1.CityName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency.CurrencyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Currency.CurrencyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DurationType.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DurationType.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TourImage.ImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TourImage.ImageURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Fullname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Fullname)
-        </dd>
-
-    </dl>
+                                <dd>
+                                    @Model.PostedDate.ToString("HH:mm dd.MM.yyyy")
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h4>Main Image</h4>
+                        <hr />
+                        <ul class="list-unstyled">
+                            <li>
+                                <img src="@Model.TourImage.ImageURL" />
+                            </li>
+                        </ul>
+                        <h4>Tour Images</h4>
+                        <hr />
+                        <ul class="list-unstyled">
+                            @{
+                                if (Model.TourImages.Count != 0)
+                                {
+                                    foreach (var image in Model.TourImages)
+                                    {
+                                        <li>
+                                            <img src="@image.ImageURL" />
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        N/A
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    <a class="mx-1" href="@Url.Action("edit", new { controller="tours", area="manage", id = Model.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
-        <i class="icon-note text-warning"></i>
-    </a>
-</p>
+
+    
