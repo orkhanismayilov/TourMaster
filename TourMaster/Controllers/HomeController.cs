@@ -21,7 +21,7 @@ namespace TourMaster.Controllers
                 Users = db.Users.ToList(),
                 Tours = db.Tours.Where(t => t.Status == 1).ToList(),
                 Categories = db.Categories.ToList(),
-                MostPopular = db.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.Bookings.Count).Take(3).ToList(),
+                MostPopular = db.Tours.Where(t => t.Status == 1 && t.Approved == 1).OrderByDescending(t => t.Bookings.Count).Take(3).ToList(),
                 BestGuides = db.Users.Where(u => u.AccountType == 1).OrderByDescending(u => u.OverallRating).Take(3).ToList()
             };
 

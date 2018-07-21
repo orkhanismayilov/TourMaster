@@ -38,6 +38,7 @@ namespace TourMaster.Models
         public string Description { get; set; }
         public System.DateTime PostedDate { get; set; }
         public int Status { get; set; }
+        public int Approved { get; set; }
     
         public virtual AccomodationLevel AccomodationLevel { get; set; }
         public virtual Accomodation Accomodation { get; set; }

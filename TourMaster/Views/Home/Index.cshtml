@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Origin.Title</title>
-    <link rel="icon" href="~/Public/images/logo/logo_orange_small.svg" type="image/svg">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900;subset=latin-ext">
     <link rel="stylesheet" href="~/public/css/fontawesome-all.min.css">
@@ -450,7 +449,7 @@
                                 <div class="tours-grid">
                                     <!-- Gutter Sizer -->
                                     <div class="gutter-sizer"></div>
-                                    @foreach (Tour tour in Model.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.PostedDate).Take(6))
+                                    @foreach (Tour tour in Model.Tours.Where(t => t.Status == 1 && t.Approved == 1).OrderByDescending(t => t.PostedDate).Take(6))
                                     {
                                         string[] tourCats = tour.Category.Split(',');
                                         string tourCatsAll = "";

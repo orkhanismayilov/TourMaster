@@ -97,14 +97,24 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Categories</label>
-                                <select class="form-control categories" name="categories[]" multiple>
-                                    @foreach (var category in ViewBag.Categories)
-                                    {
-                                        <option value="@category.Id" @(Model.Category.Contains(category.CategoryName.ToLower()) ? "selected" : "")>@category.CategoryName</option>
-                                    }
-                                </select>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Categories</label>
+                                        <select class="form-control categories" name="categories[]" multiple>
+                                            @foreach (var category in ViewBag.Categories)
+                                            {
+                                                <option value="@category.Id" @(Model.Category.Contains(category.CategoryName.ToLower()) ? "selected" : "")>@category.CategoryName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Transport</label>
+                                        <input class="form-control" type="text" name="vehicle" value="@Model.Vehicle" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -113,9 +123,10 @@
                                     <div class="form-group">
                                         <label class="control-label">Accomodation</label>
                                         <select class="form-control" name="accomodation">
+                                            <option value="" disabled selected>Accomodation</option>
                                             @foreach (var acc in ViewBag.Accomodations)
                                             {
-                                                <option value="@acc.Id" @(Model.AccomodationId == acc.Id?"selected":"")>@acc.AccomodationName</option>
+                                                <option value="@acc.Id" @(Model.AccomodationId == acc.Id ? "selected" : "")>@acc.AccomodationName</option>
                                             }
                                         </select>
                                     </div>
@@ -123,10 +134,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label @(Model.AccomodationId != 3?"text-muted":"")">Accomodation Level</label>
-                                        <select class="form-control" @(Model.AccomodationId != 3?"disabled":"") name="accomodationLvl">
+                                        <select class="form-control" @(Model.AccomodationId != 3 ? "disabled" : "") name="accomodationLvl">
                                             @foreach (var acclvl in ViewBag.AccomodationLvl)
                                             {
-                                                <option value="@acclvl.Id" @(Model.AccomodationLevelId == acclvl.Id?"selected":"")>@acclvl.Level</option>
+                                                <option value="@acclvl.Id" @(Model.AccomodationLevelId == acclvl.Id ? "selected" : "")>@acclvl.Level</option>
                                             }
                                         </select>
                                     </div>
@@ -135,147 +146,69 @@
                         </div>
                     </div>
                     <hr />
-
-
-
-
-
-                </form>
-                @*@using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="form-horizontal">
-
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.Id)
-
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.FromId, "From", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("FromId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.FromId, "", new { @class = "text-danger" })
-                                </div>
+                                <label class="control-label">Description</label>
+                                <textarea class="form-control" name="description" rows="10">@Model.Description</textarea>
                             </div>
-
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.DestinationId, "DestinationId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("DestinationId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.DestinationId, "", new { @class = "text-danger" })
-                                </div>
+                                <label class="control-label">Choose Images</label>
+                                <input class="form-control-file" type="file" name="images" multiple />
                             </div>
+                            <div id="form-group">
+                                <div id="dynamicImage">
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CurrencyId, "CurrencyId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("CurrencyId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CurrencyId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.DurationTypeId, "DurationTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("DurationTypeId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.DurationTypeId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.AccomodationId, "AccomodationId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("AccomodationId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.AccomodationId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.AccomodationLevelId, "AccomodationLevelId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("AccomodationLevelId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.AccomodationLevelId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Vehicle, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Vehicle, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Vehicle, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.MainImageId, "MainImageId", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("MainImageId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.MainImageId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PostedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PostedDate, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Save" class="btn btn-default" />
                                 </div>
                             </div>
                         </div>
-                    }*@
+                    </div>
+                    @if (Model.TourImages.Count > 0)
+                    {
+                        <hr />
+                        <ul class="list-inline" id="tourimages">
+                            @foreach (var image in Model.TourImages)
+                            {
+                                <li class="list-inline-item w-25 text-center @(image.Id == Model.MainImageId?"border border-success":"")" @(image.Id == Model.MainImageId?"data-toggle=tooltip data-placement=bottom title=Main-Image":"") data-img-id="@image.Id" data-tour-id="@Model.Id">
+                                    <div class="w-100 h-100 img" style="background-image: url(@image.ImageURL)"></div>
+                                    <i class="icon-close text-danger"></i>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    <hr />
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade text-center" id="warningModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-warning modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to set this photo as main image?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="confirm" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+        </div>
 
+    </div>
 
-
-
-
+</div>

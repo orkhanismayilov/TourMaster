@@ -35,13 +35,17 @@
 
                                 <dd>
                                     @{
-                                        if (Model.Status == 0)
+                                        if (Model.Approved == 0)
                                         {
-                                            <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
+                                            <i class="icon-close text-danger" data-toggle="tooltip" data-placement="bottom" title="Tour is not approved by Administration"></i>
+                                        }
+                                        else if (Model.Approved == 1 && Model.Status == 1)
+                                        {
+                                            <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
                                         }
                                         else
                                         {
-                                            <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
+                                            <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
                                         }
                                     }
                                 </dd>
@@ -74,7 +78,7 @@
                                 </dd>
 
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.Vehicle)
+                                    Transport
                                 </dt>
 
                                 <dd>
@@ -128,7 +132,7 @@
                         <hr />
                         <ul class="list-unstyled">
                             <li>
-                                <img src="@Model.TourImage.ImageURL" />
+                                <img src="@Model.TourImage.ImageURL" width="100%" />
                             </li>
                         </ul>
                         <h4>Tour Images</h4>
@@ -139,8 +143,8 @@
                                 {
                                     foreach (var image in Model.TourImages)
                                     {
-                                        <li>
-                                            <img src="@image.ImageURL" />
+                                        <li class="mb-3">
+                                            <img src="@image.ImageURL" width="100%" />
                                         </li>
                                     }
                                 }
@@ -159,4 +163,4 @@
     </div>
 </div>
 
-    
+

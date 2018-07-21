@@ -12,7 +12,7 @@
                 </h3>
             </div>
             <div class="card-body">
-                
+
                 <table class="table text-center">
                     <tr>
                         <th>
@@ -47,13 +47,17 @@
                         <tr>
                             <td>
                                 @{
-                                    if (item.Status == 0)
+                                    if (item.Approved == 0)
                                     {
-                                        <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
+                                        <i class="icon-close text-danger" data-toggle="tooltip" data-placement="bottom" title="Awaiting approvement"></i>
+                                    }
+                                    else if (item.Approved == 1 && item.Status == 1)
+                                    {
+                                        <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
                                     }
                                     else
                                     {
-                                        <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
+                                        <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
                                     }
                                 }
                             </td>
@@ -101,6 +105,11 @@
 
                                 }
                             </td>
+
+                            <td>
+                                @item.Vehicle
+                            </td>
+
                             <td>
                                 <a class="mx-1" href="@Url.Action("details", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
                                     <i class="icon-info text-info"></i>
@@ -109,7 +118,13 @@
                                     <i class="icon-note text-warning"></i>
                                 </a> |
                                 @{
-                                    if (item.Status == 1)
+                                    if (item.Approved == 0)
+                                    {
+                                        <a class="mx-1" data-toggle="tooltip" data-placement="bottom" title="Tour is not approved by Administration">
+                                            <i class="icon-ban text-muted"></i>
+                                        </a>
+                                    }
+                                    else if (item.Approved == 1 & item.Status == 1)
                                     {
                                         <a class="mx-1" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
                                             <i class="icon-ban text-danger"></i>

@@ -147,7 +147,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImageURL" Type="nvarchar" MaxLength="150" />
-          <Property Name="TourId" Type="int" Nullable="false" />
+          <Property Name="TourId" Type="int" />
         </EntityType>
         <EntityType Name="Tours">
           <Key>
@@ -169,6 +169,7 @@
           <Property Name="Description" Type="ntext" />
           <Property Name="PostedDate" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Approved" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -310,7 +311,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TourImages_Tours">
-          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="0..1" />
           <End Role="TourImages" Type="Self.TourImages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tours">
@@ -543,6 +544,8 @@
           <EntitySet Name="Currencies" EntityType="TourMaster.Currency" />
           <EntitySet Name="DurationTypes" EntityType="TourMaster.DurationType" />
           <EntitySet Name="Feedbacks" EntityType="TourMaster.Feedback" />
+          <EntitySet Name="Notifications" EntityType="TourMaster.Notification" />
+          <EntitySet Name="NotificationTypes" EntityType="TourMaster.NotificationType" />
           <EntitySet Name="Origins" EntityType="TourMaster.Origin" />
           <EntitySet Name="PrivateMessages" EntityType="TourMaster.PrivateMessage" />
           <EntitySet Name="TourImages" EntityType="TourMaster.TourImage" />
@@ -600,6 +603,14 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Feedback" EntitySet="Feedbacks" />
           </AssociationSet>
+          <AssociationSet Name="FK_Notifications_NotificationTypes" Association="TourMaster.FK_Notifications_NotificationTypes">
+            <End Role="NotificationType" EntitySet="NotificationTypes" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Users" Association="TourMaster.FK_Notifications_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
           <AssociationSet Name="FK_PrivateMessages_Users" Association="TourMaster.FK_PrivateMessages_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="PrivateMessage" EntitySet="PrivateMessages" />
@@ -619,16 +630,6 @@
           <AssociationSet Name="FK_Tours_Users" Association="TourMaster.FK_Tours_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Tour" EntitySet="Tours" />
-          </AssociationSet>
-          <EntitySet Name="NotificationTypes" EntityType="TourMaster.NotificationType" />
-          <EntitySet Name="Notifications" EntityType="TourMaster.Notification" />
-          <AssociationSet Name="FK_Notifications_NotificationTypes" Association="TourMaster.FK_Notifications_NotificationTypes">
-            <End Role="NotificationType" EntitySet="NotificationTypes" />
-            <End Role="Notification" EntitySet="Notifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Notifications_Users" Association="TourMaster.FK_Notifications_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccomodationLevel">
@@ -734,6 +735,29 @@
           <NavigationProperty Name="Tour" Relationship="TourMaster.FK_Feedbacks_Tours" FromRole="Feedback" ToRole="Tour" />
           <NavigationProperty Name="User" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="Feedback" ToRole="User" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NotificationType" Relationship="TourMaster.FK_Notifications_NotificationTypes" FromRole="Notification" ToRole="NotificationType" />
+          <NavigationProperty Name="User" Relationship="TourMaster.FK_Notifications_Users" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notifications" Relationship="TourMaster.FK_Notifications_NotificationTypes" FromRole="NotificationType" ToRole="Notification" />
+        </EntityType>
         <EntityType Name="Origin">
           <Key>
             <PropertyRef Name="Id" />
@@ -770,7 +794,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImageURL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="TourId" Type="Int32" />
           <NavigationProperty Name="Tour" Relationship="TourMaster.FK_TourImages_Tours" FromRole="TourImage" ToRole="Tour" />
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_TourImages" FromRole="TourImage" ToRole="Tour" />
         </EntityType>
@@ -794,6 +818,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PostedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Approved" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccomodationLevel" Relationship="TourMaster.FK_Tours_AccomodationLevels" FromRole="Tour" ToRole="AccomodationLevel" />
           <NavigationProperty Name="Accomodation" Relationship="TourMaster.FK_Tours_Accomodations" FromRole="Tour" ToRole="Accomodation" />
           <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Tours" FromRole="Tour" ToRole="Booking" />
@@ -827,10 +852,10 @@
           <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Users" FromRole="User" ToRole="Booking" />
           <NavigationProperty Name="City" Relationship="TourMaster.FK_Users_Cities" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="User" ToRole="Feedback" />
+          <NavigationProperty Name="Notifications" Relationship="TourMaster.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
           <NavigationProperty Name="PrivateMessages" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="User" ToRole="PrivateMessage" />
           <NavigationProperty Name="PrivateMessages1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="User" ToRole="PrivateMessage" />
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
-          <NavigationProperty Name="Notifications" Relationship="TourMaster.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
         </EntityType>
         <Association Name="FK_Tours_AccomodationLevels">
           <End Type="TourMaster.AccomodationLevel" Role="AccomodationLevel" Multiplicity="0..1" />
@@ -988,6 +1013,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Notifications_NotificationTypes">
+          <End Type="TourMaster.NotificationType" Role="NotificationType" Multiplicity="1" />
+          <End Type="TourMaster.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotificationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Users">
+          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
+          <End Type="TourMaster.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PrivateMessages_Users">
           <End Type="TourMaster.User" Role="User" Multiplicity="1" />
           <End Type="TourMaster.PrivateMessage" Role="PrivateMessage" Multiplicity="*" />
@@ -1013,7 +1062,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TourImages_Tours">
-          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
+          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="0..1" />
           <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tour">
@@ -1045,53 +1094,6 @@
             </Principal>
             <Dependent Role="Tour">
               <PropertyRef Name="GuideId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="NotificationType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Icon" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Notifications" Relationship="TourMaster.FK_Notifications_NotificationTypes" FromRole="NotificationType" ToRole="Notification" />
-        </EntityType>
-        <EntityType Name="Notification">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="NotificationType" Relationship="TourMaster.FK_Notifications_NotificationTypes" FromRole="Notification" ToRole="NotificationType" />
-          <NavigationProperty Name="User" Relationship="TourMaster.FK_Notifications_Users" FromRole="Notification" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Notifications_NotificationTypes">
-          <End Type="TourMaster.NotificationType" Role="NotificationType" Multiplicity="1" />
-          <End Type="TourMaster.Notification" Role="Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NotificationType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="NotificationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Notifications_Users">
-          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
-          <End Type="TourMaster.Notification" Role="Notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Notification">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1199,6 +1201,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="TourMaster.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationTypes">
+            <EntityTypeMapping TypeName="TourMaster.NotificationType">
+              <MappingFragment StoreEntitySet="NotificationTypes">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Origins">
             <EntityTypeMapping TypeName="TourMaster.Origin">
               <MappingFragment StoreEntitySet="Origins">
@@ -1241,6 +1265,7 @@
           <EntitySetMapping Name="Tours">
             <EntityTypeMapping TypeName="TourMaster.Tour">
               <MappingFragment StoreEntitySet="Tours">
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PostedDate" ColumnName="PostedDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1276,28 +1301,6 @@
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Fullname" ColumnName="Fullname" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NotificationTypes">
-            <EntityTypeMapping TypeName="TourMaster.NotificationType">
-              <MappingFragment StoreEntitySet="NotificationTypes">
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Notifications">
-            <EntityTypeMapping TypeName="TourMaster.Notification">
-              <MappingFragment StoreEntitySet="Notifications">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

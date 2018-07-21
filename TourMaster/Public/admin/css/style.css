@@ -14396,3 +14396,27 @@ body {
     breakpoint-lg: 992px;
     breakpoint-xl: 1200px
 }
+
+#tourimages li {
+    position: relative;
+    overflow: hidden;
+    height: 150px;
+    width: 150px !important;
+}
+
+    #tourimages li .img {
+        background-position: center;
+        background-size: cover;
+    }
+
+    #tourimages li i {
+        position: absolute;
+        top: 20px;
+        right: -5px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        transition: all .3s;
+        font-size: 24px;
+        transform: translate(-50%, -50%);
+    }
