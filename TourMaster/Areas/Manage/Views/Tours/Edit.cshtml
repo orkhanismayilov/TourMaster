@@ -20,7 +20,7 @@
                 }
                 <h4>@TourTitle</h4>
                 <hr />
-                <form action="" method="post" id="tour-edit">
+                <form action="@Url.Action("edit", new { controller = "tours", area = "manage", id = Model.Id })" method="post" id="tour-edit" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -112,7 +112,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Transport</label>
-                                        <input class="form-control" type="text" name="vehicle" value="@Model.Vehicle" />
+                                        <input class="form-control" type="text" name="transport" value="@Model.Vehicle" />
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Accomodation</label>
                                         <select class="form-control" name="accomodation">
-                                            <option value="" disabled selected>Accomodation</option>
+                                            <option value="" selected>Accomodation</option>
                                             @foreach (var acc in ViewBag.Accomodations)
                                             {
                                                 <option value="@acc.Id" @(Model.AccomodationId == acc.Id ? "selected" : "")>@acc.AccomodationName</option>
@@ -135,6 +135,7 @@
                                     <div class="form-group">
                                         <label class="control-label @(Model.AccomodationId != 3?"text-muted":"")">Accomodation Level</label>
                                         <select class="form-control" @(Model.AccomodationId != 3 ? "disabled" : "") name="accomodationLvl">
+                                            <option value="" selected>Accomodation Level</option>
                                             @foreach (var acclvl in ViewBag.AccomodationLvl)
                                             {
                                                 <option value="@acclvl.Id" @(Model.AccomodationLevelId == acclvl.Id ? "selected" : "")>@acclvl.Level</option>
@@ -195,7 +196,7 @@
     <div class="modal-dialog modal-warning modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title">Set Main Image</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -208,7 +209,25 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
         </div>
-
     </div>
+</div>
 
+<div class="modal fade text-center" id="deleteWarningModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-warning modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You want to delete this image. Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" id="confirmDelete" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -12,17 +12,17 @@ namespace TourMaster.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PrivateMessage
+    public partial class BookingRequest
     {
         public int Id { get; set; }
-        public int SenderId { get; set; }
-        public int RecieverId { get; set; }
-        public string Subject { get; set; }
+        public int TourId { get; set; }
+        public int UserId { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
         public string Message { get; set; }
-        public int ReadStatus { get; set; }
-        public System.DateTime Date { get; set; }
+        public int Status { get; set; }
     
+        public virtual Tour Tour { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace TourMaster.Models
     
         public virtual DbSet<AccomodationLevel> AccomodationLevels { get; set; }
         public virtual DbSet<Accomodation> Accomodations { get; set; }
+        public virtual DbSet<BookingRequest> BookingRequests { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }

@@ -19,6 +19,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AccomodationName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="BookingRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TourId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="ntext" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Bookings">
           <Key>
             <PropertyRef Name="Id" />
@@ -59,6 +71,7 @@
           <Property Name="Subject" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Message" Type="ntext" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -140,6 +153,7 @@
           <Property Name="Subject" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Message" Type="ntext" Nullable="false" />
           <Property Name="ReadStatus" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TourImages">
           <Key>
@@ -178,18 +192,43 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fullname" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Birthday" Type="datetime" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="CityId" Type="int" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProfileImage" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="OverallRating" Type="int" Nullable="false" />
           <Property Name="AccountType" Type="int" Nullable="false" />
+          <Property Name="RegisteredDate" Type="datetime" Nullable="false" />
           <Property Name="Facebook" Type="nvarchar" MaxLength="150" />
           <Property Name="Instagram" Type="nvarchar" MaxLength="150" />
           <Property Name="GooglePlus" Type="nvarchar" MaxLength="150" />
           <Property Name="Twitter" Type="nvarchar" MaxLength="150" />
         </EntityType>
+        <Association Name="FK_BookingRequests_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="BookingRequests" Type="Self.BookingRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingRequests">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingRequests_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="BookingRequests" Type="Self.BookingRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingRequests">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bookings_Currencies">
           <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
@@ -433,6 +472,7 @@
         <EntityContainer Name="TourMasterStoreContainer">
           <EntitySet Name="AccomodationLevels" EntityType="Self.AccomodationLevels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accomodations" EntityType="Self.Accomodations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingRequests" EntityType="Self.BookingRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
@@ -448,6 +488,14 @@
           <EntitySet Name="TourImages" EntityType="Self.TourImages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tours" EntityType="Self.Tours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookingRequests_Tours" Association="Self.FK_BookingRequests_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="BookingRequests" EntitySet="BookingRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingRequests_Users" Association="Self.FK_BookingRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BookingRequests" EntitySet="BookingRequests" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bookings_Currencies" Association="Self.FK_Bookings_Currencies">
             <End Role="Currencies" EntitySet="Currencies" />
             <End Role="Bookings" EntitySet="Bookings" />
@@ -536,6 +584,7 @@
         <EntityContainer Name="TourMasterEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccomodationLevels" EntityType="TourMaster.AccomodationLevel" />
           <EntitySet Name="Accomodations" EntityType="TourMaster.Accomodation" />
+          <EntitySet Name="BookingRequests" EntityType="TourMaster.BookingRequest" />
           <EntitySet Name="Bookings" EntityType="TourMaster.Booking" />
           <EntitySet Name="Categories" EntityType="TourMaster.Category" />
           <EntitySet Name="Cities" EntityType="TourMaster.City" />
@@ -558,6 +607,14 @@
           <AssociationSet Name="FK_Tours_Accomodations" Association="TourMaster.FK_Tours_Accomodations">
             <End Role="Accomodation" EntitySet="Accomodations" />
             <End Role="Tour" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingRequests_Tours" Association="TourMaster.FK_BookingRequests_Tours">
+            <End Role="Tour" EntitySet="Tours" />
+            <End Role="BookingRequest" EntitySet="BookingRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingRequests_Users" Association="TourMaster.FK_BookingRequests_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BookingRequest" EntitySet="BookingRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Currencies" Association="TourMaster.FK_Bookings_Currencies">
             <End Role="Currency" EntitySet="Currencies" />
@@ -648,6 +705,20 @@
           <Property Name="AccomodationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Accomodations" FromRole="Accomodation" ToRole="Tour" />
         </EntityType>
+        <EntityType Name="BookingRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tour" Relationship="TourMaster.FK_BookingRequests_Tours" FromRole="BookingRequest" ToRole="Tour" />
+          <NavigationProperty Name="User" Relationship="TourMaster.FK_BookingRequests_Users" FromRole="BookingRequest" ToRole="User" />
+        </EntityType>
         <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="Id" />
@@ -695,6 +766,7 @@
           <Property Name="Subject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -785,6 +857,7 @@
           <Property Name="Subject" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ReadStatus" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="PrivateMessage" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="PrivateMessage" ToRole="User" />
         </EntityType>
@@ -821,6 +894,7 @@
           <Property Name="Approved" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccomodationLevel" Relationship="TourMaster.FK_Tours_AccomodationLevels" FromRole="Tour" ToRole="AccomodationLevel" />
           <NavigationProperty Name="Accomodation" Relationship="TourMaster.FK_Tours_Accomodations" FromRole="Tour" ToRole="Accomodation" />
+          <NavigationProperty Name="BookingRequests" Relationship="TourMaster.FK_BookingRequests_Tours" FromRole="Tour" ToRole="BookingRequest" />
           <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Tours" FromRole="Tour" ToRole="Booking" />
           <NavigationProperty Name="City" Relationship="TourMaster.FK_Tours_Cities" FromRole="Tour" ToRole="City" />
           <NavigationProperty Name="City1" Relationship="TourMaster.FK_Tours_Cities1" FromRole="Tour" ToRole="City" />
@@ -838,17 +912,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Fullname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CityId" Type="Int32" Nullable="false" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProfileImage" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OverallRating" Type="Int32" Nullable="false" />
           <Property Name="AccountType" Type="Int32" Nullable="false" />
+          <Property Name="RegisteredDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Facebook" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Instagram" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="GooglePlus" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Twitter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookingRequests" Relationship="TourMaster.FK_BookingRequests_Users" FromRole="User" ToRole="BookingRequest" />
           <NavigationProperty Name="Bookings" Relationship="TourMaster.FK_Bookings_Users" FromRole="User" ToRole="Booking" />
           <NavigationProperty Name="City" Relationship="TourMaster.FK_Users_Cities" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="User" ToRole="Feedback" />
@@ -878,6 +954,30 @@
             </Principal>
             <Dependent Role="Tour">
               <PropertyRef Name="AccomodationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingRequests_Tours">
+          <End Type="TourMaster.Tour" Role="Tour" Multiplicity="1" />
+          <End Type="TourMaster.BookingRequest" Role="BookingRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingRequest">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingRequests_Users">
+          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
+          <End Type="TourMaster.BookingRequest" Role="BookingRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingRequest">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1119,6 +1219,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BookingRequests">
+            <EntityTypeMapping TypeName="TourMaster.BookingRequest">
+              <MappingFragment StoreEntitySet="BookingRequests">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="TourMaster.Booking">
               <MappingFragment StoreEntitySet="Bookings">
@@ -1154,6 +1267,7 @@
           <EntitySetMapping Name="ContactRequests">
             <EntityTypeMapping TypeName="TourMaster.ContactRequest">
               <MappingFragment StoreEntitySet="ContactRequests">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
@@ -1244,6 +1358,7 @@
           <EntitySetMapping Name="PrivateMessages">
             <EntityTypeMapping TypeName="TourMaster.PrivateMessage">
               <MappingFragment StoreEntitySet="PrivateMessages">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ReadStatus" ColumnName="ReadStatus" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
@@ -1292,6 +1407,7 @@
                 <ScalarProperty Name="GooglePlus" ColumnName="GooglePlus" />
                 <ScalarProperty Name="Instagram" ColumnName="Instagram" />
                 <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="RegisteredDate" ColumnName="RegisteredDate" />
                 <ScalarProperty Name="AccountType" ColumnName="AccountType" />
                 <ScalarProperty Name="OverallRating" ColumnName="OverallRating" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />

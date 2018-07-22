@@ -171,6 +171,9 @@
     <Compile Include="Models\Booking.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookingRequest.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -228,7 +231,7 @@
     <Compile Include="Models\TourImage.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TourCreateModel.cs" />
+    <Compile Include="Models\TourCreateEditModel.cs" />
     <Compile Include="Models\TourInfoModel.cs" />
     <Compile Include="Models\TourModel.cs" />
     <Compile Include="Models\User.cs">
@@ -844,7 +847,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Manage\Models\" />
-    <Folder Include="Areas\Manage\Views\Requests\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Database.edmx">
@@ -867,6 +869,7 @@
     <Content Include="Areas\Manage\Views\Tours\Details.cshtml" />
     <Content Include="Areas\Manage\Views\Tours\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Tours\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Requests\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\css\style.css.map" />
     <Content Include="Public\sass\style.scss" />

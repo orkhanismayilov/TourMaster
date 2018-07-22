@@ -138,12 +138,12 @@
             <nav class="sidebar-nav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("index", new { controller="tours", area="manage", id = guide.Id } )">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "tours", area = "manage", id = guide.Id } )">
                             <i class="nav-icon icon-globe text-info"></i> Tours
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="typography.html">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "requests", area = "manage", id = guide.Id })">
                             <i class="nav-icon icon-hourglass text-warning"></i> Requests
                         </a>
                     </li>

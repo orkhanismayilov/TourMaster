@@ -1,5 +1,12 @@
 ﻿@using TourMaster.Models;
 @model TourMaster.Models.ViewModel
+@{
+    User user = null;
+    if (Session["User"] != null)
+    {
+        user = Session["User"] as User;
+    }
+}
 
 <!DOCTYPE html>
 
@@ -64,19 +71,18 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     @{
-                        if (Session["User"] != null)
+                        if (user != null)
                         {
-                            User logedUser = Session["user"] as User;
-                            string userinitials = logedUser.Fullname.Split(' ')[0] + " " + logedUser.Fullname.Split(' ')[1][0] + ".";
+                            string userinitials = user.Fullname.Split(' ')[0] + " " + user.Fullname.Split(' ')[1][0] + ".";
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="notifications-dropdown" role="button" data-toggle="dropdown">
-                                    <i class="fas fa-bell @(logedUser.Notifications.Count != 0?"text-danger":"")"></i><span class="badge @(logedUser.Notifications.Count !=0?"badge-danger":"badge-secondary")">@(logedUser.Notifications.Count != 0 ? logedUser.Notifications.Count : 0)</span>
+                                    <i class="fas fa-bell @(user.Notifications.Count != 0?"text-danger":"")"></i><span class="badge @(user.Notifications.Count !=0?"badge-danger":"badge-secondary")">@(user.Notifications.Count != 0 ? user.Notifications.Count : 0)</span>
                                 </a>
                                 <div class="dropdown-menu">
                                     @{
-                                        if (logedUser.Notifications.Count != 0)
+                                        if (user.Notifications.Count != 0)
                                         {
-                                            foreach (Notification noti in logedUser.Notifications.OrderByDescending(n => n.Date).Take(10))
+                                            foreach (Notification noti in user.Notifications.OrderByDescending(n => n.Date).Take(10))
                                             {
                                                 <a class="dropdown-item" data-noti-id="@noti.Id">
                                                     <i class="@noti.NotificationType.Icon text-@noti.NotificationType.Color d-inline-block mr-2"></i>
@@ -85,16 +91,16 @@
                                             }
                                         }
                                     }
-                                    <a href="#" class="dropdown-item" data-user-id="@logedUser.Id">See all notifications</a>
+                                    <a href="#" class="dropdown-item" data-user-id="@user.Id">See all notifications</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="profile-dropdown" role="button" data-toggle="dropdown">
-                                    <img class="rounded-circle" src="@logedUser.ProfileImage" />
+                                    <img class="rounded-circle" src="@user.ProfileImage" />
                                     <p class="user-initials ml-2">@userinitials</p>
                                 </a>
                                 <div class="dropdown-menu">
-                                    @if (logedUser.AccountType == 1)
+                                    @if (user.AccountType == 1)
                                     {
                                         <a class="dropdown-item" href="@Url.Action("index", new { controller="home", area="manage" })">Dashboard</a>
                                     }
@@ -132,7 +138,7 @@
                 <div class="modal-content">
                     <div class="modal-body" id="signup-form-body">
                         <div class="signup-form-heading text-center">
-                            <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="40%"/>
+                            <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="40%" />
                             <h1 class="text-uppercase text-center">welcome</h1>
                             <p class="text-uppercase text-center">
                                 Fill the form and start
@@ -564,7 +570,6 @@
                                                         <i class="fal fa-at"></i>
                                                     </p>
                                                     @{
-                                                        User user = Session["User"] as User;
                                                         if (user != null)
                                                         {
                                                             <button class="btn btn-outline-info" id="pm-guide" data-user-id="@user.Id">Write a Private Message</button>
@@ -580,15 +585,12 @@
                                         </div>
                                         <!-- Tour Feedbacks -->
                                         <div class="tour-feedbacks-wrapper">
-                                            @if (Session["User"] != null)
+                                            @if (user != null && user.AccountType == 0)
                                             {
                                                 <form action="@Url.Action("submitfeedback", "home")" method="post" id="submit-feedback">
                                                     <h4 class="feedback-heading text-capitalize">Leave your feedback</h4>
                                                     <input type="number" name="TourId" value="" hidden />
-                                                    @{
-                                                        User usr = Session["User"] as User;
-                                                    }
-                                                    <input type="number" name="UserId" value="@usr.Id" hidden />
+                                                    <input type="number" name="UserId" value="@user.Id" hidden />
                                                     <select id="tour-rating">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -630,11 +632,16 @@
                                             <p class="tour-accomodation" title="Accomodation">
                                                 <i class="fal fa-home"></i>
                                             </p>
-                                            <h5 class="text-center">Available Dates</h5>
-                                            <div class="tour-available-dates jalendar"></div>
-                                            <span class="d-block" id="send-request-button-wrapper" tab-index="0">
-                                                <button class="btn btn-outline-info btn-block" id="send-tour-request" style="pointer-events: none;" disabled>Send a Request</button>
-                                            </span>
+                                            @{
+                                                if (user != null && user.AccountType == 0)
+                                                {
+                                                    <h5 class="text-center">Available Dates</h5>
+                                                    <div class="tour-available-dates jalendar"></div>
+                                                    <span class="d-block" id="send-request-button-wrapper" tab-index="0">
+                                                        <button class="btn btn-outline-info btn-block" id="send-tour-request" style="pointer-events: none;" disabled>Send a Request</button>
+                                                    </span>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -688,11 +695,12 @@
                         <div class="tour-request-form-heading">
                             <h3 class="text-uppercase text-center">Send a request for booking</h3>
                         </div>
-                        <form action="" method="post" id="tour-request-guide">
+                        <form action="@Url.Action("bookingrequest", "home")" method="post" id="tour-request-guide">
+                            <input name="UserId" value="@(user != null?user.Id:-1)" hidden />
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <input class="form-control" type="date" name="start-date" id="start-date" readonly>
+                                        <input class="form-control" type="date" name="startdate" id="start-date" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -700,12 +708,12 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <input class="form-control" type="date" name="end-date" id="end-date" readonly>
+                                        <input class="form-control" type="date" name="enddate" id="end-date" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="request-text" id="request-text" cols="30" rows="10" placeholder="Request message..."></textarea>
+                                <textarea class="form-control" name="message" id="request-text" cols="30" rows="10" placeholder="Request message..."></textarea>
                             </div>
                             <div class="form-button mt-3 text-center">
                                 <button class="btn btn-success text-uppercase" type="submit">send</button>
@@ -1007,7 +1015,7 @@
                         <h4 class="about-guides-slider-title text-uppercase text-center mb-5">Guides from all over the world</h4>
                         <!-- Guides Slider Start -->
                         <div class="owl-carousel about-guides-slider">
-                            @foreach (User guide in Model.Users.Where(u => u.AccountType != 2))
+                            @foreach (User guide in Model.Users.Where(u => u.AccountType == 1))
                             {
                                 <!-- Guide Item Start -->
                                 <div class="guide-item-wrapper">

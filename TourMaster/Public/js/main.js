@@ -736,7 +736,6 @@ $(document).ready(function () {
         function btnShow() {
             $('#send-request-button-wrapper').tooltip("disable");
             $("#send-tour-request").removeAttr("disabled style");
-            console.log($(".tour-available-dates input.first-range-data").val(), $(".tour-available-dates input.last-range-data").val());
         }
 
         // Tour View Feedback Rating
@@ -795,6 +794,49 @@ $(document).ready(function () {
             $("#tour-request-modal").animateCss("fadeIn", function () {
                 $("#tour-request-modal").removeClass("animated fadeIn");
             });
+        });
+
+        // Tour Request Form Submit
+        $("form#tour-request-guide").on("submit", function () {
+            var that = $(this);
+            url = that.attr("action");
+            method = that.attr("method");
+            request = {};
+
+            that.find("[name]").each(function (index, value) {
+                var that = $(this);
+                name = that.attr("name");
+                value = that.val();
+
+                request[name] = value;
+            });
+
+            request["TourId"] = $("input[name='TourId']").val();
+            console.log(request);
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: request,
+                dataType: "json",
+                success: function (data) {
+                    if (data === 0) {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong! Please, try later!'
+                        });
+                    } else {
+                        swal({
+                            type: 'success',
+                            title: 'Success',
+                            text: 'Thank you for request! Guide will get back to you soon.'
+                        });
+                    }
+                }
+            });
+
+            return false;
         });
 
         // Tour Request Modal Hide

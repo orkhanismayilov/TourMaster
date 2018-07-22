@@ -4,150 +4,152 @@
     <div class="col-12">
         <div class="card border-primary">
             <div class="card-header">
-                <h2 class="d-inline-block">My Tours</h2>
-                <h3 class="d-inline-block ml-3">
-                    <a href="@Url.Action("create", new { controller = "tours", area="manage" })" data-toggle="tooltip" data-placement="bottom" title="Create New">
-                        <i class="icon-plus text-success"></i>
+                <h2>
+                    My Tours
+                    <a class="mx-1" href="@Url.Action("create", new { controller = "tours", area="manage" })" data-toggle="tooltip" data-placement="bottom" title="Create New">
+                        <i class="icon-plus text-success text-value-sm"></i>
                     </a>
-                </h3>
+                </h2>
             </div>
             <div class="card-body">
-
-                <table class="table text-center">
-                    <tr>
-                        <th>
-                            Status
-                        </th>
-                        <th>
-                            Destination
-                        </th>
-                        <th>
-                            Country
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Duration
-                        </th>
-                        <th>
-                            Accomodation
-                        </th>
-                        <th>
-                            Transport
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @foreach (var item in Model)
-                    {
+                <table class="table table-responsive-sm text-center">
+                    <thead>
                         <tr>
-                            <td>
-                                @{
-                                    if (item.Approved == 0)
-                                    {
-                                        <i class="icon-close text-danger" data-toggle="tooltip" data-placement="bottom" title="Awaiting approvement"></i>
-                                    }
-                                    else if (item.Approved == 1 && item.Status == 1)
-                                    {
-                                        <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
-                                    }
-                                }
-                            </td>
-                            <td>
-                                @{
-                                    if (item.FromId == item.DestinationId)
-                                    {
-                                        @item.City.CityName
-                                    }
-                                    else
-                                    {
-                                        @(item.City.CityName + " - " + item.City1.CityName)
-                                    }
-                                }
-                            </td>
-                            <td>
-                                <span class="flag-icon flag-icon-@item.City1.Country.CountryCode"></span> @item.City1.Country.CountryName
-                            </td>
-                            <td>
-                                @(item.Price.ToString("#.##") + " " + item.Currency.CurrencyName)
-                            </td>
-                            <td>
-                                @item.PostedDate.ToString("HH:mm dd.MM.yyyy")
-                            </td>
-                            <td>
-                                @(item.Duration + " " + item.DurationType.Type)
-                            </td>
-                            <td>
-                                @{
-                                    if (item.AccomodationId != null)
-                                    {
-                                        if (item.AccomodationId == 3)
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Destination
+                            </th>
+                            <th>
+                                Country
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Duration
+                            </th>
+                            <th>
+                                Accomodation
+                            </th>
+                            <th>
+                                Transport
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @{
+                                        if (item.Approved == 0)
                                         {
-                                            @(item.AccomodationLevel.Level + " " + item.Accomodation.AccomodationName)
+                                            <i class="icon-close text-danger" data-toggle="tooltip" data-placement="bottom" title="Awaiting approvement"></i>
+                                        }
+                                        else if (item.Approved == 1 && item.Status == 1)
+                                        {
+                                            <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
                                         }
                                         else
                                         {
-                                            @item.Accomodation.AccomodationName
+                                            <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
                                         }
                                     }
-                                    else
-                                    {
-                                        @:N/A
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.FromId == item.DestinationId)
+                                        {
+                                            @item.City.CityName
+                                        }
+                                        else
+                                        {
+                                            @(item.City.CityName + " - " + item.City1.CityName)
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    <span class="flag-icon flag-icon-@item.City1.Country.CountryCode"></span> @item.City1.Country.CountryName
+                                </td>
+                                <td>
+                                    @(item.Price.ToString("#.##") + " " + item.Currency.CurrencyName)
+                                </td>
+                                <td>
+                                    @item.PostedDate.ToString("HH:mm dd.MM.yyyy")
+                                </td>
+                                <td>
+                                    @(item.Duration + " " + item.DurationType.Type)
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.AccomodationId != null)
+                                        {
+                                            if (item.AccomodationId == 3)
+                                            {
+                                                @(item.AccomodationLevel.Level + " " + item.Accomodation.AccomodationName)
+                                            }
+                                            else
+                                            {
+                                                @item.Accomodation.AccomodationName
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @:N/A
+                                        }
+
+                                    }
+                                </td>
+
+                                <td>
+                                    @item.Vehicle
+                                </td>
+
+                                <td>
+                                    <a class="mx-1" href="@Url.Action("details", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
+                                        <i class="icon-info text-info"></i>
+                                    </a> |
+                                    <a class="mx-1" href="@Url.Action("edit", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                                        <i class="icon-note text-warning"></i>
+                                    </a> |
+                                    @{
+                                        if (item.Approved == 0)
+                                        {
+                                            <a class="mx-1" data-toggle="tooltip" data-placement="bottom" title="Tour is not approved by Administration">
+                                                <i class="icon-ban text-muted"></i>
+                                            </a>
+                                        }
+                                        else if (item.Approved == 1 & item.Status == 1)
+                                        {
+                                            <a class="mx-1" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
+                                                <i class="icon-ban text-danger"></i>
+                                            </a>
+                                            <a class="mx-1" style="display: none" href="@Url.Action("activate", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Activate">
+                                                <i class="icon-key text-success"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="mx-1" style="display: none" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
+                                                <i class="icon-ban text-danger"></i>
+                                            </a>
+                                            <a class="mx-1" href="@Url.Action("activate", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Activate">
+                                                <i class="icon-key text-success"></i>
+                                            </a>
+                                        }
                                     }
 
-                                }
-                            </td>
-
-                            <td>
-                                @item.Vehicle
-                            </td>
-
-                            <td>
-                                <a class="mx-1" href="@Url.Action("details", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
-                                    <i class="icon-info text-info"></i>
-                                </a> |
-                                <a class="mx-1" href="@Url.Action("edit", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                                    <i class="icon-note text-warning"></i>
-                                </a> |
-                                @{
-                                    if (item.Approved == 0)
-                                    {
-                                        <a class="mx-1" data-toggle="tooltip" data-placement="bottom" title="Tour is not approved by Administration">
-                                            <i class="icon-ban text-muted"></i>
-                                        </a>
-                                    }
-                                    else if (item.Approved == 1 & item.Status == 1)
-                                    {
-                                        <a class="mx-1" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
-                                            <i class="icon-ban text-danger"></i>
-                                        </a>
-                                        <a class="mx-1" style="display: none" href="@Url.Action("activate", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Activate">
-                                            <i class="icon-key text-success"></i>
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a class="mx-1" style="display: none" href="@Url.Action("disable", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disable">
-                                            <i class="icon-ban text-danger"></i>
-                                        </a>
-                                        <a class="mx-1" href="@Url.Action("activate", new { controller="tours", area="manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Activate">
-                                            <i class="icon-key text-success"></i>
-                                        </a>
-                                    }
-                                }
-
-                            </td>
-                        </tr>
-                    }
-
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -160,7 +162,7 @@
 
 
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-success" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-success" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center">Disable Tour</h4>
@@ -178,8 +180,27 @@
     </div>
 </div>
 
+<div class="modal fade" id="successModalActivate" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Activate Tour</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Your tour successfully activated. Now it will be visible on website!</p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-warning" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-warning" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center">Disable Tour</h4>
@@ -201,7 +222,7 @@
 </div>
 
 <div class="modal fade" id="dangerModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-danger" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center">Disable Tour</h4>

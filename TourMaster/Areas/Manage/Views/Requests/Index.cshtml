@@ -1,0 +1,68 @@
+﻿@using TourMaster.Models;
+@model IEnumerable<TourMaster.Models.BookingRequest>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>
+            Requests
+            <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(br => br.Status == 0).Count()</span>
+        </h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive-sm text-center">
+            <thead>
+                <tr>
+                    <th>Tour</th>
+                    <th>User</th>
+                    <th>Dates</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BookingRequest br in Model.OrderBy(br => br.Status).OrderByDescending(br => br.Id))
+                {
+                    string TourTitle = "";
+                    if (br.Tour.FromId == br.Tour.DestinationId)
+                    {
+                        TourTitle = br.Tour.City.CityName + " Tour";
+                    }
+                    else
+                    {
+                        TourTitle = br.Tour.City.CityName + " - " + br.Tour.City1.CityName + " Tour";
+                    }
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("details", new { controller = "tours", area = "manage", id = br.TourId })">@TourTitle</a>
+                        </td>
+                        <td>
+                            <a href="">@br.User.Fullname</a>
+                        </td>
+                        <td>@br.StartDate.ToString("dd.MM.yyyy") - @br.EndDate.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            @if (br.Status == 0)
+                            {
+                                <span class="badge badge-warning">Inactive</span>
+                            }
+                            else if (br.Status == 1)
+                            {
+                                <span class="badge bagde-success">Confirmed</span>
+                            }
+                            else if (br.Status == 2)
+                            {
+                                <span class="badge badge-secondary">Rejected</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Cancelled</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -40,11 +40,12 @@ $(document).ready(function () {
             method: "get",
             dataType: "json",
             success: function (data) {
-                if (data == 1) {
+                if (data == 0) {
+                    $("#dangerModal").modal('show');
+                } else {
+                    $("#successModalActivate").modal('show');
                     that.hide().prev().show();
                     that.parent().parent().find("i[data-original-title='Inactive']").removeClass("icon-close text-warning").addClass("icon-check text-success").attr("data-original-title", "Active");
-                } else {
-                    $("#dangerModal").modal('show');
                 }
             }
         });
@@ -128,9 +129,23 @@ $(document).ready(function () {
         });
     });
 
-    // Delete Image
+    // Tour Image Delete
     $("#tourimages li i").on("click", function () {
-        console.log("test");
-    });
+        var that = $(this);
+        $("#deleteWarningModal").modal('show');
+        $("#confirmDelete").on("click", function () {
+            url = "/manage/tours/deletetourimage/" + that.parent().data("img-id");
 
+            $.ajax({
+                url: url,
+                method: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        that.parent().remove();
+                    }
+                }
+            });
+        });
+    });
 });

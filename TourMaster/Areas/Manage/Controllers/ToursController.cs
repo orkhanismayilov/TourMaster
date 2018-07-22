@@ -60,7 +60,7 @@ namespace TourMaster.Areas.Manage.Controllers
 
         // POST: Manage/Tours/Create
         [HttpPost]
-        public ActionResult Create(TourCreateModel tour)
+        public ActionResult Create(TourCreateEditModel tour)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace TourMaster.Areas.Manage.Controllers
                     Category = String.Join(",", Categories.ToArray()),
                     Duration = tour.Duration,
                     DurationTypeId = tour.DurationType,
-                    AccomodationId = tour.Accomodation != null?tour.Accomodation:null,
+                    AccomodationId = tour.Accomodation != null ? tour.Accomodation : null,
                     AccomodationLevelId = tour.AccomodationLvl != null ? tour.AccomodationLvl : null,
                     Vehicle = tour.Transport,
                     Description = tour.Description,
@@ -147,37 +147,88 @@ namespace TourMaster.Areas.Manage.Controllers
         }
 
         // POST: Manage/Tours/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GuideId,FromId,DestinationId,Price,CurrencyId,Category,Duration,DurationTypeId,AccomodationId,AccomodationLevelId,Vehicle,MainImageId,Description,PostedDate,Status")] Tour tour)
+        public ActionResult Edit(TourCreateEditModel tour, int Id)
         {
+            Tour thisTour = db.Tours.Find(Id);
+            List<string> Categories = new List<string>();
+            foreach (int catId in tour.Categories)
+            {
+                Categories.Add(db.Categories.Find(catId).CategoryName.ToLower());
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(tour).State = EntityState.Modified;
+                thisTour.FromId = tour.FromCity;
+                thisTour.DestinationId = tour.DestCity;
+                thisTour.Price = (decimal)tour.Price;
+                thisTour.CurrencyId = tour.Currency;
+                thisTour.Duration = tour.Duration;
+                thisTour.DurationTypeId = tour.DurationType;
+                thisTour.Category = String.Join(",", Categories.ToArray());
+                thisTour.AccomodationId = tour.Accomodation != null ? tour.Accomodation : null;
+                thisTour.AccomodationLevelId = tour.AccomodationLvl != null ? tour.AccomodationLvl : null;
+                thisTour.Vehicle = tour.Transport;
+                thisTour.Description = tour.Description;
+                thisTour.Approved = 0;
+
+                db.Entry(thisTour).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            ViewBag.AccomodationLevelId = new SelectList(db.AccomodationLevels, "Id", "Level", tour.AccomodationLevelId);
-            ViewBag.AccomodationId = new SelectList(db.Accomodations, "Id", "AccomodationName", tour.AccomodationId);
-            ViewBag.FromId = new SelectList(db.Cities, "Id", "CityName", tour.FromId);
-            ViewBag.DestinationId = new SelectList(db.Cities, "Id", "CityName", tour.DestinationId);
-            ViewBag.CurrencyId = new SelectList(db.Currencies, "Id", "CurrencyName", tour.CurrencyId);
-            ViewBag.DurationTypeId = new SelectList(db.DurationTypes, "Id", "Type", tour.DurationTypeId);
-            ViewBag.MainImageId = new SelectList(db.TourImages, "Id", "ImageURL", tour.MainImageId);
-            ViewBag.GuideId = new SelectList(db.Users, "Id", "Fullname", tour.GuideId);
-            return View(tour);
+
+            if (tour.Images.Count > 0)
+            {
+                foreach (HttpPostedFileBase img in tour.Images)
+                {
+                    string fileName = tour.GuideId + DateTime.Now.ToString("yyyyMMddHHmmss") + img.FileName;
+                    string path = System.IO.Path.Combine(Server.MapPath("~/uploads"), fileName);
+                    img.SaveAs(path);
+                    string image = "/uploads/" + fileName;
+                    TourImage tourImage = new TourImage
+                    {
+                        ImageURL = image,
+                        TourId = thisTour.Id,
+                    };
+                    db.TourImages.Add(tourImage);
+                    db.SaveChanges();
+                }
+            }
+
+            return View(thisTour);
         }
 
         [HttpPost]
-        public JsonResult SetMainImage(int TourId, int ImageId) {
+        public JsonResult SetMainImage(int TourId, int ImageId)
+        {
             Tour tour = db.Tours.Find(TourId);
             tour.MainImageId = ImageId;
             db.SaveChanges();
 
             return Json(1, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult DeleteTourImage(int Id)
+        {
+            TourImage timg = db.TourImages.Find(Id);
+            Tour tour = db.Tours.FirstOrDefault(t => t.MainImageId == Id);
+            if (tour != null)
+            {
+                tour.MainImageId = 1;
+            }
+            timg.TourId = null;
+            db.SaveChanges();
+            string path = Server.MapPath(timg.ImageURL);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+            db.TourImages.Remove(timg);
+            db.SaveChanges();
+
+            return Json(1, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpGet]
         public JsonResult Disable(int? Id)

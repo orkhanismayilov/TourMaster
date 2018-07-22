@@ -21,5 +21,6 @@ namespace TourMaster.Models
         public string Subject { get; set; }
         public string Message { get; set; }
         public int Status { get; set; }
+        public System.DateTime Date { get; set; }
     }
 }

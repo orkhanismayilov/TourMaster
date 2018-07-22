@@ -17,6 +17,7 @@ namespace TourMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tour()
         {
+            this.BookingRequests = new HashSet<BookingRequest>();
             this.Bookings = new HashSet<Booking>();
             this.Feedbacks = new HashSet<Feedback>();
             this.TourImages = new HashSet<TourImage>();
@@ -42,6 +43,8 @@ namespace TourMaster.Models
     
         public virtual AccomodationLevel AccomodationLevel { get; set; }
         public virtual Accomodation Accomodation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookingRequest> BookingRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual City City { get; set; }

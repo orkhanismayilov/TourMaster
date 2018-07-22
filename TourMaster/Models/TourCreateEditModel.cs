@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TourMaster.Models
 {
-    public class TourCreateModel
+    public class TourCreateEditModel
     {
         public int GuideId { get; set; }
         public int FromCity { get; set; }

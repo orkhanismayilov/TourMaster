@@ -17,6 +17,7 @@ namespace TourMaster.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.BookingRequests = new HashSet<BookingRequest>();
             this.Bookings = new HashSet<Booking>();
             this.Feedbacks = new HashSet<Feedback>();
             this.Notifications = new HashSet<Notification>();
@@ -35,11 +36,14 @@ namespace TourMaster.Models
         public string ProfileImage { get; set; }
         public int OverallRating { get; set; }
         public int AccountType { get; set; }
+        public System.DateTime RegisteredDate { get; set; }
         public string Facebook { get; set; }
         public string Instagram { get; set; }
         public string GooglePlus { get; set; }
         public string Twitter { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookingRequest> BookingRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual City City { get; set; }

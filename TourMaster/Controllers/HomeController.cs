@@ -53,7 +53,9 @@ namespace TourMaster.Controllers
                             Password = Crypto.HashPassword(signUpForm.Password),
                             Phone = signUpForm.Phone,
                             AccountType = signUpForm.AccountTypeId,
-                            CityId = signUpForm.CityId
+                            CityId = signUpForm.CityId,
+                            ProfileImage = "/public/images/profile_placeholder.png",
+                            OverallRating = 0
                         };
                         db.Users.Add(newuser);
                         db.SaveChanges();
@@ -409,6 +411,27 @@ namespace TourMaster.Controllers
             return Json("error", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult BookingRequest(int TourId, int UserId, DateTime StartDate, DateTime EndDate, string Message)
+        {
+            if (!String.IsNullOrWhiteSpace(TourId.ToString()) && !String.IsNullOrWhiteSpace(UserId.ToString()) && !String.IsNullOrWhiteSpace(Message) && StartDate != null && EndDate != null)
+            {
+                BookingRequest bookingRequest = new BookingRequest
+                {
+                    TourId = TourId,
+                    UserId = UserId,
+                    StartDate = StartDate,
+                    EndDate = EndDate,
+                    Message = Message,
+                    Status = 0
+                };
+                db.BookingRequests.Add(bookingRequest);
+                db.SaveChanges();
 
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
     }
 }
