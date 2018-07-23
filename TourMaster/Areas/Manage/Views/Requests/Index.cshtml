@@ -1,5 +1,5 @@
-﻿@using TourMaster.Models;
-@model IEnumerable<TourMaster.Models.BookingRequest>
+﻿@using TourMaster.Models
+@model IEnumerable<BookingRequest>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,12 @@
     <div class="card-header">
         <h2>
             Requests
-            <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(br => br.Status == 0).Count()</span>
+            @{
+                if (Model.Where(br => br.Status == 0).Count() > 0)
+                {
+                    <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(br => br.Status == 0).Count()</span>
+                }
+            }
         </h2>
     </div>
     <div class="card-body">
@@ -17,7 +22,7 @@
             <thead>
                 <tr>
                     <th>Tour</th>
-                    <th>User</th>
+                    <th>Traveler</th>
                     <th>Dates</th>
                     <th></th>
                 </tr>
@@ -39,13 +44,19 @@
                             <a href="@Url.Action("details", new { controller = "tours", area = "manage", id = br.TourId })">@TourTitle</a>
                         </td>
                         <td>
-                            <a href="">@br.User.Fullname</a>
+                            <a href="" role="button">@br.User.Fullname</a>
                         </td>
                         <td>@br.StartDate.ToString("dd.MM.yyyy") - @br.EndDate.ToString("dd.MM.yyyy")</td>
                         <td>
                             @if (br.Status == 0)
                             {
                                 <span class="badge badge-warning">Inactive</span>
+                                <a class="mx-1" href="@Url.Action("confirmbooking", new { controller = "requests", area = "manage", id = br.Id })" data-toggle="tooltip" data-placement="bottom" title="Confirm">
+                                    <i class="icon-check text-success"></i>
+                                </a> @:|
+                                <a class="mx-1" href="@Url.Action("rejectbooking", new { controller = "requests", area = "manage", id = br.Id })" data-toggle="tooltip" data-placement="bottom" title="Reject">
+                                    <i class="icon-close text-danger"></i>
+                                </a>
                             }
                             else if (br.Status == 1)
                             {

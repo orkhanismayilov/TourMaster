@@ -152,6 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manage\Controllers\BookingsController.cs" />
     <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\Controllers\LoginController.cs" />
     <Compile Include="Areas\Manage\Controllers\RequestsController.cs" />
@@ -870,6 +871,7 @@
     <Content Include="Areas\Manage\Views\Tours\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Tours\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Requests\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Bookings\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\css\style.css.map" />
     <Content Include="Public\sass\style.scss" />

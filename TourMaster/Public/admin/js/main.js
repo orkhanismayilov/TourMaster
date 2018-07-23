@@ -22,7 +22,7 @@ $(document).ready(function () {
                     } else {
                         $("#successModal").modal('show');
                         that.hide().next().show();
-                        that.parent().parent().find("i[data-original-title='Active']").removeClass("icon-check text-success").addClass("icon-close text-warning").attr("data-original-title", "Inactive");
+                        that.parent().find("span.badge-success").removeClass("badge-success").addClass("badge-warning").text("Inactive");
                     }
                 }
             });
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 } else {
                     $("#successModalActivate").modal('show');
                     that.hide().prev().show();
-                    that.parent().parent().find("i[data-original-title='Inactive']").removeClass("icon-close text-warning").addClass("icon-check text-success").attr("data-original-title", "Active");
+                    that.parent().find("span.badge-warning").removeClass("badge-warning").addClass("badge-success").text("Active");
                 }
             }
         });
@@ -147,5 +147,23 @@ $(document).ready(function () {
                 }
             });
         });
+    });
+
+    // Booking Request Confirm
+    $("a[data-original-title='Confirm']").on("click", function () {
+        var that = $(this);
+        url = that.attr("href");
+
+        $.ajax({
+            url: url,
+            method: "post",
+            dataType: "json",
+            success: function (data) {
+
+
+            }
+        });
+
+        return false;
     });
 });

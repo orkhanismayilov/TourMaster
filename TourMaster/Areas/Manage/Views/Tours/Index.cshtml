@@ -16,10 +16,7 @@
                     <thead>
                         <tr>
                             <th>
-                                Status
-                            </th>
-                            <th>
-                                Destination
+                                Tour
                             </th>
                             <th>
                                 Country
@@ -47,22 +44,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    @{
-                                        if (item.Approved == 0)
-                                        {
-                                            <i class="icon-close text-danger" data-toggle="tooltip" data-placement="bottom" title="Awaiting approvement"></i>
-                                        }
-                                        else if (item.Approved == 1 && item.Status == 1)
-                                        {
-                                            <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
-                                        }
-                                        else
-                                        {
-                                            <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
-                                        }
-                                    }
-                                </td>
+
                                 <td>
                                     @{
                                         if (item.FromId == item.DestinationId)
@@ -113,6 +95,20 @@
                                 </td>
 
                                 <td>
+                                    @{
+                                        if (item.Approved == 0)
+                                        {
+                                            <span class="badge badge-danger">Not Approved</span>
+                                        }
+                                        else if (item.Approved == 1 && item.Status == 1)
+                                        {
+                                            <span class="badge badge-success">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning">Inactive</span>
+                                        }
+                                    }
                                     <a class="mx-1" href="@Url.Action("details", new { controller = "tours", area = "manage", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Details">
                                         <i class="icon-info text-info"></i>
                                     </a> |
@@ -145,7 +141,6 @@
                                             </a>
                                         }
                                     }
-
                                 </td>
                             </tr>
                         }
@@ -156,6 +151,23 @@
     </div>
 </div>
 
+
+@*<td>
+        @{
+            if (item.Approved == 0)
+            {
+                <i class="icon-close text-danger" data-toggle="tooltip" data-placement="bottom" title="Awaiting approvement"></i>
+            }
+            else if (item.Approved == 1 && item.Status == 1)
+            {
+                <i class="icon-check text-success" data-toggle="tooltip" data-placement="bottom" title="Active"></i>
+            }
+            else
+            {
+                <i class="icon-close text-warning" data-toggle="tooltip" data-placement="bottom" title="Inactive"></i>
+            }
+        }
+    </td>*@
 
 
 

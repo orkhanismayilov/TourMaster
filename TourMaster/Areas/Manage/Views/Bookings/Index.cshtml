@@ -1,0 +1,73 @@
+﻿@using TourMaster.Models
+@model IEnumerable<Booking>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>
+            Bookings
+            @{
+                if (Model.Where(b => b.BookedStart.Subtract(DateTime.Now).Days <= 3).Count() > 0)
+                {
+                    <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(b => b.BookedStart.Subtract(DateTime.Now).Days <= 3).Count()</span>
+                }
+            }
+        </h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive-sm text-center">
+            <thead>
+                <tr>
+                    <th>Tour</th>
+                    <th>Traveler</th>
+                    <th>Dates</th>
+                    <th>Booking Date</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Booking booking in Model.OrderBy(b=>b.Status).OrderByDescending(b=>b.BookedStart))
+                {
+                    string TourTitle = "";
+                    if (booking.Tour.FromId == booking.Tour.DestinationId)
+                    {
+                        TourTitle = booking.Tour.City.CityName + " Tour";
+                    }
+                    else
+                    {
+                        TourTitle = booking.Tour.City.CityName + " - " + booking.Tour.City1.CityName + " Tour";
+                    }
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("details", new { controller = "tours", area = "manage", id = booking.TourId })">@TourTitle</a>
+                        </td>
+                        <td>
+                            <a href="" role="button">@booking.User.Fullname</a>
+                        </td>
+                        <td>@booking.BookedStart.ToString("dd.MM.yyyy") - @booking.BookedEnd.ToString("dd.MM.yyyy")</td>
+                        <td>@booking.BookingDate.ToString("dd.MM.yyyy")</td>
+                        <td>@booking.BookedPrice.ToString("#.##") @booking.Currency.CurrencyName</td>
+                        <td>
+                            @if (booking.Status == 0)
+                            {
+                                <span class="badge badge-danger">Cancelled</span>
+                            }
+                            else if (booking.Status == 1)
+                            {
+                                <span class="badge bagde-success">Active</span>
+                                <a class="mx-1" href="#" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                                    <i class="icon-close text-danger"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
