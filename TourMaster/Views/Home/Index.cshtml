@@ -700,7 +700,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <input class="form-control" type="date" name="startdate" id="start-date" readonly>
+                                        <input class="form-control" type="date" name="startdate" id="start-date" data-validation="required" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -708,12 +708,12 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        <input class="form-control" type="date" name="enddate" id="end-date" readonly>
+                                        <input class="form-control" type="date" name="enddate" id="end-date" data-validation="required" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="message" id="request-text" cols="30" rows="10" placeholder="Request message..."></textarea>
+                                <textarea class="form-control" name="message" id="request-text" cols="30" rows="10" placeholder="Request message..." data-validation="required"></textarea>
                             </div>
                             <div class="form-button mt-3 text-center">
                                 <button class="btn btn-success text-uppercase" type="submit">send</button>

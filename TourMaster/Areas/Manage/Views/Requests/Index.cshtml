@@ -12,7 +12,7 @@
             @{
                 if (Model.Where(br => br.Status == 0).Count() > 0)
                 {
-                    <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(br => br.Status == 0).Count()</span>
+                    <span class="badge badge-pill badge-danger text-value-sm" id="open-requests">@Model.Where(br => br.Status == 0).Count()</span>
                 }
             }
         </h2>
@@ -60,7 +60,7 @@
                             }
                             else if (br.Status == 1)
                             {
-                                <span class="badge bagde-success">Confirmed</span>
+                                <span class="badge badge-success">Confirmed</span>
                             }
                             else if (br.Status == 2)
                             {
@@ -68,12 +68,90 @@
                             }
                             else
                             {
-                                <span class="badge badge-danger">Cancelled</span>
+                                <span class="badge badge-danger">Cancelled by Traveler</span>
                             }
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-warning" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure? Booking request will be confirmed and traveler will be notified.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="confirmRequest">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="rejectWarningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-warning" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Rejection</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure? Booking request will be rejected and traveler will be notified.<br />You will not be able to confirm this request anymore!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="confirmRejectRequest">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Booking confirmed.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Oops... Error occured while confirming. <br />Please, try later!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -743,9 +743,9 @@ $(document).ready(function () {
             theme: "css-stars"
         });
 
-        // Tour View Feedback, Tours Modal Search Form, Private Message to Guide Form Submit Validation
+        // Tour View Feedback, Tours Modal Search Form, Private Message to Guide Form, Tour Request Form Submit Validation
         $.validate({
-            form: '#submit-feedback, #tours-modal-search-form, #pm-to-guide'
+            form: '#submit-feedback, #tours-modal-search-form, #pm-to-guide, #tour-request-guide'
         });
 
         // Tour View Feedback Comment Rated
@@ -812,7 +812,6 @@ $(document).ready(function () {
             });
 
             request["TourId"] = $("input[name='TourId']").val();
-            console.log(request);
 
             $.ajax({
                 url: url,
@@ -832,6 +831,7 @@ $(document).ready(function () {
                             title: 'Success',
                             text: 'Thank you for request! Guide will get back to you soon.'
                         });
+                        that.find("input[type='date'], textarea").val("").text("");
                     }
                 }
             });

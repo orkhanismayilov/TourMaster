@@ -30,12 +30,15 @@ namespace TourMaster.Areas.Manage.Controllers
                 User guide = br.Tour.User;
 
                 int busy = 0;
-                foreach (Booking booking in guide.Bookings.Where(b => b.Status == 1))
+                foreach (Tour tour in guide.Tours)
                 {
-                    if ((booking.BookedStart >= br.StartDate && booking.BookedStart <= br.EndDate)||(booking.BookedEnd >= br.StartDate && booking.BookedEnd <= br.EndDate ))
+                    foreach (Booking booking in tour.Bookings)
                     {
-                        busy = 1;
-                        return Json(0, JsonRequestBehavior.AllowGet); ;
+                        if ((booking.BookedStart >= br.StartDate && booking.BookedStart <= br.EndDate) || (booking.BookedEnd >= br.StartDate && booking.BookedEnd <= br.EndDate))
+                        {
+                            busy = 1;
+                            return Json(0, JsonRequestBehavior.AllowGet); ;
+                        }
                     }
                 }
 
@@ -53,19 +56,27 @@ namespace TourMaster.Areas.Manage.Controllers
                         Status = 1
                     };
                     db.Bookings.Add(newBooking);
+                    br.Status = 1;
                     db.SaveChanges();
                 }
+                return Json(1, JsonRequestBehavior.AllowGet);
             }
-            return Json(1, JsonRequestBehavior.AllowGet);
+            else
+            {
+                return Json(2, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]
         public JsonResult RejectBooking(int? Id) {
-
-
-
-
-            return Json(1, JsonRequestBehavior.AllowGet);
+            BookingRequest br = db.BookingRequests.Find(Id);
+            if (br != null)
+            {
+                br.Status = 2;
+                db.SaveChanges();
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+            return Json(0, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -152,16 +152,63 @@ $(document).ready(function () {
     // Booking Request Confirm
     $("a[data-original-title='Confirm']").on("click", function () {
         var that = $(this);
-        url = that.attr("href");
+        $("#warningModal").modal('show');
+        $("#confirmRequest").on("click", function () {
+            url = that.attr("href");
 
-        $.ajax({
-            url: url,
-            method: "post",
-            dataType: "json",
-            success: function (data) {
+            $.ajax({
+                url: url,
+                method: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        $("#successModal").modal('show');
+                        var td = that.parent();
+                        td.empty();
+                        td.append('<span class="badge badge-success">Confirmed</span>');
+                        var or = $("#open-requests");
+                        orCount = parseInt(or.text()) - 1;
+                        if (orCount > 0) {
+                            or.text(orCount);
+                        } else {
+                            or.remove();
+                        }
+                    } else if (data == 2) {
+                        $("#dangerModal .modal-body p").html("Oops... Error occured while confirming. <br />Please, try later!");
+                        $("#dangerModal").modal('show');
+                    } else {
+                        $("#dangerModal .modal-body p").text("You already have a booking on these dates. Please, check your bookings first.");
+                        $("#dangerModal").modal('show');
+                    }
+                }
+            });
+        });
 
+        return false;
+    });
 
-            }
+    // Booking Request Reject
+    $("a[data-original-title='Reject']").on("click", function () {
+        var that = $(this);
+        $("#rejectWarningModal").modal('show');
+        $("#confirmRejectRequest").on("click", function () {
+            url = that.attr("href");
+
+            $.ajax({
+                url: url,
+                method: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        var td = that.parent();
+                        td.empty();
+                        td.append('<span class="badge badge-secondary">Rejected</span>');
+                    } else {
+                        $("#dangerModal .modal-body p").html("Oops... Error occured while rejecting. <br />Please, try later!");
+                        $("#dangerModal").modal('show');
+                    }
+                }
+            });
         });
 
         return false;

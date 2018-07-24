@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Booking booking in Model.OrderBy(b=>b.Status).OrderByDescending(b=>b.BookedStart))
+                @foreach (Booking booking in Model.OrderBy(b=>b.Status).OrderBy(b=>b.BookedStart))
                 {
                     string TourTitle = "";
                     if (booking.Tour.FromId == booking.Tour.DestinationId)
@@ -41,12 +41,12 @@
                     {
                         TourTitle = booking.Tour.City.CityName + " - " + booking.Tour.City1.CityName + " Tour";
                     }
-                    <tr>
+                    <tr @(booking.BookedStart.Subtract(DateTime.Now).Days <= 3?"class=bg-ghost-warning":"")>
                         <td>
-                            <a href="@Url.Action("details", new { controller = "tours", area = "manage", id = booking.TourId })">@TourTitle</a>
+                            <a class="text-white" href="@Url.Action("details", new { controller = "tours", area = "manage", id = booking.TourId })">@TourTitle</a>
                         </td>
                         <td>
-                            <a href="" role="button">@booking.User.Fullname</a>
+                            <a class="text-white" href="" role="button">@booking.User.Fullname</a>
                         </td>
                         <td>@booking.BookedStart.ToString("dd.MM.yyyy") - @booking.BookedEnd.ToString("dd.MM.yyyy")</td>
                         <td>@booking.BookingDate.ToString("dd.MM.yyyy")</td>
@@ -58,10 +58,13 @@
                             }
                             else if (booking.Status == 1)
                             {
-                                <span class="badge bagde-success">Active</span>
+                                <span class="badge badge-success">Active</span>
                                 <a class="mx-1" href="#" data-toggle="tooltip" data-placement="bottom" title="Cancel">
                                     <i class="icon-close text-danger"></i>
                                 </a>
+                            }
+                            else {
+                                <span class="badge badge-info">Completed</span>
                             }
                         </td>
                     </tr>
