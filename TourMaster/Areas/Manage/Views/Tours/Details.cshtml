@@ -1,4 +1,5 @@
-﻿@model TourMaster.Models.Tour
+﻿@using TourMaster.Models
+@model Tour
 
 <div class="row">
     <div class="col-12">
@@ -125,6 +126,32 @@
                                     @Model.PostedDate.ToString("HH:mm dd.MM.yyyy")
                                 </dd>
                             </dl>
+                        </div>
+                        <hr />
+                        <h4>Feedbacks</h4>
+                        <div class="feedbacks">
+                            <table class="table table-responsive-sm">
+                                <tbody>
+                                    @{
+                                        foreach (Feedback fdbck in Model.Feedbacks)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img class="rounded-circle d-inline-block align-top mr-3" width="50" src="@fdbck.User.ProfileImage" />
+                                                    <ul class="list-unstyled d-inline-block">
+                                                        <li>@fdbck.User.Fullname</li>
+                                                        <li>
+                                                            <i class="fas fa-star text-warning"></i> @fdbck.Rating
+                                                        </li>
+                                                    </ul>
+                                                    <p>@fdbck.Text</p>
+                                                    <span class="float-right">@fdbck.Date.ToString("HH:mm dd MMM yyyy")</span>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="col-md-6">

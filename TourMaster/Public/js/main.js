@@ -84,9 +84,9 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data == 1) {
-                    that.find("a.notification").css("background-color", "transparent !important");
+                    that.find("a.notification").attr("style", "background-color: transparent !important");
                     that.find("#notifications-dropdown").find("i").removeClass("text-danger");
-                    that.find("#notifications-dropdown").find("span").remove();
+                    that.find("#notifications-dropdown").find("span").removeClass("badge-danger").addClass("badge-secondary").text(0);
                 }
             }
         });

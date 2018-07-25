@@ -19,6 +19,7 @@ namespace TourMaster.Models
         public string Text { get; set; }
         public System.DateTime Date { get; set; }
         public int NotificationTypeId { get; set; }
+        public string Link { get; set; }
         public int Status { get; set; }
     
         public virtual NotificationType NotificationType { get; set; }

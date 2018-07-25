@@ -298,6 +298,7 @@ namespace TourMaster.Controllers
                 Text = "New feedback for " + TourTitle,
                 Date = DateTime.Now,
                 NotificationTypeId = 8,
+                Link = "/manage/tours/details/" + TourId,
                 Status = 0
             };
             db.Notifications.Add(noti);
@@ -467,6 +468,7 @@ namespace TourMaster.Controllers
                     Text = "New booking request for " + TourTitle,
                     Date = DateTime.Now,
                     NotificationTypeId = 8,
+                    Link = "/manage/requests/index/" + tour.GuideId,
                     Status = 0
                 };
                 db.Notifications.Add(noti);

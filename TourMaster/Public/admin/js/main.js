@@ -204,6 +204,13 @@ $(document).ready(function () {
                         var td = that.parent();
                         td.empty();
                         td.append('<span class="badge badge-secondary">Rejected</span>');
+                        var or = $("#open-requests");
+                        orCount = parseInt(or.text()) - 1;
+                        if (orCount > 0) {
+                            or.text(orCount);
+                        } else {
+                            or.remove();
+                        }
                     } else {
                         $("#dangerModal .modal-body p").html("Oops... Error occured while rejecting. <br />Please, try later!");
                         $("#dangerModal").modal('show');
@@ -240,4 +247,32 @@ $(document).ready(function () {
 
         return false;
     });
+
+    // Feedbacks Perfect Scrollbar
+    if ($("div.feedbacks").length > 0) {
+        var ps = new PerfectScrollbar("div.feedbacks");
+    }
+
+    // Notifications Seen
+    $("#noti-dropdown").on("shown.bs.dropdown", function () {
+        var that = $(this),
+            url = "/home/notiseen/" + that.data("guide");
+
+        $.ajax({
+            url: url,
+            method: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data == 1) {
+                    that.find(".notis").attr("style", "background-color: transparent !important");
+                    that.find(".dropdown-header strong").text("You have 0 notifications");
+                    that.find(".icon-bell").next().remove();
+                }
+            }
+        });
+    });
+
+
+
+
 });

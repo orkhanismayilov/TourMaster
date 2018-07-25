@@ -43,7 +43,7 @@
             </li>
         </ul>
         <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item dropdown d-md-down-none">
+            <li class="nav-item dropdown d-md-down-none" id="noti-dropdown" data-guide="@guide.Id">
                 <a class="nav-link" data-toggle="dropdown" href="#" role="button">
                     <i class="icon-bell"></i>
                     @{
@@ -53,22 +53,20 @@
                             <span class="badge badge-pill badge-danger">@NewNoti</span>
                         }
                     }
-
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
                     <div class="dropdown-header text-center">
                         <strong>You have @NewNoti notifications</strong>
                     </div>
-                    <a class="dropdown-item" href="#">
-                        <i class="icon-user-follow text-success"></i> New user registered
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="icon-user-unfollow text-danger"></i> User deleted
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="icon-basket-loaded text-primary"></i> New client
-                    </a>
-                    <a class="dropdown-item text-center" href="#">
+                    @{
+                        foreach (Notification noti in guide.Notifications.Where(n => n.Status == 0))
+                        {
+                            <a class="dropdown-item text-truncate d-block bg-@noti.NotificationType.Color notis" href="@noti.Link">
+                                <i class="@noti.NotificationType.Icon text-white text-value-lg align-middle"></i> @noti.Text
+                            </a>
+                        }
+                    }
+                    <a class="dropdown-item text-center" href="@Url.Action("index", new { controller = "notifications", area = "manage", id = guide.Id })">
                         <strong>View all notifications</strong>
                     </a>
                 </div>
@@ -106,9 +104,6 @@
                             <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
                         </div>
                     </a>
-
-
-
                     <a class="dropdown-item text-center" href="#">
                         <strong>View all messages</strong>
                     </a>
@@ -122,7 +117,7 @@
                     <div class="dropdown-header text-center">
                         <strong>@guide.Fullname</strong>
                     </div>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="@Url.Action("index", new { controller = "settings", area = "manage", id = guide.Id })">
                         <i class="fa fa-wrench"></i> Settings
                     </a>
                     <div class="divider"></div>
@@ -166,12 +161,7 @@
 
                 </div>
             </div>
-
-
         </main>
-
-
-
     </div>
     <!-- CoreUI and necessary plugins-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -1,0 +1,115 @@
+﻿@using TourMaster.Models
+@model User
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Profile Settings</h2>
+    </div>
+    <div class="card-body">
+        <form action="" method="post" id="profile-settings" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-8">
+                    <h4>Main Info</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input class="form-control" name="name" type="text" value="@Model.Fullname.Split(' ')[0]" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Surname</label>
+                                <input class="form-control" name="surname" type="text" value="@Model.Fullname.Split(' ')[1]" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input class="form-control" name="email" type="email" value="@Model.Email" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Password</label>
+                            <button class="btn btn-warning btn-block">Change</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Birthday</label>
+                                <input class="form-control" name="birthday" type="date" value="@Model.Birthday.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Phone</label>
+                                <input class="form-control" type="tel" name="phone" value="+@Model.Phone" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Country</label>
+                                <select class="form-control" name="country">
+                                    @foreach (Country cnt in ViewBag.Countries)
+                                    {
+                                        <option value="@cnt.Id" @(Model.City.CountryId == cnt.Id ? "selected" : "")>@cnt.CountryName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">City</label>
+                                <select class="form-control" name="city">
+                                    @foreach (City city in Model.City.Country.Cities)
+                                    {
+                                        <option value="@city.Id" @(Model.CityId == city.Id ? "selected" : "")>@city.CityName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h4>Social Links</h4>
+                    <div class="form-group">
+                        <label class="control-label">Facebook</label>
+                        <input class="form-control" name="facebook" type="text" value="@Model.Facebook" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Instagram</label>
+                        <input class="form-control" name="instagram" type="text" value="@Model.Instagram" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">GooglePlus</label>
+                        <input class="form-control" name="googleplus" type="text" value="@Model.GooglePlus" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Twitter</label>
+                        <input class="form-control" name="twitter" type="text" value="@Model.Twitter" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h4>Profile Image</h4>
+                    <img class="rounded w-100" src="@Model.ProfileImage" />
+                    <input class="form-control-file mt-3" type="file" name="image" />
+                </div>
+            </div>
+            <hr />
+            <div class="form-buttons text-center">
+                <button class="btn btn-primary" type="submit">Save Changes</button>
+                <a class="btn btn-danger" href="@Url.Action("index", new { controller = "settings", area = "manage", id = Model.Id })">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
