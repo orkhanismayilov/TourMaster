@@ -74,24 +74,29 @@
                         if (user != null)
                         {
                             string userinitials = user.Fullname.Split(' ')[0] + " " + user.Fullname.Split(' ')[1][0] + ".";
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown" id="noti-dropdown" data-user-id="@user.Id">
                                 <a class="nav-link dropdown-toggle" id="notifications-dropdown" role="button" data-toggle="dropdown">
                                     <i class="fas fa-bell @(user.Notifications.Count != 0?"text-danger":"")"></i><span class="badge @(user.Notifications.Count !=0?"badge-danger":"badge-secondary")">@(user.Notifications.Count != 0 ? user.Notifications.Count : 0)</span>
                                 </a>
                                 <div class="dropdown-menu">
                                     @{
-                                        if (user.Notifications.Count != 0)
+                                        if (user.Notifications.Count != 0 && user.Notifications.Where(n => n.Status == 0) != null)
                                         {
-                                            foreach (Notification noti in user.Notifications.OrderByDescending(n => n.Date).Take(10))
+                                            foreach (Notification noti in user.Notifications.Where(n=>n.Status == 0).OrderByDescending(n => n.Date))
                                             {
-                                                <a class="dropdown-item" data-noti-id="@noti.Id">
-                                                    <i class="@noti.NotificationType.Icon text-@noti.NotificationType.Color d-inline-block mr-2"></i>
-                                                    <p class="noti-text">@noti.Text</p>
+                                                <a href="" class="dropdown-item notification bg-@noti.NotificationType.Color" data-noti-id="@noti.Id">
+                                                    <i class="@noti.NotificationType.Icon text-white d-inline-block mr-2 align-middle"></i>
+                                                    <p class="noti-text mb-0 text-white">@noti.Text</p>
+                                                    <span class="badge d-block">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
                                                 </a>
                                             }
                                         }
+                                        else
+                                        {
+                                            <a class="dropdown-item">No new notifications</a>
+                                        }
                                     }
-                                    <a href="#" class="dropdown-item" data-user-id="@user.Id">See all notifications</a>
+                                    <a href="#" class="dropdown-item text-center" data-user-id="@user.Id">See all notifications</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -104,14 +109,12 @@
                                     {
                                         <a class="dropdown-item" href="@Url.Action("index", new { controller="home", area="manage" })">Dashboard</a>
                                     }
-                                    <a class="dropdown-item" href="#">Notifications</a>
                                     <a class="dropdown-item" href="#">Messages</a>
                                     <a class="dropdown-item" href="#">Settings</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("logout", "home")">Log Out</a>
                                 </div>
                             </li>
-
                         }
                         else
                         {

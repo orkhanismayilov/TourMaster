@@ -268,7 +268,7 @@ nav.navbar {
     z-index: 99;
     transition: all .3s ease-in-out;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1400px) {
         background: $secondary-color;
 
         & .container {
@@ -296,6 +296,17 @@ nav.navbar {
                     display: none;
                 }
             }
+        }
+    }
+
+
+    a.notification {
+        width: 100%;
+        i{
+            font-size: 30px;
+        }
+        p{
+            display: inline-block;
         }
     }
 
@@ -403,7 +414,8 @@ nav.navbar {
 
             &:hover {
                 background: rgba(0, 0, 0, 0.3);
-                a{
+
+                a {
                     color: $secondary-color;
                 }
             }

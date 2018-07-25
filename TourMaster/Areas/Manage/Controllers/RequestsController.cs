@@ -53,7 +53,7 @@ namespace TourMaster.Areas.Manage.Controllers
                         BookedEnd = br.EndDate,
                         BookedPrice = br.Tour.Price,
                         CurrencyId = br.Tour.CurrencyId,
-                        Status = 1
+                        Status = 0
                     };
                     db.Bookings.Add(newBooking);
                     br.Status = 1;

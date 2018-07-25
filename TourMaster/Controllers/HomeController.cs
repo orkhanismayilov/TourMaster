@@ -282,6 +282,28 @@ namespace TourMaster.Controllers
                 UserProfileImage = user.ProfileImage
             };
 
+            Tour notiTour = db.Tours.Find(TourId);
+            string TourTitle = "";
+            if (notiTour.FromId == notiTour.DestinationId)
+            {
+                TourTitle = notiTour.City.CityName + " Tour";
+            }
+            else
+            {
+                TourTitle = notiTour.City.CityName + " - " + notiTour.City1.CityName + " Tour";
+            }
+
+            Notification noti = new Notification {
+                UserId = userRated.Id,
+                Text = "New feedback for " + TourTitle,
+                Date = DateTime.Now,
+                NotificationTypeId = 8,
+                Status = 0
+            };
+            db.Notifications.Add(noti);
+            db.SaveChanges();
+
+
             return Json(feedbackModel, JsonRequestBehavior.AllowGet);
         }
 
@@ -428,10 +450,44 @@ namespace TourMaster.Controllers
                 db.BookingRequests.Add(bookingRequest);
                 db.SaveChanges();
 
+                Tour tour = db.Tours.Find(TourId);
+                string TourTitle = "";
+                if (tour.FromId == tour.DestinationId)
+                {
+                    TourTitle = tour.City.CityName + " Tour";
+                }
+                else
+                {
+                    TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
+                }
+
+                Notification noti = new Notification
+                {
+                    UserId = tour.GuideId,
+                    Text = "New booking request for " + TourTitle,
+                    Date = DateTime.Now,
+                    NotificationTypeId = 8,
+                    Status = 0
+                };
+                db.Notifications.Add(noti);
+                db.SaveChanges();
+
                 return Json(1, JsonRequestBehavior.AllowGet);
             }
 
             return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult NotiSeen(int? Id)
+        {
+            User user = db.Users.Find(Id);
+            foreach (Notification noti in user.Notifications.Where(n=>n.Status == 0))
+            {
+                noti.Status = 1;
+            }
+            db.SaveChanges();
+            return Json(1, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -21,9 +21,9 @@ namespace TourMaster.Areas.Manage.Controllers
             {
                 foreach (Booking booking in tour.Bookings)
                 {
-                    if (booking.BookedEnd < DateTime.Now && booking.Status != 2)
+                    if (booking.BookedEnd < DateTime.Now && booking.Status == 0)
                     {
-                        booking.Status = 2;
+                        booking.Status = 1;
                     }
                     bookings.Add(booking);
                 }
@@ -32,5 +32,21 @@ namespace TourMaster.Areas.Manage.Controllers
 
             return View(bookings);
         }
+
+        [HttpPost]
+        public JsonResult CancelBooking(int? Id)
+        {
+            Booking booking = db.Bookings.Find(Id);
+            if (booking != null)
+            {
+                booking.Status = 2;
+                db.SaveChanges();
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

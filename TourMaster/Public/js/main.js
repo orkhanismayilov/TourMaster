@@ -73,6 +73,25 @@ $(document).ready(function () {
         });
     }
 
+    // Notifications Seen
+    $("#noti-dropdown").on("shown.bs.dropdown", function () {
+        var that = $(this),
+            url = "/home/notiseen/" + that.attr("data-user-id");
+
+        $.ajax({
+            url: url,
+            method: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data == 1) {
+                    that.find("a.notification").css("background-color", "transparent !important");
+                    that.find("#notifications-dropdown").find("i").removeClass("text-danger");
+                    that.find("#notifications-dropdown").find("span").remove();
+                }
+            }
+        });
+    });
+
     // Main Slider
     if ($(".main-slider")) {
         $(".main-slider").owlCarousel({
@@ -199,7 +218,7 @@ $(document).ready(function () {
             var GetCitiesUrl = "/Home/GetCities/" + $("#signup-form #country").val();
             $.ajax({
                 url: GetCitiesUrl,
-                type: "get",
+                method: "get",
                 dataType: "json",
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
@@ -372,7 +391,7 @@ $(document).ready(function () {
 
         // GetTourInfo Ajax Function
         function GetTourInfo(TourId) {
-            var url = "/Home/GetTourInfo/" + TourId;
+            var url = "/home/gettourinfo/" + TourId;
             tvm = $("#tour-view-modal");
 
             $.ajax({

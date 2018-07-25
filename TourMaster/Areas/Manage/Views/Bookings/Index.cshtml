@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Booking booking in Model.OrderBy(b=>b.Status).OrderBy(b=>b.BookedStart))
+                @foreach (Booking booking in Model.OrderBy(b => b.Status).ThenBy(b=>b.BookedStart))
                 {
                     string TourTitle = "";
                     if (booking.Tour.FromId == booking.Tour.DestinationId)
@@ -41,7 +41,7 @@
                     {
                         TourTitle = booking.Tour.City.CityName + " - " + booking.Tour.City1.CityName + " Tour";
                     }
-                    <tr @(booking.BookedStart.Subtract(DateTime.Now).Days <= 3?"class=bg-ghost-warning":"")>
+                    <tr @(booking.BookedStart.Subtract(DateTime.Now).Days <= 3 ? "class=bg-success" : "")>
                         <td>
                             <a class="text-white" href="@Url.Action("details", new { controller = "tours", area = "manage", id = booking.TourId })">@TourTitle</a>
                         </td>
@@ -54,23 +54,85 @@
                         <td>
                             @if (booking.Status == 0)
                             {
-                                <span class="badge badge-danger">Cancelled</span>
+                                <span class="badge badge-success">Active</span>
+                                if (booking.BookedStart.Subtract(DateTime.Now).Days > 3)
+                                {
+                                    <a class="mx-1" href="@Url.Action("cancelbooking", new { controller = "bookings", area = "manage", id = booking.Id })" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                                        <i class="icon-close text-danger"></i>
+                                    </a>
+                                }
                             }
                             else if (booking.Status == 1)
                             {
-                                <span class="badge badge-success">Active</span>
-                                <a class="mx-1" href="#" data-toggle="tooltip" data-placement="bottom" title="Cancel">
-                                    <i class="icon-close text-danger"></i>
-                                </a>
-                            }
-                            else {
                                 <span class="badge badge-info">Completed</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Cancelled</span>
                             }
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="warningModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-warning" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Cancellation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure? Booking will be cancelled and traveler will be notified.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" id="cancelOK">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="successModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Cancellation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Booking cancelled.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="dangerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Booking Cancellation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Oops... Error occured while cancelling. <br />Please, try later!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
     </div>
 </div>
 

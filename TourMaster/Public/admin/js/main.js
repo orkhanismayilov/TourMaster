@@ -5,7 +5,6 @@ $(document).ready(function () {
 
     // Disable Tour Button
     $("a[data-original-title='Disable']").on("click", function (e) {
-        e.preventDefault();
         var that = $(this);
 
         $("#warningModal").modal('show');
@@ -27,13 +26,14 @@ $(document).ready(function () {
                 }
             });
         });
+
+        return false;
     });
 
     // Activate Tour Button
     $("a[data-original-title='Activate']").on("click", function (e) {
-        e.preventDefault();
-        var that = $(this);
-        url = that.attr("href");
+        var that = $(this),
+            url = that.attr("href");
 
         $.ajax({
             url: url,
@@ -49,6 +49,8 @@ $(document).ready(function () {
                 }
             }
         });
+
+        return false;
     });
 
     // Login Error
@@ -94,21 +96,20 @@ $(document).ready(function () {
     $("input[type='file']").on("change", function (event) {
         var images = event.target.files;
         $("#dynamicImage").empty();
-        console.log(images);
         for (var i = 0; i < images.length; i++) {
             $("#dynamicImage").append("<img src=" + URL.createObjectURL(event.target.files[i]) + " class='dynamicImg mr-2 mt-2' width='100px' />");
         }
     });
 
     // Main Image Select
-    $("#tourimages li").css({"cursor": "pointer"});
+    $("#tourimages li").css({ "cursor": "pointer" });
     $("#tourimages li .img").on("click", function () {
-        var that = $(this);
-        var prevImage = $("#tourimages").find("li.border");
+        var that = $(this),
+            prevImage = $("#tourimages").find("li.border");
         $("#warningModal").modal("show");
         $("#confirm").on("click", function () {
-            var url = "/manage/tours/SetMainImage";
-            request = {};
+            var url = "/manage/tours/SetMainImage",
+                request = {};
 
             request["TourId"] = that.parent().data("tour-id");
             request["ImageId"] = that.parent().data("img-id");
@@ -134,7 +135,7 @@ $(document).ready(function () {
         var that = $(this);
         $("#deleteWarningModal").modal('show');
         $("#confirmDelete").on("click", function () {
-            url = "/manage/tours/deletetourimage/" + that.parent().data("img-id");
+            var url = "/manage/tours/deletetourimage/" + that.parent().data("img-id");
 
             $.ajax({
                 url: url,
@@ -154,7 +155,7 @@ $(document).ready(function () {
         var that = $(this);
         $("#warningModal").modal('show');
         $("#confirmRequest").on("click", function () {
-            url = that.attr("href");
+            var url = that.attr("href");
 
             $.ajax({
                 url: url,
@@ -206,6 +207,32 @@ $(document).ready(function () {
                     } else {
                         $("#dangerModal .modal-body p").html("Oops... Error occured while rejecting. <br />Please, try later!");
                         $("#dangerModal").modal('show');
+                    }
+                }
+            });
+        });
+
+        return false;
+    });
+
+    // Booking Cancel
+    $("a[data-original-title='Cancel']").on("click", function () {
+        var that = $(this);
+        $("#warningModal").modal('show');
+        $("#cancelOK").on("click", function () {
+            var url = that.attr("href");
+
+            $.ajax({
+                url: url,
+                method: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        that.prev().removeClass("badge-success").addClass("badge-danger").text("Cancelled");
+                        that.remove();
+                        $("#successModal").modal('show');
+                    } else {
+                        $("dangerModal").modal('show');
                     }
                 }
             });

@@ -1,7 +1,6 @@
 body {
   font-family: 'Montserrat';
-  position: relative; 
-}
+  position: relative; }
 
 ::-webkit-scrollbar {
   display: none !important; }
@@ -179,7 +178,7 @@ nav.navbar {
   right: 0;
   z-index: 99;
   transition: all .3s ease-in-out; }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1400px) {
     nav.navbar {
       background: #63cac5; }
       nav.navbar .container {
@@ -197,6 +196,12 @@ nav.navbar {
           width: 100%; }
         nav.navbar ul .sign-in::after {
           display: none; } }
+  nav.navbar a.notification {
+    width: 100%; }
+    nav.navbar a.notification i {
+      font-size: 30px; }
+    nav.navbar a.notification p {
+      display: inline-block; }
   @media only screen and (max-width: 1200px) and (orientation: landscape) {
     nav.navbar ul li a {
       font-size: 12px !important; } }

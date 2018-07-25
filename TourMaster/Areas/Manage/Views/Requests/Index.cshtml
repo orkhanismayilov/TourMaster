@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (BookingRequest br in Model.OrderBy(br => br.Status).OrderByDescending(br => br.Id))
+                @foreach (BookingRequest br in Model.OrderBy(br => br.Status).ThenByDescending(br => br.Id))
                 {
                     string TourTitle = "";
                     if (br.Tour.FromId == br.Tour.DestinationId)
@@ -41,10 +41,10 @@
                     }
                     <tr>
                         <td>
-                            <a href="@Url.Action("details", new { controller = "tours", area = "manage", id = br.TourId })">@TourTitle</a>
+                            <a class="text-white" href="@Url.Action("details", new { controller = "tours", area = "manage", id = br.TourId })">@TourTitle</a>
                         </td>
                         <td>
-                            <a href="" role="button">@br.User.Fullname</a>
+                            <a class="text-white" href="" role="button">@br.User.Fullname</a>
                         </td>
                         <td>@br.StartDate.ToString("dd.MM.yyyy") - @br.EndDate.ToString("dd.MM.yyyy")</td>
                         <td>
@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<div class="modal fade text-center" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="warningModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-warning" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<div class="modal fade text-center" id="rejectWarningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="rejectWarningModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-warning" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,7 +118,7 @@
     </div>
 </div>
 
-<div class="modal fade text-center" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+<div class="modal fade text-center" id="successModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-success" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -137,7 +137,7 @@
     </div>
 </div>
 
-<div class="modal fade text-center" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade text-center" id="dangerModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
         <div class="modal-content">
             <div class="modal-header">
