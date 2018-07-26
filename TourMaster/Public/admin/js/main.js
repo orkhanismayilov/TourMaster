@@ -75,6 +75,24 @@ $(document).ready(function () {
         });
     });
 
+    // Get Cities in Settings
+    $("select[name='country']").on("change", function () {
+        var that = $(this);
+        console.log(that.val());
+        that.parent().parent().next().children().children("select").empty().append("<option value='' disabled selected>City</option>");
+        $.ajax({
+            url: "/home/getcities/" + that.val(),
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var option = "<option value=" + data[i].Id + ">" + data[i].CityName + "</option>";
+                    that.parent().parent().next().children().children("select").append(option);
+                }
+            }
+        });
+    });
+
     // Select 2 Plugin
     if ($(".categories").length > 0) {
         $(".categories").select2({

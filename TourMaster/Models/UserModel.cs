@@ -22,5 +22,6 @@ namespace TourMaster.Models
         public string Instagram { get; set; }
         public string GooglePlus { get; set; }
         public string Twitter { get; set; }
+        public int CompletedTours { get; set; }
     }
 }

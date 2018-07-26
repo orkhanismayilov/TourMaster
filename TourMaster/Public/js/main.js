@@ -1,4 +1,40 @@
 $(document).ready(function () {
+    // Images Loaded
+    $("body").imagesLoaded(function () {
+        var preloader = $("#preloader");
+        preloader.fadeOut();
+
+        // SignUp Sweet Alerts
+        if ($("#signup-alert-success").length > 0) {
+            swal({
+                type: 'success',
+                title: 'Success',
+                text: 'Now you can login!'
+            });
+        } else if ($("#signup-alert-error").length > 0) {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: $("#signup-alert-error").data("msg")
+            });
+        }
+
+        // LogIn Sweet Alert
+        if ($("#login-alert-success").length > 0) {
+            swal({
+                type: 'success',
+                title: 'Success',
+                text: 'You are logged in!'
+            });
+        } else if ($("#login-alert-error").length > 0) {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Invalid Email or Password!'
+            });
+        }
+    });
+
     // Animate CSS Function Extension
     $.fn.extend({
         animateCss: function (animationName, callback) {
@@ -72,6 +108,30 @@ $(document).ready(function () {
             }
         });
     }
+
+    // Notifications Modal
+    $("#notifications-trigger").on("click", function (e) {
+        e.preventDefault();
+        $("#notifications-modal").addClass("animated fadeIn").modal('show');
+        $("#notifications-modal").animateCss("fadeIn", function () {
+            $("#notifications-modal").removeClass("animated fadeIn");
+        });
+        var nt = new PerfectScrollbar(".noti-table");
+    });
+
+    // Notifications Modal Hide
+    $("#notifications-modal").on("hide.bs.modal", function (e) {
+        if (!$("#notifications-modal").hasClass("animated")) {
+            e.preventDefault();
+            $("#notifications-modal").addClass("animated fadeOut");
+            setTimeout("$('#notifications-modal').modal('hide')", 550);
+        }
+    });
+
+    // Notifications Modal Hidden
+    $("#notifications-modal").on("hidden.bs.modal", function () {
+        $("#notifications-modal").removeClass("animated fadeOut");
+    });
 
     // Notifications Seen
     $("#noti-dropdown").on("shown.bs.dropdown", function () {
@@ -232,21 +292,6 @@ $(document).ready(function () {
         });
     }
 
-    // SignUp Sweet Alerts
-    if ($("#signup-alert-success").length > 0) {
-        swal({
-            type: 'success',
-            title: 'Success',
-            text: 'Now you can login!'
-        });
-    } else if ($("#signup-alert-error").length > 0) {
-        swal({
-            type: 'error',
-            title: 'Oops...',
-            text: $("#signup-alert-error").data("msg")
-        });
-    }
-
     // Signup Form Validation
     if ($(".signup-form-modal-wrapper")) {
         $.validate({
@@ -297,21 +342,6 @@ $(document).ready(function () {
             $("#pass-recovery-form-modal").animateCss("fadeIn", function () {
                 $("#pass-recovery-form-modal").removeClass("animated fadeIn");
             });
-        });
-    }
-
-    // LogIn Sweet Alert
-    if ($("#login-alert-success").length > 0) {
-        swal({
-            type: 'success',
-            title: 'Success',
-            text: 'You are logged in!'
-        });
-    } else if ($("#login-alert-error").length > 0) {
-        swal({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Invalid Email or Password!'
         });
     }
 
@@ -393,6 +423,8 @@ $(document).ready(function () {
         function GetTourInfo(TourId) {
             var url = "/home/gettourinfo/" + TourId;
             tvm = $("#tour-view-modal");
+            var preloader = $("#preloader");
+            preloader.fadeIn();
 
             $.ajax({
                 url: url,
@@ -508,6 +540,8 @@ $(document).ready(function () {
                     if (data.Guide.Id == tvm.find("input[name='UserId']").val()) {
                         tvm.find("form#submit-feedback").hide();
                     }
+
+                    preloader.fadeOut();
                 }
             });
         }
@@ -901,6 +935,8 @@ $(document).ready(function () {
 
         function GetUserInfo(UserId) {
             url = "/home/getuserinfo/" + UserId;
+            var preloader = $("#preloader");
+            preloader.fadeIn();
 
             $.ajax({
                 url: url,
@@ -913,7 +949,7 @@ $(document).ready(function () {
                     pvm.find("img.profile-photo").attr("src", data.ProfileImage);
                     pvm.find("h3.profile-country").empty().append('<span class="flag-icon flag-icon-' + data.CountryCode + '"></span> ' + data.Country + '');
                     pvm.find("h5.profile-total-tours span").text(data.ToursList.length);
-                    pvm.find("h5.profile-completed-tours span").text(data.BookingsCount);
+                    pvm.find("h5.profile-completed-tours span").text(data.CompletedTours);
                     pvm.find("h5.profile-tour-feedbacks span").text(data.FeedbacksCount);
                     pvm.find("h5.profile-number").empty().append('<i class="fal fa-mobile-android"></i> +' + data.Phone + '');
                     pvm.find("h5.profile-email").empty().append('<i class="fal fa-at"></i> ' + data.Email + '');
@@ -991,6 +1027,8 @@ $(document).ready(function () {
                             $("#tour-view-modal").removeClass("animated fadeInRight");
                         });
                     });
+
+                    preloader.fadeOut();
                 }
             });
         }

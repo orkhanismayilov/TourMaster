@@ -133,7 +133,7 @@
                             <table class="table table-responsive-sm">
                                 <tbody>
                                     @{
-                                        foreach (Feedback fdbck in Model.Feedbacks)
+                                        foreach (Feedback fdbck in Model.Feedbacks.OrderByDescending(f=>f.Id))
                                         {
                                             <tr>
                                                 <td>

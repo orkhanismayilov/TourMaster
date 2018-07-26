@@ -185,7 +185,7 @@ namespace TourMaster.Controllers
                 Rating = tour.User.OverallRating
             };
 
-            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Take(5).ToList();
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Id).Take(5).ToList();
             List<FeedbackModel> feedbacksList = new List<FeedbackModel>();
             foreach (Feedback fdbck in feedbacks)
             {
@@ -249,7 +249,7 @@ namespace TourMaster.Controllers
             int totalUserRating = 0;
             if (userRated.Tours.Count != 0)
             {
-                foreach (Tour tour in userRated.Tours)
+                foreach (Tour tour in userRated.Tours.Where(t=>t.Approved == 1))
                 {
                     if (tour.Feedbacks.Count != 0)
                     {
@@ -264,7 +264,7 @@ namespace TourMaster.Controllers
                         totalUserRating += overallTourRating;
                     }
                 }
-                double b = totalUserRating / userRated.Tours.Count;
+                double b = totalUserRating / userRated.Tours.Where(t=>t.Approved == 1).Count();
                 rating = (int)Math.Ceiling(b);
             }
 
@@ -312,7 +312,7 @@ namespace TourMaster.Controllers
         public JsonResult LoadMoreFeedbacks(int FeedbackId, int FeedbacksCount)
         {
             Tour tour = db.Feedbacks.Find(FeedbackId).Tour;
-            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Date).Skip(FeedbacksCount).Take(5).ToList();
+            List<Feedback> feedbacks = tour.Feedbacks.OrderByDescending(f => f.Id).Skip(FeedbacksCount).Take(5).ToList();
             List<FeedbackModel> feedbacksList = new List<FeedbackModel>();
             foreach (Feedback item in feedbacks)
             {
@@ -364,7 +364,7 @@ namespace TourMaster.Controllers
             User user = db.Users.Find(Id);
 
             List<TourModel> toursList = new List<TourModel>();
-            foreach (Tour tour in user.Tours.Where(t => t.Status == 1).OrderByDescending(t => t.PostedDate))
+            foreach (Tour tour in user.Tours.Where(t => t.Status == 1 && t.Approved == 1).OrderByDescending(t => t.PostedDate))
             {
                 string title = "";
                 if (tour.FromId == tour.DestinationId)
@@ -389,6 +389,18 @@ namespace TourMaster.Controllers
                 toursList.Add(tourModel);
             }
 
+            int CompletedToursCount = 0;
+            foreach (Tour allTours in user.Tours.Where(t=>t.Approved == 1))
+            {
+                foreach (Booking booking in allTours.Bookings)
+                {
+                    if (booking.Status == 1)
+                    {
+                        CompletedToursCount++;
+                    }
+                }
+            }
+
             UserModel userModel = new UserModel
             {
                 Id = user.Id,
@@ -402,6 +414,7 @@ namespace TourMaster.Controllers
                 Rating = user.OverallRating,
                 Phone = user.Phone,
                 Email = user.Email,
+                CompletedTours = CompletedToursCount,
                 Facebook = user.Facebook,
                 Instagram = user.Instagram,
                 GooglePlus = user.GooglePlus,

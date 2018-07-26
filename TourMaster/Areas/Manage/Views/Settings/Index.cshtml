@@ -11,7 +11,8 @@
         <h2>Profile Settings</h2>
     </div>
     <div class="card-body">
-        <form action="" method="post" id="profile-settings" enctype="multipart/form-data">
+        <form action="@Url.Action("savesettings", new { controller = "settings", area = "manage", id = Model.Id })" method="post" id="profile-settings" enctype="multipart/form-data">
+            <input name="id" type="number" value="@Model.Id" hidden/>
             <div class="row">
                 <div class="col-md-8">
                     <h4>Main Info</h4>
@@ -51,7 +52,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Phone</label>
-                                <input class="form-control" type="tel" name="phone" value="+@Model.Phone" />
+                                <input class="form-control" type="tel" name="phone" value="@Model.Phone" />
                             </div>
                         </div>
                     </div>
@@ -71,7 +72,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">City</label>
-                                <select class="form-control" name="city">
+                                <select class="form-control" name="cityid">
                                     @foreach (City city in Model.City.Country.Cities)
                                     {
                                         <option value="@city.Id" @(Model.CityId == city.Id ? "selected" : "")>@city.CityName</option>
@@ -102,7 +103,7 @@
                 <div class="col-md-4">
                     <h4>Profile Image</h4>
                     <img class="rounded w-100" src="@Model.ProfileImage" />
-                    <input class="form-control-file mt-3" type="file" name="image" />
+                    <input class="form-control-file mt-3" type="file" name="profileimage" />
                 </div>
             </div>
             <hr />

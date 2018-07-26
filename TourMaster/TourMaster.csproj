@@ -823,6 +823,7 @@
     <Content Include="Public\js\plugins\form-validator\date.js" />
     <Content Include="Public\js\plugins\form-validator\jquery.form-validator.min.js" />
     <Content Include="Public\js\plugins\form-validator\security.js" />
+    <Content Include="Public\js\plugins\imagesloaded\imagesloaded.pkgd.min.js" />
     <Content Include="Public\js\plugins\isotope\isotope.pkgd.min.js" />
     <Content Include="Public\js\plugins\jalendar\jalendar.min.js" />
     <Content Include="Public\js\plugins\waypoint\waypoint.js" />
@@ -849,7 +850,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Manage\Models\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Database.edmx">

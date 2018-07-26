@@ -5,6 +5,79 @@ body {
 ::-webkit-scrollbar {
   display: none !important; }
 
+#preloader {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: #f15a23; }
+
+.sk-cube-grid {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: #63cac5;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+  animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; }
+
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s; }
+
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s; }
+
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s; }
+
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s; }
+
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s; }
+
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1); }
+  35% {
+    -webkit-transform: scale3D(0, 0, 1);
+    transform: scale3D(0, 0, 1); } }
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+    transform: scale3D(1, 1, 1); }
+  35% {
+    -webkit-transform: scale3D(0, 0, 1);
+    transform: scale3D(0, 0, 1); } }
 .tooltip .arrow::before {
   border-bottom-color: #f15a23; }
 .tooltip.bs-tooltip-top .arrow::before {
@@ -456,7 +529,8 @@ select.form-control {
 .signup-form-modal-wrapper,
 .pass-recovery-form-modal-wrapper,
 .pm-modal-wrapper,
-.tour-request-modal-wrapper {
+.tour-request-modal-wrapper,
+.notifications-modal-wrapper {
   height: 0;
   width: 0; }
   .login-form-modal-wrapper #login-form-modal,
@@ -464,26 +538,37 @@ select.form-control {
   .login-form-modal-wrapper #pass-recovery-form-modal,
   .login-form-modal-wrapper #pm-form-modal,
   .login-form-modal-wrapper #tour-request-modal,
+  .login-form-modal-wrapper #notifications-modal,
   .signup-form-modal-wrapper #login-form-modal,
   .signup-form-modal-wrapper #signup-form-modal,
   .signup-form-modal-wrapper #pass-recovery-form-modal,
   .signup-form-modal-wrapper #pm-form-modal,
   .signup-form-modal-wrapper #tour-request-modal,
+  .signup-form-modal-wrapper #notifications-modal,
   .pass-recovery-form-modal-wrapper #login-form-modal,
   .pass-recovery-form-modal-wrapper #signup-form-modal,
   .pass-recovery-form-modal-wrapper #pass-recovery-form-modal,
   .pass-recovery-form-modal-wrapper #pm-form-modal,
   .pass-recovery-form-modal-wrapper #tour-request-modal,
+  .pass-recovery-form-modal-wrapper #notifications-modal,
   .pm-modal-wrapper #login-form-modal,
   .pm-modal-wrapper #signup-form-modal,
   .pm-modal-wrapper #pass-recovery-form-modal,
   .pm-modal-wrapper #pm-form-modal,
   .pm-modal-wrapper #tour-request-modal,
+  .pm-modal-wrapper #notifications-modal,
   .tour-request-modal-wrapper #login-form-modal,
   .tour-request-modal-wrapper #signup-form-modal,
   .tour-request-modal-wrapper #pass-recovery-form-modal,
   .tour-request-modal-wrapper #pm-form-modal,
-  .tour-request-modal-wrapper #tour-request-modal {
+  .tour-request-modal-wrapper #tour-request-modal,
+  .tour-request-modal-wrapper #notifications-modal,
+  .notifications-modal-wrapper #login-form-modal,
+  .notifications-modal-wrapper #signup-form-modal,
+  .notifications-modal-wrapper #pass-recovery-form-modal,
+  .notifications-modal-wrapper #pm-form-modal,
+  .notifications-modal-wrapper #tour-request-modal,
+  .notifications-modal-wrapper #notifications-modal {
     background: rgba(99, 202, 197, 0.95);
     width: 100%;
     animation-duration: .5s; }
@@ -492,26 +577,37 @@ select.form-control {
     .login-form-modal-wrapper #pass-recovery-form-modal .modal-content,
     .login-form-modal-wrapper #pm-form-modal .modal-content,
     .login-form-modal-wrapper #tour-request-modal .modal-content,
+    .login-form-modal-wrapper #notifications-modal .modal-content,
     .signup-form-modal-wrapper #login-form-modal .modal-content,
     .signup-form-modal-wrapper #signup-form-modal .modal-content,
     .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content,
     .signup-form-modal-wrapper #pm-form-modal .modal-content,
     .signup-form-modal-wrapper #tour-request-modal .modal-content,
+    .signup-form-modal-wrapper #notifications-modal .modal-content,
     .pass-recovery-form-modal-wrapper #login-form-modal .modal-content,
     .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content,
     .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content,
     .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content,
     .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content,
+    .pass-recovery-form-modal-wrapper #notifications-modal .modal-content,
     .pm-modal-wrapper #login-form-modal .modal-content,
     .pm-modal-wrapper #signup-form-modal .modal-content,
     .pm-modal-wrapper #pass-recovery-form-modal .modal-content,
     .pm-modal-wrapper #pm-form-modal .modal-content,
     .pm-modal-wrapper #tour-request-modal .modal-content,
+    .pm-modal-wrapper #notifications-modal .modal-content,
     .tour-request-modal-wrapper #login-form-modal .modal-content,
     .tour-request-modal-wrapper #signup-form-modal .modal-content,
     .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content,
     .tour-request-modal-wrapper #pm-form-modal .modal-content,
-    .tour-request-modal-wrapper #tour-request-modal .modal-content {
+    .tour-request-modal-wrapper #tour-request-modal .modal-content,
+    .tour-request-modal-wrapper #notifications-modal .modal-content,
+    .notifications-modal-wrapper #login-form-modal .modal-content,
+    .notifications-modal-wrapper #signup-form-modal .modal-content,
+    .notifications-modal-wrapper #pass-recovery-form-modal .modal-content,
+    .notifications-modal-wrapper #pm-form-modal .modal-content,
+    .notifications-modal-wrapper #tour-request-modal .modal-content,
+    .notifications-modal-wrapper #notifications-modal .modal-content {
       border-radius: 0;
       box-shadow: 0 0 10px 2px #f15a23; }
       .login-form-modal-wrapper #login-form-modal .modal-content .modal-body,
@@ -519,26 +615,37 @@ select.form-control {
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
       .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body,
       .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body,
+      .login-form-modal-wrapper #notifications-modal .modal-content .modal-body,
       .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body,
       .pm-modal-wrapper #login-form-modal .modal-content .modal-body,
       .pm-modal-wrapper #signup-form-modal .modal-content .modal-body,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
       .pm-modal-wrapper #pm-form-modal .modal-content .modal-body,
       .pm-modal-wrapper #tour-request-modal .modal-content .modal-body,
+      .pm-modal-wrapper #notifications-modal .modal-content .modal-body,
       .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body,
+      .notifications-modal-wrapper #login-form-modal .modal-content .modal-body,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body,
+      .notifications-modal-wrapper #notifications-modal .modal-content .modal-body {
         padding: 0; }
         @media screen and (max-width: 768px) {
           .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
@@ -546,26 +653,37 @@ select.form-control {
           .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
           .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs,
           .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs,
           .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
           .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs,
           .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
           .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs,
           .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs,
           .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
           .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs,
           .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
           .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs,
           .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs,
           .pm-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
           .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs,
           .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
           .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs,
           .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs,
           .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
           .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs,
           .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
           .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs,
-          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs {
+          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs {
             width: 85% !important;
             border-right: 1px solid #dee2e6; }
             .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
@@ -573,52 +691,224 @@ select.form-control {
             .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
             .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
             .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a,
+            .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs li > a,
             .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
             .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs li > a,
             .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
             .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
             .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a,
+            .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs li > a,
             .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a,
+            .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs li > a,
             .pm-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
             .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a,
+            .pm-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs li > a,
             .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
             .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs li > a,
             .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
             .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
-            .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a {
+            .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a,
+            .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs li > a,
+            .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .nav-tabs li > a,
+            .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-tabs li > a,
+            .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-tabs li > a,
+            .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-tabs li > a,
+            .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-tabs li > a,
+            .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .nav-tabs li > a {
               height: 100%; } }
+        .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table,
+        .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table,
+        .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table,
+        .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table,
+        .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table,
+        .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table,
+        .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table,
+        .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table,
+        .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table,
+        .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table,
+        .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table,
+        .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table,
+        .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table,
+        .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table,
+        .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table,
+        .pm-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table,
+        .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table,
+        .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table,
+        .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table,
+        .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table,
+        .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table,
+        .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table,
+        .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table,
+        .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table,
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table {
+          position: relative;
+          overflow: hidden;
+          max-height: 500px; }
+          .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table tr:hover,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table tr:hover,
+          .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table tr:hover,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table tr:hover,
+          .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table tr:hover,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table tr:hover,
+          .pm-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table tr:hover,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table tr:hover,
+          .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table tr:hover,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table tr:hover,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table tr:hover,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table tr:hover,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.7) !important; }
+          .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table .notis,
+          .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table .notis,
+          .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table .notis,
+          .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table .notis,
+          .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table .notis,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table .notis,
+          .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table .notis,
+          .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table .notis,
+          .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table .notis,
+          .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table .notis,
+          .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table .notis,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table .notis,
+          .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table .notis,
+          .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table .notis,
+          .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table .notis,
+          .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table .notis,
+          .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table .notis,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table .notis,
+          .pm-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table .notis,
+          .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table .notis,
+          .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table .notis,
+          .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table .notis,
+          .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table .notis,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table .notis,
+          .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table .notis,
+          .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table .notis,
+          .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table .notis,
+          .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table .notis,
+          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table .notis,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table .notis,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .noti-table .notis,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .noti-table .notis,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .noti-table .notis,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .noti-table .notis,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .noti-table .notis,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .noti-table .notis {
+            text-decoration: none; }
+        .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .notis i,
+        .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .notis i,
+        .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .notis i,
+        .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .notis i,
+        .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .notis i,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .notis i,
+        .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .notis i,
+        .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .notis i,
+        .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .notis i,
+        .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .notis i,
+        .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .notis i,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .notis i,
+        .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .notis i,
+        .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .notis i,
+        .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .notis i,
+        .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .notis i,
+        .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .notis i,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .notis i,
+        .pm-modal-wrapper #login-form-modal .modal-content .modal-body .notis i,
+        .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .notis i,
+        .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .notis i,
+        .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .notis i,
+        .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .notis i,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body .notis i,
+        .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .notis i,
+        .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .notis i,
+        .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .notis i,
+        .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .notis i,
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .notis i,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .notis i,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .notis i,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .notis i,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .notis i,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .notis i,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .notis i,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .notis i {
+          font-size: 30px; }
         .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
         .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
         .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link,
         .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link,
         .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link,
         .pm-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
         .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
         .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link,
         .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link,
         .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link {
           border-radius: 0;
           color: #f15a23; }
           .login-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
@@ -626,26 +916,37 @@ select.form-control {
           .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
           .login-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
           .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link.active,
           .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
           .signup-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link.active,
           .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
           .signup-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
           .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link.active,
           .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
           .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link.active,
           .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
           .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
           .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link.active,
           .pm-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
           .pm-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link.active,
           .pm-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
           .pm-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
           .pm-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link.active,
           .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
           .tour-request-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link.active,
           .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
           .tour-request-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
-          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active {
+          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link.active,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body .nav-link.active,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body .nav-link.active,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body .nav-link.active,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body .nav-link.active,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body .nav-link.active,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body .nav-link.active {
             color: #63cac5; }
         .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#tour-request-modal-body,
         .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body#signup-form-body,
@@ -664,6 +965,10 @@ select.form-control {
         .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body,
         .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
         .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body,
+        .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body,
         .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body,
         .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body,
         .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body,
@@ -684,6 +989,10 @@ select.form-control {
         .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body,
@@ -704,6 +1013,10 @@ select.form-control {
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body,
         .pm-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body,
         .pm-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body,
         .pm-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body,
@@ -724,6 +1037,10 @@ select.form-control {
         .pm-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body,
         .pm-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
         .pm-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body,
+        .pm-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body,
         .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body,
         .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body,
         .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body,
@@ -743,7 +1060,35 @@ select.form-control {
         .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#signup-form-body,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body,
+        .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#tour-request-modal-body,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#signup-form-body,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#pass-recovery-form-body,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#pm-form-modal-body,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#tour-request-modal-body,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#signup-form-body,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#pass-recovery-form-body,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#pm-form-modal-body,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#tour-request-modal-body,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#signup-form-body,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#pass-recovery-form-body,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#pm-form-modal-body,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#tour-request-modal-body,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#signup-form-body,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body,
+        .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body {
           padding: 10px 20px; }
           .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right, .login-form-modal-wrapper #login-form-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
           .login-form-modal-wrapper #signup-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
@@ -762,6 +1107,10 @@ select.form-control {
           .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
           .login-form-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .login-form-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
           .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
           .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .signup-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
@@ -782,6 +1131,10 @@ select.form-control {
           .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
           .signup-form-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .signup-form-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
           .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
           .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
@@ -802,6 +1155,10 @@ select.form-control {
           .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
           .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
           .pm-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
           .pm-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .pm-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
@@ -822,6 +1179,10 @@ select.form-control {
           .pm-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .pm-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
           .pm-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .pm-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
           .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
           .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .tour-request-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
@@ -841,7 +1202,35 @@ select.form-control {
           .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
           .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
           .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
-          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right {
+          .tour-request-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .tour-request-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #login-form-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #signup-form-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #pm-form-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #tour-request-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#signup-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#pass-recovery-form-body i.fa-angle-right,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#pm-form-modal-body i.fa-angle-right,
+          .notifications-modal-wrapper #notifications-modal .modal-content .modal-body#tour-request-modal-body i.fa-angle-right {
             font-size: 40px;
             line-height: 45px;
             color: #f15a23; }
@@ -850,52 +1239,74 @@ select.form-control {
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
       .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
       .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span,
+      .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-check-label > span,
       .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-check-label > span,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-check-label > span,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-check-label > span,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-check-label > span,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-check-label > span,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-check-label > span,
       .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-check-label > span,
       .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-check-label > span,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
       .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
       .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span,
+      .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-check-label > span,
       .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-check-label > span,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-check-label > span,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-check-label > span,
+      .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-check-label > span,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-check-label > span,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-check-label > span,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-check-label > span,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-check-label > span,
+      .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-check-label > span {
         color: #f15a23; }
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
       .login-form-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
       .login-form-modal-wrapper #pm-form-modal .modal-content .form-group textarea.form-control,
       .login-form-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control,
+      .login-form-modal-wrapper #notifications-modal .modal-content .form-group textarea.form-control,
       .signup-form-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group textarea.form-control,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .form-group textarea.form-control,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group textarea.form-control,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group textarea.form-control,
       .pm-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
       .pm-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
       .pm-modal-wrapper #pm-form-modal .modal-content .form-group textarea.form-control,
       .pm-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control,
+      .pm-modal-wrapper #notifications-modal .modal-content .form-group textarea.form-control,
       .tour-request-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group textarea.form-control,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .form-group textarea.form-control,
+      .notifications-modal-wrapper #login-form-modal .modal-content .form-group textarea.form-control,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .form-group textarea.form-control,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group textarea.form-control,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .form-group textarea.form-control,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .form-group textarea.form-control,
+      .notifications-modal-wrapper #notifications-modal .modal-content .form-group textarea.form-control {
         resize: none;
         transition: none;
         border: 1px solid #f15a23;
@@ -906,26 +1317,37 @@ select.form-control {
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
       .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control-plaintext,
       .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext,
+      .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control-plaintext,
       .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control-plaintext,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control-plaintext,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control-plaintext,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control-plaintext,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control-plaintext,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control-plaintext,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control-plaintext,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control-plaintext,
       .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-control-plaintext,
       .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-control-plaintext,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
       .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-control-plaintext,
       .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext,
+      .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-control-plaintext,
       .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-control-plaintext,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-control-plaintext,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-control-plaintext,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-control-plaintext,
+      .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-control-plaintext,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-control-plaintext,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control-plaintext,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-control-plaintext,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-control-plaintext,
+      .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-control-plaintext {
         font-size: 20px;
         font-weight: 500; }
       .login-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
@@ -933,26 +1355,37 @@ select.form-control {
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
       .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control,
       .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control,
+      .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control,
       .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control,
       .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
       .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-control,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
       .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-control,
       .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-control,
+      .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-control,
       .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-control,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-control,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-control,
+      .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-control,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-control,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-control,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-control,
+      .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-control {
         border-radius: 0;
         border: none;
         border-bottom: 1px solid #f15a23;
@@ -962,26 +1395,37 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
         .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:read-only,
         .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only,
+        .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control:read-only,
         .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control:read-only,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:read-only,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:read-only,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control:read-only,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control:read-only,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:read-only,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:read-only,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control:read-only,
         .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-control:read-only,
         .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:read-only,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
         .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:read-only,
         .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only,
+        .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-control:read-only,
         .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-control:read-only,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:read-only,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:read-only,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-control:read-only,
+        .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-control:read-only,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:read-only,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:read-only,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:read-only,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:read-only,
+        .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-control:read-only {
           background: transparent !important;
           height: 37px !important;
           color: black;
@@ -992,26 +1436,37 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
         .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:focus,
         .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus,
+        .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control:focus,
         .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control:focus,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:focus,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:focus,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control:focus,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control:focus,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:focus,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:focus,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control:focus,
         .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-control:focus,
         .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:focus,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
         .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:focus,
         .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus,
+        .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-control:focus,
         .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-control:focus,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:focus,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:focus,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-control:focus,
+        .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-control:focus,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-control:focus,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control:focus,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-control:focus,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-control:focus,
+        .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-control:focus {
           outline: none;
           box-shadow: 0px 2px 0px 0px #63cac5;
           border-color: #63cac5; }
@@ -1020,26 +1475,37 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
         .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.error,
         .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error,
+        .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control.error,
         .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control.error,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.error,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.error,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control.error,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control.error,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.error,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.error,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control.error,
         .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-control.error,
         .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.error,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
         .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.error,
         .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error,
+        .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-control.error,
         .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-control.error,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.error,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.error,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-control.error,
+        .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-control.error,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.error,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.error,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.error,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.error,
+        .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-control.error {
           box-shadow: 0px 2px 0px 0px #f44336;
           border-color: #f44336 !important;
           margin-bottom: 5px; }
@@ -1048,26 +1514,37 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
         .login-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.valid,
         .login-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid,
+        .login-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control.valid,
         .signup-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control.valid,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.valid,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.valid,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control.valid,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group .form-control.valid,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.valid,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.valid,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group .form-control.valid,
         .pm-modal-wrapper #login-form-modal .modal-content .form-group .form-control.valid,
         .pm-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.valid,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
         .pm-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.valid,
         .pm-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid,
+        .pm-modal-wrapper #notifications-modal .modal-content .form-group .form-control.valid,
         .tour-request-modal-wrapper #login-form-modal .modal-content .form-group .form-control.valid,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.valid,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.valid,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .form-group .form-control.valid,
+        .notifications-modal-wrapper #login-form-modal .modal-content .form-group .form-control.valid,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .form-group .form-control.valid,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group .form-control.valid,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .form-group .form-control.valid,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .form-group .form-control.valid,
+        .notifications-modal-wrapper #notifications-modal .modal-content .form-group .form-control.valid {
           box-shadow: none;
           border-color: #8bc34a !important;
           margin-bottom: 0; }
@@ -1076,26 +1553,37 @@ select.form-control {
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
       .login-form-modal-wrapper #pm-form-modal .modal-content .form-group.has-error > span,
       .login-form-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span,
+      .login-form-modal-wrapper #notifications-modal .modal-content .form-group.has-error > span,
       .signup-form-modal-wrapper #login-form-modal .modal-content .form-group.has-error > span,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .form-group.has-error > span,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .form-group.has-error > span,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .form-group.has-error > span,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .form-group.has-error > span,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .form-group.has-error > span,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .form-group.has-error > span,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .form-group.has-error > span,
       .pm-modal-wrapper #login-form-modal .modal-content .form-group.has-error > span,
       .pm-modal-wrapper #signup-form-modal .modal-content .form-group.has-error > span,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
       .pm-modal-wrapper #pm-form-modal .modal-content .form-group.has-error > span,
       .pm-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span,
+      .pm-modal-wrapper #notifications-modal .modal-content .form-group.has-error > span,
       .tour-request-modal-wrapper #login-form-modal .modal-content .form-group.has-error > span,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .form-group.has-error > span,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .form-group.has-error > span,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .form-group.has-error > span,
+      .notifications-modal-wrapper #login-form-modal .modal-content .form-group.has-error > span,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .form-group.has-error > span,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .form-group.has-error > span,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .form-group.has-error > span,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .form-group.has-error > span,
+      .notifications-modal-wrapper #notifications-modal .modal-content .form-group.has-error > span {
         color: #f44336;
         font-size: 14px; }
       .login-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
@@ -1103,26 +1591,37 @@ select.form-control {
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
       .login-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
       .login-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+      .login-form-modal-wrapper #notifications-modal .modal-content #form-modal-close,
       .signup-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
       .signup-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
       .signup-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
       .signup-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+      .signup-form-modal-wrapper #notifications-modal .modal-content #form-modal-close,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content #form-modal-close,
       .pm-modal-wrapper #login-form-modal .modal-content #form-modal-close,
       .pm-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
       .pm-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
       .pm-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+      .pm-modal-wrapper #notifications-modal .modal-content #form-modal-close,
       .tour-request-modal-wrapper #login-form-modal .modal-content #form-modal-close,
       .tour-request-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
       .tour-request-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+      .tour-request-modal-wrapper #notifications-modal .modal-content #form-modal-close,
+      .notifications-modal-wrapper #login-form-modal .modal-content #form-modal-close,
+      .notifications-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
+      .notifications-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
+      .notifications-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+      .notifications-modal-wrapper #notifications-modal .modal-content #form-modal-close {
         position: absolute;
         top: 0;
         right: -45px;
@@ -1135,26 +1634,37 @@ select.form-control {
           .login-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
           .login-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
           .login-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+          .login-form-modal-wrapper #notifications-modal .modal-content #form-modal-close,
           .signup-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
           .signup-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
           .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
           .signup-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
           .signup-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+          .signup-form-modal-wrapper #notifications-modal .modal-content #form-modal-close,
           .pass-recovery-form-modal-wrapper #login-form-modal .modal-content #form-modal-close,
           .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
           .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
           .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
           .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+          .pass-recovery-form-modal-wrapper #notifications-modal .modal-content #form-modal-close,
           .pm-modal-wrapper #login-form-modal .modal-content #form-modal-close,
           .pm-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
           .pm-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
           .pm-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
           .pm-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+          .pm-modal-wrapper #notifications-modal .modal-content #form-modal-close,
           .tour-request-modal-wrapper #login-form-modal .modal-content #form-modal-close,
           .tour-request-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
           .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
           .tour-request-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
-          .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close {
+          .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+          .tour-request-modal-wrapper #notifications-modal .modal-content #form-modal-close,
+          .notifications-modal-wrapper #login-form-modal .modal-content #form-modal-close,
+          .notifications-modal-wrapper #signup-form-modal .modal-content #form-modal-close,
+          .notifications-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close,
+          .notifications-modal-wrapper #pm-form-modal .modal-content #form-modal-close,
+          .notifications-modal-wrapper #tour-request-modal .modal-content #form-modal-close,
+          .notifications-modal-wrapper #notifications-modal .modal-content #form-modal-close {
             right: 5%;
             top: 2%; } }
         .login-form-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
@@ -1162,26 +1672,37 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
         .login-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close:hover,
         .login-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover,
+        .login-form-modal-wrapper #notifications-modal .modal-content #form-modal-close:hover,
         .signup-form-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
         .signup-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close:hover,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
         .signup-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close:hover,
         .signup-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover,
+        .signup-form-modal-wrapper #notifications-modal .modal-content #form-modal-close:hover,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content #form-modal-close:hover,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content #form-modal-close:hover,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content #form-modal-close:hover,
         .pm-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
         .pm-modal-wrapper #signup-form-modal .modal-content #form-modal-close:hover,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
         .pm-modal-wrapper #pm-form-modal .modal-content #form-modal-close:hover,
         .pm-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover,
+        .pm-modal-wrapper #notifications-modal .modal-content #form-modal-close:hover,
         .tour-request-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
         .tour-request-modal-wrapper #signup-form-modal .modal-content #form-modal-close:hover,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
         .tour-request-modal-wrapper #pm-form-modal .modal-content #form-modal-close:hover,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover,
+        .tour-request-modal-wrapper #notifications-modal .modal-content #form-modal-close:hover,
+        .notifications-modal-wrapper #login-form-modal .modal-content #form-modal-close:hover,
+        .notifications-modal-wrapper #signup-form-modal .modal-content #form-modal-close:hover,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content #form-modal-close:hover,
+        .notifications-modal-wrapper #pm-form-modal .modal-content #form-modal-close:hover,
+        .notifications-modal-wrapper #tour-request-modal .modal-content #form-modal-close:hover,
+        .notifications-modal-wrapper #notifications-modal .modal-content #form-modal-close:hover {
           transform: scale(1.2);
           color: #f15a23; }
       .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
@@ -1194,6 +1715,8 @@ select.form-control {
       .login-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading h1,
       .login-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading h1,
       .login-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1,
+      .login-form-modal-wrapper #notifications-modal .modal-content .login-form-heading h1,
+      .login-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading h1,
       .signup-form-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
       .signup-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading h1,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading h1,
@@ -1204,6 +1727,8 @@ select.form-control {
       .signup-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading h1,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading h1,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .login-form-heading h1,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading h1,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading h1,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading h1,
@@ -1214,6 +1739,8 @@ select.form-control {
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading h1,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading h1,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .login-form-heading h1,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading h1,
       .pm-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
       .pm-modal-wrapper #login-form-modal .modal-content .signup-form-heading h1,
       .pm-modal-wrapper #signup-form-modal .modal-content .login-form-heading h1,
@@ -1224,6 +1751,8 @@ select.form-control {
       .pm-modal-wrapper #pm-form-modal .modal-content .signup-form-heading h1,
       .pm-modal-wrapper #tour-request-modal .modal-content .login-form-heading h1,
       .pm-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1,
+      .pm-modal-wrapper #notifications-modal .modal-content .login-form-heading h1,
+      .pm-modal-wrapper #notifications-modal .modal-content .signup-form-heading h1,
       .tour-request-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
       .tour-request-modal-wrapper #login-form-modal .modal-content .signup-form-heading h1,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .login-form-heading h1,
@@ -1233,7 +1762,21 @@ select.form-control {
       .tour-request-modal-wrapper #pm-form-modal .modal-content .login-form-heading h1,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .signup-form-heading h1,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .login-form-heading h1,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1 {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .login-form-heading h1,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .signup-form-heading h1,
+      .notifications-modal-wrapper #login-form-modal .modal-content .login-form-heading h1,
+      .notifications-modal-wrapper #login-form-modal .modal-content .signup-form-heading h1,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .login-form-heading h1,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .signup-form-heading h1,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .login-form-heading h1,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .signup-form-heading h1,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .login-form-heading h1,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .signup-form-heading h1,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .login-form-heading h1,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .signup-form-heading h1,
+      .notifications-modal-wrapper #notifications-modal .modal-content .login-form-heading h1,
+      .notifications-modal-wrapper #notifications-modal .modal-content .signup-form-heading h1 {
         color: #63cac5;
         font-weight: 300; }
       .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
@@ -1246,6 +1789,8 @@ select.form-control {
       .login-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p,
       .login-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
       .login-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p,
+      .login-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p,
+      .login-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p,
       .signup-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
       .signup-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p,
@@ -1256,6 +1801,8 @@ select.form-control {
       .signup-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p,
@@ -1266,6 +1813,8 @@ select.form-control {
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p,
       .pm-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
       .pm-modal-wrapper #login-form-modal .modal-content .signup-form-heading p,
       .pm-modal-wrapper #signup-form-modal .modal-content .login-form-heading p,
@@ -1276,6 +1825,8 @@ select.form-control {
       .pm-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p,
       .pm-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
       .pm-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p,
+      .pm-modal-wrapper #notifications-modal .modal-content .login-form-heading p,
+      .pm-modal-wrapper #notifications-modal .modal-content .signup-form-heading p,
       .tour-request-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
       .tour-request-modal-wrapper #login-form-modal .modal-content .signup-form-heading p,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .login-form-heading p,
@@ -1285,7 +1836,21 @@ select.form-control {
       .tour-request-modal-wrapper #pm-form-modal .modal-content .login-form-heading p,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .login-form-heading p,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .signup-form-heading p,
+      .notifications-modal-wrapper #login-form-modal .modal-content .login-form-heading p,
+      .notifications-modal-wrapper #login-form-modal .modal-content .signup-form-heading p,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .login-form-heading p,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .signup-form-heading p,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .login-form-heading p,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .signup-form-heading p,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .login-form-heading p,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .login-form-heading p,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p,
+      .notifications-modal-wrapper #notifications-modal .modal-content .login-form-heading p,
+      .notifications-modal-wrapper #notifications-modal .modal-content .signup-form-heading p {
         font-weight: 600; }
         .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
         .login-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
@@ -1297,6 +1862,8 @@ select.form-control {
         .login-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p span,
         .login-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
         .login-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span,
+        .login-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p span,
+        .login-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p span,
         .signup-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
         .signup-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p span,
@@ -1307,6 +1874,8 @@ select.form-control {
         .signup-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p span,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p span,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p span,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p span,
@@ -1317,6 +1886,8 @@ select.form-control {
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p span,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p span,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p span,
         .pm-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
         .pm-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
         .pm-modal-wrapper #signup-form-modal .modal-content .login-form-heading p span,
@@ -1327,6 +1898,8 @@ select.form-control {
         .pm-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p span,
         .pm-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
         .pm-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span,
+        .pm-modal-wrapper #notifications-modal .modal-content .login-form-heading p span,
+        .pm-modal-wrapper #notifications-modal .modal-content .signup-form-heading p span,
         .tour-request-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
         .tour-request-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .login-form-heading p span,
@@ -1336,7 +1909,21 @@ select.form-control {
         .tour-request-modal-wrapper #pm-form-modal .modal-content .login-form-heading p span,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p span,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .login-form-heading p span,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .signup-form-heading p span,
+        .notifications-modal-wrapper #login-form-modal .modal-content .login-form-heading p span,
+        .notifications-modal-wrapper #login-form-modal .modal-content .signup-form-heading p span,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .login-form-heading p span,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .signup-form-heading p span,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .login-form-heading p span,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .signup-form-heading p span,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .login-form-heading p span,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p span,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .login-form-heading p span,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p span,
+        .notifications-modal-wrapper #notifications-modal .modal-content .login-form-heading p span,
+        .notifications-modal-wrapper #notifications-modal .modal-content .signup-form-heading p span {
           color: #f15a23; }
         .login-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
         .login-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
@@ -1348,6 +1935,8 @@ select.form-control {
         .login-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p t,
         .login-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p t,
         .login-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t,
+        .login-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p t,
+        .login-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p t,
         .signup-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
         .signup-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p t,
@@ -1358,6 +1947,8 @@ select.form-control {
         .signup-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p t,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p t,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p t,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p t,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .login-form-heading p t,
@@ -1368,6 +1959,8 @@ select.form-control {
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p t,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .login-form-heading p t,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .login-form-heading p t,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .signup-form-heading p t,
         .pm-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
         .pm-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
         .pm-modal-wrapper #signup-form-modal .modal-content .login-form-heading p t,
@@ -1378,6 +1971,8 @@ select.form-control {
         .pm-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p t,
         .pm-modal-wrapper #tour-request-modal .modal-content .login-form-heading p t,
         .pm-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t,
+        .pm-modal-wrapper #notifications-modal .modal-content .login-form-heading p t,
+        .pm-modal-wrapper #notifications-modal .modal-content .signup-form-heading p t,
         .tour-request-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
         .tour-request-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .login-form-heading p t,
@@ -1387,7 +1982,21 @@ select.form-control {
         .tour-request-modal-wrapper #pm-form-modal .modal-content .login-form-heading p t,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p t,
         .tour-request-modal-wrapper #tour-request-modal .modal-content .login-form-heading p t,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .login-form-heading p t,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .signup-form-heading p t,
+        .notifications-modal-wrapper #login-form-modal .modal-content .login-form-heading p t,
+        .notifications-modal-wrapper #login-form-modal .modal-content .signup-form-heading p t,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .login-form-heading p t,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .signup-form-heading p t,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .login-form-heading p t,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .signup-form-heading p t,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .login-form-heading p t,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .signup-form-heading p t,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .login-form-heading p t,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .signup-form-heading p t,
+        .notifications-modal-wrapper #notifications-modal .modal-content .login-form-heading p t,
+        .notifications-modal-wrapper #notifications-modal .modal-content .signup-form-heading p t {
           color: black;
           text-decoration: underline;
           text-decoration-color: #63cac5; }
@@ -1401,6 +2010,8 @@ select.form-control {
       .login-form-modal-wrapper #pm-form-modal .modal-content .tour-request-form-heading h3,
       .login-form-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
       .login-form-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3,
+      .login-form-modal-wrapper #notifications-modal .modal-content .pm-form-heading h3,
+      .login-form-modal-wrapper #notifications-modal .modal-content .tour-request-form-heading h3,
       .signup-form-modal-wrapper #login-form-modal .modal-content .pm-form-heading h3,
       .signup-form-modal-wrapper #login-form-modal .modal-content .tour-request-form-heading h3,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .pm-form-heading h3,
@@ -1411,6 +2022,8 @@ select.form-control {
       .signup-form-modal-wrapper #pm-form-modal .modal-content .tour-request-form-heading h3,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .pm-form-heading h3,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .tour-request-form-heading h3,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .pm-form-heading h3,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .tour-request-form-heading h3,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .pm-form-heading h3,
@@ -1421,6 +2034,8 @@ select.form-control {
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .tour-request-form-heading h3,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .pm-form-heading h3,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .tour-request-form-heading h3,
       .pm-modal-wrapper #login-form-modal .modal-content .pm-form-heading h3,
       .pm-modal-wrapper #login-form-modal .modal-content .tour-request-form-heading h3,
       .pm-modal-wrapper #signup-form-modal .modal-content .pm-form-heading h3,
@@ -1431,6 +2046,8 @@ select.form-control {
       .pm-modal-wrapper #pm-form-modal .modal-content .tour-request-form-heading h3,
       .pm-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
       .pm-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3,
+      .pm-modal-wrapper #notifications-modal .modal-content .pm-form-heading h3,
+      .pm-modal-wrapper #notifications-modal .modal-content .tour-request-form-heading h3,
       .tour-request-modal-wrapper #login-form-modal .modal-content .pm-form-heading h3,
       .tour-request-modal-wrapper #login-form-modal .modal-content .tour-request-form-heading h3,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .pm-form-heading h3,
@@ -1440,33 +2057,58 @@ select.form-control {
       .tour-request-modal-wrapper #pm-form-modal .modal-content .pm-form-heading h3,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .tour-request-form-heading h3,
       .tour-request-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3 {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .pm-form-heading h3,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .tour-request-form-heading h3,
+      .notifications-modal-wrapper #login-form-modal .modal-content .pm-form-heading h3,
+      .notifications-modal-wrapper #login-form-modal .modal-content .tour-request-form-heading h3,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .pm-form-heading h3,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .tour-request-form-heading h3,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .pm-form-heading h3,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .tour-request-form-heading h3,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .pm-form-heading h3,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .tour-request-form-heading h3,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .pm-form-heading h3,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .tour-request-form-heading h3,
+      .notifications-modal-wrapper #notifications-modal .modal-content .pm-form-heading h3,
+      .notifications-modal-wrapper #notifications-modal .modal-content .tour-request-form-heading h3 {
         font-weight: 300; }
       .login-form-modal-wrapper #login-form-modal .modal-content .btn-success,
       .login-form-modal-wrapper #signup-form-modal .modal-content .btn-success,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
       .login-form-modal-wrapper #pm-form-modal .modal-content .btn-success,
       .login-form-modal-wrapper #tour-request-modal .modal-content .btn-success,
+      .login-form-modal-wrapper #notifications-modal .modal-content .btn-success,
       .signup-form-modal-wrapper #login-form-modal .modal-content .btn-success,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .btn-success,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .btn-success,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .btn-success,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .btn-success,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .btn-success,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .btn-success,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .btn-success,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .btn-success,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .btn-success,
       .pm-modal-wrapper #login-form-modal .modal-content .btn-success,
       .pm-modal-wrapper #signup-form-modal .modal-content .btn-success,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
       .pm-modal-wrapper #pm-form-modal .modal-content .btn-success,
       .pm-modal-wrapper #tour-request-modal .modal-content .btn-success,
+      .pm-modal-wrapper #notifications-modal .modal-content .btn-success,
       .tour-request-modal-wrapper #login-form-modal .modal-content .btn-success,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .btn-success,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .btn-success,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-success {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-success,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .btn-success,
+      .notifications-modal-wrapper #login-form-modal .modal-content .btn-success,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .btn-success,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .btn-success,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .btn-success,
+      .notifications-modal-wrapper #notifications-modal .modal-content .btn-success {
         background-color: #63cac5;
         border: none;
         border-radius: 0;
@@ -1477,130 +2119,185 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
         .login-form-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
         .login-form-modal-wrapper #tour-request-modal .modal-content .btn-success:hover,
+        .login-form-modal-wrapper #notifications-modal .modal-content .btn-success:hover,
         .signup-form-modal-wrapper #login-form-modal .modal-content .btn-success:hover,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .btn-success:hover,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .btn-success:hover,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .btn-success:hover,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .btn-success:hover,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .btn-success:hover,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .btn-success:hover,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .btn-success:hover,
         .pm-modal-wrapper #login-form-modal .modal-content .btn-success:hover,
         .pm-modal-wrapper #signup-form-modal .modal-content .btn-success:hover,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
         .pm-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
         .pm-modal-wrapper #tour-request-modal .modal-content .btn-success:hover,
+        .pm-modal-wrapper #notifications-modal .modal-content .btn-success:hover,
         .tour-request-modal-wrapper #login-form-modal .modal-content .btn-success:hover,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .btn-success:hover,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-success:hover {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-success:hover,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .btn-success:hover,
+        .notifications-modal-wrapper #login-form-modal .modal-content .btn-success:hover,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .btn-success:hover,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .btn-success:hover,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .btn-success:hover,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .btn-success:hover,
+        .notifications-modal-wrapper #notifications-modal .modal-content .btn-success:hover {
           background-color: #f15a23; }
       .login-form-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
       .login-form-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
       .login-form-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
       .login-form-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary,
+      .login-form-modal-wrapper #notifications-modal .modal-content .btn-outline-secondary,
       .signup-form-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .btn-outline-secondary,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .btn-outline-secondary,
       .pm-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
       .pm-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
       .pm-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
       .pm-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary,
+      .pm-modal-wrapper #notifications-modal .modal-content .btn-outline-secondary,
       .tour-request-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .btn-outline-secondary,
+      .notifications-modal-wrapper #login-form-modal .modal-content .btn-outline-secondary,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .btn-outline-secondary,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .btn-outline-secondary,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .btn-outline-secondary,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .btn-outline-secondary,
+      .notifications-modal-wrapper #notifications-modal .modal-content .btn-outline-secondary {
         border-radius: 0; }
       .login-form-modal-wrapper #login-form-modal .modal-content .tab-pane,
       .login-form-modal-wrapper #signup-form-modal .modal-content .tab-pane,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
       .login-form-modal-wrapper #pm-form-modal .modal-content .tab-pane,
       .login-form-modal-wrapper #tour-request-modal .modal-content .tab-pane,
+      .login-form-modal-wrapper #notifications-modal .modal-content .tab-pane,
       .signup-form-modal-wrapper #login-form-modal .modal-content .tab-pane,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .tab-pane,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .tab-pane,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .tab-pane,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .tab-pane,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .tab-pane,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .tab-pane,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .tab-pane,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .tab-pane,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .tab-pane,
       .pm-modal-wrapper #login-form-modal .modal-content .tab-pane,
       .pm-modal-wrapper #signup-form-modal .modal-content .tab-pane,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
       .pm-modal-wrapper #pm-form-modal .modal-content .tab-pane,
       .pm-modal-wrapper #tour-request-modal .modal-content .tab-pane,
+      .pm-modal-wrapper #notifications-modal .modal-content .tab-pane,
       .tour-request-modal-wrapper #login-form-modal .modal-content .tab-pane,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .tab-pane,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .tab-pane,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .tab-pane {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .tab-pane,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .tab-pane,
+      .notifications-modal-wrapper #login-form-modal .modal-content .tab-pane,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .tab-pane,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .tab-pane,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .tab-pane,
+      .notifications-modal-wrapper #notifications-modal .modal-content .tab-pane {
         padding: 10px 20px; }
         .login-form-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
         .login-form-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
         .login-form-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
         .login-form-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade,
+        .login-form-modal-wrapper #notifications-modal .modal-content .tab-pane.fade,
         .signup-form-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .tab-pane.fade,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .tab-pane.fade,
         .pm-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
         .pm-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
         .pm-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
         .pm-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade,
+        .pm-modal-wrapper #notifications-modal .modal-content .tab-pane.fade,
         .tour-request-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .tab-pane.fade,
+        .notifications-modal-wrapper #login-form-modal .modal-content .tab-pane.fade,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .tab-pane.fade,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .tab-pane.fade,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .tab-pane.fade,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .tab-pane.fade,
+        .notifications-modal-wrapper #notifications-modal .modal-content .tab-pane.fade {
           transition: opacity .5s linear; }
       .login-form-modal-wrapper #login-form-modal .modal-content .pass-recovery,
       .login-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
       .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
       .login-form-modal-wrapper #pm-form-modal .modal-content .pass-recovery,
       .login-form-modal-wrapper #tour-request-modal .modal-content .pass-recovery,
+      .login-form-modal-wrapper #notifications-modal .modal-content .pass-recovery,
       .signup-form-modal-wrapper #login-form-modal .modal-content .pass-recovery,
       .signup-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
       .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
       .signup-form-modal-wrapper #pm-form-modal .modal-content .pass-recovery,
       .signup-form-modal-wrapper #tour-request-modal .modal-content .pass-recovery,
+      .signup-form-modal-wrapper #notifications-modal .modal-content .pass-recovery,
       .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .pass-recovery,
       .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
       .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
       .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .pass-recovery,
       .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .pass-recovery,
+      .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .pass-recovery,
       .pm-modal-wrapper #login-form-modal .modal-content .pass-recovery,
       .pm-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
       .pm-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
       .pm-modal-wrapper #pm-form-modal .modal-content .pass-recovery,
       .pm-modal-wrapper #tour-request-modal .modal-content .pass-recovery,
+      .pm-modal-wrapper #notifications-modal .modal-content .pass-recovery,
       .tour-request-modal-wrapper #login-form-modal .modal-content .pass-recovery,
       .tour-request-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
       .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
       .tour-request-modal-wrapper #pm-form-modal .modal-content .pass-recovery,
-      .tour-request-modal-wrapper #tour-request-modal .modal-content .pass-recovery {
+      .tour-request-modal-wrapper #tour-request-modal .modal-content .pass-recovery,
+      .tour-request-modal-wrapper #notifications-modal .modal-content .pass-recovery,
+      .notifications-modal-wrapper #login-form-modal .modal-content .pass-recovery,
+      .notifications-modal-wrapper #signup-form-modal .modal-content .pass-recovery,
+      .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery,
+      .notifications-modal-wrapper #pm-form-modal .modal-content .pass-recovery,
+      .notifications-modal-wrapper #tour-request-modal .modal-content .pass-recovery,
+      .notifications-modal-wrapper #notifications-modal .modal-content .pass-recovery {
         color: #63cac5;
         text-decoration: none;
         transition: all .3s; }
@@ -1609,26 +2306,37 @@ select.form-control {
         .login-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
         .login-form-modal-wrapper #pm-form-modal .modal-content .pass-recovery:hover,
         .login-form-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover,
+        .login-form-modal-wrapper #notifications-modal .modal-content .pass-recovery:hover,
         .signup-form-modal-wrapper #login-form-modal .modal-content .pass-recovery:hover,
         .signup-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery:hover,
         .signup-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
         .signup-form-modal-wrapper #pm-form-modal .modal-content .pass-recovery:hover,
         .signup-form-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover,
+        .signup-form-modal-wrapper #notifications-modal .modal-content .pass-recovery:hover,
         .pass-recovery-form-modal-wrapper #login-form-modal .modal-content .pass-recovery:hover,
         .pass-recovery-form-modal-wrapper #signup-form-modal .modal-content .pass-recovery:hover,
         .pass-recovery-form-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
         .pass-recovery-form-modal-wrapper #pm-form-modal .modal-content .pass-recovery:hover,
         .pass-recovery-form-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover,
+        .pass-recovery-form-modal-wrapper #notifications-modal .modal-content .pass-recovery:hover,
         .pm-modal-wrapper #login-form-modal .modal-content .pass-recovery:hover,
         .pm-modal-wrapper #signup-form-modal .modal-content .pass-recovery:hover,
         .pm-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
         .pm-modal-wrapper #pm-form-modal .modal-content .pass-recovery:hover,
         .pm-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover,
+        .pm-modal-wrapper #notifications-modal .modal-content .pass-recovery:hover,
         .tour-request-modal-wrapper #login-form-modal .modal-content .pass-recovery:hover,
         .tour-request-modal-wrapper #signup-form-modal .modal-content .pass-recovery:hover,
         .tour-request-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
         .tour-request-modal-wrapper #pm-form-modal .modal-content .pass-recovery:hover,
-        .tour-request-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover {
+        .tour-request-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover,
+        .tour-request-modal-wrapper #notifications-modal .modal-content .pass-recovery:hover,
+        .notifications-modal-wrapper #login-form-modal .modal-content .pass-recovery:hover,
+        .notifications-modal-wrapper #signup-form-modal .modal-content .pass-recovery:hover,
+        .notifications-modal-wrapper #pass-recovery-form-modal .modal-content .pass-recovery:hover,
+        .notifications-modal-wrapper #pm-form-modal .modal-content .pass-recovery:hover,
+        .notifications-modal-wrapper #tour-request-modal .modal-content .pass-recovery:hover,
+        .notifications-modal-wrapper #notifications-modal .modal-content .pass-recovery:hover {
           color: #f15a23; }
 
 .tours-modal-wrapper {
@@ -1669,111 +2377,113 @@ select.form-control {
           background: #a4330a;
           color: #63cac5;
           font-weight: 500; }
-    .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .gutter-sizer {
-      width: 2%; }
-      @media screen and (max-width: 768px) {
-        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .gutter-sizer {
-          width: 0; } }
-    .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item {
-      overflow: hidden;
-      position: relative;
-      background-size: cover;
-      height: 500px;
-      width: 32%;
-      margin-bottom: 40px;
-      box-shadow: 0 0 10px 2px #f15a23; }
-      @media screen and (max-width: 768px) {
-        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item {
-          width: 100%; } }
-      .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: all .5s; }
-        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading {
-          text-align: center;
-          width: 100%;
-          padding: 10px 20px;
+    .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper {
+      position: relative; }
+      .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .gutter-sizer {
+        width: 2%; }
+        @media screen and (max-width: 768px) {
+          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .gutter-sizer {
+            width: 0; } }
+      .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item {
+        overflow: hidden;
+        position: relative;
+        background-size: cover;
+        height: 500px;
+        width: 32%;
+        margin-bottom: 40px;
+        box-shadow: 0 0 10px 2px #f15a23; }
+        @media screen and (max-width: 768px) {
+          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item {
+            width: 100%; } }
+        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay {
           position: absolute;
-          top: 40%;
-          left: 50%;
-          transform: translate(-50%, -50%); }
-          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading h3 {
-            color: white; }
-          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .duration,
-          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .price {
-            font-size: 25px;
-            margin-bottom: 0;
-            color: white;
-            cursor: default; }
-            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .duration i,
-            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .price i {
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(0, 0, 0, 0.7);
+          transform: translateY(-100%);
+          opacity: 0;
+          transition: all .5s; }
+          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading {
+            text-align: center;
+            width: 100%;
+            padding: 10px 20px;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%); }
+            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading h3 {
+              color: white; }
+            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .duration,
+            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .price {
+              font-size: 25px;
+              margin-bottom: 0;
+              color: white;
+              cursor: default; }
+              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .duration i,
+              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-heading .price i {
+                display: inline-block;
+                width: 60px;
+                font-size: 30px;
+                vertical-align: middle;
+                line-height: 50px;
+                text-align: left; }
+          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide {
+            border-top: 1px solid #63cac5;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0; }
+            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide img {
+              margin: 10px 20px;
               display: inline-block;
-              width: 60px;
-              font-size: 30px;
-              vertical-align: middle;
-              line-height: 50px;
-              text-align: left; }
-        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide {
-          border-top: 1px solid #63cac5;
+              max-width: 20%;
+              border-radius: 50%; }
+            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul {
+              display: inline-block;
+              margin: 10px 0 30px;
+              vertical-align: top;
+              max-width: 60%; }
+              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li {
+                text-transform: uppercase;
+                color: #63cac5; }
+                .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li:first-child {
+                  font-size: 24px;
+                  font-weight: 600; }
+                .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a {
+                  float: none;
+                  font-size: 30px;
+                  display: inline; }
+                  .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after {
+                    color: #63cac5; }
+        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom {
           position: absolute;
           bottom: 0;
           left: 0;
-          right: 0; }
-          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide img {
-            margin: 10px 20px;
-            display: inline-block;
-            max-width: 20%;
-            border-radius: 50%; }
-          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul {
-            display: inline-block;
-            margin: 10px 0 30px;
-            vertical-align: top;
-            max-width: 60%; }
-            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li {
-              text-transform: uppercase;
-              color: #63cac5; }
-              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li:first-child {
-                font-size: 24px;
-                font-weight: 600; }
-              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a {
-                float: none;
-                font-size: 30px;
-                display: inline; }
-                .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay .tour-guide ul li .br-theme-css-stars .br-widget a.br-selected:after {
-                  color: #63cac5; }
-      .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        transition: all .5s; }
-        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p {
-          margin-bottom: 0;
-          padding: 5px 20px;
-          font-size: 24px; }
-          @media screen and (max-width: 1500px) {
-            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p {
-              font-size: 18px;
-              text-align: center; }
-              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p span {
-                float: none !important;
-                display: block; } }
-          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p span {
-            float: right; }
-      .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item:hover .info-overlay {
-        transform: translateY(0);
-        opacity: 1; }
-      .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item:hover .info-overlay-bottom {
-        transform: translateY(100%);
-        opacity: 0; }
+          right: 0;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          transition: all .5s; }
+          .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p {
+            margin-bottom: 0;
+            padding: 5px 20px;
+            font-size: 24px; }
+            @media screen and (max-width: 1500px) {
+              .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p {
+                font-size: 18px;
+                text-align: center; }
+                .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p span {
+                  float: none !important;
+                  display: block; } }
+            .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item .info-overlay-bottom p span {
+              float: right; }
+        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item:hover .info-overlay {
+          transform: translateY(0);
+          opacity: 1; }
+        .tours-modal-wrapper #tours-modal section#tours .tours-grid-wrapper .grid-item:hover .info-overlay-bottom {
+          transform: translateY(100%);
+          opacity: 0; }
     .tours-modal-wrapper #tours-modal section#tours .tours-search-wrapper .accordion .card {
       background-color: transparent;
       border: none; }

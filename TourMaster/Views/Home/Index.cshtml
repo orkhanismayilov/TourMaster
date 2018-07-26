@@ -38,6 +38,21 @@
 
 
 <body data-spy="scroll" data-target="#navigation" data-offset="100">
+    <!-- Preloader -->
+    <div id="preloader" style="display: block">
+        <div class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+        </div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg" id="navigation">
         <div class="container">
@@ -82,7 +97,7 @@
                                     @{
                                         if (user.Notifications.Count != 0 && user.Notifications.Where(n => n.Status == 0) != null)
                                         {
-                                            foreach (Notification noti in user.Notifications.Where(n=>n.Status == 0).OrderByDescending(n => n.Date))
+                                            foreach (Notification noti in user.Notifications.Where(n => n.Status == 0).OrderByDescending(n => n.Date))
                                             {
                                                 <a href="" class="dropdown-item notification bg-@noti.NotificationType.Color" data-noti-id="@noti.Id">
                                                     <i class="@noti.NotificationType.Icon text-white d-inline-block mr-2 align-middle"></i>
@@ -96,7 +111,7 @@
                                             <a class="dropdown-item">No new notifications</a>
                                         }
                                     }
-                                    <a href="#" class="dropdown-item text-center" data-user-id="@user.Id">See all notifications</a>
+                                    <a href="" class="dropdown-item text-center" id="notifications-trigger" data-user-id="@user.Id">View all notifications</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -366,6 +381,7 @@
 
     <!-- Tours Modal Section -->
     <div class="tours-modal-wrapper">
+        
         <div class="row">
             <div class="col-12">
                 <div class="modal" id="tours-modal" tabindex="-1" role="dialog" data-backdrop="false">
@@ -377,6 +393,7 @@
                         </div>
                         <!-- Section Body -->
                         <div class="container">
+                            
                             <!-- Filter Buttons -->
                             <div class="tours-filters-wrapper text-center">
                                 <div class="btn-group btn-group-lg flex-wrap filter-button-group justify-content-center">
@@ -755,14 +772,14 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <h5 class="profile-total-tours profile-card">
-                                                    Total tours
+                                                    Active tours
                                                     <span></span>
                                                 </h5>
                                             </div>
                                             <div class="col-md-4">
                                                 <h5 class="profile-completed-tours profile-card">
                                                     Completed tours
-                                                    <span></span>
+                                                    <span>0</span>
                                                 </h5>
                                             </div>
                                             <div class="col-md-4">
@@ -840,6 +857,40 @@
                         <!-- Tour Body End -->
                         <i class="fas fa-times" id="modal-close" data-dismiss="modal"></i>
                     </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div class="notifications-modal-wrapper">
+        <div class="modal" id="notifications-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="tour-request-modal-body">
+                        <h3 class="text-uppercase text-center py-3">Notifications</h3>
+                        <table class="table table-hover noti-table">
+                            <tbody>
+                                @{
+                                    if (user != null)
+                                    {
+                                        foreach (Notification noti in user.Notifications.OrderByDescending(n => n.Date))
+                                        {
+                                            <tr class="bg-@noti.NotificationType.Color">
+                                                <td class="p-0">
+                                                    <a class="notis text-white d-block p-3" href="@noti.Link">
+                                                        <i class="@noti.NotificationType.Icon mr-3 align-middle"></i> @noti.Text
+                                                        <span class="badge text-white mt-3 d-block text-left">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                 </div>
             </div>
         </div>
@@ -1262,6 +1313,8 @@
     <script src="~/public/js/plugins/jalendar/jalendar.min.js"></script>
     <script src="~/public/js/plugins/waypoint/waypoint.js"></script>
     <script src="~/public/js/plugins/counterup/counterup.min.js"></script>
+    <script src="~/public/admin/js/perfect-scrollbar.min.js"></script>
+    <script src="~/public/js/plugins/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/public/js/main.js"></script>
 </body>
 
