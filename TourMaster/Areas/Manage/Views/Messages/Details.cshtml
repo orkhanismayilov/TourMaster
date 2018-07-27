@@ -1,0 +1,41 @@
+﻿@using TourMaster.Models
+@model PrivateMessage
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+    User user = Session["User"] as User;
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Private Message from @Model.User.Fullname</h2>
+    </div>
+    <div class="card-body">
+        <div class="message-heading">
+            <img class="rounded-circle mr-3 d-inline-block align-top" style="width: 100px" src="@Model.User.ProfileImage"/>
+            <ul class="list-unstyled d-inline-block">
+                <li><h4 class="mb-0">@Model.User.Fullname</h4></li>
+                <li><small>@Model.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                <li><h1>@Model.Subject</h1></li>
+            </ul>
+        </div>
+        <div class="message-body mt-2">
+            <p class="bg-gray-dark p-3 text-justify rounded">@Model.Message</p>
+        </div>
+        <hr />
+        <div class="reply-heading">
+            <h2>Reply</h2>
+        </div>
+        <div class="reply-body">
+            <form action="@Url.Action("reply", new { controller = "messages", area = "manage" })" method="post" id="reply-to-message">
+                <input type="number" name="SenderId" value="@user.Id" hidden/>
+                <input type="number" name="RecieverId" value="@Model.User.Id" hidden/>
+                <input type="text" name="Subject" value="@Model.Subject" hidden/>
+                <textarea class="form-control" name="message" placeholder="Message" rows="5"></textarea>
+                <div class="form-buttons text-center mt-3">
+                    <button class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

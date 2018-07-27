@@ -86,25 +86,29 @@
                     <div class="dropdown-header text-center">
                         <strong>You have @NewMsg messages</strong>
                     </div>
-                    <a class="dropdown-item" href="#">
-                        <div class="message">
-                            <div class="py-3 mr-3 float-left">
-                                <div class="avatar">
-                                    <img class="img-avatar" src="" />
-                                    <span class="avatar-status badge-success"></span>
+                    @{
+                        foreach (PrivateMessage pm in guide.PrivateMessages1.Where(pm => pm.ReadStatus == 0).OrderByDescending(pm => pm.Id))
+                        {
+                            <a class="dropdown-item" href="@Url.Action("details", new { controller = "messages", area = "manage", id = pm.Id })">
+                                <div class="message">
+                                    <div class="py-3 mr-3 float-left">
+                                        <div class="avatar">
+                                            <img class="img-avatar" src="@pm.User.ProfileImage" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">@pm.User.Fullname</small>
+                                        <small class="text-muted float-right mt-1">@pm.Date.ToString("HH:mm dd MMM yyyy")</small>
+                                    </div>
+                                    <div class="text-truncate font-weight-bold">
+                                        <span class="fa fa-exclamation text-danger"></span> @pm.Subject
+                                    </div>
+                                    <div class="small text-muted text-truncate">@pm.Message</div>
                                 </div>
-                            </div>
-                            <div>
-                                <small class="text-muted">John Doe</small>
-                                <small class="text-muted float-right mt-1">Just now</small>
-                            </div>
-                            <div class="text-truncate font-weight-bold">
-                                <span class="fa fa-exclamation text-danger"></span> Important message
-                            </div>
-                            <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</div>
-                        </div>
-                    </a>
-                    <a class="dropdown-item text-center" href="#">
+                            </a>
+                        }
+                    }
+                    <a class="dropdown-item text-center" href="@Url.Action("index", new { controller = "messages", area = "manage", id = guide.Id })">
                         <strong>View all messages</strong>
                     </a>
                 </div>

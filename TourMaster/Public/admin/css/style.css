@@ -14427,3 +14427,7 @@ div.feedbacks {
     max-height: 500px;
     overflow: hidden;
 }
+
+li.msg-item:hover{
+    background-color: #181b1e !important;
+}

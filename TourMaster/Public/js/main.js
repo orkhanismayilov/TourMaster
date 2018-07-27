@@ -767,7 +767,6 @@ $(document).ready(function () {
                 request[name] = value;
             });
             request["SenderId"] = $("button#pm-guide").data("user-id");
-            console.log(request);
 
             $.ajax({
                 url: url,

@@ -155,6 +155,7 @@
     <Compile Include="Areas\Manage\Controllers\BookingsController.cs" />
     <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Manage\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Manage\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Manage\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Manage\Controllers\SettingsController.cs" />
@@ -880,6 +881,8 @@
     <Content Include="Areas\Manage\Views\Bookings\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Notifications\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Settings\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Messages\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Messages\Details.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\css\style.css.map" />
     <Content Include="Public\sass\style.scss" />

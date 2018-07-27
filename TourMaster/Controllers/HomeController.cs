@@ -343,6 +343,7 @@ namespace TourMaster.Controllers
                     RecieverId = GuideId,
                     Subject = Subject,
                     Message = Msg,
+                    Date = DateTime.Now,
                     ReadStatus = 0
                 };
                 db.PrivateMessages.Add(pm);

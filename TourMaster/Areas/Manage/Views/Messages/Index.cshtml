@@ -1,0 +1,121 @@
+﻿@using TourMaster.Models
+@model User
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Messages</h2>
+    </div>
+    <div class="card-body">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active show" data-toggle="tab" href="#inbox" role="tab">
+                    <i class="icon-envelope"></i> Inbox
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#outbox" role="tab">
+                    <i class="icon-paper-plane"></i> Outbox
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active show p-0" id="inbox" role="tabpanel">
+                <ul class="list-unstyled mb-0">
+                    @{
+                        if (Model.PrivateMessages1.Count != 0)
+                        {
+                            foreach (PrivateMessage pm in Model.PrivateMessages1.OrderByDescending(pm => pm.Date))
+                            {
+                                <li class="msg-item @(pm.ReadStatus == 0?"bg-success":"")">
+                                    <a class="text-white d-block p-3" href="@Url.Action("details", new { controller = "messages", area = "manage", id = pm.Id })">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img class="rounded-circle mr-3 align-top d-inline-block" src="@pm.User.ProfileImage" style="width: 50px" />
+                                                <ul class="list-unstyled d-inline-block text-wrap">
+                                                    <li><h5 class="mb-0">@pm.User.Fullname</h5></li>
+                                                    <li><small>@pm.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-9">
+                                                <ul class="list-unstyled d-inline-block w-100">
+                                                    <li><h5 class="d-inline-block mb-0">@pm.Subject</h5></li>
+                                                    <li><p class="d-block text-truncate mb-0">@pm.Message</p></li>
+                                                </ul>
+                                            </div>
+                                            @if (pm.ReadStatus == 0)
+                                            {
+                                                <div class="w-100">
+                                                    <i class="icon-envelope-open text-success float-right mr-3" data-toggle="tooltip" data-placement="bottom" title="Mark as read"></i>
+                                                </div>
+                                            }
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="text-center">
+                                <p class="text-muted mb-0">No messages yet ...</p>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="tab-pane fade p-0" id="outbox" role="tabpanel">
+                <ul class="list-unstyled mb-0">
+                    @{
+                        if (Model.PrivateMessages.Count != 0)
+                        {
+                            foreach (PrivateMessage pm in Model.PrivateMessages.OrderByDescending(pm => pm.Date))
+                            {
+                                PrivateMessage prevMsg = Model.PrivateMessages1.FirstOrDefault(p=>p.Subject == pm.Subject.TrimStart('R', 'e', ':', ' '));
+                                <li class="msg-item">
+                                    <a class="text-white d-block p-3" href="@Url.Action("details", new { controller = "messages", area = "manage", id = prevMsg.Id })">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img class="rounded-circle mr-3 align-top d-inline-block" src="@pm.User1.ProfileImage" style="width: 50px"/>
+                                                <ul class="list-unstyled d-inline-block text-wrap">
+                                                    <li><h5 class="mb-0">@pm.User1.Fullname</h5></li>
+                                                    <li><small>@pm.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-9">
+                                                <ul class="list-unstyled d-inline-block w-100">
+                                                    <li><h5 class="d-inline-block mb-0">@pm.Subject</h5></li>
+                                                    <li><p class="d-block text-truncate mb-0">@pm.Message</p></li>
+                                                </ul>
+                                            </div>
+                                            @if (pm.ReadStatus == 0)
+                                            {
+                                                <div class="w-100">
+                                                    <i class="fal fa-check text-white float-right mr-3" data-toggle="tooltip" data-placement="bottom" title="Delivered"></i>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="w-100">
+                                                    <i class="fal fa-check-double text-success float-right mr-3" data-toggle="tooltip" data-placement="bottom" title="Read"></i>
+                                                </div>
+                                            }
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="text-center">
+                                <p class="text-muted mb-0">No messages yet ...</p>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
