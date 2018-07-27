@@ -12,7 +12,7 @@
     </div>
     <div class="card-body">
         <form action="@Url.Action("savesettings", new { controller = "settings", area = "manage", id = Model.Id })" method="post" id="profile-settings" enctype="multipart/form-data">
-            <input name="id" type="number" value="@Model.Id" hidden/>
+            <input name="id" type="number" value="@Model.Id" hidden />
             <div class="row">
                 <div class="col-md-8">
                     <h4>Main Info</h4>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-2">
                             <label class="control-label">Password</label>
-                            <button class="btn btn-warning btn-block">Change</button>
+                            <button class="btn btn-warning btn-block" id="changePassBtn">Change</button>
                         </div>
                     </div>
                     <div class="row">
@@ -112,5 +112,76 @@
                 <a class="btn btn-danger" href="@Url.Action("index", new { controller = "settings", area = "manage", id = Model.Id })">Cancel</a>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="modal fade" id="passModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("changepass", new { controller = "settings", area = "manage", id = Model.Id })" method="post" id="changePass">
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input class="form-control" type="password" name="oldpass" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">New Password</label>
+                        <input class="form-control" type="password" name="pass" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">New Password Confirmation</label>
+                        <input class="form-control" type="password" name="passconf" />
+                    </div>
+                    <div class="form-buttons text-center">
+                        <button class="btn btn-primary">Save Changes</button>
+                        <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="successModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Password successfully changed</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="dangerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Oops... Error occured while changing password. <br />Please, try later!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
     </div>
 </div>

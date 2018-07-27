@@ -125,7 +125,7 @@
                                         <a class="dropdown-item" href="@Url.Action("index", new { controller="home", area="manage" })">Dashboard</a>
                                     }
                                     <a class="dropdown-item" href="#">Messages</a>
-                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="" role="button" id="profile-settings">Settings</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("logout", "home")">Log Out</a>
                                 </div>
@@ -381,7 +381,7 @@
 
     <!-- Tours Modal Section -->
     <div class="tours-modal-wrapper">
-        
+
         <div class="row">
             <div class="col-12">
                 <div class="modal" id="tours-modal" tabindex="-1" role="dialog" data-backdrop="false">
@@ -393,7 +393,7 @@
                         </div>
                         <!-- Section Body -->
                         <div class="container">
-                            
+
                             <!-- Filter Buttons -->
                             <div class="tours-filters-wrapper text-center">
                                 <div class="btn-group btn-group-lg flex-wrap filter-button-group justify-content-center">
@@ -867,7 +867,7 @@
         <div class="modal" id="notifications-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-body" id="tour-request-modal-body">
+                    <div class="modal-body" id="noti-modal-body">
                         <h3 class="text-uppercase text-center py-3">Notifications</h3>
                         <table class="table table-hover noti-table">
                             <tbody>
@@ -895,6 +895,164 @@
             </div>
         </div>
     </div>
+
+    @if (user != null)
+    {
+        <!-- Settings Modal -->
+        <div class="settings-modal-wrapper">
+            <div class="modal" id="settings-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body" id="settings-modal-body">
+                            <h3 class="text-uppercase text-center py-3">Settings</h3>
+                            <form action="@Url.Action("savesettings", "home")" method="post" id="profile-settings-form" enctype="multipart/form-data" novalidate>
+                                <input name="id" type="number" value="@user.Id" hidden />
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h4>Main Info</h4>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Name</label>
+                                                    <input class="form-control" name="name" type="text" value="@user.Fullname.Split(' ')[0]" data-validation="required length" data-validation-length="min3" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Surname</label>
+                                                    <input class="form-control" name="surname" type="text" value="@user.Fullname.Split(' ')[1]" data-validation="required length" data-validation-length="min3" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="control-label">Email</label>
+                                                    <input class="form-control" name="email" type="email" value="@user.Email" data-validation="email required" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="control-label">Password</label>
+                                                <button class="btn btn-warning btn-block text-uppercase" id="changePassBtn">Change</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Birthday</label>
+                                                    <input class="form-control" name="birthday" type="date" value="@user.Birthday.ToString("yyyy-MM-dd")" data-validation="required" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Phone</label>
+                                                    <input class="form-control" type="tel" name="phone" value="@user.Phone" data-validation="required number" data-validation-allowing="integer, positive" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Country</label>
+                                                    <select class="form-control" name="country" data-validation="required">
+                                                        @foreach (Country cnt in ViewBag.Countries)
+                                                        {
+                                                            <option value="@cnt.Id" @(user.City.CountryId == cnt.Id ? "selected" : "")>@cnt.CountryName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">City</label>
+                                                    <select class="form-control" name="cityid" data-validation="required">
+                                                        @foreach (City city in user.City.Country.Cities)
+                                                        {
+                                                            <option value="@city.Id" @(user.CityId == city.Id ? "selected" : "")>@city.CityName</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Profile Image</h4>
+                                        <img class="w-100" src="@user.ProfileImage" />
+                                        <input class="form-control-file mt-3" type="file" name="profileimage"/>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4>Social Links</h4>
+                                        <div class="form-group">
+                                            <label class="control-label">Facebook</label>
+                                            <input class="form-control" name="facebook" type="text" value="@user.Facebook" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Instagram</label>
+                                            <input class="form-control" name="instagram" type="text" value="@user.Instagram" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">GooglePlus</label>
+                                            <input class="form-control" name="googleplus" type="text" value="@user.GooglePlus" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Twitter</label>
+                                            <input class="form-control" name="twitter" type="text" value="@user.Twitter" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-buttons text-center">
+                                    <button class="btn btn-primary text-uppercase" type="submit">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Change Password Modal -->
+        <div class="change-pass-modal-wrapper">
+            <div class="modal" id="change-pass-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body" id="change-pass-modal-body">
+                            <h3 class="text-uppercase text-center py-3">Change Password</h3>
+                            <form action="@Url.Action("changepass", "home", new { id = user.Id })" method="post" id="change-pass-form">
+                                <div class="form-group">
+                                    <label class="control-label">Password</label>
+                                    <input class="form-control" type="password" name="oldpass" data-validation="required length" data-validation-length="min8" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">New Password</label>
+                                    <input class="form-control" type="password" name="pass" id="pass" data-validation="required strength length" data-validation-length="min8" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">New Password Confirmation</label>
+                                    <input class="form-control" type="password" name="passconf" data-validation="required confirmation" data-validation-confirm="pass" />
+                                </div>
+                                <div class="form-buttons">
+                                    <button class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        if (Session["Settings"] != null)
+        {
+            <span id="settings-ok" hidden></span>
+            Session["Settings"] = null;
+        }
+    }
 
     <!-- Main Slider -->
     <div class="main-slider-wrapper" id="main-car">

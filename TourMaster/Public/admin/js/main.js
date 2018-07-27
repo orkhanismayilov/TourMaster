@@ -290,7 +290,45 @@ $(document).ready(function () {
         });
     });
 
+    // Change Password Modal
+    $("#changePassBtn").on("click", function () {
+        $("#passModal").modal('show');
+        $("#changePass").on("submit", function () {
+            
+            var that = $(this),
+                url = that.attr("action"),
+                method = that.attr("method"),
+                request = {};
 
+            that.find("[name]").each(function (idnex, value) {
+                var that = $(this),
+                    name = that.attr("name"),
+                    value = that.val();
+
+                request[name] = value;
+            });
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: request,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        $("#passModal").modal('hide');
+                        $("#passModal form")[0].reset();
+                        $("#successModal").modal('show');
+                    } else {
+                        $("#dangerModal").modal('show');
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        return false;
+    });
 
 
 });

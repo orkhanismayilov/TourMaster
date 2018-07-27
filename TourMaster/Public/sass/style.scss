@@ -777,7 +777,9 @@ select.form-control {
 .pass-recovery-form-modal-wrapper,
 .pm-modal-wrapper,
 .tour-request-modal-wrapper,
-.notifications-modal-wrapper {
+.notifications-modal-wrapper,
+.settings-modal-wrapper,
+.change-pass-modal-wrapper {
     height: 0;
     width: 0;
 
@@ -786,7 +788,9 @@ select.form-control {
     #pass-recovery-form-modal,
     #pm-form-modal,
     #tour-request-modal,
-    #notifications-modal {
+    #notifications-modal,
+    #settings-modal,
+    #change-pass-modal {
         background: rgba($secondary-color, .95);
         width: 100%;
         animation-duration: .5s;
@@ -839,13 +843,32 @@ select.form-control {
                 &#signup-form-body,
                 &#pass-recovery-form-body,
                 &#pm-form-modal-body,
-                &#tour-request-modal-body {
+                &#tour-request-modal-body,
+                &#noti-modal-body,
+                &#settings-modal-body,
+                &#change-pass-modal-body {
                     padding: 10px 20px;
 
                     i.fa-angle-right {
                         font-size: 40px;
                         line-height: 45px;
                         color: $primary-color;
+                    }
+
+                    .btn-warning {
+                        background: $primary-color;
+                        border-radius: 0;
+                        outline: none;
+                        box-shadow: none;
+                        color: white;
+                        font-weight: 600;
+                        transition: all .3s;
+                        border: none;
+                        letter-spacing: 1.5px;
+
+                        &:hover {
+                            background: $secondary-color;
+                        }
                     }
                 }
             }

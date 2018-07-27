@@ -33,8 +33,102 @@ $(document).ready(function () {
                 text: 'Invalid Email or Password!'
             });
         }
+
+        // Profile Settings Sweet Alert
+        if ($("#settings-ok").length > 0) {
+            swal({
+                type: 'success',
+                title: 'Success',
+                text: 'Settigns successfully saved.'
+            });
+        }
     });
 
+    // Profile Settings Modal
+    $("#profile-settings").on("click", function () {
+        $("#settings-modal").addClass("animated fadeIn").modal('show');
+        $("#settings-modal").animateCss("fadeIn", function () {
+            $("#settings-modal").removeClass("animated fadeIn");
+        });
+
+        return false;
+    });
+
+    // Change Pass Modal
+    $("#changePassBtn").on("click", function () {
+        $("#change-pass-modal").modal('show');
+        $("#change-pass-form").on("submit", function () {
+            var that = $(this),
+                url = that.attr("action"),
+                method = that.attr("method"),
+                request = {};
+
+            that.find("[name]").each(function (index, value) {
+                var that = $(this),
+                    name = that.attr("name"),
+                    value = that.val();
+
+                request[name] = value;
+            });
+
+            $.ajax({
+                url: url,
+                method: method,
+                data: request,
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        swal({
+                            type: 'success',
+                            title: 'Success',
+                            text: 'Password successfully changed.'
+                        });
+                        $("#change-pass-modal").modal('hide');
+                        that[0].reset();
+                    } else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong! Please, try later!'
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        return false;
+    });
+
+    // Change Pass and Profile Settings Form Validation
+    $.validate({
+        modules: 'security, date',
+        form: '#change-pass-form, #profile-settings-form'
+    });
+
+    // Profile Settings Get City by Country
+    $("#profile-settings-form").find("[name='country']").on("change", function () {
+        var that = $(this),
+            ci = $("#profile-settings-form").find("[name='cityid']");
+        ci.empty();
+        ci.append("<option value='' disabled selected>City</option>");
+        var url = "/home/getcities/" + that.val();
+        $.ajax({
+            url: url,
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var option = $("<option></option>");
+                    option.text(data[i].CityName);
+                    option.attr("value", data[i].Id);
+                    ci.append(option);
+                }
+            }
+        });
+    });
+    
     // Animate CSS Function Extension
     $.fn.extend({
         animateCss: function (animationName, callback) {
@@ -275,9 +369,9 @@ $(document).ready(function () {
         $("#signup-form #country").on("change", function () {
             $("#signup-form #city").empty();
             $("#signup-form #city").append("<option value='' disabled selected></option>");
-            var GetCitiesUrl = "/Home/GetCities/" + $("#signup-form #country").val();
+            var url = "/home/getcities/" + $("#signup-form #country").val();
             $.ajax({
-                url: GetCitiesUrl,
+                url: url,
                 method: "get",
                 dataType: "json",
                 success: function (data) {

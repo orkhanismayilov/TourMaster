@@ -61,5 +61,28 @@ namespace TourMaster.Areas.Manage.Controllers
 
             return RedirectToAction("index", new { user.Id });
         }
+
+        [HttpPost]
+        public JsonResult ChangePass(int? Id, string OldPass, string Pass, string PassConf)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = db.Users.Find(Id);
+                if (user != null && Pass == PassConf)
+                {
+                    if (System.Web.Helpers.Crypto.VerifyHashedPassword(user.Password, OldPass))
+                    {
+                        user.Password = System.Web.Helpers.Crypto.HashPassword(Pass);
+                        db.SaveChanges();
+                        return Json(1, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(0, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
     }
 }

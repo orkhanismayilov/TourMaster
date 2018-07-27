@@ -831,6 +831,10 @@
     <Content Include="Public\webfonts\fa-light-300.svg" />
     <Content Include="Public\webfonts\fa-regular-400.svg" />
     <Content Include="Public\webfonts\fa-solid-900.svg" />
+    <Content Include="Uploads\020180722151200slider_1.jpg" />
+    <Content Include="Uploads\1020180721154251home_1.jpg" />
+    <Content Include="Uploads\1020180721154252home_2.jpg" />
+    <Content Include="Uploads\1020180726181119profile_placeholder.png" />
     <Content Include="Uploads\guide_1.jpg" />
     <Content Include="Uploads\guide_2.jpg" />
     <Content Include="Uploads\guide_3.jpg" />
