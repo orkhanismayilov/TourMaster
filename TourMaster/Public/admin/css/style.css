@@ -14431,3 +14431,9 @@ div.feedbacks {
 li.msg-item:hover{
     background-color: #181b1e !important;
 }
+
+.messages-list{
+    position: relative;
+    max-height: 48vh;
+    overflow: hidden;
+}

@@ -929,7 +929,8 @@ $(document).ready(function () {
         // Tour View Guide Private Message Modal Hidden
         $("#pm-form-modal").on("hidden.bs.modal", function () {
             $("#pm-form-modal").removeClass("animated fadeOut");
-            $("#pm-to-guide")[0].reset();
+            $("#pm-form-modal").find("[name='subject']").val("");
+            $("#pm-form-modal").find("[name='msg']").val("");
         });
 
         // Tour Request Modal

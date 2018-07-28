@@ -1,26 +1,43 @@
 ﻿@using TourMaster.Models
-@model PrivateMessage
+@model List<PrivateMessage>
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
     User user = Session["User"] as User;
+    User sender = Model.Where(m => m.SenderId != user.Id).FirstOrDefault().User;
 }
 
 <div class="card border-primary">
     <div class="card-header">
-        <h2>Private Message from @Model.User.Fullname</h2>
-    </div>
-    <div class="card-body">
         <div class="message-heading">
-            <img class="rounded-circle mr-3 d-inline-block align-top" style="width: 100px" src="@Model.User.ProfileImage"/>
-            <ul class="list-unstyled d-inline-block">
-                <li><h4 class="mb-0">@Model.User.Fullname</h4></li>
-                <li><small>@Model.Date.ToString("HH:mm dd MMM yyyy")</small></li>
-                <li><h1>@Model.Subject</h1></li>
+            <img class="rounded-circle mr-3 d-inline-block align-top" style="width: 65px" src="@sender.ProfileImage" />
+            <ul class="list-unstyled d-inline-block mb-0">
+                <li><h4 class="mb-0">@sender.Fullname</h4></li>
+                <li><h1>@Model.FirstOrDefault().Subject</h1></li>
             </ul>
         </div>
-        <div class="message-body mt-2">
-            <p class="bg-gray-dark p-3 text-justify rounded">@Model.Message</p>
+    </div>
+    <div class="card-body">
+        <div class="messages-list">
+            @{
+                foreach (PrivateMessage pm in Model.OrderByDescending(pm=>pm.Date))
+                {
+                    <div class="message-body rounded p-3 mt-2 w-75 @(pm.User.Id == user.Id?"ml-auto bg-gray":"bg-gray-dark")">
+                        <p class="text-justify">@pm.Message</p>
+                        <small class="@(pm.User.Id == user.Id?"d-block text-right":"")">
+                            @pm.Date.ToString("HH:mm dd MMM yyyy")
+                            @if (pm.ReadStatus == 1 && pm.User.Id == user.Id)
+                            {
+                                <i class="fas fa-check text-success ml-2" data-toggle="tooltip" data-placement="bottom" title="Delivered"></i>
+                            }
+                            else if (pm.User.Id == user.Id)
+                            {
+                                <i class="fas fa-check text-grey-dark ml-2" data-toggle="tooltip" data-placement="bottom" title="Read"></i>
+                            }
+                        </small>
+                    </div>
+                }
+            }
         </div>
         <hr />
         <div class="reply-heading">
@@ -28,9 +45,9 @@
         </div>
         <div class="reply-body">
             <form action="@Url.Action("reply", new { controller = "messages", area = "manage" })" method="post" id="reply-to-message">
-                <input type="number" name="SenderId" value="@user.Id" hidden/>
-                <input type="number" name="RecieverId" value="@Model.User.Id" hidden/>
-                <input type="text" name="Subject" value="@Model.Subject" hidden/>
+                <input type="number" name="SenderId" value="@user.Id" hidden />
+                <input type="number" name="RecieverId" value="@sender.Id" hidden />
+                <input type="text" name="Subject" value="@Model.FirstOrDefault().Subject" hidden />
                 <textarea class="form-control" name="message" placeholder="Message" rows="5"></textarea>
                 <div class="form-buttons text-center mt-3">
                     <button class="btn btn-primary">Send</button>

@@ -151,7 +151,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SenderId" Type="int" Nullable="false" />
           <Property Name="RecieverId" Type="int" Nullable="false" />
-          <Property Name="Subject" Type="ntext" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Message" Type="ntext" Nullable="false" />
           <Property Name="ReadStatus" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
@@ -597,7 +597,6 @@
           <EntitySet Name="Notifications" EntityType="TourMaster.Notification" />
           <EntitySet Name="NotificationTypes" EntityType="TourMaster.NotificationType" />
           <EntitySet Name="Origins" EntityType="TourMaster.Origin" />
-          <EntitySet Name="PrivateMessages" EntityType="TourMaster.PrivateMessage" />
           <EntitySet Name="TourImages" EntityType="TourMaster.TourImage" />
           <EntitySet Name="Tours" EntityType="TourMaster.Tour" />
           <EntitySet Name="Users" EntityType="TourMaster.User" />
@@ -669,14 +668,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
-          <AssociationSet Name="FK_PrivateMessages_Users" Association="TourMaster.FK_PrivateMessages_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="PrivateMessage" EntitySet="PrivateMessages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PrivateMessages_Users1" Association="TourMaster.FK_PrivateMessages_Users1">
-            <End Role="User" EntitySet="Users" />
-            <End Role="PrivateMessage" EntitySet="PrivateMessages" />
-          </AssociationSet>
           <AssociationSet Name="FK_TourImages_Tours" Association="TourMaster.FK_TourImages_Tours">
             <End Role="Tour" EntitySet="Tours" />
             <End Role="TourImage" EntitySet="TourImages" />
@@ -688,6 +679,15 @@
           <AssociationSet Name="FK_Tours_Users" Association="TourMaster.FK_Tours_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Tour" EntitySet="Tours" />
+          </AssociationSet>
+          <EntitySet Name="PrivateMessages" EntityType="TourMaster.PrivateMessage" />
+          <AssociationSet Name="FK_PrivateMessages_Users" Association="TourMaster.FK_PrivateMessages_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PrivateMessage" EntitySet="PrivateMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrivateMessages_Users1" Association="TourMaster.FK_PrivateMessages_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PrivateMessage" EntitySet="PrivateMessages" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AccomodationLevel">
@@ -849,20 +849,6 @@
           <Property Name="Youtube" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Copyright" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PrivateMessage">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SenderId" Type="Int32" Nullable="false" />
-          <Property Name="RecieverId" Type="Int32" Nullable="false" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ReadStatus" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="User" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="PrivateMessage" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="PrivateMessage" ToRole="User" />
-        </EntityType>
         <EntityType Name="TourImage">
           <Key>
             <PropertyRef Name="Id" />
@@ -931,9 +917,9 @@
           <NavigationProperty Name="City" Relationship="TourMaster.FK_Users_Cities" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Feedbacks" Relationship="TourMaster.FK_Feedbacks_Users" FromRole="User" ToRole="Feedback" />
           <NavigationProperty Name="Notifications" Relationship="TourMaster.FK_Notifications_Users" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
           <NavigationProperty Name="PrivateMessages" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="User" ToRole="PrivateMessage" />
           <NavigationProperty Name="PrivateMessages1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="User" ToRole="PrivateMessage" />
-          <NavigationProperty Name="Tours" Relationship="TourMaster.FK_Tours_Users" FromRole="User" ToRole="Tour" />
         </EntityType>
         <Association Name="FK_Tours_AccomodationLevels">
           <End Type="TourMaster.AccomodationLevel" Role="AccomodationLevel" Multiplicity="0..1" />
@@ -1139,30 +1125,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PrivateMessages_Users">
-          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
-          <End Type="TourMaster.PrivateMessage" Role="PrivateMessage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PrivateMessage">
-              <PropertyRef Name="SenderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PrivateMessages_Users1">
-          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
-          <End Type="TourMaster.PrivateMessage" Role="PrivateMessage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PrivateMessage">
-              <PropertyRef Name="RecieverId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TourImages_Tours">
           <End Type="TourMaster.Tour" Role="Tour" Multiplicity="0..1" />
           <End Type="TourMaster.TourImage" Role="TourImage" Multiplicity="*" />
@@ -1196,6 +1158,44 @@
             </Principal>
             <Dependent Role="Tour">
               <PropertyRef Name="GuideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PrivateMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderId" Type="Int32" Nullable="false" />
+          <Property Name="RecieverId" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReadStatus" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="TourMaster.FK_PrivateMessages_Users" FromRole="PrivateMessage" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TourMaster.FK_PrivateMessages_Users1" FromRole="PrivateMessage" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_PrivateMessages_Users">
+          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
+          <End Type="TourMaster.PrivateMessage" Role="PrivateMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateMessage">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrivateMessages_Users1">
+          <End Type="TourMaster.User" Role="User" Multiplicity="1" />
+          <End Type="TourMaster.PrivateMessage" Role="PrivateMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateMessage">
+              <PropertyRef Name="RecieverId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1358,19 +1358,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PrivateMessages">
-            <EntityTypeMapping TypeName="TourMaster.PrivateMessage">
-              <MappingFragment StoreEntitySet="PrivateMessages">
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="ReadStatus" ColumnName="ReadStatus" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="RecieverId" ColumnName="RecieverId" />
-                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TourImages">
             <EntityTypeMapping TypeName="TourMaster.TourImage">
               <MappingFragment StoreEntitySet="TourImages">
@@ -1420,6 +1407,19 @@
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrivateMessages">
+            <EntityTypeMapping TypeName="TourMaster.PrivateMessage">
+              <MappingFragment StoreEntitySet="PrivateMessages">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReadStatus" ColumnName="ReadStatus" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="RecieverId" ColumnName="RecieverId" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

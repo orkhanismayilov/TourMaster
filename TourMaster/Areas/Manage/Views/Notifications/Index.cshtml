@@ -18,7 +18,7 @@
                         <tr>
                             <td class="bg-@noti.NotificationType.Color">
                                 <a class="text-white d-block" href="@noti.Link">
-                                    <i class="@noti.NotificationType.Icon align-middle d-inline-block mr-1 text-value-lg"></i> @noti.Text
+                                    <i class="@noti.NotificationType.Icon @(noti.Status == 0?"text-danger":"") align-middle d-inline-block mr-1 text-value-lg"></i> @noti.Text
                                     <span class="badge d-block text-left mt-3">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
                                 </a>
                             </td>

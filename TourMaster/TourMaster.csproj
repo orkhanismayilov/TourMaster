@@ -225,6 +225,7 @@
     <Compile Include="Models\Origin.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PMModel.cs" />
     <Compile Include="Models\PrivateMessage.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

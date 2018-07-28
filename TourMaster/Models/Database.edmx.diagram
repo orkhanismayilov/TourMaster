@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="TourMaster.Notification" Width="1.5" PointX="6" PointY="14.375" />
         <EntityTypeShape EntityType="TourMaster.NotificationType" Width="1.5" PointX="3.75" PointY="2.75" />
         <EntityTypeShape EntityType="TourMaster.Origin" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TourMaster.PrivateMessage" Width="1.5" PointX="6" PointY="17.875" />
         <EntityTypeShape EntityType="TourMaster.TourImage" Width="1.5" PointX="8.25" PointY="10.25" />
         <EntityTypeShape EntityType="TourMaster.Tour" Width="1.5" PointX="6" PointY="4.625" />
         <EntityTypeShape EntityType="TourMaster.User" Width="1.5" PointX="3.75" PointY="13" />
@@ -40,11 +39,12 @@
         <AssociationConnector Association="TourMaster.FK_Feedbacks_Users" />
         <AssociationConnector Association="TourMaster.FK_Notifications_NotificationTypes" />
         <AssociationConnector Association="TourMaster.FK_Notifications_Users" />
-        <AssociationConnector Association="TourMaster.FK_PrivateMessages_Users" />
-        <AssociationConnector Association="TourMaster.FK_PrivateMessages_Users1" />
         <AssociationConnector Association="TourMaster.FK_TourImages_Tours" />
         <AssociationConnector Association="TourMaster.FK_Tours_TourImages" />
         <AssociationConnector Association="TourMaster.FK_Tours_Users" />
+        <EntityTypeShape EntityType="TourMaster.PrivateMessage" Width="1.5" PointX="6.25" PointY="17.875" />
+        <AssociationConnector Association="TourMaster.FK_PrivateMessages_Users" />
+        <AssociationConnector Association="TourMaster.FK_PrivateMessages_Users1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

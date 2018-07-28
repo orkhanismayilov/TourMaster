@@ -271,6 +271,12 @@ $(document).ready(function () {
         var ps = new PerfectScrollbar("div.feedbacks");
     }
 
+    // Messages List Perfect Scrollbar
+    if ($("div.messages-list").length > 0) {
+        var ps = new PerfectScrollbar("div.messages-list");
+        $("div.messages-list").scrollTop = $("div.messages-list").scrollHeight;
+    }
+
     // Notifications Seen
     $("#noti-dropdown").on("shown.bs.dropdown", function () {
         var that = $(this),
@@ -294,7 +300,7 @@ $(document).ready(function () {
     $("#changePassBtn").on("click", function () {
         $("#passModal").modal('show');
         $("#changePass").on("submit", function () {
-            
+
             var that = $(this),
                 url = that.attr("action"),
                 method = that.attr("method"),
@@ -330,5 +336,44 @@ $(document).ready(function () {
         return false;
     });
 
+
+    // Reply to Message
+    $("#reply-to-message").on("submit", function () {
+        var that = $(this),
+            url = that.attr("action"),
+            method = that.attr("method"),
+            request = {};
+
+        that.find("[name]").each(function (index, value) {
+            var that = $(this),
+                name = that.attr("name"),
+                value = that.val();
+
+            request[name] = value;
+        });
+
+        $.ajax({
+            url: url,
+            method: method,
+            data: request,
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    var message = `<div class="message-body rounded p-3 mt-2 w-75 ml-auto bg-gray animated fadeIn">
+                        <p class="text-justify">`+data.Message+`</p>
+                        <small class="d-block text-right">
+                            `+data.Date+`
+                            <i class="fas fa-check text-gray ml-2" data-toggle="tooltip" data-placement="bottom" title="Delivered"></i>
+                        </small>
+                    </div>`;
+
+                    that.find("[name='message']").val("");
+                    $(".messages-list").prepend(message);
+                }
+            }
+        });
+
+        return false;
+    });
 
 });
