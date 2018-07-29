@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Helpers;
+using TourMaster.Models;
 
 namespace TourMaster.Filters
 {
@@ -12,7 +13,8 @@ namespace TourMaster.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             HttpContext httpContext = HttpContext.Current;
-            if (httpContext.Session["User"] == null)
+            User user = httpContext.Session["User"] as User;
+            if (user == null || user.AccountType != 1)
             {
                 filterContext.Result = new RedirectResult("~/manage/login");
                 return;

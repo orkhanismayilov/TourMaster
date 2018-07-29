@@ -72,12 +72,6 @@
                                                         @message.Message</p></li>
                                                 </ul>
                                             </div>
-                                            @if (message.ReadStatus == 0 && message.User.Id != Model.Id)
-                                            {
-                                                <div class="w-100">
-                                                    <i class="icon-envelope-open text-success float-right mr-3" data-toggle="tooltip" data-placement="bottom" title="Mark as read"></i>
-                                                </div>
-                                            }
                                         </div>
                                     </a>
                                 </li>

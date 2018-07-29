@@ -181,6 +181,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\City.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -216,6 +217,7 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogInForm.cs" />
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\Notification.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -264,6 +266,7 @@
     </Content>
     <Content Include="Public\admin\css\icons\coreui-icons.min.css" />
     <Content Include="Public\admin\css\icons\simple-line-icons.css" />
+    <Content Include="Public\admin\css\perfect-scrollbar.css" />
     <Content Include="Public\admin\css\select2.min.css" />
     <Content Include="Public\admin\css\style.css" />
     <Content Include="Public\admin\js\chart.min.js" />

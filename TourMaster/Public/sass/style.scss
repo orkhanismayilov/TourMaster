@@ -15,8 +15,21 @@ body {
     display: none !important;
 }
 
+// Backgrounds
+.bg-tiffany {
+    background-color: $secondary-color;
+}
+
+.bg-orange {
+    background-color: $primary-color;
+}
+
+.bg-dark-gray {
+    background-color: darkgray;
+}
+
 // Preloader
-#preloader{
+#preloader {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -294,9 +307,9 @@ input[type=range] {
     border-right: none;
     border-left: none;
     border-radius: 0;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
-    padding: 20px 40px;
+    padding: 20px 20px;
     letter-spacing: 1px;
     transition: all .3s ease;
     color: white !important;
@@ -430,6 +443,7 @@ nav.navbar {
         color: white;
         font-weight: 700;
         font-size: 30px;
+        width: 150px;
     }
 
     ul {
@@ -772,25 +786,11 @@ select.form-control {
 }
 
 // Login, SignUp, Password Recovery Form, PM, Tour Request Modal
-.login-form-modal-wrapper,
-.signup-form-modal-wrapper,
-.pass-recovery-form-modal-wrapper,
-.pm-modal-wrapper,
-.tour-request-modal-wrapper,
-.notifications-modal-wrapper,
-.settings-modal-wrapper,
-.change-pass-modal-wrapper {
+.modal-sm-wrapper {
     height: 0;
     width: 0;
 
-    #login-form-modal,
-    #signup-form-modal,
-    #pass-recovery-form-modal,
-    #pm-form-modal,
-    #tour-request-modal,
-    #notifications-modal,
-    #settings-modal,
-    #change-pass-modal {
+    .modal-container {
         background: rgba($secondary-color, .95);
         width: 100%;
         animation-duration: .5s;
@@ -813,10 +813,57 @@ select.form-control {
                     }
                 }
 
+                .all-messages-list {
+                    position: relative;
+                    overflow: hidden;
+                    max-height: 70vh;
+
+                    li.msg-item {
+                        a {
+                            text-decoration: none;
+                            color: black;
+                        }
+
+                        &:hover {
+                            background-color: darkgray !important;
+
+                            a {
+                                color: white;
+                            }
+                        }
+                    }
+                }
+
+                .messages-list {
+                    position: relative;
+                    overflow: hidden;
+                    max-height: 40vh;
+                }
+
+                .btn-sm {
+                    padding: 10px 20px;
+                }
+
+                .bookings-table {
+                    position: relative;
+                    overflow: hidden;
+                    max-height: 70vh;
+                    a.booking-item{
+                        color: white;
+                        text-decoration: none;
+                        i{
+                            font-size: 30px;
+                        }
+                    }
+                    tr:hover{
+                        background-color: darkgray;
+                    }
+                }
+
                 .noti-table {
                     position: relative;
                     overflow: hidden;
-                    max-height: 500px;
+                    max-height: 70vh;
 
                     tr:hover {
                         background-color: rgba(0,0,0, .7) !important;
@@ -840,13 +887,7 @@ select.form-control {
                     }
                 }
 
-                &#signup-form-body,
-                &#pass-recovery-form-body,
-                &#pm-form-modal-body,
-                &#tour-request-modal-body,
-                &#noti-modal-body,
-                &#settings-modal-body,
-                &#change-pass-modal-body {
+                &.modal-sm-body {
                     padding: 10px 20px;
 
                     i.fa-angle-right {
@@ -1077,6 +1118,7 @@ select.form-control {
 
             .tours-grid-wrapper {
                 position: relative;
+
                 .gutter-sizer {
                     width: 2%;
 

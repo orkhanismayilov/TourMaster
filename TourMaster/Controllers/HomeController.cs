@@ -249,7 +249,7 @@ namespace TourMaster.Controllers
             int totalUserRating = 0;
             if (userRated.Tours.Count != 0)
             {
-                foreach (Tour tour in userRated.Tours.Where(t=>t.Approved == 1))
+                foreach (Tour tour in userRated.Tours.Where(t => t.Approved == 1))
                 {
                     if (tour.Feedbacks.Count != 0)
                     {
@@ -264,7 +264,7 @@ namespace TourMaster.Controllers
                         totalUserRating += overallTourRating;
                     }
                 }
-                double b = totalUserRating / userRated.Tours.Where(t=>t.Approved == 1).Count();
+                double b = totalUserRating / userRated.Tours.Where(t => t.Approved == 1).Count();
                 rating = (int)Math.Ceiling(b);
             }
 
@@ -293,7 +293,8 @@ namespace TourMaster.Controllers
                 TourTitle = notiTour.City.CityName + " - " + notiTour.City1.CityName + " Tour";
             }
 
-            Notification noti = new Notification {
+            Notification noti = new Notification
+            {
                 UserId = userRated.Id,
                 Text = "New feedback for " + TourTitle,
                 Date = DateTime.Now,
@@ -391,7 +392,7 @@ namespace TourMaster.Controllers
             }
 
             int CompletedToursCount = 0;
-            foreach (Tour allTours in user.Tours.Where(t=>t.Approved == 1))
+            foreach (Tour allTours in user.Tours.Where(t => t.Approved == 1))
             {
                 foreach (Booking booking in allTours.Bookings)
                 {
@@ -498,7 +499,7 @@ namespace TourMaster.Controllers
         public JsonResult NotiSeen(int? Id)
         {
             User user = db.Users.Find(Id);
-            foreach (Notification noti in user.Notifications.Where(n=>n.Status == 0))
+            foreach (Notification noti in user.Notifications.Where(n => n.Status == 0))
             {
                 noti.Status = 1;
             }
@@ -568,6 +569,82 @@ namespace TourMaster.Controllers
                 }
             }
             return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetChat(int? Id)
+        {
+            if (Session["User"] != null)
+            {
+                PrivateMessage thisMessage = db.PrivateMessages.Find(Id);
+                User user = Session["User"] as User;
+                User sender = null;
+                if (thisMessage.User.Id == user.Id)
+                {
+                    sender = thisMessage.User1;
+                }
+                else
+                {
+                    sender = thisMessage.User;
+                }
+
+                List<PrivateMessage> pms = new List<PrivateMessage>();
+                foreach (PrivateMessage pm in user.PrivateMessages.Where(pm => pm.Subject == thisMessage.Subject && (pm.SenderId == thisMessage.User.Id || pm.RecieverId == thisMessage.User.Id) && (pm.SenderId == thisMessage.User1.Id || pm.RecieverId == thisMessage.User1.Id)))
+                {
+                    pms.Add(pm);
+                }
+
+                foreach (PrivateMessage pm in user.PrivateMessages1.Where(pm => pm.Subject == thisMessage.Subject && (pm.SenderId == thisMessage.User.Id || pm.RecieverId == thisMessage.User.Id) && (pm.SenderId == thisMessage.User1.Id || pm.RecieverId == thisMessage.User1.Id)))
+                {
+                    pms.Add(pm);
+                }
+
+                List<MessageModel> messages = new List<MessageModel>();
+                foreach (PrivateMessage pm in pms.OrderByDescending(pm=>pm.Date))
+                {
+                    MessageModel message = new MessageModel
+                    {
+                        SenderId = pm.SenderId,
+                        Message = pm.Message,
+                        Date = pm.Date.ToString("HH:mm dd MMM yyyy"),
+                        ReadStatus = pm.ReadStatus
+                    };
+                    messages.Add(message);
+                    if (pm.ReadStatus == 0 && pm.SenderId != user.Id)
+                    {
+                        pm.ReadStatus = 1;
+                        db.SaveChanges();
+                    }
+                }
+
+                ChatModel chat = new ChatModel
+                {
+                    SenderId = sender.Id,
+                    SenderFullname = sender.Fullname,
+                    SenderImage = sender.ProfileImage,
+                    Subject = thisMessage.Subject,
+                    Messages = messages
+                };
+
+                return Json(chat, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public JsonResult Reply(PrivateMessage privateMessage)
+        {
+            if (privateMessage != null)
+            {
+                privateMessage.Date = DateTime.Now;
+                privateMessage.ReadStatus = 0;
+                db.PrivateMessages.Add(privateMessage);
+                db.SaveChanges();
+            }
+
+            return Json(new { privateMessage.Message, Date = privateMessage.Date.ToString("HH:mm dd MMM yyyy") }, JsonRequestBehavior.AllowGet);
         }
     }
 }

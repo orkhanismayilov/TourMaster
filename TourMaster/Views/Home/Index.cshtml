@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/css-stars.min.css">
     <link rel="stylesheet" href="~/public/css/jalendar.css">
     <link rel="stylesheet" href="~/public/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/public/admin/css/perfect-scrollbar.css" />
     <link rel="stylesheet" href="~/public/css/style.css">
 </head>
 
@@ -58,7 +59,7 @@
         <div class="container">
             <!-- NavBar Logo Start -->
             <a href="@Url.Action("index", "home")" class="navbar-brand">
-                <img src="@ViewBag.Origin.Logo" width="50%">
+                <img src="@ViewBag.Origin.Logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsable">
                 <i class="fas fa-bars text-white"></i>
@@ -114,6 +115,32 @@
                                     <a href="" class="dropdown-item text-center" id="notifications-trigger" data-user-id="@user.Id">View all notifications</a>
                                 </div>
                             </li>
+
+                            <li class="nav-item dropdown" id="msg-dropdown">
+                                <a class="nav-link dropdown-toggle" id="messages-dropdown" role="button" data-toggle="dropdown">
+                                    <i class="fas fa-envelope @(user.PrivateMessages1.Where(pm=>pm.ReadStatus== 0).Count() != 0?"text-danger":"")"></i><span class="badge @(user.PrivateMessages1.Where(pm=>pm.ReadStatus == 0).Count() !=0?"badge-danger":"badge-secondary")">@(user.PrivateMessages1.Where(pm => pm.ReadStatus == 0).Count() != 0 ? user.PrivateMessages1.Where(pm => pm.ReadStatus == 0).Count() : 0)</span>
+                                </a>
+                                <div class="dropdown-menu" style="width: 300px">
+                                    @{
+                                        if (user.PrivateMessages1.Count != 0 && user.PrivateMessages1.Where(pm => pm.ReadStatus == 0) != null)
+                                        {
+                                            foreach (PrivateMessage pm in user.PrivateMessages1.Where(pm => pm.ReadStatus == 0).OrderByDescending(n => n.Date))
+                                            {
+                                                <a href="@Url.Action("getchat", "home", new { pm.Id })" class="notification msg-noti dropdown-item notification d-block">
+                                                    <i class="fas fa-envelope d-inline-block mr-2 align-middle"></i>
+                                                    <p class="mb-0 text-truncate d-inline-block w-75">@pm.Message</p>
+                                                    <span class="badge d-block">@pm.Date.ToString("HH:mm dd MMM yyyy")</span>
+                                                </a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item">No new messages</a>
+                                        }
+                                    }
+                                    <a href="" class="dropdown-item text-center" id="messages-trigger">View all messages</a>
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="profile-dropdown" role="button" data-toggle="dropdown">
                                     <img class="rounded-circle" src="@user.ProfileImage" />
@@ -124,8 +151,12 @@
                                     {
                                         <a class="dropdown-item" href="@Url.Action("index", new { controller="home", area="manage" })">Dashboard</a>
                                     }
-                                    <a class="dropdown-item" href="#">Messages</a>
                                     <a class="dropdown-item" href="" role="button" id="profile-settings">Settings</a>
+                                    @if (user.AccountType == 0)
+                                    {
+                                        <a class="dropdown-item" href="" role="button" id="traveler-bookings">Bookings</a>
+
+                                    }
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("logout", "home")">Log Out</a>
                                 </div>
@@ -149,235 +180,238 @@
         </div>
     </nav>
 
-    <!-- SignUp Form Modal -->
-    <div class="signup-form-modal-wrapper">
-        <div class="modal" id="signup-form-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-body" id="signup-form-body">
-                        <div class="signup-form-heading text-center">
-                            <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="40%" />
-                            <h1 class="text-uppercase text-center">welcome</h1>
-                            <p class="text-uppercase text-center">
-                                Fill the form and start
-                                <span>touring</span>
-                            </p>
-                        </div>
-                        <form action="@Url.Action("signup", "home")" method="post" id="signup-form" novalidate>
-                            <div class="row">
-                                <div class="col-md-6 mt-4">
-                                    <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input class="form-control" type="text" name="name" id="name" data-validation="required length" data-validation-length="min3">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">E-mail</label>
-                                        <input class="form-control" type="email" name="email" id="email" data-validation="required email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input class="form-control" type="password" name="password" id="password" data-validation="required strength length" data-validation-length="min8"
-                                               data-validation-strength="2">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password-confirmation">Password Confirmation</label>
-                                        <input class="form-control" type="password" name="passwordconfirmation" id="password-confirmation" data-validation="required confirmation"
-                                               data-validation-confirm="password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">Phone</label>
-                                        <input class="form-control" type="text" name="phone" id="phone" data-validation="required number" data-validation-allowing="integer, positive">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mt-4">
-                                    <div class="form-group">
-                                        <label for="surname">Surname</label>
-                                        <input class="form-control" type="text" name="surname" id="surnname" data-validation="required length" data-validation-length="min3">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="b-day-date">Birthday</label>
-                                        <input class="datepicker form-control" name="birthday" id="b-day-date" data-validation="required">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="country">Country</label>
-                                        <select class="form-control" name="countryid" id="country" data-validation="required">
-                                            <option value="" disabled selected></option>
-                                            @foreach (Country cntr in ViewBag.Countries)
-                                            {
-                                                <option value="@cntr.Id">@cntr.CountryName</option>
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="city">City</label>
-                                        <select class="form-control" name="cityid" id="city" data-validation="required">
-                                            <option value="" disabled selected></option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group mb-0 mt-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="accounttypeid" id="account-type-traveler" value="0" checked>
-                                            <label class="form-check-label" for="account-type-traveler">
-                                                I want to
-                                                <span>book</span> a tour.
-                                            </label>
+    @if (user == null)
+    {
+        <!-- SignUp Form Modal -->
+        <div class="signup-form-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="signup-form-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="signup-form-body">
+                            <div class="signup-form-heading text-center">
+                                <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="40%" />
+                                <h1 class="text-uppercase text-center">welcome</h1>
+                                <p class="text-uppercase text-center">
+                                    Fill the form and start
+                                    <span>touring</span>
+                                </p>
+                            </div>
+                            <form action="@Url.Action("signup", "home")" method="post" id="signup-form" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6 mt-4">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input class="form-control" type="text" name="name" id="name" data-validation="required length" data-validation-length="min3">
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="accounttypeid" id="account-type-guide" value="1">
-                                            <label class="form-check-label" for="account-type-guide">
-                                                I am a
-                                                <span>guide</span>.
-                                            </label>
+                                        <div class="form-group">
+                                            <label for="email">E-mail</label>
+                                            <input class="form-control" type="email" name="email" id="email" data-validation="required email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input class="form-control" type="password" name="password" id="password" data-validation="required strength length" data-validation-length="min8"
+                                                   data-validation-strength="2">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password-confirmation">Password Confirmation</label>
+                                            <input class="form-control" type="password" name="passwordconfirmation" id="password-confirmation" data-validation="required confirmation"
+                                                   data-validation-confirm="password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Phone</label>
+                                            <input class="form-control" type="text" name="phone" id="phone" data-validation="required number" data-validation-allowing="integer, positive">
                                         </div>
                                     </div>
+                                    <div class="col-md-6 mt-4">
+                                        <div class="form-group">
+                                            <label for="surname">Surname</label>
+                                            <input class="form-control" type="text" name="surname" id="surnname" data-validation="required length" data-validation-length="min3">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="b-day-date">Birthday</label>
+                                            <input class="datepicker form-control" name="birthday" id="b-day-date" data-validation="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <select class="form-control" name="countryid" id="country" data-validation="required">
+                                                <option value="" disabled selected></option>
+                                                @foreach (Country cntr in ViewBag.Countries)
+                                                {
+                                                    <option value="@cntr.Id">@cntr.CountryName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="city">City</label>
+                                            <select class="form-control" name="cityid" id="city" data-validation="required">
+                                                <option value="" disabled selected></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-0 mt-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="accounttypeid" id="account-type-traveler" value="0" checked>
+                                                <label class="form-check-label" for="account-type-traveler">
+                                                    I want to
+                                                    <span>book</span> a tour.
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="accounttypeid" id="account-type-guide" value="1">
+                                                <label class="form-check-label" for="account-type-guide">
+                                                    I am a
+                                                    <span>guide</span>.
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-buttons my-4">
-                                <button type="submit" class="btn btn-success btn-block text-uppercase">Sign Up</button>
-                                <button type="button" class="btn btn-outline-secondary btn-block" id="go-to-login">Already have an account? Log In</button>
-                            </div>
-                        </form>
-                    </div>
-                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
-                </div>
-            </div>
-        </div>
-        @if (Session["SignedUpSuccess"] != null)
-        {
-            <span id="signup-alert-success" hidden></span>
-            Session["SignedUpSuccess"] = null;
-        }
-        else if (Session["SignedUpError"] != null)
-        {
-            <span id="signup-alert-error" data-msg="@Session["SignUpMsg"]" hidden></span>
-            Session["SignedUpError"] = null;
-            Session["SignUpMsg"] = null;
-        }
-    </div>
-
-    <!-- Login Form Modal -->
-    <div class="login-form-modal-wrapper">
-        <div class="modal" id="login-form-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <!-- Tabs -->
-                        <ul class="nav nav-tabs nav-justified" id="login-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active text-uppercase" href="#traveler-login" data-toggle="tab">Traveler Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-uppercase" href="#guide-login" data-toggle="tab">Guide Login</a>
-                            </li>
-                        </ul>
-                        <!-- Tab Contents -->
-                        <div class="tab-content">
-                            <!-- Traveler Login Tab Start -->
-                            <div class="tab-pane fade show active" id="traveler-login" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="login-form-heading text-center">
-                                    <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="60%" />
-                                    <h1 class="text-uppercase text-center">welcome</h1>
-                                    <p class="text-uppercase text-center">
-                                        if you are a
-                                        <span>guide</span> use
-                                        <t>guide login</t>
-                                    </p>
+                                <div class="form-buttons my-4">
+                                    <button type="submit" class="btn btn-success btn-block text-uppercase">Sign Up</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-block" id="go-to-login">Already have an account? Log In</button>
                                 </div>
-                                <form action="@Url.Action("login", "home")" method="post" id="traveler-login-form" novalidate>
-                                    <input type="number" name="accounttypeid" value="0" hidden />
-                                    <div class="form-group">
-                                        <label for="traveler-email">E-mail</label>
-                                        <input class="form-control" type="email" name="email" id="traveler-email" data-validation="required email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="traveler-password">Password</label>
-                                        <input class="form-control" type="password" name="password" id="traveler-password" data-validation="length" data-validation-length="min8">
-                                    </div>
-                                    <div class="form-buttons my-4 text-center">
-                                        <button type="submit" class="btn btn-success btn-block text-uppercase">Log in</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
-                                        <a href="#" class="btn btn-link pass-recovery">Forgot Password?</a>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- Traveler Login Tab End -->
-                            <!-- Guide Login Tab Start -->
-                            <div class="tab-pane fade" id="guide-login" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="login-form-heading text-center">
-                                    <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="60%" />
-                                    <h1 class="text-uppercase text-center">welcome</h1>
-                                    <p class="text-uppercase text-center">
-                                        if you want to
-                                        <span>book</span> a tour use
-                                        <t>traveler login</t>
-                                    </p>
-                                </div>
-                                <form action="@Url.Action("login", "home")" method="post" id="guide-login-form" novalidate>
-                                    <input type="number" name="accounttypeid" value="1" hidden />
-                                    <div class="form-group">
-                                        <label for="guide-email">E-mail</label>
-                                        <input class="form-control" type="email" name="email" id="guide-email" data-validation="required email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="guide-password">Password</label>
-                                        <input class="form-control" type="password" name="password" id="guide-password" data-validation="length" data-validation-length="min8">
-                                    </div>
-                                    <div class="form-buttons my-4 text-center">
-                                        <button type="submit" class="btn btn-success btn-block text-uppercase">Log in</button>
-                                        <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
-                                        <a href="#" class="btn btn-link pass-recovery">Forgot Password?</a>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- Guide Login Tab End -->
+                            </form>
                         </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                     </div>
-                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                 </div>
             </div>
+            @if (Session["SignedUpSuccess"] != null)
+            {
+                <span id="signup-alert-success" hidden></span>
+                Session["SignedUpSuccess"] = null;
+            }
+            else if (Session["SignedUpError"] != null)
+            {
+                <span id="signup-alert-error" data-msg="@Session["SignUpMsg"]" hidden></span>
+                Session["SignedUpError"] = null;
+                Session["SignUpMsg"] = null;
+            }
         </div>
-        @if (Session["LogInSuccess"] != null)
-        {
-            <span id="login-alert-success" hidden></span>
-            Session["LogInSuccess"] = null;
-        }
-        else if (Session["LogInError"] != null)
-        {
-            <span id="login-alert-error" hidden></span>
-            Session["LogInError"] = null;
-        }
-    </div>
 
-    <!-- Password Recovery Form Modal -->
-    <div class="pass-recovery-form-modal-wrapper">
-        <div class="modal" id="pass-recovery-form-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body" id="pass-recovery-form-body">
-                        <div class="login-form-heading">
-                            <h2 class="text-capitalize text-center">tour master</h2>
-                            <h1 class="text-uppercase text-center">welcome</h1>
-                            <p class="text-uppercase text-center">
-                                enter your
-                                <span>email</span> to recover your password
-                            </p>
+        <!-- Login Form Modal -->
+        <div class="login-form-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="login-form-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <!-- Tabs -->
+                            <ul class="nav nav-tabs nav-justified" id="login-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active text-uppercase" href="#traveler-login" data-toggle="tab">Traveler Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-uppercase" href="#guide-login" data-toggle="tab">Guide Login</a>
+                                </li>
+                            </ul>
+                            <!-- Tab Contents -->
+                            <div class="tab-content">
+                                <!-- Traveler Login Tab Start -->
+                                <div class="tab-pane fade show active" id="traveler-login" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="login-form-heading text-center">
+                                        <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="60%" />
+                                        <h1 class="text-uppercase text-center">welcome</h1>
+                                        <p class="text-uppercase text-center">
+                                            if you are a
+                                            <span>guide</span> use
+                                            <t>guide login</t>
+                                        </p>
+                                    </div>
+                                    <form action="@Url.Action("login", "home")" method="post" id="traveler-login-form" novalidate>
+                                        <input type="number" name="accounttypeid" value="0" hidden />
+                                        <div class="form-group">
+                                            <label for="traveler-email">E-mail</label>
+                                            <input class="form-control" type="email" name="email" id="traveler-email" data-validation="required email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="traveler-password">Password</label>
+                                            <input class="form-control" type="password" name="password" id="traveler-password" data-validation="length" data-validation-length="min8">
+                                        </div>
+                                        <div class="form-buttons my-4 text-center">
+                                            <button type="submit" class="btn btn-success btn-block text-uppercase">Log in</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
+                                            <a href="#" class="btn btn-link pass-recovery">Forgot Password?</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Traveler Login Tab End -->
+                                <!-- Guide Login Tab Start -->
+                                <div class="tab-pane fade" id="guide-login" role="tabpanel" aria-labelledby="profile-tab">
+                                    <div class="login-form-heading text-center">
+                                        <img class="p-4" src="~/Public/images/logo/logo_orange.svg" width="60%" />
+                                        <h1 class="text-uppercase text-center">welcome</h1>
+                                        <p class="text-uppercase text-center">
+                                            if you want to
+                                            <span>book</span> a tour use
+                                            <t>traveler login</t>
+                                        </p>
+                                    </div>
+                                    <form action="@Url.Action("login", "home")" method="post" id="guide-login-form" novalidate>
+                                        <input type="number" name="accounttypeid" value="1" hidden />
+                                        <div class="form-group">
+                                            <label for="guide-email">E-mail</label>
+                                            <input class="form-control" type="email" name="email" id="guide-email" data-validation="required email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="guide-password">Password</label>
+                                            <input class="form-control" type="password" name="password" id="guide-password" data-validation="length" data-validation-length="min8">
+                                        </div>
+                                        <div class="form-buttons my-4 text-center">
+                                            <button type="submit" class="btn btn-success btn-block text-uppercase">Log in</button>
+                                            <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
+                                            <a href="#" class="btn btn-link pass-recovery">Forgot Password?</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Guide Login Tab End -->
+                            </div>
                         </div>
-                        <form action="" method="post" id="pass-recovery-form" novalidate>
-                            <div class="form-group">
-                                <label for="recover-email">E-mail</label>
-                                <input class="form-control" type="email" name="email" id="recover-email" data-validation="required email">
-                            </div>
-                            <div class="form-buttons my-4 text-center">
-                                <button type="submit" class="btn btn-success btn-block text-uppercase">Send recovery email</button>
-                                <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
-                            </div>
-                        </form>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                     </div>
-                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                </div>
+            </div>
+            @if (Session["LogInSuccess"] != null)
+            {
+                <span id="login-alert-success" hidden></span>
+                Session["LogInSuccess"] = null;
+            }
+            else if (Session["LogInError"] != null)
+            {
+                <span id="login-alert-error" hidden></span>
+                Session["LogInError"] = null;
+            }
+        </div>
+
+        <!-- Password Recovery Form Modal -->
+        <div class="pass-recovery-form-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="pass-recovery-form-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="pass-recovery-form-body">
+                            <div class="login-form-heading">
+                                <h2 class="text-capitalize text-center">tour master</h2>
+                                <h1 class="text-uppercase text-center">welcome</h1>
+                                <p class="text-uppercase text-center">
+                                    enter your
+                                    <span>email</span> to recover your password
+                                </p>
+                            </div>
+                            <form action="" method="post" id="pass-recovery-form" novalidate>
+                                <div class="form-group">
+                                    <label for="recover-email">E-mail</label>
+                                    <input class="form-control" type="email" name="email" id="recover-email" data-validation="required email">
+                                </div>
+                                <div class="form-buttons my-4 text-center">
+                                    <button type="submit" class="btn btn-success btn-block text-uppercase">Send recovery email</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-block go-to-signup">Don't have an account? Sign Up</button>
+                                </div>
+                            </form>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 
     <!-- Tours Modal Section -->
     <div class="tours-modal-wrapper">
@@ -654,7 +688,7 @@
                                             @{
                                                 if (user != null && user.AccountType == 0)
                                                 {
-                                                    <h5 class="text-center">Available Dates</h5>
+                                                    <h5 class="text-center">Booking Request</h5>
                                                     <div class="tour-available-dates jalendar"></div>
                                                     <span class="d-block" id="send-request-button-wrapper" tab-index="0">
                                                         <button class="btn btn-outline-info btn-block" id="send-tour-request" style="pointer-events: none;" disabled>Send a Request</button>
@@ -670,76 +704,6 @@
                         <i class="fas fa-angle-left" id="tour-view-back"></i>
                         <i class="fas fa-times" id="modal-close" data-dismiss="modal"></i>
                     </section>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Private Message Modal -->
-    <div class="pm-modal-wrapper">
-        <div class="modal" id="pm-form-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body" id="pm-form-modal-body">
-                        <div class="pm-form-heading">
-                            <h3 class="text-uppercase text-center">Drop a Private Message to guide</h3>
-                        </div>
-                        <form action="@Url.Action("sendprivatemessage", "home")" method="post" id="pm-to-guide">
-                            <div class="form-group">
-                                <input class="form-control-plaintext" type="text" readonly id="guide-fullname" value="">
-                                <input type="number" name="GuideId" value="" hidden />
-                                <input class="form-control" type="text" id="pm-subject" name="subject" placeholder="Subject" data-validation="required">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="msg" id="pm-text" cols="30" rows="5" placeholder="Message" data-validation="required length"
-                                          data-validation-length="min5"></textarea>
-                            </div>
-                            <div class="form-button mt-3 text-center">
-                                <button class="btn btn-success text-uppercase" type="submit">send</button>
-                            </div>
-                        </form>
-                    </div>
-                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Send a Request Modal -->
-    <div class="tour-request-modal-wrapper">
-        <div class="modal" id="tour-request-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-body" id="tour-request-modal-body">
-                        <div class="tour-request-form-heading">
-                            <h3 class="text-uppercase text-center">Send a request for booking</h3>
-                        </div>
-                        <form action="@Url.Action("bookingrequest", "home")" method="post" id="tour-request-guide">
-                            <input name="UserId" value="@(user != null?user.Id:-1)" hidden />
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <input class="form-control" type="date" name="startdate" id="start-date" data-validation="required" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 text-center">
-                                    <i class="far fa-angle-right"></i>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="form-group">
-                                        <input class="form-control" type="date" name="enddate" id="end-date" data-validation="required" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="message" id="request-text" cols="30" rows="10" placeholder="Request message..." data-validation="required"></textarea>
-                            </div>
-                            <div class="form-button mt-3 text-center">
-                                <button class="btn btn-success text-uppercase" type="submit">send</button>
-                            </div>
-                        </form>
-                    </div>
-                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                 </div>
             </div>
         </div>
@@ -861,48 +825,126 @@
         </div>
     </div>
 
-    <!-- Notifications Modal -->
-    <div class="notifications-modal-wrapper">
-        <div class="modal" id="notifications-modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-body" id="noti-modal-body">
-                        <h3 class="text-uppercase text-center py-3">Notifications</h3>
-                        <table class="table table-hover noti-table">
-                            <tbody>
-                                @{
-                                    if (user != null)
-                                    {
-                                        foreach (Notification noti in user.Notifications.OrderByDescending(n => n.Date))
+    @if (user != null)
+    {
+        <!-- Private Message Modal -->
+        <div class="pm-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="pm-form-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="pm-form-modal-body">
+                            <div class="pm-form-heading">
+                                <h3 class="text-uppercase text-center">Drop a Private Message to guide</h3>
+                            </div>
+                            <form action="@Url.Action("sendprivatemessage", "home")" method="post" id="pm-to-guide">
+                                <div class="form-group">
+                                    <input class="form-control-plaintext" type="text" id="guide-fullname" value="" readonly>
+                                    <input type="number" name="GuideId" value="" hidden />
+                                    <input class="form-control" type="text" id="pm-subject" name="subject" placeholder="Subject" data-validation="required">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="msg" id="pm-text" cols="30" rows="5" placeholder="Message" data-validation="required length"
+                                              data-validation-length="min5"></textarea>
+                                </div>
+                                <div class="form-button mt-3 text-center">
+                                    <button class="btn btn-success text-uppercase" type="submit">send</button>
+                                </div>
+                            </form>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Send a Request Modal -->
+        <div class="tour-request-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="tour-request-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="tour-request-modal-body">
+                            <div class="tour-request-form-heading">
+                                <h3 class="text-uppercase text-center">Send a request for booking</h3>
+                            </div>
+                            <form action="@Url.Action("bookingrequest", "home")" method="post" id="tour-request-guide">
+                                <input name="UserId" value="@user.Id" hidden />
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input class="form-control" type="date" name="startdate" id="start-date" data-validation="required" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <i class="far fa-angle-right"></i>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <input class="form-control" type="date" name="enddate" id="end-date" data-validation="required" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" id="request-text" cols="30" rows="10" placeholder="Request message..." data-validation="required"></textarea>
+                                </div>
+                                <div class="form-button mt-3 text-center">
+                                    <button class="btn btn-success text-uppercase" type="submit">send</button>
+                                </div>
+                            </form>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Modal -->
+        <div class="notifications-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="notifications-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="noti-modal-body">
+                            <h3 class="text-uppercase text-center py-3">Notifications</h3>
+                            <table class="table table-hover noti-table">
+                                <tbody>
+                                    @{
+                                        if (user.Notifications.Count != 0)
                                         {
-                                            <tr class="bg-@noti.NotificationType.Color">
-                                                <td class="p-0">
-                                                    <a class="notis text-white d-block p-3" href="@noti.Link">
-                                                        <i class="@noti.NotificationType.Icon mr-3 align-middle"></i> @noti.Text
-                                                        <span class="badge text-white mt-3 d-block text-left">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
-                                                    </a>
+                                            foreach (Notification noti in user.Notifications.OrderByDescending(n => n.Date))
+                                            {
+                                                <tr class="bg-@noti.NotificationType.Color">
+                                                    <td class="p-0">
+                                                        <a class="notis text-white d-block p-3" href="@noti.Link">
+                                                            <i class="@noti.NotificationType.Icon mr-3 align-middle"></i> @noti.Text
+                                                            <span class="badge text-white mt-3 d-block text-left">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr class="text-center bg-tiffany">
+                                                <td class="p-3 text-white">
+                                                    <h5>No notifications yet</h5>
                                                 </td>
                                             </tr>
                                         }
                                     }
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                     </div>
-                    <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
                 </div>
             </div>
         </div>
-    </div>
 
-    @if (user != null)
-    {
         <!-- Settings Modal -->
-        <div class="settings-modal-wrapper">
-            <div class="modal" id="settings-modal" tabindex="-1" role="dialog">
+        <div class="settings-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="settings-modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
-                        <div class="modal-body" id="settings-modal-body">
+                        <div class="modal-body modal-sm-body" id="settings-modal-body">
                             <h3 class="text-uppercase text-center py-3">Settings</h3>
                             <form action="@Url.Action("savesettings", "home")" method="post" id="profile-settings-form" enctype="multipart/form-data" novalidate>
                                 <input name="id" type="number" value="@user.Id" hidden />
@@ -977,7 +1019,7 @@
                                     <div class="col-md-4">
                                         <h4>Profile Image</h4>
                                         <img class="w-100" src="@user.ProfileImage" />
-                                        <input class="form-control-file mt-3" type="file" name="profileimage"/>
+                                        <input class="form-control-file mt-3" type="file" name="profileimage" />
                                     </div>
                                 </div>
                                 <hr />
@@ -1014,13 +1056,12 @@
             </div>
         </div>
 
-
         <!-- Change Password Modal -->
-        <div class="change-pass-modal-wrapper">
-            <div class="modal" id="change-pass-modal" tabindex="-1" role="dialog">
+        <div class="change-pass-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="change-pass-modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
-                        <div class="modal-body" id="change-pass-modal-body">
+                        <div class="modal-body modal-sm-body" id="change-pass-modal-body">
                             <h3 class="text-uppercase text-center py-3">Change Password</h3>
                             <form action="@Url.Action("changepass", "home", new { id = user.Id })" method="post" id="change-pass-form">
                                 <div class="form-group">
@@ -1051,6 +1092,183 @@
             <span id="settings-ok" hidden></span>
             Session["Settings"] = null;
         }
+
+        <!-- Messages Modal -->
+        <div class="messages-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="messages-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="messages-modal-body">
+                            <h3 class="text-uppercase text-center py-3">Messages</h3>
+                            <ul class="list-unstyled mb-0 all-messages-list">
+                                @{
+                                    List<PrivateMessage> pms = new List<PrivateMessage>();
+                                    foreach (PrivateMessage pm in user.PrivateMessages)
+                                    {
+                                        pms.Add(pm);
+                                    }
+
+                                    foreach (PrivateMessage pm in user.PrivateMessages1)
+                                    {
+                                        pms.Add(pm);
+                                    }
+
+                                    List<PMModel> pmModels = pms.OrderByDescending(pm => pm.Date).GroupBy(pm => pm.Subject, (k, p) => new PMModel() { Subject = k, privateMessages = p.ToList() }).ToList();
+
+                                    foreach (PMModel pmm in pmModels)
+                                    {
+                                        PrivateMessage message = pmm.privateMessages.OrderByDescending(m => m.Date).FirstOrDefault();
+                                        <li class="msg-item @(message.ReadStatus == 0 && message.User.Id != user.Id?"bg-orange":"bg-tiffany")">
+                                            <a class="d-block p-3 text-black" href="@Url.Action("getchat", "home", new { message.Id })">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        @{
+                                                            if (message.User.Id == user.Id)
+                                                            {
+                                                                <img class="rounded-circle mr-3 align-top d-inline-block" src="@message.User1.ProfileImage" style="width: 50px" />
+                                                                <ul class="list-unstyled d-inline-block text-wrap">
+                                                                    <li><h5 class="mb-0">@message.User1.Fullname</h5></li>
+                                                                    <li><small>@message.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                                                                </ul>
+                                                            }
+                                                            else
+                                                            {
+                                                                <img class="rounded-circle mr-3 align-top d-inline-block" src="@message.User.ProfileImage" style="width: 50px" />
+                                                                <ul class="list-unstyled d-inline-block text-wrap">
+                                                                    <li><h5 class="mb-0">@message.User.Fullname</h5></li>
+                                                                    <li><small>@message.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                                                                </ul>
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <div class="col-12 mt-2">
+                                                        <ul class="list-unstyled d-block w-100">
+                                                            <li><h5 class="d-inline-block mb-0">@pmm.Subject</h5></li>
+                                                            <li>
+                                                                <p class="d-block text-truncate mb-0">
+                                                                    @{
+                                                                        if (message.User.Id == user.Id)
+                                                                        {
+                                                                            <span class="badge badge-success">Me: </span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="badge badge-primary">@message.User.Fullname: </span>
+                                                                        }
+                                                                    }
+                                                                    @message.Message
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message View Modal -->
+        <div class="mv-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="mv-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="mv-modal-body">
+                            <div class="message-heading">
+                                <img class="rounded-circle mr-3 d-inline-block align-top" style="width: 65px" src="" />
+                                <ul class="list-unstyled d-inline-block mb-0">
+                                    <li><h4 class="mb-0"></h4></li>
+                                    <li><h3></h3></li>
+                                </ul>
+                            </div>
+                            <div class="messages-list">
+
+                            </div>
+                            <hr />
+                            <div class="reply-heading">
+                                <h3>Reply</h3>
+                            </div>
+                            <div class="reply-body">
+                                <form action="@Url.Action("reply", "home")" method="post" id="reply-to-message">
+                                    <input type="number" name="senderid" value="@user.Id" hidden />
+                                    <input type="number" name="recieverid" value="" hidden />
+                                    <input type="text" name="subject" value="subject" hidden />
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="message" placeholder="Message" rows="5" data-validation="required"></textarea>
+                                    </div>
+                                    <div class="form-buttons text-center mt-3">
+                                        <button class="btn btn-primary btn-sm">Send</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookings Modal -->
+        <div class="bookings-modal-wrapper modal-sm-wrapper">
+            <div class="modal modal-container" id="bookings-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body modal-sm-body" id="bookings-modal-body">
+                            <h3 class="text-uppercase text-center py-3">Bookings</h3>
+                            <table class="table bookings-table">
+                                <tbody>
+                                    @{
+                                        foreach (Booking booking in user.Bookings.OrderByDescending(b => b.BookingDate))
+                                        {
+                                            <tr class="@(booking.Status == 0 ? "bg-orange" : booking.Status == 1 ? "bg-orange" : "bg-secondary")">
+                                                <td class="p-0">
+                                                    <a class="booking-item d-block p-3" href="" data-tour-id="@booking.TourId">
+                                                        @{
+                                                            string TourTitle = "";
+                                                            if (booking.Tour.FromId == booking.Tour.DestinationId)
+                                                            {
+                                                                TourTitle = booking.Tour.City.CityName + " Tour";
+                                                            }
+                                                            else
+                                                            {
+                                                                TourTitle = booking.Tour.City.CityName + " - " + booking.Tour.City1.CityName + " Tour";
+                                                            }
+                                                        }
+                                                        @if (booking.Status == 0)
+                                                        {
+                                                            <i class="fal fa-check-circle mr-3 align-top text-success" data-toggle="tooltip" data-placement="bottom" title="Confirmed"></i>
+                                                        }
+                                                        else if (booking.Status == 1)
+                                                        {
+                                                            <i class="fal fa-check-circle mr-3 align-top text-info" data-toggle="tooltip" data-placement="bottom" title="Completed"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fal fa-times-circle mr-3 align-top text-danger" data-toggle="tooltip" data-placement="bottom" title="Cancelled"></i>
+
+                                                        }
+                                                        <h3 class="d-inline-block">@TourTitle</h3>
+                                                        <span class="badge text-white mt-3 d-block text-left">@booking.BookedStart.ToString("dd.MM.yyyy") - @booking.BookedEnd.ToString("dd.MM.yyyy")</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <i class="fas fa-times" id="form-modal-close" data-dismiss="modal"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     }
 
     <!-- Main Slider -->

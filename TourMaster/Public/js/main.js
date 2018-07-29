@@ -44,6 +44,9 @@ $(document).ready(function () {
         }
     });
 
+    // Tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
     // Profile Settings Modal
     $("#profile-settings").on("click", function () {
         $("#settings-modal").addClass("animated fadeIn").modal('show');
@@ -128,7 +131,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     // Animate CSS Function Extension
     $.fn.extend({
         animateCss: function (animationName, callback) {
@@ -244,6 +247,211 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    // Messages Modal
+    $("#messages-trigger").on("click", function (e) {
+        e.preventDefault();
+        $("#messages-modal").addClass("animated fadeIn").modal('show');
+        $("#messages-modal").animateCss("fadeIn", function () {
+            $("#messages-modal").removeClass("animated fadeIn");
+        });
+        var nt = new PerfectScrollbar(".all-messages-list");
+    });
+
+    // Messages Modal Hide
+    $("#messages-modal").on("hide.bs.modal", function (e) {
+        if (!$("#messages-modal").hasClass("animated")) {
+            e.preventDefault();
+            $("#messages-modal").addClass("animated fadeOut");
+            setTimeout("$('#messages-modal').modal('hide')", 550);
+        }
+    });
+
+    // Messages Modal Hidden
+    $("#messages-modal").on("hidden.bs.modal", function () {
+        $("#messages-modal").removeClass("animated fadeOut");
+    });
+
+    // Chat View Modal
+    $(".msg-item").on("click", function (e) {
+        e.preventDefault();
+        var that = $(this),
+            url = that.find("a").attr("href");
+
+        $.ajax({
+            url: url,
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                var mh = $(".message-heading");
+                mh.find("img").attr("src", data.SenderImage);
+                mh.find("h4").text(data.SenderFullname);
+                mh.find("h3").text(data.Subject);
+
+                var ml = $(".messages-list");
+                ml.empty();
+                for (var i = 0; i < data.Messages.length; i++) {
+                    if (data.Messages[i].ReadStatus == 1 && data.Messages[i].SenderId != data.SenderId) {
+                        var status = '<i class="fas fa-check text-success ml-2" data-toggle="tooltip" data-placement="bottom" title="Delivered"></i>';
+                    } else if (data.Messages[i].SenderId != data.SenderId) {
+                        var status = '<i class="fas fa-check text-grey-dark ml-2" data-toggle="tooltip" data-placement="bottom" title="Read"></i>';
+                    } else {
+                        var status = "";
+                    }
+
+                    var message = `<div class="message-body rounded p-3 mt-2 w-75 ` + (data.Messages[i].SenderId != data.SenderId ? "ml-auto bg-tiffany" : "bg-dark-gray") + `")">
+                                            <p class="text-justify">`+ data.Messages[i].Message + `</p>
+                                            <small class="`+ (data.Messages[i].SenderId != data.SenderId ? "d-block text-right" : "") + `")">
+                                                `+ data.Messages[i].Date + `
+                                                `+ status + `
+                                            </small>
+                                        </div>`
+                    ml.append(message);
+                }
+                var ps = new PerfectScrollbar(".messages-list", { wheelSpeed: 0.5 });
+
+                $("input[name='receiverid']").val(data.SenderId);
+                $("input[name='subject']").val(data.Subject);
+
+            }
+        });
+
+        $("#mv-modal").addClass("animated fadeIn").modal('show');
+        $("#mv-modal").animateCss("fadeIn", function () {
+            $("#mv-modal").removeClass("animated fadeIn");
+        });
+    });
+    $(".msg-noti").on("click", function (e) {
+        e.preventDefault();
+        var that = $(this),
+            url = that.attr("href");
+
+        $.ajax({
+            url: url,
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    var mh = $(".message-heading");
+                    mh.find("img").attr("src", data.SenderImage);
+                    mh.find("h4").text(data.SenderFullname);
+                    mh.find("h3").text(data.Subject);
+
+                    var ml = $(".messages-list");
+                    ml.empty();
+                    for (var i = 0; i < data.Messages.length; i++) {
+                        if (data.Messages[i].ReadStatus == 1 && data.Messages[i].SenderId != data.SenderId) {
+                            var status = '<i class="fas fa-check text-success ml-2" data-toggle="tooltip" data-placement="bottom" title="Delivered"></i>';
+                        } else if (data.Messages[i].SenderId != data.SenderId) {
+                            var status = '<i class="fas fa-check text-grey-dark ml-2" data-toggle="tooltip" data-placement="bottom" title="Read"></i>';
+                        } else {
+                            var status = "";
+                        }
+
+                        if (data.Messages[i].SenderId != data.SenderId) {
+                            var bgcolor = "ml-auto bg-tiffany";
+                        } else {
+                            var bgcolor = "bg-dark-gray";
+                        }
+
+                        var message = `<div class="message-body rounded p-3 mt-2 w-75 ` + bgcolor + `")">
+                                            <p class="text-justify">`+ data.Messages[i].Message + `</p>
+                                            <small class="`+ (data.Messages[i].SenderId != data.SenderId ? "d-block text-right" : "") + `")">
+                                                `+ data.Messages[i].Date + `
+                                                `+ status + `
+                                            </small>
+                                        </div>`
+                        ml.append(message);
+                    }
+                    var ps = new PerfectScrollbar(".messages-list", { wheelSpeed: 0.5 });
+
+                    $("input[name='recieverid']").val(data.SenderId);
+                    $("input[name='subject']").val(data.Subject);
+                }
+            }
+        });
+
+        $("#mv-modal").addClass("animated fadeIn").modal('show');
+        $("#mv-modal").animateCss("fadeIn", function () {
+            $("#mv-modal").removeClass("animated fadeIn");
+        });
+    });
+
+    // Chat Reply
+    $("#reply-to-message").on("submit", function () {
+        var that = $(this),
+            url = that.attr("action"),
+            method = that.attr("method"),
+            request = {};
+
+        that.find("[name]").each(function (index, value) {
+            var that = $(this),
+                name = that.attr("name"),
+                value = that.val();
+
+            request[name] = value;
+        });
+
+        $.ajax({
+            url: url,
+            method: method,
+            data: request,
+            dataType: "json",
+            success: function (data) {
+                if (data != null) {
+                    var message = `<div class="message-body rounded p-3 mt-2 w-75 ml-auto bg-tiffany animated fadeIn">
+                                        <p class="text-justify">`+ data.Message + `</p>
+                                        <small class="d-block text-right">
+                                            `+ data.Date + `
+                                            <i class="fas fa-check text-gray ml-2" data-toggle="tooltip" data-placement="bottom" title="Delivered"></i>
+                                        </small>
+                                    </div>`;
+                    that.find("[name='message']").val("");
+                    $(".messages-list").prepend(message);
+                }
+            }
+        });
+
+        return false;
+    });
+
+    // Bookings Modal
+    $("#traveler-bookings").on("click", function (e) {
+        e.preventDefault();
+        $("#bookings-modal").addClass("animated fadeIn").modal('show');
+        $("#bookings-modal").animateCss("fadeIn", function () {
+            $("#bookings-modal").removeClass("animated fadeIn");
+        });
+        var bt = new PerfectScrollbar(".bookings-table");
+    });
+
+    // Bookings Modal Hide
+    $("#bookings-modal").on("hide.bs.modal", function (e) {
+        if (!$("#bookings-modal").hasClass("animated")) {
+            e.preventDefault();
+            $("#bookings-modal").addClass("animated fadeOut");
+            setTimeout("$('#bookings-modal').modal('hide')", 550);
+        }
+    });
+
+    // Bookings Modal Hidden
+    $("#bookings-modal").on("hidden.bs.modal", function () {
+        $("#bookings-modal").removeClass("animated fadeOut");
+    });
+
+    // Chat View Modal Hide
+    $("#mv-modal").on("hide.bs.modal", function (e) {
+        if (!$("#mv-modal").hasClass("animated")) {
+            e.preventDefault();
+            $("#mv-modal").addClass("animated fadeOut");
+            setTimeout("$('#mv-modal').modal('hide')", 550);
+        }
+    });
+
+    // Chat View Modal Hidden
+    $("#mv-modal").on("hidden.bs.modal", function () {
+        $("#mv-modal").removeClass("animated fadeOut");
     });
 
     // Main Slider
@@ -804,6 +1012,18 @@ $(document).ready(function () {
             });
         });
 
+        // Tour Details in Bookings
+        $(".booking-item").on("click", function () {
+            $("#bookings-modal").modal('hide');
+            GetTourInfo($(this).data("tour-id"));
+            $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
+            $("#tour-view-modal").animateCss("fadeInRight", function () {
+                $("#tour-view-modal").removeClass("animated fadeInRight");
+            });
+
+            return false;
+        });
+
         // Tour View Modal Hide
         $("#tour-view-modal").on("hide.bs.modal", function (e) {
             if (!$("#tour-view-modal").hasClass("animated")) {
@@ -889,9 +1109,9 @@ $(document).ready(function () {
             theme: "css-stars"
         });
 
-        // Tour View Feedback, Tours Modal Search Form, Private Message to Guide Form, Tour Request Form Submit Validation
+        // Tour View Feedback, Tours Modal Search Form, Private Message to Guide Form, Tour Request Form, Reply to Message Submit Validation
         $.validate({
-            form: '#submit-feedback, #tours-modal-search-form, #pm-to-guide, #tour-request-guide'
+            form: '#submit-feedback, #tours-modal-search-form, #pm-to-guide, #tour-request-guide, #reply-to-message'
         });
 
         // Tour View Feedback Comment Rated

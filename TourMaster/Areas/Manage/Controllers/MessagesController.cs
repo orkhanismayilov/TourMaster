@@ -26,14 +26,16 @@ namespace TourMaster.Areas.Manage.Controllers
         {
             User user = Session["User"] as User;
             PrivateMessage pm = db.PrivateMessages.Find(Id);
-            if (pm.ReadStatus == 0 && pm.User.Id != user.Id)
-            {
-                pm.ReadStatus = 1;
-                db.SaveChanges();
-                Session["User"] = user;
-            }
-
             List<PrivateMessage> messages = db.PrivateMessages.Where(m => m.Subject == pm.Subject && (m.SenderId == pm.User.Id || m.RecieverId == pm.User.Id) && (m.SenderId == pm.User1.Id || m.RecieverId == pm.User1.Id)).ToList();
+            foreach (PrivateMessage message in messages)
+            {
+                if (message.ReadStatus == 0 && message.User.Id != user.Id)
+                {
+                    message.ReadStatus = 1;
+                    db.SaveChanges();
+                }
+            }
+            Session["User"] = db.Users.Find(user.Id);
 
             return View(messages);
         }
