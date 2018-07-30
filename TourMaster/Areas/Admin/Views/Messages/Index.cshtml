@@ -1,0 +1,94 @@
+﻿@using TourMaster.Models
+@model User
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Messages</h2>
+    </div>
+    <div class="card-body">
+        <div>
+            <div>
+                <ul class="list-unstyled mb-0">
+                    @{
+                        if (Model.PrivateMessages1.Count != 0)
+                        {
+                            List<PrivateMessage> pms = new List<PrivateMessage>();
+                            foreach (PrivateMessage pm in Model.PrivateMessages)
+                            {
+                                pms.Add(pm);
+                            }
+
+                            foreach (PrivateMessage pm in Model.PrivateMessages1)
+                            {
+                                pms.Add(pm);
+                            }
+
+                            List<PMModel> pmModels = pms.OrderByDescending(pm => pm.Date).GroupBy(pm => pm.Subject, (k, p) => new PMModel() { Subject = k, privateMessages = p.ToList() }).ToList();
+
+                            foreach (PMModel pmm in pmModels)
+                            {
+                                PrivateMessage message = pmm.privateMessages.OrderByDescending(m => m.Date).FirstOrDefault();
+                                <li class="msg-item @(message.ReadStatus == 0 && message.User.Id != Model.Id?"bg-success":"")">
+                                    <a class="text-white d-block p-3" href="@Url.Action("details", new { controller = "messages", area = "manage", id = message.Id })">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                @{
+                                                    if (message.User.Id == Model.Id)
+                                                    {
+                                                        <img class="rounded-circle mr-3 align-top d-inline-block" src="@message.User1.ProfileImage" style="width: 50px" />
+                                                        <ul class="list-unstyled d-inline-block text-wrap">
+                                                            <li><h5 class="mb-0">@message.User1.Fullname</h5></li>
+                                                            <li><small>@message.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                                                        </ul>
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="rounded-circle mr-3 align-top d-inline-block" src="@message.User.ProfileImage" style="width: 50px" />
+                                                        <ul class="list-unstyled d-inline-block text-wrap">
+                                                            <li><h5 class="mb-0">@message.User.Fullname</h5></li>
+                                                            <li><small>@message.Date.ToString("HH:mm dd MMM yyyy")</small></li>
+                                                        </ul>
+                                                    }
+                                                }
+                                            </div>
+                                            <div class="col-10">
+                                                <ul class="list-unstyled d-inline-block w-100">
+                                                    <li><h5 class="d-inline-block mb-0">@pmm.Subject</h5></li>
+                                                    <li>
+                                                        <p class="d-block text-truncate mb-0">
+                                                            @{
+                                                                if (message.User.Id == Model.Id)
+                                                                {
+                                                                    <span class="badge badge-success">Me: </span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="badge badge-primary">@message.User.Fullname: </span>
+                                                                }
+                                                            }
+                                                            @message.Message
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="text-center">
+                                <p class="text-muted mb-0">No messages yet ...</p>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,9 @@
 ﻿@using TourMaster.Models
 @model Tour
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
 <div class="row">
     <div class="col-12">
@@ -133,7 +137,7 @@
                             <table class="table table-responsive-sm">
                                 <tbody>
                                     @{
-                                        foreach (Feedback fdbck in Model.Feedbacks.OrderByDescending(f=>f.Id))
+                                        foreach (Feedback fdbck in Model.Feedbacks.OrderByDescending(f => f.Id))
                                         {
                                             <tr>
                                                 <td>

@@ -138,7 +138,7 @@ namespace TourMaster.Controllers
         public ActionResult LogOut()
         {
             Session["User"] = null;
-
+            Session["LogInSuccess"] = null;
             return RedirectToAction("index");
         }
 
@@ -504,6 +504,7 @@ namespace TourMaster.Controllers
                 noti.Status = 1;
             }
             db.SaveChanges();
+            Session["User"] = user;
             return Json(1, JsonRequestBehavior.AllowGet);
         }
 

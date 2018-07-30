@@ -1,5 +1,9 @@
 ﻿@using TourMaster.Models
 @model IEnumerable<Tour>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
 <div class="row">
     <div class="col-12">
@@ -42,7 +46,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach (var item in Model.OrderByDescending(t=>t.PostedDate))
+                        @foreach (var item in Model.OrderByDescending(t => t.PostedDate))
                         {
                             <tr>
                                 <td>

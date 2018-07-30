@@ -19,11 +19,12 @@ namespace TourMaster.Areas.Manage.Controllers
         // GET: Manage/Tours
         public ActionResult Index(int? Id)
         {
-            var tours = db.Users.Find(Id).Tours;
-            return View(tours.ToList());
+            List<Tour> tours = db.Users.Find(Id).Tours.ToList();
+            return View(tours);
         }
 
         // GET: Manage/Tours/Details/5
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)

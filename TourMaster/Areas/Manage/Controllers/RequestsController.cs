@@ -58,6 +58,28 @@ namespace TourMaster.Areas.Manage.Controllers
                     db.Bookings.Add(newBooking);
                     br.Status = 1;
                     db.SaveChanges();
+
+                    string TourTitle = "";
+                    if (br.Tour.FromId == br.Tour.DestinationId)
+                    {
+                        TourTitle = br.Tour.City.CityName + " Tour";
+                    }
+                    else
+                    {
+                        TourTitle = br.Tour.City.CityName + " - " + br.Tour.City1.CityName + " Tour";
+                    }
+
+                    Notification noti = new Notification
+                    {
+                        UserId = br.UserId,
+                        Text = "Booking for " + TourTitle+ " on " + newBooking.BookedStart + " - " + newBooking.BookedEnd + " confirmed",
+                        Date = DateTime.Now,
+                        NotificationTypeId = 6,
+                        Link = "#",
+                        Status = 0,
+                    };
+                    db.Notifications.Add(noti);
+                    db.SaveChanges();
                 }
                 return Json(1, JsonRequestBehavior.AllowGet);
             }

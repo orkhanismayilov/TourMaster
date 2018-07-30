@@ -100,7 +100,7 @@
                                         {
                                             foreach (Notification noti in user.Notifications.Where(n => n.Status == 0).OrderByDescending(n => n.Date))
                                             {
-                                                <a href="" class="dropdown-item notification bg-@noti.NotificationType.Color" data-noti-id="@noti.Id">
+                                                <a href="@noti.Link" class="dropdown-item notification @(user.AccountType == 0?"traveler-noti":"") bg-@noti.NotificationType.Color" data-noti-id="@noti.Id">
                                                     <i class="@noti.NotificationType.Icon text-white d-inline-block mr-2 align-middle"></i>
                                                     <p class="noti-text mb-0 text-white">@noti.Text</p>
                                                     <span class="badge d-block">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
@@ -1118,7 +1118,7 @@
                                     foreach (PMModel pmm in pmModels)
                                     {
                                         PrivateMessage message = pmm.privateMessages.OrderByDescending(m => m.Date).FirstOrDefault();
-                                        <li class="msg-item @(message.ReadStatus == 0 && message.User.Id != user.Id?"bg-orange":"bg-tiffany")">
+                                        <li class="msg-item mb-1 @(message.ReadStatus == 0 && message.User.Id != user.Id?"bg-orange":"bg-tiffany")">
                                             <a class="d-block p-3 text-black" href="@Url.Action("getchat", "home", new { message.Id })">
                                                 <div class="row">
                                                     <div class="col-12">

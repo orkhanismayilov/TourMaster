@@ -57,9 +57,26 @@ $(document).ready(function () {
         return false;
     });
 
+    // Profile Settings Modal Hide
+    $("#settings-modal").on("hide.bs.modal", function (e) {
+        if (!$("#settings-modal").hasClass("animated")) {
+            e.preventDefault();
+            $("#settings-modal").addClass("animated fadeOut");
+            setTimeout("$('#settings-modal').modal('hide')", 550);
+        }
+    });
+
+    // Profile Settings Modal Hide
+    $("#settings-modal").on("hidden.bs.modal", function () {
+        $("#settings-modal").removeClass("animated fadeOut");
+    });
+
     // Change Pass Modal
     $("#changePassBtn").on("click", function () {
-        $("#change-pass-modal").modal('show');
+        $("#change-pass-modal").addClass("animated fadeIn").modal('show');
+        $("#change-pass-modal").animateCss("fadeIn", function () {
+            $("#change-pass-modal").removeClass("animated fadeIn");
+        });
         $("#change-pass-form").on("submit", function () {
             var that = $(this),
                 url = that.attr("action"),
@@ -102,6 +119,20 @@ $(document).ready(function () {
         });
 
         return false;
+    });
+
+    // Change Pass Modal
+    $("#change-pass-modal").on("hide.bs.modal", function (e) {
+        if (!$("#change-pass-modal").hasClass("animated")) {
+            e.preventDefault();
+            $("#change-pass-modal").addClass("animated fadeOut");
+            setTimeout("$('#change-pass-modal').modal('hide')", 550);
+        }
+    });
+
+    // Profile Settings Modal Hide
+    $("#change-pass-modal").on("hidden.bs.modal", function () {
+        $("#change-pass-modal").removeClass("animated fadeOut");
     });
 
     // Change Pass and Profile Settings Form Validation

@@ -1,40 +1,212 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using TourMaster.Models
+@{
+    User admin = new User();
+    if (Session["User"] != null)
+    {
+        admin = Session["User"] as User;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>TourMaster - Guide's Manage Panel</title>
+    <!-- Icons-->
+    <link href="~/Public/admin/css/icons/coreui-icons.min.css" rel="stylesheet">
+    <link href="~/Public/css/flag-icon.min.css" rel="stylesheet">
+    <link href="~/Public/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="~/Public/admin/css/icons/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="~/Public/admin/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/public/admin/css/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link href="~/Public/admin/css/style.css" rel="stylesheet">
+    <link href="~/Public/admin/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="@Url.Action("index", new { controller = "home", area = "" })">
+            <img class="navbar-brand-full" src="~/Public/images/logo/logo_tiffany.svg" width="80%" alt="TourMaster Logo">
+            <img class="navbar-brand-minimized" src="~/Public/images/logo/logo_tiffany_small.svg" width="80%" alt="TourMaster Logo">
+        </a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="@Url.Action("index", new { controller = "home", area="admin" })">Dashboard</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item dropdown d-md-down-none" id="noti-dropdown" data-guide="@admin.Id">
+                <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+                    <i class="icon-bell"></i>
+                    @{
+                        int NewNoti = admin.Notifications.Where(n => n.Status == 0).ToList().Count;
+                        if (NewNoti != 0)
+                        {
+                            <span class="badge badge-pill badge-danger">@NewNoti</span>
+                        }
+                    }
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                    <div class="dropdown-header text-center">
+                        <strong>You have @NewNoti notifications</strong>
+                    </div>
+                    @{
+                        foreach (Notification noti in admin.Notifications.Where(n => n.Status == 0))
+                        {
+                            <a class="dropdown-item text-truncate d-block bg-@noti.NotificationType.Color notis" href="@noti.Link">
+                                <i class="@noti.NotificationType.Icon text-white text-value-lg align-middle"></i> @noti.Text
+                            </a>
+                        }
+                    }
+                    <a class="dropdown-item text-center" href="@Url.Action("index", new { controller = "notifications", area = "admin", id = admin.Id })">
+                        <strong>View all notifications</strong>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown d-md-down-none">
+                <a class="nav-link" data-toggle="dropdown" href="#" role="button">
+                    <i class="icon-envelope-letter"></i>
+                    @{
+                        int NewMsg = admin.PrivateMessages1.Where(pm => pm.ReadStatus == 0).ToList().Count;
+                        if (NewMsg != 0)
+                        {
+                            <span class="badge badge-pill badge-info">@NewMsg</span>
+                        }
+                    }
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
+                    <div class="dropdown-header text-center">
+                        <strong>You have @NewMsg messages</strong>
+                    </div>
+                    @{
+                        foreach (PrivateMessage pm in admin.PrivateMessages1.Where(pm => pm.ReadStatus == 0).OrderByDescending(pm => pm.Id))
+                        {
+                            <a class="dropdown-item" href="@Url.Action("details", new { controller = "messages", area = "admin", id = pm.Id })">
+                                <div class="message">
+                                    <div class="py-3 mr-3 float-left">
+                                        <div class="avatar">
+                                            <img class="img-avatar" src="@pm.User.ProfileImage" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">@pm.User.Fullname</small>
+                                        <small class="text-muted float-right mt-1">@pm.Date.ToString("HH:mm dd MMM yyyy")</small>
+                                    </div>
+                                    <div class="text-truncate font-weight-bold">
+                                        <span class="fa fa-exclamation text-danger"></span> @pm.Subject
+                                    </div>
+                                    <div class="small text-muted text-truncate">@pm.Message</div>
+                                </div>
+                            </a>
+                        }
+                    }
+                    <a class="dropdown-item text-center" href="@Url.Action("index", new { controller = "messages", area = "admin", id = admin.Id })">
+                        <strong>View all messages</strong>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img class="img-avatar" src="@admin.ProfileImage" alt="@admin.Email">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>@admin.Fullname</strong>
+                    </div>
+                    <a class="dropdown-item" href="@Url.Action("index", new { controller = "settings", area = "admin", id = admin.Id })">
+                        <i class="icon-wrench"></i> Settings
+                    </a>
+                    <div class="divider"></div>
+                    <a class="dropdown-item bg-danger" href="@Url.Action("logout", new { controller="home", area="admin" })">
+                        <i class="icon-power"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <div class="app-body">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "origins", area = "admin" } )">
+                            <i class="nav-icon icon-home text-danger"></i> Website Appearence
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "tours", area = "admin" } )">
+                            <i class="nav-icon icon-globe text-danger"></i> Tours
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "users", area = "admin" } )">
+                            <i class="nav-icon icon-user text-danger"></i> Users
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "contacts", area = "admin" } )">
+                            <i class="nav-icon icon-link text-danger"></i> Contact Requests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "notifications", area = "admin", id = admin.Id })">
+                            <i class="nav-icon icon-info text-danger"></i> Notifications
+                            @{
+                                if (NewNoti != 0)
+                                {
+                                    <span class="badge badge-pill badge-danger">@NewNoti</span>
+                                }
+                            }
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("index", new { controller = "messages", area = "admin", id = admin.Id })">
+                            <i class="nav-icon icon-envelope text-danger"></i> Messages
+                            @{
+                                if (NewMsg != 0)
+                                {
+                                    <span class="badge badge-pill badge-info">@NewMsg</span>
+                                }
+                            }
+                        </a>
+                    </li>
                 </ul>
-            </div>
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
-    </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <main class="main">
+            <div class="container-fluid">
+                <div class="animated fadeIn pt-3">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                    @RenderBody()
+
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="~/Public/admin/vendors/pace-progress/js/pace.min.js"></script>
+    <script src="~/Public/admin/js/perfect-scrollbar.min.js"></script>
+    <script src="~/Public/admin/js/coreui.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="~/Public/admin/js/chart.min.js"></script>
+    <script src="~/Public/admin/js/custom-tooltips.min.js"></script>
+    <script src="~/Public/admin/js/select2.min.js"></script>
+    <script src="~/Public/admin/js/main.js"></script>
 </body>
 </html>

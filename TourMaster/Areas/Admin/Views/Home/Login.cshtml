@@ -1,0 +1,94 @@
+﻿@using TourMaster.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>TourMaster - Admin Login</title>
+    <!-- Icons-->
+    <link href="~/Public/admin/css/icons/coreui-icons.min.css" rel="stylesheet">
+    <link href="~/Public/css/flag-icon.min.css" rel="stylesheet">
+    <link href="~/Public/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="~/Public/admin/css/icons/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="~/Public/admin/css/style.css" rel="stylesheet">
+    <link href="~/Public/admin/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<body class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body text-center">
+                            <img class="w-50 mb-3" src="~/Public/images/logo/logo_tiffany.svg" />
+                            <h1>Admin Login</h1>
+                            <p class="text-muted">Sign In to your account</p>
+                            <form action="@Url.Action("login", new { controller = "home", area = "admin"})" method="post" id="admin-login">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-user"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" name="email" type="text" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" name="password" type="password" placeholder="Password">
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button class="btn btn-primary px-4" type="submit">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Session["LogInError"] != null)
+    {
+        <span id="login-error"></span>
+    }
+    <div class="modal fade text-center" id="dangerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-danger" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Login</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Invalid Login or Password</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="~/Public/admin/vendors/pace-progress/js/pace.min.js"></script>
+    <script src="~/Public/admin/js/perfect-scrollbar.min.js"></script>
+    <script src="~/Public/admin/js/coreui.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="~/Public/admin/js/main.js"></script>
+</body>
+</html>

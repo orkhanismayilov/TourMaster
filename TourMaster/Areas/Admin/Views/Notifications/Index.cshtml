@@ -1,0 +1,32 @@
+﻿@using TourMaster.Models
+@model IEnumerable<Notification>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Notifications</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive-sm">
+            <tbody>
+                @{
+                    foreach (Notification noti in Model.OrderByDescending(n => n.Date))
+                    {
+                        <tr>
+                            <td class="bg-@noti.NotificationType.Color">
+                                <a class="text-white d-block" href="@noti.Link">
+                                    <i class="@noti.NotificationType.Icon @(noti.Status == 0?"text-danger":"") align-middle d-inline-block mr-1 text-value-lg"></i> @noti.Text
+                                    <span class="badge d-block text-left mt-3">@noti.Date.ToString("HH:mm dd MMM yyyy")</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
