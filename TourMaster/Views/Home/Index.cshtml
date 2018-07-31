@@ -109,7 +109,7 @@
                                         }
                                         else
                                         {
-                                            <a class="dropdown-item">No new notifications</a>
+                                            <a class="dropdown-item text-center">No new notifications</a>
                                         }
                                     }
                                     <a href="" class="dropdown-item text-center" id="notifications-trigger" data-user-id="@user.Id">View all notifications</a>
@@ -135,7 +135,7 @@
                                         }
                                         else
                                         {
-                                            <a class="dropdown-item">No new messages</a>
+                                            <a class="dropdown-item text-center">No new messages</a>
                                         }
                                     }
                                     <a href="" class="dropdown-item text-center" id="messages-trigger">View all messages</a>
@@ -1276,9 +1276,9 @@
         <!-- Slider Start -->
         <div class="owl-carousel main-slider">
             @{
-                foreach (string image in ViewBag.Origin.MainSliderPhotos.Split(','))
+                foreach (MainSliderImage image in ViewBag.Origin.MainSliderImages)
                 {
-                    <div class="slider-image" style="background-image: url('/public/images/@image')"></div>
+                    <div class="slider-image" style="background-image: url(@image.ImageURL)"></div>
                 }
             }
         </div>

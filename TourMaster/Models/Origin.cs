@@ -14,10 +14,15 @@ namespace TourMaster.Models
     
     public partial class Origin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Origin()
+        {
+            this.MainSliderImages = new HashSet<MainSliderImage>();
+        }
+    
         public int Id { get; set; }
         public string Logo { get; set; }
         public string Title { get; set; }
-        public string MainSliderPhotos { get; set; }
         public string About { get; set; }
         public string JoinUs { get; set; }
         public string Facebook { get; set; }
@@ -26,5 +31,8 @@ namespace TourMaster.Models
         public string GooglePlus { get; set; }
         public string Youtube { get; set; }
         public string Copyright { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MainSliderImage> MainSliderImages { get; set; }
     }
 }

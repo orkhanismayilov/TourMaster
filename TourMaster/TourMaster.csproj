@@ -225,6 +225,9 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LogInForm.cs" />
+    <Compile Include="Models\MainSliderImage.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\Notification.cs">
       <DependentUpon>Database.tt</DependentUpon>
@@ -825,10 +828,11 @@
     <Content Include="Public\images\logo\logo_tiffany_small.svg" />
     <Content Include="Public\images\logo\logo_white.svg" />
     <Content Include="Public\images\logo\logo_white_small.svg" />
+    <Content Include="Public\images\mainslider\20180731161639boat-in-the-sea-1150x647-1150x647.jpg" />
+    <Content Include="Public\images\mainslider\20180731161639slider_1.jpg" />
+    <Content Include="Public\images\mainslider\20180731161640slider_3.jpg" />
     <Content Include="Public\images\profile_placeholder.png" />
-    <Content Include="Public\images\slider_1.jpg" />
-    <Content Include="Public\images\slider_2.jpg" />
-    <Content Include="Public\images\slider_3.jpg" />
+    <Content Include="Public\images\mainslider\slider_2.jpg" />
     <Content Include="Public\js\main.js" />
     <Content Include="Public\js\plugins\counterup\counterup.min.js" />
     <Content Include="Public\js\plugins\datepicker\picker.date.js" />
@@ -844,10 +848,12 @@
     <Content Include="Public\webfonts\fa-light-300.svg" />
     <Content Include="Public\webfonts\fa-regular-400.svg" />
     <Content Include="Public\webfonts\fa-solid-900.svg" />
-    <Content Include="Uploads\020180722151200slider_1.jpg" />
-    <Content Include="Uploads\1020180721154251home_1.jpg" />
-    <Content Include="Uploads\1020180721154252home_2.jpg" />
+    <Content Include="Uploads\020180731162821home_1.jpg" />
+    <Content Include="Uploads\020180731162821home_2.jpg" />
+    <Content Include="Uploads\020180731162821home_3.jpg" />
+    <Content Include="Uploads\020180731162821join.jpg" />
     <Content Include="Uploads\1020180726181119profile_placeholder.png" />
+    <Content Include="Uploads\1120180727182816guide_2.jpg" />
     <Content Include="Uploads\guide_1.jpg" />
     <Content Include="Uploads\guide_2.jpg" />
     <Content Include="Uploads\guide_3.jpg" />
@@ -905,6 +911,7 @@
     <Content Include="Areas\Admin\Views\Contacts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Origins\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Origins\MainSlider.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\css\style.css.map" />
     <Content Include="Public\sass\style.scss" />

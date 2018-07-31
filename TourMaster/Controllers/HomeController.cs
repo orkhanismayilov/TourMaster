@@ -438,9 +438,22 @@ namespace TourMaster.Controllers
                     Email = Email,
                     Phone = Phone,
                     Subject = Subject,
-                    Message = Msg
+                    Message = Msg,
+                    Date = DateTime.Now
                 };
                 db.ContactRequests.Add(contact);
+                db.SaveChanges();
+
+                Notification noti = new Notification
+                {
+                    UserId = db.Users.FirstOrDefault(u => u.AccountType == 2).Id,
+                    Text = "New contact request",
+                    Link = "/admin/contacts/details/" + contact.Id,
+                    Date = DateTime.Now,
+                    Status = 0,
+                    NotificationTypeId = 8
+                };
+                db.Notifications.Add(noti);
                 db.SaveChanges();
 
                 return Json(contact.Id, JsonRequestBehavior.AllowGet);
@@ -601,7 +614,7 @@ namespace TourMaster.Controllers
                 }
 
                 List<MessageModel> messages = new List<MessageModel>();
-                foreach (PrivateMessage pm in pms.OrderByDescending(pm=>pm.Date))
+                foreach (PrivateMessage pm in pms.OrderByDescending(pm => pm.Date))
                 {
                     MessageModel message = new MessageModel
                     {
@@ -611,7 +624,7 @@ namespace TourMaster.Controllers
                         ReadStatus = pm.ReadStatus
                     };
                     messages.Add(message);
-                    if (pm.ReadStatus == 0 && pm.SenderId != user.Id)
+                    if (pm.ReadStatus == 0 && pm.User.Id != user.Id)
                     {
                         pm.ReadStatus = 1;
                         db.SaveChanges();

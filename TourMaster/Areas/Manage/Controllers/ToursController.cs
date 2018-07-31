@@ -195,7 +195,7 @@ namespace TourMaster.Areas.Manage.Controllers
                 }
             }
 
-            return View(thisTour);
+            return RedirectToAction("edit", new { thisTour.Id });
         }
 
         [HttpPost]

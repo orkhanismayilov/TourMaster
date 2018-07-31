@@ -5,5 +5,67 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Website Appearence</h2>
+    </div>
+    <div class="card-body">
+        <form action="@Url.Action("savechanges", new { controller = "origins", area = "admin" })" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Main Logo</label>
+                        <div class="w-25 my-3">
+                            <img class="rounded w-100" src="@Model.Logo" />
+                        </div>
+                        <input class="form-control" type="file" name="logo" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <input class="form-control" type="text" name="title" value="@Model.Title" />
+                    </div>
+                    <div class="form-group">
+                        <a href="@Url.Action("mainslider", new { controller = "origins", area = "admin" })" class="btn btn-primary d-block">Main Slider</a>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">About</label>
+                        <textarea class="form-control" name="about" rows="5">@Model.About</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Join Us</label>
+                        <textarea class="form-control" name="joinus" rows="5">@Model.JoinUs</textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Facebook</label>
+                        <input class="form-control" type="text" name="facebook" value="@Model.Facebook" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Instagram</label>
+                        <input class="form-control" type="text" name="instagram" value="@Model.Instagram" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Twitter</label>
+                        <input class="form-control" type="text" name="twitter" value="@Model.Twitter" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">GooglePlus</label>
+                        <input class="form-control" type="text" name="googleplus" value="@Model.GooglePlus" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">YouTube</label>
+                        <input class="form-control" type="text" name="youtube" value="@Model.Youtube" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Copyright</label>
+                        <input class="form-control" type="text" name="copyright" value="@Model.Copyright" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-buttons text-center">
+                <button class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>

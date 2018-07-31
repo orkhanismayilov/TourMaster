@@ -35,5 +35,76 @@ namespace TourMaster.Areas.Admin.Controllers
             }
             return View(tour);
         }
+
+        [HttpGet]
+        public JsonResult Approve(int? Id)
+        {
+            Tour tour = db.Tours.Find(Id);
+            if (tour != null)
+            {
+                tour.Approved = 1;
+                tour.Status = 1;
+                string TourTitle = "";
+                if (tour.FromId == tour.DestinationId)
+                {
+                    TourTitle = tour.City.CityName + " Tour";
+                }
+                else
+                {
+                    TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
+                }
+
+                Notification noti = new Notification
+                {
+                    UserId = tour.GuideId,
+                    Text = TourTitle + " approved by administration",
+                    Date = DateTime.Now,
+                    NotificationTypeId = 6,
+                    Link = "/manage/tours/details/" + tour.Id,
+                    Status = 0
+                };
+                db.Notifications.Add(noti);
+                db.SaveChanges();
+
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult Disapprove(int? Id) {
+            Tour tour = db.Tours.Find(Id);
+            if (tour != null)
+            {
+                tour.Approved = 0;
+                tour.Status = 0;
+                string TourTitle = "";
+                if (tour.FromId == tour.DestinationId)
+                {
+                    TourTitle = tour.City.CityName + " Tour";
+                }
+                else
+                {
+                    TourTitle = tour.City.CityName + " - " + tour.City1.CityName + " Tour";
+                }
+
+                Notification noti = new Notification
+                {
+                    UserId = tour.GuideId,
+                    Text = TourTitle + " disapproved by administration",
+                    Date = DateTime.Now,
+                    NotificationTypeId = 7,
+                    Link = "/manage/tours/details/" + tour.Id,
+                    Status = 0
+                };
+                db.Notifications.Add(noti);
+                db.SaveChanges();
+
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
     }
 }

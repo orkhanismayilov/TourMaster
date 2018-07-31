@@ -4,3 +4,75 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Contact Requests</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Fullname
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Subject
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (Model.Count() > 0)
+                    {
+                        foreach (ContactRequest cr in Model)
+                        {
+                            <tr class="@(cr.Status == 0?"bg-info":"")">
+                                <td>
+                                    @cr.Fullname
+                                </td>
+                                <td>
+                                    @cr.Email
+                                </td>
+                                <td>
+                                    @(cr.Phone != "" ? "+" + cr.Phone : "-")
+                                </td>
+                                <td>
+                                    @cr.Subject
+                                </td>
+                                <td class="w-25">
+                                    @cr.Message.Substring(0, 60) ...
+                                </td>
+                                <td>
+                                    @cr.Date.ToString("HH:mm dd.MM.yyyy")
+                                </td>
+                                <td>
+                                    Shitman
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="text-muted text-center">No requests yet...</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

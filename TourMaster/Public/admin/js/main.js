@@ -52,6 +52,58 @@ $(document).ready(function () {
         return false;
     });
 
+    // Approve Tour Button
+    $("a[data-original-title='Approve']").on("click", function (e) {
+        e.preventDefault();
+        var that = $(this),
+            url = that.attr("href");
+
+        $.ajax({
+            url: url,
+            method: "get",
+            dataType: "json",
+            success: function (data) {
+                if (data == 0) {
+                    $("#dangerModal").modal('show');
+                } else {
+                    $("#successModalApprove").modal('show');
+                    that.hide().prev().show();
+                    that.parent().find("span.badge-danger").removeClass("badge-danger").addClass("badge-success").text("Active");
+                }
+            }
+        });
+
+        return false;
+    });
+
+    // Disapprove Tour Button
+    $("a[data-original-title='Disapprove']").on("click", function (e) {
+        e.preventDefault();
+        var that = $(this);
+
+        $("#warningModal").modal('show');
+        $("#confirm").on("click", function () {
+            url = that.attr("href");
+
+            $.ajax({
+                url: url,
+                method: "get",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 0) {
+                        $("#dangerModal").modal('show');
+                    } else {
+                        $("#successModal").modal('show');
+                        that.hide().next().show();
+                        that.parent().find("span.badge-success").removeClass("badge-success").addClass("badge-danger").text("Not Approved");
+                    }
+                }
+            });
+        });
+
+        return false;
+    });
+
     // Login Error
     if ($("#login-error").length > 0) {
         $("#dangerModal").modal('show');
@@ -114,7 +166,7 @@ $(document).ready(function () {
         var images = event.target.files;
         $("#dynamicImage").empty();
         for (var i = 0; i < images.length; i++) {
-            $("#dynamicImage").append("<img src=" + URL.createObjectURL(event.target.files[i]) + " class='dynamicImg mr-2 mt-2' width='100px' />");
+            $("#dynamicImage").append("<img src=" + URL.createObjectURL(event.target.files[i]) + " class='dynamicImg mr-2 mt-2' width='150px' height='100px'/>");
         }
     });
 
@@ -150,11 +202,12 @@ $(document).ready(function () {
     // Tour Image Delete
     $("#tourimages li i").on("click", function () {
         var that = $(this);
+        var url = "/manage/tours/deletetourimage/" + that.parent().data("img-id");
+
         $("#deleteWarningModal").modal('show');
         $("#confirmDelete").on("click", function () {
-            var url = "/manage/tours/deletetourimage/" + that.parent().data("img-id");
 
-            $.ajax({
+            var request = $.ajax({
                 url: url,
                 method: "post",
                 dataType: "json",
@@ -164,6 +217,34 @@ $(document).ready(function () {
                     }
                 }
             });
+        });
+        $("#cancelDelete").on("click", function () {
+            that = null;
+        });
+    });
+
+    // Slider Image Delete
+    $("#sliderimages li i").on("click", function () {
+        var that = $(this);
+        var url = "/admin/origins/deleteimage/" + that.parent().data("img-id");
+
+        $("#deleteWarningModal").modal('show');
+        $("#confirmDelete").on("click", function () {
+            var request = $.ajax({
+                url: url,
+                method: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {
+                        that.parent().remove();
+                    } else {
+                        $("#dangerModal").modal('show');
+                    }
+                }
+            });
+        });
+        $("#cancelDelete").on("click", function () {
+            that = null;
         });
     });
 
@@ -358,7 +439,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (data != null) {
-                    var message = `<div class="message-body rounded p-3 mt-2 w-75 ml-auto bg-gray animated fadeIn">
+                    var message = `<div class="message-body rounded p-3 mt-2 w-75 animated fadeIn ml-auto bg-gray">
                         <p class="text-justify">`+data.Message+`</p>
                         <small class="d-block text-right">
                             `+data.Date+`

@@ -40,6 +40,7 @@ namespace TourMaster.Models
         public System.DateTime PostedDate { get; set; }
         public int Status { get; set; }
         public int Approved { get; set; }
+        public Nullable<int> AdminId { get; set; }
     
         public virtual AccomodationLevel AccomodationLevel { get; set; }
         public virtual Accomodation Accomodation { get; set; }
@@ -57,5 +58,6 @@ namespace TourMaster.Models
         public virtual ICollection<TourImage> TourImages { get; set; }
         public virtual TourImage TourImage { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

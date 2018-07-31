@@ -1438,8 +1438,6 @@ $(document).ready(function () {
             request[name] = value;
         });
 
-        console.log(request);
-
         $.ajax({
             url: url,
             method: method,
