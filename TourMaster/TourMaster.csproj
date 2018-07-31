@@ -833,6 +833,7 @@
     <Content Include="Public\images\mainslider\20180731161640slider_3.jpg" />
     <Content Include="Public\images\profile_placeholder.png" />
     <Content Include="Public\images\mainslider\slider_2.jpg" />
+    <Content Include="Public\images\slider_1.jpg" />
     <Content Include="Public\js\main.js" />
     <Content Include="Public\js\plugins\counterup\counterup.min.js" />
     <Content Include="Public\js\plugins\datepicker\picker.date.js" />
@@ -933,6 +934,7 @@
     <Content Include="Public\webfonts\fa-solid-900.woff2" />
     <Content Include="Public\admin\css\fonts\Simple-Line-Icons.woff2" />
     <Content Include="Public\admin\vendors\pace-progress\css\pace.min.css.map" />
+    <None Include="Properties\PublishProfiles\TourMaster - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
