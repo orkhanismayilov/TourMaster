@@ -55,7 +55,8 @@ namespace TourMaster.Controllers
                             AccountType = signUpForm.AccountTypeId,
                             CityId = signUpForm.CityId,
                             ProfileImage = "/public/images/profile_placeholder.png",
-                            OverallRating = 0
+                            OverallRating = 0,
+                            RegisteredDate = DateTime.Now
                         };
                         db.Users.Add(newuser);
                         db.SaveChanges();
@@ -64,7 +65,7 @@ namespace TourMaster.Controllers
                     else
                     {
                         Session["SignedUpError"] = true;
-                        Session["SignUpMsg"] = "Password and Password Confirmation are not the matching.";
+                        Session["SignUpMsg"] = "Password and Password Confirmation are not matching.";
                     }
                 }
                 else
@@ -331,6 +332,57 @@ namespace TourMaster.Controllers
             }
 
             return Json(feedbacksList, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult LoadMoreTours(int Count) {
+            List<Tour> dbTours = db.Tours.Where(t => t.Status == 1 && t.Approved == 1).OrderByDescending(t => t.PostedDate).Skip(Count).Take(6).ToList();
+            if (dbTours != null)
+            {
+                List<TourAjaxModel> tours = new List<TourAjaxModel>();
+                foreach (Tour t in dbTours)
+                {
+                    string TourTitle = "";
+                    if (t.FromId == t.DestinationId)
+                    {
+                        TourTitle = t.City.CityName + " Tour";
+                    }
+                    else
+                    {
+                        TourTitle = t.City.CityName + " - " + t.City1.CityName + " Tour";
+                    }
+
+                    string[] tourCats = t.Category.Split(',');
+                    string tourCatsAll = "";
+                    foreach (string category in tourCats)
+                    {
+                        tourCatsAll += " " + category;
+                    }
+
+                    TourAjaxModel tourModel = new TourAjaxModel
+                    {
+                        Id = t.Id,
+                        TourTitle = TourTitle,
+                        TourImage = db.TourImages.Find(t.MainImageId).ImageURL,
+                        Duration = t.Duration,
+                        DurationType = t.DurationType.Type,
+                        Price = t.Price.ToString("#.##"),
+                        Currency = t.Currency.CurrencyName,
+                        Categories = tourCatsAll,
+                        GuideProfileImage = t.User.ProfileImage,
+                        GuideFullname = t.User.Fullname,
+                        GuideRating = t.User.OverallRating
+                    };
+
+                    tours.Add(tourModel);
+                }
+
+                return Json(1, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpPost]

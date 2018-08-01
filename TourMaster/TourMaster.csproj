@@ -246,6 +246,7 @@
     <Compile Include="Models\Tour.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TourAjaxModel.cs" />
     <Compile Include="Models\TourImage.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

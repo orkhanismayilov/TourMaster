@@ -120,7 +120,7 @@
                                         <i class="icon-info text-info"></i>
                                     </a> |
                                     @{
-                                        if (item.Approved == 0)
+                                        if (item.Approved == 0 && item.Status == 0)
                                         {
                                             <a class="mx-1" style="display: none" href="@Url.Action("disapprove", new { controller="tours", area="admin", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disapprove">
                                                 <i class="icon-close text-danger"></i>
@@ -129,7 +129,7 @@
                                                 <i class="icon-check text-success"></i>
                                             </a>
                                         }
-                                        else if (item.Approved == 1 & item.Status == 1)
+                                        else if (item.Approved == 1 && item.Status == 1)
                                         {
                                             <a class="mx-1" href="@Url.Action("disapprove", new { controller="tours", area="admin", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disapprove">
                                                 <i class="icon-close text-danger"></i>
@@ -138,12 +138,12 @@
                                                 <i class="icon-check text-success"></i>
                                             </a>
                                         }
-                                        else
+                                        else if(item.Approved == 1 && item.Status == 0)
                                         {
-                                            <a class="mx-1" style="display: none" href="@Url.Action("disapprove", new { controller="tours", area="admin", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disapprove">
+                                            <a class="mx-1" href="@Url.Action("disapprove", new { controller="tours", area="admin", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Disapprove">
                                                 <i class="icon-close text-danger"></i>
                                             </a>
-                                            <a class="mx-1" href="@Url.Action("approve", new { controller="tours", area="admin", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Approve">
+                                            <a class="mx-1" style="display: none" href="@Url.Action("approve", new { controller="tours", area="admin", id = item.Id })" data-toggle="tooltip" data-placement="bottom" title="Approve">
                                                 <i class="icon-check text-success"></i>
                                             </a>
                                         }

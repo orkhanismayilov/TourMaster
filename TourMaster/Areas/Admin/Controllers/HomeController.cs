@@ -63,6 +63,7 @@ namespace TourMaster.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Session["User"] = null;
+            Session["LogInSuccess"] = null;
 
             return RedirectToAction("login", new { controller = "home", area = "admin" });
         }

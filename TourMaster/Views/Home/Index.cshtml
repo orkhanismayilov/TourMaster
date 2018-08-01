@@ -569,9 +569,12 @@
                                         <!-- Grid Item End -->
                                     }
                                 </div>
-                                <div class="tours-load-button text-center mb-5">
-                                    <button class="btn btn-secondary text-capitalize" id="load-more-tours">Load More</button>
-                                </div>
+                                @if (Model.Tours.Where(t => t.Status == 1 && t.Approved == 1).OrderByDescending(t => t.PostedDate).Count() > 6)
+                                {
+                                    <div class="tours-load-button text-center mb-5">
+                                        <button class="btn btn-secondary text-capitalize" id="load-more-tours">Load More</button>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </section>
@@ -1464,7 +1467,7 @@
                 </div>
                 <div class="col-xl-6">
                     <p class="about-text text-justify mb-0">
-                        @(new HtmlString(ViewBag.Origin.About));
+                        @(new HtmlString(ViewBag.Origin.About))
                     </p>
                 </div>
             </div>
@@ -1478,7 +1481,7 @@
             <div class="row text-center align-items-center">
                 <div class="col-lg-6">
                     <h1 class="guide-join-text text-uppercase">
-                        @(new HtmlString(ViewBag.Origin.JoinUs));
+                        @(new HtmlString(ViewBag.Origin.JoinUs))
                     </h1>
                 </div>
                 <div class="col-lg-4 offset-lg-2">

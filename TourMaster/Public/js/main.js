@@ -752,6 +752,67 @@ $(document).ready(function () {
             $("#tours-modal").removeClass("animated fadeOutLeft");
         });
 
+        // Tour Modal Load More Tours
+        $("#load-more-tours").on("click", function () {
+            var that = $(this),
+                container = $("#tours-modal .tours-grid"),
+                count = $("#tours-modal .tours-grid .grid-item").length,
+                url = "/home/loadmoretours/" + count;
+
+            $.ajax({
+                url: url,
+                method: "get",
+                dataType: "json",
+                success: function (data) {
+                    if (data != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            var tour = `<!-- Grid Item Start -->
+                                        <div class="grid-item `+ data[i].Categories + `" style="background-image: url('` + data[i].TourImage + `')">
+                                            <div class="info-overlay">
+                                                <div class="tour-heading">
+                                                    <h3 class="tour-title">`+ data[i].TourTitle + `</h3>
+                                                    <p class="duration" title="Duration">
+                                                        <i class="fal fa-clock"></i>`+ data[i].Duration + ` ` + data[i].DurationType + `
+                                                    </p>
+                                                    <p class="price" title="Price">
+                                                        <i class="fal fa-money-bill"></i>`+ data[i].Price + ` ` + data[i].Currency + `
+                                                    </p>
+                                                    <button class="btn btn-primary text-uppercase my-3 tour-details" data-tour-id="`+ data[i].Id + `">Details</button>
+                                                </div>
+                                                <div class="tour-guide">
+                                                    <img src="`+ data[i].GuideProfileImage + `">
+                                                    <ul class="list-unstyled">
+                                                        <li>`+ data[i].GuideFullname + `</li>
+                                                        <li>
+                                                            <select class="tour-guide-rating">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </select>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="info-overlay-bottom">
+                                                <p>
+                                                    `+ data[i].TourTitle + `
+                                                    <span>`+ data[i].Price + ` ` + data[i].Currency + `</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Grid Item End -->`;
+                            var appended = container.append(tour);
+                            appended.find(".tour-guide-rating").barrating('set', data[i].GuideRating);
+                        }
+                    }
+                }
+            });
+
+            return false;
+        });
+
         // GetTourInfo Ajax Function
         function GetTourInfo(TourId) {
             var url = "/home/gettourinfo/" + TourId;
@@ -893,9 +954,9 @@ $(document).ready(function () {
 
         // Tour View Modal Load More Feedbacks
         $("button#load-more-feedbacks").on("click", function () {
-            var that = $(this);
-            url = "/home/loadmorefeedbacks/";
-            data = {};
+            var that = $(this),
+                url = "/home/loadmorefeedbacks/",
+                data = {};
 
             data["FeedbacksCount"] = $(".feedbacks-list-wrapper .media.comment").length;
             data["FeedbackId"] = $(".feedbacks-list-wrapper .media.comment").last().find(".feedback-rated").data("feedback-id");

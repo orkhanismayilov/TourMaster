@@ -113,6 +113,18 @@ namespace TourMaster.Areas.Manage.Controllers
 
                 newTour.MainImageId = db.TourImages.Where(ti => ti.TourId == newTour.Id).OrderBy(ti => ti.Id).FirstOrDefault().Id;
                 db.SaveChanges();
+
+                Notification noti = new Notification
+                {
+                    UserId = db.Users.FirstOrDefault(u => u.AccountType == 2).Id,
+                    Text = "New tour from " + newTour.User.Fullname,
+                    Date = DateTime.Now,
+                    NotificationTypeId = 8,
+                    Status = 0,
+                    Link = "admin/tours/details/" + newTour.Id
+                };
+                db.Notifications.Add(noti);
+                db.SaveChanges();
             };
 
             return RedirectToAction("index", new { controller = "tours", area = "manage", id = tour.GuideId });
