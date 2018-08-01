@@ -378,7 +378,8 @@ nav.navbar {
     z-index: 99;
     transition: all .3s ease-in-out;
 
-    @media screen and (max-width: 1400px) {
+    @media screen and (max-width: 1024px) {
+        padding: 20px;
         background: $secondary-color;
 
         & .container {
