@@ -22,16 +22,22 @@ namespace TourMaster.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? Id, int? notiId)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tour tour = db.Tours.Find(id);
+            Tour tour = db.Tours.Find(Id);
             if (tour == null)
             {
                 return HttpNotFound();
+            }
+
+            if (notiId != null)
+            {
+                db.Notifications.Find(notiId).Status = 1;
+                db.SaveChanges();
             }
             return View(tour);
         }

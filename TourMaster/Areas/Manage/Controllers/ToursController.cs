@@ -25,7 +25,7 @@ namespace TourMaster.Areas.Manage.Controllers
 
         // GET: Manage/Tours/Details/5
         [HttpGet]
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? notiId)
         {
             if (id == null)
             {
@@ -35,6 +35,12 @@ namespace TourMaster.Areas.Manage.Controllers
             if (tour == null)
             {
                 return HttpNotFound();
+            }
+
+            if (notiId != null)
+            {
+                db.Notifications.Find(notiId).Status = 1;
+                db.SaveChanges();
             }
             return View(tour);
         }
@@ -117,13 +123,16 @@ namespace TourMaster.Areas.Manage.Controllers
                 Notification noti = new Notification
                 {
                     UserId = db.Users.FirstOrDefault(u => u.AccountType == 2).Id,
-                    Text = "New tour from " + newTour.User.Fullname,
+                    Text = "New tour from " + db.Users.Find(tour.GuideId).Fullname,
                     Date = DateTime.Now,
                     NotificationTypeId = 8,
+                    Link = "0",
                     Status = 0,
-                    Link = "admin/tours/details/" + newTour.Id
+                    
                 };
                 db.Notifications.Add(noti);
+                db.SaveChanges();
+                noti.Link = "/admin/tours/details/?id=" + newTour.Id + "&notiId=" + noti.Id;
                 db.SaveChanges();
             };
 

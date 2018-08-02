@@ -151,6 +151,10 @@
                                     {
                                         <a class="dropdown-item" href="@Url.Action("index", new { controller="home", area="manage" })">Dashboard</a>
                                     }
+                                    @if (user.AccountType == 2)
+                                    {
+                                        <a class="dropdown-item" href="@Url.Action("index", new { controller="home", area="admin" })">Dashboard</a>
+                                    }
                                     <a class="dropdown-item" href="" role="button" id="profile-settings">Settings</a>
                                     @if (user.AccountType == 0)
                                     {
