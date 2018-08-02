@@ -11,6 +11,7 @@
     </div>
     <div class="card-body">
         <form action="@Url.Action("savechanges", new { controller = "origins", area = "admin" })" method="post" enctype="multipart/form-data">
+            <input name="Id" value="@Model.Id" hidden/>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

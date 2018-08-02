@@ -54,7 +54,14 @@
                                     @cr.Subject
                                 </td>
                                 <td class="w-25">
-                                    @cr.Message.Substring(0, 60) ...
+                                    @if (cr.Message.Length > 65)
+                                    {
+                                        @cr.Message.Substring(0, 60)
+                                    }
+                                    else
+                                    {
+                                        @cr.Message
+                                    }
                                 </td>
                                 <td>
                                     @cr.Date.ToString("HH:mm dd.MM.yyyy")

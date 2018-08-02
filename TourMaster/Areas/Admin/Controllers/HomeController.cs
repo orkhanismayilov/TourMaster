@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TourMaster.Areas.Admin.Models;
 using TourMaster.Models;
 using TourMaster.Filters;
 
@@ -16,7 +17,12 @@ namespace TourMaster.Areas.Admin.Controllers
         [AdminAuth]
         public ActionResult Index()
         {
-            return View();
+            DashboardModel model = new DashboardModel
+            {
+                Users = db.Users.ToList()
+            };
+
+            return View(model);
         }
 
         [HttpGet]

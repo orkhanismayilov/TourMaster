@@ -5,6 +5,81 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">Under Construction</h2>
-<h1 class="text-center text-warning"><i class="icon-wrench"></i></h1>
-
+<div class="card border-primary">
+    <div class="card-header">
+        <h2>Users</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-3">New Users <span class="badge badge-success">@Model.Where(u => DateTime.Now.Subtract(u.RegisteredDate).Days < 7).Count()</span></h3>
+                <div class="row">
+                    @{
+                        if (Model.Where(u => DateTime.Now.Subtract(u.RegisteredDate).Days < 7).Count() > 0)
+                        {
+                            foreach (User user in Model.Where(u => DateTime.Now.Subtract(u.RegisteredDate).Days < 7))
+                            {
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card text-white bg-@(user.AccountType == 0?"success":user.AccountType == 1?"primary":"danger")">
+                                        <div class="card-header">
+                                            <h4 class="d-inline-block">@user.Fullname</h4> <span class="badge badge-dark">@(user.AccountType == 0 ? "Traveler" : user.AccountType == 1 ? "Guide" : "Administrator")</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <img class="rounded-circle w-25" src="@user.ProfileImage" />
+                                            <ul class="list-unstyled mb-0 d-inline-block ml-3">
+                                                <li>
+                                                    <h4 class="mb-0">Registered Date</h4>
+                                                </li>
+                                                <li>
+                                                    @user.RegisteredDate.ToString("HH:mm dd.MM.yyyy")
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="col-12">
+                <h3 class="mb-3">All Users  <span class="badge badge-success">@Model.Count()</span></h3>
+                <div class="row">
+                    @{
+                        if (Model.Count() > 0)
+                        {
+                            foreach (User user in Model)
+                            {
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="card text-white bg-@(user.AccountType == 0?"success":user.AccountType == 1?"primary":"danger")">
+                                        <div class="card-header">
+                                            <h4 class="d-inline-block">@user.Fullname</h4> <span class="badge badge-dark">@(user.AccountType == 0 ? "Traveler" : user.AccountType == 1 ? "Guide" : "Administrator")</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <img class="rounded-circle w-25" src="@user.ProfileImage" />
+                                            <ul class="list-unstyled mb-0 d-inline-block ml-3">
+                                                <li>
+                                                    <h4 class="mb-0">Registered Date</h4>
+                                                </li>
+                                                <li>
+                                                    @user.RegisteredDate.ToString("HH:mm dd.MM.yyyy")
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <h3>No users yet...</h3>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -84,8 +84,6 @@ namespace TourMaster.Areas.Admin.Controllers
                     string logoURL = "/pulic/images/logo/" + fileName;
                     origin.Logo = logoURL;
                 }
-                Origin info = db.Origins.FirstOrDefault();
-                info = origin;
                 db.SaveChanges();
             }
 
