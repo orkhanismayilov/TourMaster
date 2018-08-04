@@ -757,7 +757,7 @@ $(document).ready(function () {
             var that = $(this),
                 container = $("#tours-modal .tours-grid"),
                 count = $("#tours-modal .tours-grid .grid-item").length,
-                url = "/home/loadmoretours/" + count;
+                url = "/home/loadmoretours/?count=" + count;
 
             $.ajax({
                 url: url,
@@ -766,7 +766,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data != null) {
                         for (var i = 0; i < data.length; i++) {
-                            var tour = `<!-- Grid Item Start -->
+                            var $tour = $(`<!-- Grid Item Start -->
                                         <div class="grid-item `+ data[i].Categories + `" style="background-image: url('` + data[i].TourImage + `')">
                                             <div class="info-overlay">
                                                 <div class="tour-heading">
@@ -802,10 +802,20 @@ $(document).ready(function () {
                                                 </p>
                                             </div>
                                         </div>
-                                        <!-- Grid Item End -->`;
-                            var appended = container.append(tour);
-                            appended.find(".tour-guide-rating").barrating('set', data[i].GuideRating);
+                                        <!-- Grid Item End -->`);
+                            var appended = $tour.appendTo(container);
+                            appended.find(".tour-guide-rating").barrating({
+                                theme: "css-stars",
+                                readonly: true
+                            }).barrating('set', data[i].GuideRating);
+                            container.isotope('appended', $tour);
                         }
+                    } else {
+                        that.fadeOut();
+                    }
+
+                    if (data.length < 6) {
+                        that.fadeOut();
                     }
                 }
             });

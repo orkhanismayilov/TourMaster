@@ -66,10 +66,13 @@ namespace TourMaster.Areas.Admin.Controllers
                     Text = TourTitle + " approved by administration",
                     Date = DateTime.Now,
                     NotificationTypeId = 6,
-                    Link = "/manage/tours/details/" + tour.Id,
+                    Link = "/manage/tours/details/?id=" + tour.Id + "&notiId=",
                     Status = 0
                 };
                 db.Notifications.Add(noti);
+                db.SaveChanges();
+
+                noti.Link += noti.Id;
                 db.SaveChanges();
 
                 return Json(1, JsonRequestBehavior.AllowGet);
@@ -101,10 +104,13 @@ namespace TourMaster.Areas.Admin.Controllers
                     Text = TourTitle + " disapproved by administration",
                     Date = DateTime.Now,
                     NotificationTypeId = 7,
-                    Link = "/manage/tours/details/" + tour.Id,
+                    Link = "/manage/tours/details/?id=" + tour.Id + "&notiId=",
                     Status = 0
                 };
                 db.Notifications.Add(noti);
+                db.SaveChanges();
+
+                noti.Link += noti.Id;
                 db.SaveChanges();
 
                 return Json(1, JsonRequestBehavior.AllowGet);

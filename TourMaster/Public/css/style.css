@@ -945,6 +945,21 @@ select.form-control {
       bottom: 0;
       background: rgba(0, 0, 0, 0.5);
       transition: all .5s; }
+    .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item,
+    .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item,
+    .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item,
+    .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item {
+      height: 300px !important; }
+      .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item div,
+      .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item div,
+      .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item div,
+      .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item div {
+        height: 100%; }
+        .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item div img,
+        .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item div img,
+        .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item div img,
+        .profile-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item div img {
+          height: 100%; }
     .tour-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item.center div.overlay,
     .tour-view-modal-wrapper #profile-view-modal #tour-view-car .owl-item.center div.overlay,
     .profile-view-modal-wrapper #tour-view-modal #tour-view-car .owl-item.center div.overlay,

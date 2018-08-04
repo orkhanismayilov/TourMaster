@@ -10,9 +10,9 @@
         <h2>
             Bookings
             @{
-                if (Model.Where(b => b.BookedStart.Subtract(DateTime.Now).Days <= 3).Count() > 0)
+                if (Model.Where(b => b.BookedStart.Subtract(DateTime.Now).Days <= 3 && b.BookedStart.Subtract(DateTime.Now).Days > 0).Count() > 0)
                 {
-                    <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(b => b.BookedStart.Subtract(DateTime.Now).Days <= 3).Count()</span>
+                    <span class="badge badge-pill badge-danger text-value-sm">@Model.Where(b => b.BookedStart.Subtract(DateTime.Now).Days <= 3 && b.BookedStart.Subtract(DateTime.Now).Days > 0).Count()</span>
                 }
             }
         </h2>
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Booking booking in Model.OrderBy(b => b.Status).ThenBy(b=>b.BookedStart))
+                @foreach (Booking booking in Model.OrderBy(b => b.Status).ThenBy(b => b.BookedStart))
                 {
                     string TourTitle = "";
                     if (booking.Tour.FromId == booking.Tour.DestinationId)
@@ -41,7 +41,8 @@
                     {
                         TourTitle = booking.Tour.City.CityName + " - " + booking.Tour.City1.CityName + " Tour";
                     }
-                    <tr @(booking.BookedStart.Subtract(DateTime.Now).Days <= 3 ? "class=bg-success" : "")>
+                    int DaysLeft = booking.BookedStart.Subtract(DateTime.Now).Days;
+                    <tr @(DaysLeft > 0 && DaysLeft <= 3 ? "class=bg-success" : "")>
                         <td>
                             <a class="text-white" href="@Url.Action("details", new { controller = "tours", area = "manage", id = booking.TourId })">@TourTitle</a>
                         </td>

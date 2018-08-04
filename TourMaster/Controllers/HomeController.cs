@@ -335,7 +335,7 @@ namespace TourMaster.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadMoreTours(int Count) {
+        public JsonResult LoadMoreTours(int Count = 0) {
             List<Tour> dbTours = db.Tours.Where(t => t.Status == 1 && t.Approved == 1).OrderByDescending(t => t.PostedDate).Skip(Count).Take(6).ToList();
             if (dbTours != null)
             {
@@ -377,7 +377,7 @@ namespace TourMaster.Controllers
                     tours.Add(tourModel);
                 }
 
-                return Json(1, JsonRequestBehavior.AllowGet);
+                return Json(tours, JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -548,10 +548,13 @@ namespace TourMaster.Controllers
                     Text = "New booking request for " + TourTitle,
                     Date = DateTime.Now,
                     NotificationTypeId = 8,
-                    Link = "/manage/requests/index/" + tour.GuideId,
+                    Link = "/manage/requests/index/?id=" + tour.GuideId + "&notiId=",
                     Status = 0
                 };
                 db.Notifications.Add(noti);
+                db.SaveChanges();
+
+                noti.Link += noti.Id;
                 db.SaveChanges();
 
                 return Json(1, JsonRequestBehavior.AllowGet);

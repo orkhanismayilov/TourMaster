@@ -96,6 +96,27 @@ namespace TourMaster.Areas.Manage.Controllers
             {
                 br.Status = 2;
                 db.SaveChanges();
+
+                string TourTitle = "";
+                if (br.Tour.FromId == br.Tour.DestinationId)
+                {
+                    TourTitle = br.Tour.City.CityName + " Tour";
+                }
+                else
+                {
+                    TourTitle = br.Tour.City.CityName + " - " + br.Tour.City1.CityName + " Tour";
+                }
+
+                Notification noti = new Notification
+                {
+                    UserId = br.UserId,
+                    Text = "Booking request for " + TourTitle + " rejected. Please, choose another dates.",
+                    Date = DateTime.Now,
+                    NotificationTypeId = 7,
+                    Link = "#",
+                    Status = 0,
+                };
+
                 return Json(1, JsonRequestBehavior.AllowGet);
             }
             return Json(0, JsonRequestBehavior.AllowGet);

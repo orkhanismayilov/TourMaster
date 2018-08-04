@@ -263,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -857,6 +858,9 @@
     <Content Include="Uploads\020180731162821join.jpg" />
     <Content Include="Uploads\1020180726181119profile_placeholder.png" />
     <Content Include="Uploads\1120180727182816guide_2.jpg" />
+    <Content Include="Uploads\1820180802102729home_2.jpg" />
+    <Content Include="Uploads\1820180802102729home_3.jpg" />
+    <Content Include="Uploads\1820180802103309home_1.jpg" />
     <Content Include="Uploads\1820180802143639home_2.jpg" />
     <Content Include="Uploads\1820180802143639home_3.jpg" />
     <Content Include="Uploads\guide_1.jpg" />

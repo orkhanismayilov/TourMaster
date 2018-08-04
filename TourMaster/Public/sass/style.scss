@@ -849,14 +849,17 @@ select.form-control {
                     position: relative;
                     overflow: hidden;
                     max-height: 70vh;
-                    a.booking-item{
+
+                    a.booking-item {
                         color: white;
                         text-decoration: none;
-                        i{
+
+                        i {
                             font-size: 30px;
                         }
                     }
-                    tr:hover{
+
+                    tr:hover {
                         background-color: darkgray;
                     }
                 }
@@ -1396,6 +1399,18 @@ select.form-control {
                 bottom: 0;
                 background: rgba(black, .5);
                 transition: all .5s;
+            }
+
+            .owl-item {
+                height: 300px !important;
+
+                div {
+                    height: 100%;
+
+                    img {
+                        height: 100%;
+                    }
+                }
             }
 
             .owl-item.center div.overlay {
