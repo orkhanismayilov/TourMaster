@@ -819,6 +819,7 @@ $(document).ready(function () {
                     }
                 }
             });
+            TourInfo();
 
             return false;
         });
@@ -951,16 +952,19 @@ $(document).ready(function () {
         }
 
         // Tour Details in Tours Modal
-        $("#tours-modal button.tour-details").on("click", function () {
-            GetTourInfo($(this).data("tour-id"));
-            $("#tours-modal").addClass("animated fadeOutLeft parent");
-            setTimeout("$('#tours-modal').modal('hide')", 550);
-            $("#profile-view-modal").removeClass("parent");
-            $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
-            $("#tour-view-modal").animateCss("fadeInRight", function () {
-                $("#tour-view-modal").removeClass("animated fadeInRight");
+        function TourInfo() {
+            $("#tours-modal button.tour-details").on("click", function () {
+                GetTourInfo($(this).data("tour-id"));
+                $("#tours-modal").addClass("animated fadeOutLeft parent");
+                setTimeout("$('#tours-modal').modal('hide')", 550);
+                $("#profile-view-modal").removeClass("parent");
+                $("#tour-view-modal").addClass("animated fadeInRight").modal('show');
+                $("#tour-view-modal").animateCss("fadeInRight", function () {
+                    $("#tour-view-modal").removeClass("animated fadeInRight");
+                });
             });
-        });
+        }
+        TourInfo();
 
         // Tour View Modal Load More Feedbacks
         $("button#load-more-feedbacks").on("click", function () {
